@@ -1,0 +1,77 @@
+{
+    "facilityDetails": [
+        "Upper floors accessible by elevator",
+        "Toilet paper",
+        "Child safety socket covers",
+        "Bidet",
+        "Hardwood or parquet floors",
+        "Linen",
+        "Electric kettle",
+        "Slippers",
+        "Clothes rack",
+        "Kitchenware",
+        "Dining area",
+        "Heating",
+        "Dining table",
+        "Refrigerator",
+        "Bath or shower",
+        "Kitchenette",
+        "Single-room air conditioning for guest accommodation",
+        "Streaming service (like Netflix)",
+        "Detached",
+        "Free toiletries",
+        "Desk",
+        "Kitchen",
+        "Toilet",
+        "TV",
+        "iPod dock",
+        "Tile/marble floor",
+        "Hairdryer",
+        "Socket near the bed",
+        "Microwave",
+        "Private entrance",
+        "Towels"
+    ],
+    "question_answer": [
+        {
+            "question": "Is there an elevator for guests?",
+            "answer": "Yes, we have an elevator which go from basement to the top floor of the building."
+        },
+        {
+            "question": "Do you have a room with three single beds? Is there elevator?",
+            "answer": "Our \"Standard Triple Room\" has 3 beds (1,2m). And yes we have elevator."
+        },
+        {
+            "question": "Hi, do you have cooking facilities for group of 20?",
+            "answer": "Hello, we don't have a place to cook for many people"
+        },
+        {
+            "question": "Does the Double Room have air conditioning?",
+            "answer": "No, our room temperature always from 20-23 degree whole year so we don't need AC. Only the rooftop room (Deluxe Studio) have AC system because it hot up there. "
+        },
+        {
+            "question": "Do you have secure car parking available?",
+            "answer": "I'm sorry. We only have parking for motorbikes"
+        },
+        {
+            "question": "We intend to book a superior studio for 2 of us and 2 kids, age 1 and 4.\nDo you provide a portable heater or can you help us rent a portable heater for our room.",
+            "answer": "Hello, we can rent a portable heater for you or there are another option that the smaller room: Deluxe Studio with King-size bed, which have an AC system so you don't need a heater if you choose this room."
+        },
+        {
+            "question": "do you have washing facilities or is there a laundry close by? Thank you",
+            "answer": "There is a laundry shop near by, just 5 minutes of walking. We also have washing facilities but it will more expensive."
+        },
+        {
+            "question": "Hello, for the Quadruple room, there is a total of 4 beds, right? Since there is 2 bunk beds",
+            "answer": "As you can see in the photo of the room, the quadruple room have only 2 double beds for 4 peoples. (1,6m lower bed and 1,4m upper bed)"
+        },
+        {
+            "question": "How is the payment handled? Through Booking.com or direct to the host?",
+            "answer": "Hello, our guests will pay at the property, not through Booking.com, and not prepaid. "
+        },
+        {
+            "question": "Is there air conditioning in Superior Studio? (60 sq.metre room)",
+            "answer": "Sorry, we don't have air conditioning in Superior Studio. Only the Deluxe King Studio has an AC."
+        }
+    ]
+}

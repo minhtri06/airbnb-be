@@ -1,0 +1,885 @@
+{
+    "modelName": "New Model",
+    "collections": [
+        {
+            "collectionName": "users",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "7f1c8aae-aee1-489d-a29e-b4cd0b5224c9",
+                    "error": {},
+                    "childRelationships": [
+                        "0d405060-e044-4296-9a36-6e650868d0c3"
+                    ]
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "e2ec7e96-4827-4e56-a9d2-d387aa2e461f",
+                    "error": {}
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "0b8d602c-a28b-4904-8f62-9a61948484c8",
+                    "name": "email",
+                    "error": {}
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "c73785f1-020a-410f-b137-ddf85acc93b3",
+                    "name": "password",
+                    "error": {}
+                },
+                {
+                    "name": "avatarLink",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "09a843bc-d933-4c6b-8b8c-ee6ff4be345f",
+                    "error": {}
+                },
+                {
+                    "name": "phoneNumber",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "78e0808d-b1c6-4cf6-8894-7b7137311946",
+                    "error": {}
+                },
+                {
+                    "name": "dateOfBirth",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "c997930f-e2f1-4e72-bfa3-91e4a296ad1b",
+                    "error": {}
+                },
+                {
+                    "name": "gender",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "60ffb4c3-eb1f-43cf-b8b8-6454792b9b02",
+                    "error": {}
+                },
+                {
+                    "name": "address",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "name": "address",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "a681dffa-3c29-48c9-8d37-995de40f1b9a",
+                            "error": {}
+                        },
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "3cd961bb-cdad-4bbb-b9f0-ef0ab7a4eef9",
+                            "name": "province",
+                            "error": {}
+                        },
+                        {
+                            "name": "district",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "26648580-7dd8-4799-a4bd-d11eada43d99",
+                            "error": {}
+                        },
+                        {
+                            "name": "provinceId",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "7ad0f305-f436-4f81-9d81-acc1a8f4091c",
+                            "foreignCollection": "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                            "foreignField": [
+                                "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                                "58507141-558c-49ab-9803-ae68ebc67cf7"
+                            ],
+                            "relationshipType": "Foreign Key",
+                            "parentRelationship": "3c0f6594-85fe-4051-a103-e373c08d461a",
+                            "error": {}
+                        },
+                        {
+                            "name": "districtId",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "0c2bc546-68ed-434e-9afd-c5d27913f124",
+                            "foreignCollection": "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+                            "foreignField": [
+                                "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+                                "28db0cf3-b53b-433a-a12f-b7c3409e5efb"
+                            ],
+                            "relationshipType": "Foreign Key",
+                            "parentRelationship": "5f5261e1-6afd-4cbf-9f65-bbecc88524fc",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "fe7e0c87-f9e9-49f3-b5ac-7d4f1f4122c4",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "f16367c8-a24c-4b72-bffb-d7af8515d810"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+            "bucketId": "433e863b-4fb5-4b7f-8dd9-39617d72d73f"
+        },
+        {
+            "collectionName": "provinces",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "58507141-558c-49ab-9803-ae68ebc67cf7",
+                    "error": {},
+                    "childRelationships": [
+                        "2e2bcf10-d196-4e55-8b3a-d8bf685fab0c",
+                        "3c0f6594-85fe-4051-a103-e373c08d461a"
+                    ]
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "02143f55-b7b3-4086-8f77-0c96c1d7228a",
+                    "error": {}
+                },
+                {
+                    "name": "code",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "error": {},
+                    "GUID": "2d211c31-e54e-43f6-8521-48e4037688a7"
+                },
+                {
+                    "name": "divisionType",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "cbc777ac-4121-41f9-987b-0e5f04442eea",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "4b3788d3-d095-450c-af0d-0f6205da8078"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+            "bucketId": "433e863b-4fb5-4b7f-8dd9-39617d72d73f"
+        },
+        {
+            "collectionName": "properties",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "a120d577-89cd-4627-aba2-3ee295f5050d",
+                    "error": {}
+                },
+                {
+                    "name": "title",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "cf6d3f71-370f-41b9-b6fb-492917e44cd9",
+                    "error": {}
+                },
+                {
+                    "name": "isClosed",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "boolean",
+                    "GUID": "507ac735-ee10-4857-a8ee-068c2d4e6789",
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "ownerId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "eb658489-6f2e-45d9-a154-7d0ae1b3a5ff",
+                    "foreignCollection": "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                    "foreignField": [
+                        "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                        "7f1c8aae-aee1-489d-a29e-b4cd0b5224c9"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "0d405060-e044-4296-9a36-6e650868d0c3",
+                    "error": {}
+                },
+                {
+                    "name": "pageName",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "355859e5-6fe5-42ce-b387-f7c874eff452",
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "203b71de-5fed-47fc-b08c-b0eda54ac9b3",
+                    "name": "rattingStars",
+                    "error": {}
+                },
+                {
+                    "name": "score",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "48b63b88-f4ff-40c4-b587-f3209e7819ff",
+                    "error": {}
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "2840d4c3-2e98-4053-872e-1a720cf36b6c",
+                    "name": "reviewCount",
+                    "error": {}
+                },
+                {
+                    "name": "location",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "name": "countryId",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "38e6b609-5f19-4270-a638-95aba11bcded",
+                            "error": {}
+                        },
+                        {
+                            "name": "provinceId",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "40100956-8473-440c-a58a-95fb5c33e759",
+                            "error": {}
+                        },
+                        {
+                            "name": "displayAddress",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "d0f42f42-62ce-47d0-aaf7-3154391fb510",
+                            "error": {}
+                        },
+                        {
+                            "name": "displayLocation",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "afc833c0-b9b7-4c72-91ca-ed6672ece31e",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "7e3883c2-345a-4df0-8a72-bbb7a8e497e9",
+                    "error": {}
+                },
+                {
+                    "name": "selectedQuestions",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "question",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "4e0d6b01-fda5-4aa1-8f71-6ab5f32ad9d5",
+                                    "error": {}
+                                },
+                                {
+                                    "name": "answer",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "9ba53d8a-dac8-4793-b13b-733757e52f3c",
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "error": {},
+                            "GUID": "e2276cfe-928a-41d0-99b8-1e35c1336cb5",
+                            "arrayItem": true
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "3fdf1c92-0320-47ef-8996-b6ec911bc5bc",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "4b849781-a551-49a1-a518-d26c1c796df2"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "2b50b242-e40c-404f-bb0a-58406fde5cb0",
+            "bucketId": "433e863b-4fb5-4b7f-8dd9-39617d72d73f"
+        },
+        {
+            "collectionName": "districts",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "28db0cf3-b53b-433a-a12f-b7c3409e5efb",
+                    "error": {},
+                    "childRelationships": [
+                        "5f5261e1-6afd-4cbf-9f65-bbecc88524fc"
+                    ]
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "1ad0540f-0bc9-4ee3-9297-36c761212a95",
+                    "error": {}
+                },
+                {
+                    "name": "code",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "6f61f423-7430-421c-91a8-da778d8ff29e",
+                    "error": {}
+                },
+                {
+                    "name": "provinceCode",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "635942c9-b946-4c1a-a6bd-89d13d2f3c4c",
+                    "error": {}
+                },
+                {
+                    "name": "divisionType",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "fc7fab5d-46bc-452f-9a6c-51bec7e8ccbd",
+                    "error": {}
+                },
+                {
+                    "name": "provinceId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "8e33ee54-8db0-48ab-960d-618617f93e2d",
+                    "foreignCollection": "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                    "foreignField": [
+                        "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                        "58507141-558c-49ab-9803-ae68ebc67cf7"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "2e2bcf10-d196-4e55-8b3a-d8bf685fab0c",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "e731f182-02c8-477d-9a6b-ca1af97209cb"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+            "bucketId": "433e863b-4fb5-4b7f-8dd9-39617d72d73f"
+        }
+    ],
+    "buckets": [
+        {
+            "name": "booking-app",
+            "type": "bucket",
+            "collectionIds": [
+                "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                "2b50b242-e40c-404f-bb0a-58406fde5cb0",
+                "27fe0b82-96d8-4555-ad69-cc732ab3001b"
+            ],
+            "backgroundColor": {
+                "r": 51,
+                "g": 51,
+                "b": 51,
+                "a": 1
+            },
+            "show": true,
+            "isActivated": true,
+            "GUID": "433e863b-4fb5-4b7f-8dd9-39617d72d73f"
+        }
+    ],
+    "views": [],
+    "relationships": [
+        {
+            "name": "fk districts.provinceId to provinces._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                    "58507141-558c-49ab-9803-ae68ebc67cf7"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+                    "8e33ee54-8db0-48ab-960d-618617f93e2d"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "2e2bcf10-d196-4e55-8b3a-d8bf685fab0c",
+            "parentCollection": "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+            "childCollection": "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+            "hackoladeStyles": {
+                "GUID": "33dc25c4-843e-4e4e-87c6-d5c216f46a70",
+                "autoPositioning": false,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1251.5,
+                        "y": 1364
+                    },
+                    {
+                        "x": 1251.5,
+                        "y": 1258.656845753903
+                    }
+                ],
+                "sides": [
+                    "top",
+                    "bottom"
+                ]
+            }
+        },
+        {
+            "name": "fk properties.ownerId to users._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                    "7f1c8aae-aee1-489d-a29e-b4cd0b5224c9"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "2b50b242-e40c-404f-bb0a-58406fde5cb0",
+                    "eb658489-6f2e-45d9-a154-7d0ae1b3a5ff"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "0d405060-e044-4296-9a36-6e650868d0c3",
+            "parentCollection": "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+            "childCollection": "2b50b242-e40c-404f-bb0a-58406fde5cb0",
+            "hackoladeStyles": {
+                "GUID": "3426debb-12e7-462a-afad-079a271626e7",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1790.0329289428048,
+                        "y": 1297.0441941074528
+                    },
+                    {
+                        "x": 1727.0329289428048,
+                        "y": 1297.0441941074528
+                    },
+                    {
+                        "x": 1727.0329289428048,
+                        "y": 1296.0441941074528
+                    },
+                    {
+                        "x": 1664.0329289428048,
+                        "y": 1296.0441941074528
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk users.address.provinceId to provinces._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                    "58507141-558c-49ab-9803-ae68ebc67cf7"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                    "fe7e0c87-f9e9-49f3-b5ac-7d4f1f4122c4",
+                    "7ad0f305-f436-4f81-9d81-acc1a8f4091c"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "3c0f6594-85fe-4051-a103-e373c08d461a",
+            "parentCollection": "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+            "childCollection": "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+            "hackoladeStyles": {
+                "GUID": "f294b5d0-d950-4e7b-908e-c3e5602fd95c",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1453.0329289428048,
+                        "y": 1248.5441941074528
+                    },
+                    {
+                        "x": 1401.4800693240863,
+                        "y": 1248.5441941074528
+                    },
+                    {
+                        "x": 1401.4800693240863,
+                        "y": 1206.156845753903
+                    },
+                    {
+                        "x": 1349.927209705368,
+                        "y": 1206.156845753903
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk users.address.districtId to districts._id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+                    "28db0cf3-b53b-433a-a12f-b7c3409e5efb"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                    "fe7e0c87-f9e9-49f3-b5ac-7d4f1f4122c4",
+                    "0c2bc546-68ed-434e-9afd-c5d27913f124"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "5f5261e1-6afd-4cbf-9f65-bbecc88524fc",
+            "parentCollection": "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+            "childCollection": "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+            "hackoladeStyles": {
+                "GUID": "296b0910-411e-42e1-aa02-daa85bfb8c29",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1453.0329289428048,
+                        "y": 1343.5441941074528
+                    },
+                    {
+                        "x": 1402.0164644714023,
+                        "y": 1343.5441941074528
+                    },
+                    {
+                        "x": 1402.0164644714023,
+                        "y": 1434.5
+                    },
+                    {
+                        "x": 1351,
+                        "y": 1434.5
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        }
+    ],
+    "users": [],
+    "diagramViews": [],
+    "idToNameHashTable": {
+        "433e863b-4fb5-4b7f-8dd9-39617d72d73f": "booking-app",
+        "03738cfb-43c2-4603-a1e3-aedb0a5f78fe": "users",
+        "e2ec7e96-4827-4e56-a9d2-d387aa2e461f": "name",
+        "0b8d602c-a28b-4904-8f62-9a61948484c8": "email",
+        "78e0808d-b1c6-4cf6-8894-7b7137311946": "phoneNumber",
+        "c997930f-e2f1-4e72-bfa3-91e4a296ad1b": "dateOfBirth",
+        "60ffb4c3-eb1f-43cf-b8b8-6454792b9b02": "gender",
+        "fe7e0c87-f9e9-49f3-b5ac-7d4f1f4122c4": "address",
+        "a681dffa-3c29-48c9-8d37-995de40f1b9a": "address",
+        "3cd961bb-cdad-4bbb-b9f0-ef0ab7a4eef9": "province",
+        "7ad0f305-f436-4f81-9d81-acc1a8f4091c": "provinceId",
+        "09a843bc-d933-4c6b-8b8c-ee6ff4be345f": "avatarLink",
+        "c73785f1-020a-410f-b137-ddf85acc93b3": "password",
+        "8e452b17-6f89-47bc-bc7e-b7f7c18a789c": "provinces",
+        "02143f55-b7b3-4086-8f77-0c96c1d7228a": "name",
+        "2b50b242-e40c-404f-bb0a-58406fde5cb0": "properties",
+        "507ac735-ee10-4857-a8ee-068c2d4e6789": "isClosed",
+        "355859e5-6fe5-42ce-b387-f7c874eff452": "pageName",
+        "cf6d3f71-370f-41b9-b6fb-492917e44cd9": "title",
+        "203b71de-5fed-47fc-b08c-b0eda54ac9b3": "rattingStars",
+        "48b63b88-f4ff-40c4-b587-f3209e7819ff": "score",
+        "2840d4c3-2e98-4053-872e-1a720cf36b6c": "reviewCount",
+        "7e3883c2-345a-4df0-8a72-bbb7a8e497e9": "location",
+        "38e6b609-5f19-4270-a638-95aba11bcded": "countryId",
+        "40100956-8473-440c-a58a-95fb5c33e759": "provinceId",
+        "d0f42f42-62ce-47d0-aaf7-3154391fb510": "displayAddress",
+        "eb658489-6f2e-45d9-a154-7d0ae1b3a5ff": "ownerId",
+        "afc833c0-b9b7-4c72-91ca-ed6672ece31e": "displayLocation",
+        "2d211c31-e54e-43f6-8521-48e4037688a7": "code",
+        "cbc777ac-4121-41f9-987b-0e5f04442eea": "divisionType",
+        "27fe0b82-96d8-4555-ad69-cc732ab3001b": "districts",
+        "1ad0540f-0bc9-4ee3-9297-36c761212a95": "name",
+        "6f61f423-7430-421c-91a8-da778d8ff29e": "code",
+        "635942c9-b946-4c1a-a6bd-89d13d2f3c4c": "provinceCode",
+        "fc7fab5d-46bc-452f-9a6c-51bec7e8ccbd": "divisionType",
+        "8e33ee54-8db0-48ab-960d-618617f93e2d": "provinceId",
+        "58507141-558c-49ab-9803-ae68ebc67cf7": "_id",
+        "28db0cf3-b53b-433a-a12f-b7c3409e5efb": "_id",
+        "a120d577-89cd-4627-aba2-3ee295f5050d": "_id",
+        "7f1c8aae-aee1-489d-a29e-b4cd0b5224c9": "_id",
+        "0c2bc546-68ed-434e-9afd-c5d27913f124": "districtId",
+        "26648580-7dd8-4799-a4bd-d11eada43d99": "district",
+        "2e2bcf10-d196-4e55-8b3a-d8bf685fab0c": "fk districts.provinceId to provinces._id",
+        "0d405060-e044-4296-9a36-6e650868d0c3": "fk properties.ownerId to users._id",
+        "3c0f6594-85fe-4051-a103-e373c08d461a": "fk users.address.provinceId to provinces._id",
+        "5f5261e1-6afd-4cbf-9f65-bbecc88524fc": "fk users.address.districtId to districts._id",
+        "3fdf1c92-0320-47ef-8996-b6ec911bc5bc": "selectedQuestions",
+        "4e0d6b01-fda5-4aa1-8f71-6ab5f32ad9d5": "question",
+        "9ba53d8a-dac8-4793-b13b-733757e52f3c": "answer"
+    },
+    "definitions": {
+        "type": "definitions",
+        "properties": [],
+        "GUID": "665dd4ea-4d45-47cc-94dd-dc1d2f2164da"
+    },
+    "polyglotDefinitions": {
+        "type": "polyglotDefinitions",
+        "properties": [],
+        "GUID": "b48f9e15-9ca8-4bca-902b-7f2c16c1be9e"
+    },
+    "externalDefinitions": {
+        "type": "externalDefinitions",
+        "properties": [],
+        "GUID": "3214ddd1-ca1b-4fe8-9497-65c219d016a3"
+    },
+    "sources": [],
+    "decorativeSymbols": [],
+    "dbVersion": "v5.0",
+    "dbVendor": "MongoDB",
+    "appTarget": "MONGODB",
+    "creationTS": "2023-06-03T11:33:28.567Z",
+    "GUID": "093f699d-98ea-4c6a-b127-992686ac56bb",
+    "isLineageEnabled": false,
+    "lastModifTS": "2023-06-11T09:28:29.784Z",
+    "persistenceSchemaVersion": "6",
+    "isCreatedByPlugin": true,
+    "pluginInformation": {
+        "pluginEngineVersion": "1.0.0"
+    },
+    "applicationInformation": {
+        "version": "6.10.5"
+    },
+    "hackoladeMeta": {},
+    "settings": {
+        "centralPane": {
+            "dbLevel": {
+                "erd": [
+                    {
+                        "GUID": "03738cfb-43c2-4603-a1e3-aedb0a5f78fe",
+                        "x": 1453.0329289428048,
+                        "y": 1153.5441941074528,
+                        "width": 211,
+                        "height": 285,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "8e452b17-6f89-47bc-bc7e-b7f7c18a789c",
+                        "x": 1158.927209705368,
+                        "y": 1153.656845753903,
+                        "width": 191,
+                        "height": 105,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "2b50b242-e40c-404f-bb0a-58406fde5cb0",
+                        "x": 1790.0329289428048,
+                        "y": 1127.5441941074528,
+                        "width": 232,
+                        "height": 339,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "27fe0b82-96d8-4555-ad69-cc732ab3001b",
+                        "x": 1152,
+                        "y": 1364,
+                        "width": 199,
+                        "height": 141,
+                        "color": {}
+                    }
+                ],
+                "erdDefinitions": {
+                    "erd": [],
+                    "rootPath": [],
+                    "entities": [],
+                    "decorativeSymbols": []
+                },
+                "buckets": [
+                    {
+                        "x": 1112,
+                        "y": 1087.5441941074528,
+                        "GUID": "433e863b-4fb5-4b7f-8dd9-39617d72d73f"
+                    }
+                ],
+                "collapsedNodes": [],
+                "activeRelationship": "",
+                "activeRelationshipFields": {
+                    "childField": [],
+                    "parentField": []
+                },
+                "selectedCollections": [],
+                "displayColorPicker": false,
+                "graphView": {
+                    "erd": [],
+                    "buckets": [],
+                    "decorativeSymbols": [],
+                    "forceLayout": true,
+                    "defaultLinkLength": 300
+                },
+                "diagramViews": [],
+                "decorativeSymbols": [],
+                "nestedCollectionsLayout": "horizontal",
+                "options": [],
+                "relationshipUpdateDisabled": false
+            },
+            "collectionLevel": {},
+            "changed": false
+        },
+        "dtDiagram": {
+            "collapsedNodes": [],
+            "shouldDistributeCollections": false
+        }
+    }
+}
