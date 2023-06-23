@@ -1,7 +1,6 @@
 const createError = require("http-errors")
 
 const { User } = require("../models")
-const redisService = require("./redis.service")
 const envConfig = require("../configs/envConfig")
 // const { updateImage } = require("../utils")
 

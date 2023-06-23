@@ -28,7 +28,7 @@ const createRefreshToken = async (userId, accessToken) => {
     return await RefreshToken.create({
         body: token,
         user: userId,
-        accessToken,
+        accessToken: accessToken.slice(7), // Remove Bearer
         expires: expires.toDate(),
     })
 }
@@ -38,12 +38,12 @@ const createAuthTokens = async (userId) => {
     const refreshToken = await createRefreshToken(userId, accessToken)
     return {
         accessToken,
-        refreshToken: refreshToken.token,
+        refreshToken: refreshToken.body,
     }
 }
 
 const getPayload = (token) => {
-    return jwt.decode(token, SECRET_KEY)
+    return jwt.decode(token, SECRET)
 }
 
 const getTokenInfo = (token) => {
@@ -52,6 +52,11 @@ const getTokenInfo = (token) => {
         info.isExpired = info.exp < moment().unix()
     }
     return info
+}
+
+const getRefreshTokenByTokenBody = async (tokenBody) => {
+    const refreshToken = await RefreshToken.findOne({ body: tokenBody })
+    return refreshToken
 }
 
 const blackListAUser = async (userId) => {
@@ -67,5 +72,6 @@ module.exports = {
     createAuthTokens,
     getPayload,
     getTokenInfo,
+    getRefreshTokenByTokenBody,
     blackListAUser,
 }

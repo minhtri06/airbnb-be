@@ -1,4 +1,5 @@
 const { District, Province } = require("../models")
+const { connectMongoDb } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
 
@@ -23,8 +24,6 @@ const seed = async () => {
     }
 }
 
-console.log("object")
-console.log("object")
-console.log("object")
-console.log("object")
-seed()
+connectMongoDb().then(() => {
+    seed()
+})

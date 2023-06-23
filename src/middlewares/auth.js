@@ -8,11 +8,17 @@ const createError = require("http-errors")
  * @param {function} next
  * @returns {function}
  */
-const verifyCallBack = (allowedRoles, req, next) => async (err, user, info) => {
+const verifyCallBack = (allowedRoles, required, req, next) => async (err, user, info) => {
     try {
+        if (!required) {
+            next()
+        }
+
         if (err || !user || info) {
             throw createError.Unauthorized("Unauthorized")
         }
+
+        req.user = user
 
         if (allowedRoles.length !== 0) {
             // if every roles of user is not included in allowedRoles => throw Forbidden error
@@ -27,12 +33,12 @@ const verifyCallBack = (allowedRoles, req, next) => async (err, user, info) => {
 }
 
 const auth =
-    (...allowedRoles) =>
+    (allowedRoles, required = true) =>
     async (req, res, next) => {
         passport.authenticate(
             "jwt",
             { session: false },
-            verifyCallBack(allowedRoles, req, next),
+            verifyCallBack(allowedRoles, required, req, next),
         )(req, res, next)
     }
 

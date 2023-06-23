@@ -14,4 +14,24 @@ module.exports = {
             address: user.address,
         }),
     },
+
+    login: {
+        [BODY]: Joi.object({
+            email: user.email.required(),
+            password: user.password.required(),
+        }),
+    },
+
+    logout: {
+        [BODY]: Joi.object({
+            refreshToken: Joi.string().required(),
+        }),
+    },
+
+    refreshToken: {
+        [BODY]: Joi.object({
+            refreshToken: Joi.string().required(),
+            accessToken: Joi.string().required(),
+        }),
+    },
 }

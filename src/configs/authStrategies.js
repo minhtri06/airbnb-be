@@ -5,13 +5,14 @@ const { SECRET } = require("./envConfig").jwt
 const { ACCESS } = require("../constants").tokenTypes
 const { redisService } = require("../services")
 
+const jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken("Authorization")
+
 const jwtStrategy = new JwtStrategy(
     {
         secretOrKey: SECRET,
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken("Authorization"),
-        passReqToCallback: true,
+        jwtFromRequest,
     },
-    async (req, payload, done) => {
+    async (payload, done) => {
         try {
             if (payload.type !== ACCESS) {
                 throw createError.BadRequest("Invalid token type")
@@ -20,7 +21,6 @@ const jwtStrategy = new JwtStrategy(
             if (!user) {
                 throw createError.Unauthorized("Unauthorized")
             }
-            req.user = user
             return done(null, user)
         } catch (error) {
             done(error, false)

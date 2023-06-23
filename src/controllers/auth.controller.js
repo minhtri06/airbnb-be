@@ -9,4 +9,24 @@ const registerUser = async (req, res) => {
     return res.status(StatusCodes.CREATED).json({ user, authTokens })
 }
 
-module.exports = { registerUser }
+/** @type {import('express').RequestHandler} */
+const login = async (req, res) => {
+    const { email, password } = req.body
+    const authTokens = await service.login(email, password)
+    return res.json({ authTokens })
+}
+
+/** @type {import('express').RequestHandler} */
+const logout = async (req, res) => {
+    await service.logout(req.body.refreshToken)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+/** @type {import('express').RequestHandler} */
+const refreshToken = async (req, res) => {
+    const { accessToken, refreshToken } = req.body
+    const authTokens = await service.refreshAuthTokens(accessToken, refreshToken)
+    return res.json({ authTokens })
+}
+
+module.exports = { registerUser, login, logout, refreshToken }
