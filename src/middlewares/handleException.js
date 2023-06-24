@@ -12,9 +12,7 @@ const handleException = async (err, req, res, next) => {
         await deleteFile(req.file.path)
     }
     if (req.files) {
-        for (let file of req.files) {
-            await deleteFile(file.path)
-        }
+        await Promise.all(req.files.map((file) => deleteFile(file.path)))
     }
     if (envConfig.NODE_ENV !== PRODUCTION) {
         if (err instanceof createError.HttpError) {

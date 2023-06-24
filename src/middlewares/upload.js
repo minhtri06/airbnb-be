@@ -9,17 +9,13 @@ const imageFilter = (req, file, cb) => {
     if (type !== "image") {
         cb(createError.BadRequest("Invalid image"))
     } else {
-        file.extension = extension
         cb(null, true)
     }
 }
 
 const imageStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, process.cwd() + "/src/static/images")
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + "." + file.extension)
+        cb(null, process.cwd() + "/src/static/img")
     },
 })
 
@@ -32,13 +28,13 @@ const uploadImage = (fieldName) =>
         }).single(fieldName),
     )
 
-const uploadManyImages = (fields) =>
+const uploadManyImages = (fieldName) =>
     util.promisify(
         multer({
             storage: imageStorage,
             limits: { fileSize: maxSize },
             fileFilter: imageFilter,
-        }).fields(fields),
+        }).array(fieldName),
     )
 
 module.exports = { uploadImage, uploadManyImages }

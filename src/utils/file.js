@@ -2,7 +2,11 @@ const { promisify } = require("util")
 const fs = require("fs")
 const { STATIC_DIRNAME } = require("../constants")
 
-const deleteFile = promisify(fs.unlink)
+const deleteFile = async (path) => {
+    if (fs.existsSync(path)) {
+        await promisify(fs.unlink)(path)
+    }
+}
 
 const deleteStaticFile = async (relativePath) => {
     await deleteFile(STATIC_DIRNAME + relativePath)

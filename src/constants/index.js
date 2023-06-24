@@ -23,6 +23,10 @@ const commonConstants = {
         MALE: "male",
         FEMALE: "female",
     },
+    propertyType: {
+        ENTIRE_HOUSE: "entire-house",
+        SPECIFIC_ROOM: "specific-room",
+    },
 }
 
 module.exports = commonConstants

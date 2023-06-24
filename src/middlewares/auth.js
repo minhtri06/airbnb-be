@@ -33,7 +33,7 @@ const verifyCallBack = (allowedRoles, required, req, next) => async (err, user, 
 }
 
 const auth =
-    (allowedRoles, required = true) =>
+    (allowedRoles = [], required = true) =>
     async (req, res, next) => {
         passport.authenticate(
             "jwt",

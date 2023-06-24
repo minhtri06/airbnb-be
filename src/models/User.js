@@ -6,7 +6,7 @@ const roles = require("../configs/roles")
 const { toJSON } = require("./plugins")
 const moment = require("moment")
 const bcrypt = require("bcryptjs")
-const District = require("./District")
+const { addressSchema } = require("./subdocs")
 
 const { Schema } = mongoose
 
@@ -68,23 +68,10 @@ const userSchema = new Schema({
             return moment(value).isBefore(new Date())
         },
     },
-    gender: { type: String, enum: Object.values(genders) },
+    gender: { type: String, lowercase: true, enum: Object.values(genders) },
     address: {
-        address: { type: String },
-        district: {
-            type: Schema.Types.ObjectId,
-            ref: "District",
-            validate: async function (value) {
-                const district = await District.findById(value)
-                if (!district) {
-                    throw Error("District not found")
-                }
-                if (!district.province.equals(this.get("address.province"))) {
-                    throw Error("District is not match with province")
-                }
-            },
-        },
-        province: { type: Schema.Types.ObjectId, ref: "Province" },
+        type: addressSchema,
+        default: () => ({}),
     },
 })
 
