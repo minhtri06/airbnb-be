@@ -9,11 +9,14 @@ const { deleteFile } = require("../utils").file
 /** @type {import('express').ErrorRequestHandler} */
 const handleException = async (err, req, res, next) => {
     if (req.file) {
-        await deleteFile(req.file.path)
+        deleteFile(req.file.path)
     }
     if (req.files) {
-        await Promise.all(req.files.map((file) => deleteFile(file.path)))
+        for (let file of req.files) {
+            deleteFile(file.path)
+        }
     }
+
     if (envConfig.NODE_ENV !== PRODUCTION) {
         if (err instanceof createError.HttpError) {
             return res.status(err.statusCode).json({ message: err.message })
