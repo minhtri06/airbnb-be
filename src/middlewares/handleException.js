@@ -11,7 +11,7 @@ const handleException = async (err, req, res, next) => {
     if (req.file) {
         deleteFile(req.file.path)
     }
-    if (req.files) {
+    if (req.files && req.files instanceof Array) {
         for (let file of req.files) {
             deleteFile(file.path)
         }

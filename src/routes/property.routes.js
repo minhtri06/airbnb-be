@@ -10,11 +10,6 @@ const { propertyController: controller } = require("../controllers")
 
 router
     .route("/")
-    .post(
-        auth(),
-        uploadManyImages("images"),
-        validate(validation.createProperty),
-        controller.createProperty,
-    )
+    .post(auth(), validate(validation.createProperty), controller.createProperty)
 
 module.exports = router

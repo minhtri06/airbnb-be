@@ -79,6 +79,17 @@ const propertySchema = new Schema({
 
 propertySchema.plugin(toJSON)
 
+propertySchema.pre("save", function (next) {
+    const property = this
+    if (property.propertyType === ENTIRE_HOUSE) {
+        property.roomDetail = undefined
+    }
+    if (property.propertyType === SPECIFIC_ROOM) {
+        property.houseDetail = undefined
+    }
+    next()
+})
+
 const Property = mongoose.model("Property", propertySchema)
 
 module.exports = Property
