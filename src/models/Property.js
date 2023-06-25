@@ -1,8 +1,9 @@
 const mongoose = require("mongoose")
 
-const { addressSchema, currentBookingDatesSchema } = require("./subdocs")
+const { addressSchema, houseDetailSchema, roomGroupDetailSchema } = require("./subdocs")
 const { toJSON } = require("./plugins")
 const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").propertyType
+const { createMongooseValidationErr } = require("../utils")
 
 const { Schema } = mongoose
 
@@ -10,7 +11,7 @@ const propertySchema = new Schema({
     title: { type: String, required: true, trim: true },
     isClosed: { type: Boolean, default: false },
     owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    pageUrl: { type: String, required: true, unique: true, lowercase: true },
+    pageName: { type: String, required: true, unique: true, lowercase: true },
     score: { type: Number, min: 0, max: 10 },
     reviewCount: {
         type: Number,
@@ -40,39 +41,25 @@ const propertySchema = new Schema({
     ],
     propertyType: { type: String, required: true, enum: [ENTIRE_HOUSE, SPECIFIC_ROOM] },
     houseDetail: {
-        type: {
-            title: { type: String, required: true, trim: true },
-            rooms: [
-                {
-                    roomType: { type: String, required: true },
-                    bedType: { type: String, required: true },
-                    roomCode: { type: String, required: true },
-                },
-            ],
-            pricePerNight: { type: Number, required: true, min: 0 },
-            currentBookDates: { type: [currentBookingDatesSchema], default: [] },
-        },
+        type: houseDetailSchema,
         required: function () {
             return this.get("propertyType") === ENTIRE_HOUSE
         },
     },
-    roomDetail: {
-        type: {
-            title: { type: String, required: true },
-            pricePerNight: { type: Number, required: true, min: 0 },
-            bedType: { type: String, required: true },
-            rooms: [
-                {
-                    currentBookingDates: {
-                        type: [currentBookingDatesSchema],
-                        default: [],
-                    },
-                    roomCode: { type: String, required: true },
-                },
-            ],
-        },
-        required: function () {
-            return this.get("propertyType") === SPECIFIC_ROOM
+    roomGroupDetails: {
+        type: [roomGroupDetailSchema],
+        validate(roomGroupDetails) {
+            if (!Array.isArray(roomGroupDetails)) {
+                throw Error("roomGroupDetails must be an array")
+            }
+            if (
+                this.get("propertyType") === SPECIFIC_ROOM &&
+                roomGroupDetails.length < 1
+            ) {
+                throw Error(
+                    "roomGroupDetails is required and must have at least one room group",
+                )
+            }
         },
     },
 })
@@ -82,7 +69,7 @@ propertySchema.plugin(toJSON)
 propertySchema.pre("save", function (next) {
     const property = this
     if (property.propertyType === ENTIRE_HOUSE) {
-        property.roomDetail = undefined
+        property.roomGroupDetails = undefined
     }
     if (property.propertyType === SPECIFIC_ROOM) {
         property.houseDetail = undefined

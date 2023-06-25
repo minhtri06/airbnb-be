@@ -7,11 +7,23 @@ module.exports = {
     createProperty: {
         [BODY]: Joi.object({
             title: property.title.required(),
-            pageUrl: property.pageUrl.required(),
+            pageName: property.pageName.required(),
             address: property.address.required(),
             propertyType: property.propertyType.required(),
             houseDetail: property.houseDetail,
-            roomDetail: property.roomDetail,
+            roomGroupDetails: property.roomGroupDetails,
+        }),
+    },
+    addRooms: {
+        [BODY]: Joi.object({
+            rooms: Joi.array().items(
+                Joi.object({
+                    roomType: Joi.string(),
+                    bedType: Joi.string(),
+                    roomCode: Joi.string(),
+                }),
+            ),
+            roomGroupIndex: Joi.number().integer(),
         }),
     },
 }

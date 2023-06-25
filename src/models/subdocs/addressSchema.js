@@ -34,8 +34,8 @@ addressSchema.pre("save", async function (next) {
             err.message = "District and province do not match"
             throw err
         }
-        address.address.districtName = district.name
-        address.address.provinceName = province.name
+        address.districtName = district.name
+        address.provinceName = province.name
     }
     next()
 })

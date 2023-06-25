@@ -8,7 +8,7 @@ module.exports = {
     title: Joi.string(),
     isClosed: Joi.boolean(),
     owner: Joi.string().custom(objectId),
-    pageUrl: Joi.string(),
+    pageName: Joi.string(),
     score: Joi.number().min(0).max(10),
     reviewCount: Joi.number().min(0),
     address: Joi.object({
@@ -26,17 +26,21 @@ module.exports = {
                 roomType: Joi.string().required(),
                 bedType: Joi.string().required(),
                 roomCode: Joi.string().required(),
-            }),
+            }).min(1),
         ),
     }),
-    roomDetail: Joi.object({
-        title: Joi.string().required(),
-        pricePerNight: Joi.number().min(0).required(),
-        bedType: Joi.string().required(),
-        rooms: Joi.array().items(
-            Joi.object({
-                roomCode: Joi.string().required(),
-            }),
-        ),
-    }),
+    roomGroupDetails: Joi.array().items(
+        Joi.object({
+            title: Joi.string().required(),
+            pricePerNight: Joi.number().min(0).required(),
+            bedType: Joi.string().required(),
+            rooms: Joi.array()
+                .items(
+                    Joi.object({
+                        roomCode: Joi.string().required(),
+                    }),
+                )
+                .min(1),
+        }),
+    ),
 }
