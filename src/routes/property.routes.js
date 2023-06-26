@@ -13,7 +13,7 @@ router
     .post(auth(), validate(validation.createProperty), controller.createProperty)
 
 router
-    .route("/:propertyId/rooms")
-    .post(auth(), validate(validation.addRooms), controller.addRooms)
+    .route("/:propertyId/accom-groups/:accomGroupId/accoms")
+    .post(auth(), controller.addAccommodations)
 
 module.exports = router

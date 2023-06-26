@@ -12,35 +12,24 @@ const createProperty = async (body) => {
     return property
 }
 
-const getAccommodateOfProperty = (property, roomGroupIndex = undefined) => {
-    if (property.propertyType === ENTIRE_HOUSE) {
-        return property.houseDetail
-    } else if (property.propertyType === SPECIFIC_ROOM) {
-        if (roomGroupIndex !== 0 && !roomGroupIndex) {
-            throw createError.BadRequest(
-                `If propertyType is ${SPECIFIC_ROOM} then roomGroupIndex is required`,
-            )
-        }
-        return property.roomGroupDetails[roomGroupIndex]
+const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) => {
+    if (newAccoms.length === 0) {
+        throw new Error("newAccoms must have at least one accommodation")
     }
-}
-
-const addRoom = async (propertyId, rooms, owner, roomGroupIndex = undefined) => {
-    const property = await Property.findOne({ _id: propertyId, owner })
+    const property = await Property.findOne({ _id: propertyId, owner: ownerId })
     if (!property) {
         throw createError.NotFound("Property not found")
     }
-    const accommodate = getAccommodateOfProperty(property, roomGroupIndex)
-    if (!accommodate) {
-        throw createError.NotFound("Accommodate not found")
+    const accoGroup = property.accommodationGroups.id(accomGroupId)
+    if (!accoGroup) {
+        throw createError.NotFound("Accommodation group not found")
     }
-    accommodate.rooms.push(...rooms)
-    console.log(property.houseDetail)
+    accoGroup.accommodations.push(...newAccoms)
     await property.save()
     return property
 }
 
 module.exports = {
     createProperty,
-    addRoom,
+    addAccommodations,
 }

@@ -11,16 +11,16 @@ const createProperty = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
-const addRooms = async (req, res) => {
-    const { rooms, roomGroupIndex } = req.body
-    console.log(req.params.propertyId)
-    const property = await service.addRoom(
-        req.params.propertyId,
-        rooms,
+const addAccommodations = async (req, res) => {
+    const { propertyId, accomGroupId } = req.params
+    const { newAccoms } = req.body
+    const property = await service.addAccommodations(
+        propertyId,
         req.user._id,
-        roomGroupIndex,
+        accomGroupId,
+        newAccoms,
     )
     return res.json({ property })
 }
 
-module.exports = { createProperty, addRooms }
+module.exports = { createProperty, addAccommodations }
