@@ -12,8 +12,8 @@ const registerUser = async (req, res) => {
 /** @type {import('express').RequestHandler} */
 const login = async (req, res) => {
     const { email, password } = req.body
-    const authTokens = await service.login(email, password)
-    return res.json({ authTokens })
+    const { user, authTokens } = await service.login(email, password)
+    return res.json({ user, authTokens })
 }
 
 /** @type {import('express').RequestHandler} */

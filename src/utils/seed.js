@@ -143,7 +143,13 @@ const seedUsers = async () => {
     ])
 }
 
+const seedProperty = async () => {
+    const propertyData = require("../../crawl-data/hotel-data/da-lat-hotels.json")
+    console.log(propertyData)
+}
+
 connectMongoDb().then(async () => {
-    await seedDivisions()
-    await seedUsers()
+    // await seedDivisions()
+    // await seedUsers()
+    seedProperty()
 })

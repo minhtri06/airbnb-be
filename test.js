@@ -1,5 +1,5 @@
 const { connectMongoDb } = require("./src/db")
-const { Property } = require("./src/models")
+const { Property, User } = require("./src/models")
 
 const addAccommodation = async (accommodationGroupId) => {
     const property = await Property.findOne({
@@ -8,10 +8,13 @@ const addAccommodation = async (accommodationGroupId) => {
     console.log(property)
 }
 
-connectMongoDb().then(async () => {
-    const property = await Property.findOne({
-        "accommodationGroups._id": "64995518ca2df4d0dc97a9e0",
-    })
-    const accoGroup = property.accommodationGroups.id("64995518ca2df4d0dc97a9e0")
-    console.log(accoGroup)
-})
+// connectMongoDb().then(async () => {
+//     const uCursor = User.where().cursor()
+//     for (let user = await uCursor.next(); user !== null; user = await uCursor.next()) {
+//         console.log(user)
+//     }
+// })
+
+let a = undefined
+a = a || 1
+console.log(a)

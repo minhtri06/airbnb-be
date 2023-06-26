@@ -52,6 +52,7 @@ module.exports = {
     pageName: Joi.string(),
     score: Joi.number().min(0).max(10),
     reviewCount: Joi.number().min(0),
+    description: Joi.string(),
     address: Joi.object({
         address: Joi.string().required(),
         district: Joi.string().custom(objectId).required(),

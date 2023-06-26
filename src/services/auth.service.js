@@ -27,7 +27,7 @@ const login = async (email, password) => {
         throw createError.BadRequest("Wrong password")
     }
     const authTokens = tokenService.createAuthTokens(user._id)
-    return authTokens
+    return { user, authTokens }
 }
 
 const logout = async (rTokenBody) => {

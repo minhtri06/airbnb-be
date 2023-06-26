@@ -1,6 +1,7 @@
 const createError = require("http-errors")
 
 const { Property } = require("../models")
+const envConfig = require("../configs/envConfig")
 const {
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
     accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
@@ -12,15 +13,32 @@ const createProperty = async (body) => {
     return property
 }
 
-const searchProperties = async ({ districtId, provinceId }) => {
+const searchProperties = async ({
+    districtId,
+    provinceId,
+    bookInDate,
+    bookOutDate,
+    page,
+    limit,
+}) => {
     const query = Property.where().select("-selectedQuestions")
+
     if (districtId) {
         query.where({ "address.district": districtId })
     }
     if (provinceId) {
         query.where({ "address.province": provinceId })
     }
-    const properties = await query.exec()
+
+    let properties
+    page = page || 1
+    limit = limit || envConfig.DEFAULT_PAGE_LIMIT
+
+    if (bookInDate && bookOutDate) {
+    } else {
+        query.skip((page - 1) * limit).limit(limit)
+        properties = await query.exec()
+    }
     return properties
 }
 

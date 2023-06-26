@@ -12,6 +12,7 @@ module.exports = {
             title: property.title.required(),
             pageName: property.pageName.required(),
             address: property.address.required(),
+            description: property.description,
             accommodationGroups: property.accommodationGroups,
         }),
     },

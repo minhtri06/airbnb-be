@@ -12,6 +12,8 @@ const propertySchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
     pageName: { type: String, required: true, unique: true, lowercase: true },
     score: { type: Number, min: 0, max: 10 },
+    description: { type: String },
+    facilities: { type: [String] },
     reviewCount: {
         type: Number,
         get: function (value) {
@@ -29,7 +31,7 @@ const propertySchema = new Schema({
         default: () => ({}),
         required: true,
     },
-    thumbnail: String,
+    thumbnail: { type: String },
     images: [String],
     selectedQuestions: [
         {
