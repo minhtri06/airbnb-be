@@ -26,7 +26,7 @@ const login = async (email, password) => {
     if (!(await user.isPasswordMatch(password))) {
         throw createError.BadRequest("Wrong password")
     }
-    const authTokens = tokenService.createAuthTokens(user._id)
+    const authTokens = await tokenService.createAuthTokens(user._id)
     return { user, authTokens }
 }
 
