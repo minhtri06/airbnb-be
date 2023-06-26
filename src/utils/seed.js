@@ -159,7 +159,6 @@ const generateCurrentBookingDates = (n) => {
             bookOut: `${bookOut.year()}/${bookOut.month()}/${bookOut.date()}`,
         })
     }
-    console.log(currentBookingDates)
     return currentBookingDates
 }
 
@@ -186,37 +185,70 @@ const seedProperty = async () => {
                 province: "6499991e74f757e3f4d955d9",
             },
         },
+        binhThuan: {
+            dataFilePath: "../../crawl-data/hotel-data/binh-thuan-hotels.json",
+            address: {
+                address: "Bo bien Tuoi Sang",
+                district: "6499991e74f757e3f4d95590",
+                province: "6499991e74f757e3f4d9558e",
+            },
+        },
+        daNang: {
+            dataFilePath: "../../crawl-data/hotel-data/da-nang-hotels.json",
+            address: {
+                address: "Bo bien Buoi Sang",
+                district: "6499991d74f757e3f4d95530",
+                province: "6499991d74f757e3f4d9552e",
+            },
+        },
+        haNoi: {
+            dataFilePath: "../../crawl-data/hotel-data/ha-noi-hotels.json",
+            address: {
+                address: "Bo bien Buoi Sang",
+                district: "6499991d74f757e3f4d95371",
+                province: "6499991d74f757e3f4d9536a",
+            },
+        },
+        hcm: {
+            dataFilePath: "../../crawl-data/hotel-data/ho-chi-minh-hotels.json",
+            address: {
+                address: "Bo bien Buoi Sang",
+                district: "6499991e74f757e3f4d95629",
+                province: "6499991e74f757e3f4d95627",
+            },
+        },
     }
     for (let l of Object.values(locationInfo)) {
-        const propertyData = require(l.dataFilePath)
-        const property = propertyData[2]
-        property.owner = getRandomElementInArray(users)._id
-        property.address = l.address
-        property.accommodationGroups = [
-            {
-                title: getRandomElementInArray(accommodationGroupTitles),
-                pricePerNight: getRandomNumber(10, 100) * 10000,
-                type: "specific-room",
-                bedType: "Single Bed",
-                accommodations: [
+        const propertiesData = require(l.dataFilePath)
+        await Promise.all(
+            propertiesData.map((propertyData) => {
+                propertyData.owner = getRandomElementInArray(users)._id
+                propertyData.address = l.address
+                propertyData.accommodationGroups = [
                     {
-                        roomCode: "AA1",
-                        currentBookingDates: generateCurrentBookingDates(
-                            getRandomNumber(0, 3),
-                        ),
+                        title: getRandomElementInArray(accommodationGroupTitles),
+                        pricePerNight: getRandomNumber(10, 100) * 10000,
+                        type: "specific-room",
+                        bedType: "Single Bed",
+                        accommodations: [
+                            {
+                                roomCode: "AA1",
+                                currentBookingDates: generateCurrentBookingDates(
+                                    getRandomNumber(0, 3),
+                                ),
+                            },
+                            {
+                                roomCode: "AA2",
+                                currentBookingDates: generateCurrentBookingDates(
+                                    getRandomNumber(0, 3),
+                                ),
+                            },
+                        ],
                     },
-                    {
-                        roomCode: "AA2",
-                        currentBookingDates: generateCurrentBookingDates(
-                            getRandomNumber(0, 3),
-                        ),
-                    },
-                ],
-            },
-        ]
-        console.log(
-            (await Property.create(property)).accommodationGroups[0].accommodations[0]
-                .currentBookingDates,
+                ]
+                const property = new Property(propertyData)
+                return property.save()
+            }),
         )
     }
 }
@@ -224,5 +256,5 @@ const seedProperty = async () => {
 connectMongoDb().then(async () => {
     // await seedDivisions()
     // await seedUsers()
-    seedProperty()
+    await seedProperty()
 })
