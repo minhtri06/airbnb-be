@@ -1,9 +1,8 @@
 const mongoose = require("mongoose")
 
-const { addressSchema, houseDetailSchema, roomGroupDetailSchema } = require("./subdocs")
+const { addressSchema, accommodationGroupSchema } = require("./subdocs")
 const { toJSON } = require("./plugins")
-const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").propertyType
-const { createMongooseValidationErr } = require("../utils")
+const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").accommodationTypes
 
 const { Schema } = mongoose
 
@@ -39,43 +38,12 @@ const propertySchema = new Schema({
             questioner: { type: Schema.Types.ObjectId, ref: "User", required: true },
         },
     ],
-    propertyType: { type: String, required: true, enum: [ENTIRE_HOUSE, SPECIFIC_ROOM] },
-    houseDetail: {
-        type: houseDetailSchema,
-        required: function () {
-            return this.get("propertyType") === ENTIRE_HOUSE
-        },
-    },
-    roomGroupDetails: {
-        type: [roomGroupDetailSchema],
-        validate(roomGroupDetails) {
-            if (!Array.isArray(roomGroupDetails)) {
-                throw Error("roomGroupDetails must be an array")
-            }
-            if (
-                this.get("propertyType") === SPECIFIC_ROOM &&
-                roomGroupDetails.length < 1
-            ) {
-                throw Error(
-                    "roomGroupDetails is required and must have at least one room group",
-                )
-            }
-        },
+    accommodationGroups: {
+        type: [accommodationGroupSchema],
     },
 })
 
 propertySchema.plugin(toJSON)
-
-propertySchema.pre("save", function (next) {
-    const property = this
-    if (property.propertyType === ENTIRE_HOUSE) {
-        property.roomGroupDetails = undefined
-    }
-    if (property.propertyType === SPECIFIC_ROOM) {
-        property.houseDetail = undefined
-    }
-    next()
-})
 
 const Property = mongoose.model("Property", propertySchema)
 

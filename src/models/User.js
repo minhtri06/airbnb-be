@@ -55,7 +55,7 @@ const userSchema = new Schema({
             // In case array have undefined value
             values.forEach((value) => {
                 if (!value) {
-                    throw Error(`Invalid role '${value}'`)
+                    throw new Error(`Invalid role '${value}'`)
                 }
             })
         },

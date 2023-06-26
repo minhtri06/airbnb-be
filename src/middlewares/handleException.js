@@ -20,7 +20,8 @@ const handleException = async (err, req, res, next) => {
     if (envConfig.NODE_ENV !== PRODUCTION) {
         if (err instanceof createError.HttpError) {
             return res.status(err.statusCode).json({ message: err.message })
-        } else if (err instanceof ValidationError) {
+        } else if (err instanceof ValidationError || err.code === 11000) {
+            // Validation error or duplicate key error
             return res
                 .status(StatusCodes.BAD_REQUEST)
                 .json({ message: err.message.replaceAll('"', "'") })
@@ -33,7 +34,8 @@ const handleException = async (err, req, res, next) => {
     } else {
         if (err instanceof createError.HttpError) {
             return res.status(err.statusCode).json({ message: err.message })
-        } else if (err instanceof ValidationError) {
+        } else if (err instanceof ValidationError || err.code === 11000) {
+            // Validation error or duplicate key error
             return res.status(StatusCodes.BAD_REQUEST).json({ message: "Bad request" })
         } else {
             return res

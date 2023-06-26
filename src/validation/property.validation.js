@@ -1,6 +1,9 @@
 const Joi = require("joi")
 
-const { BODY, PARAMS } = require("../constants").request
+const {
+    request: { BODY, PARAMS },
+    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+} = require("../constants")
 const { property } = require("./common")
 
 module.exports = {
@@ -9,11 +12,10 @@ module.exports = {
             title: property.title.required(),
             pageName: property.pageName.required(),
             address: property.address.required(),
-            propertyType: property.propertyType.required(),
-            houseDetail: property.houseDetail,
-            roomGroupDetails: property.roomGroupDetails,
+            accommodationGroups: property.accommodationGroups,
         }),
     },
+
     addRooms: {
         [BODY]: Joi.object({
             rooms: Joi.array().items(

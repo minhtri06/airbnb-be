@@ -1,6 +1,9 @@
 const Joi = require("joi")
 
-const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../../constants").propertyType
+const {
+    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+    accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
+} = require("../../constants")
 const { objectId } = require("./custom")
 
 module.exports = {
@@ -17,30 +20,41 @@ module.exports = {
         province: Joi.string().custom(objectId).required(),
     }),
     images: Joi.array().items(Joi.string()),
-    propertyType: Joi.string().valid(ENTIRE_HOUSE, SPECIFIC_ROOM),
-    houseDetail: Joi.object({
+    accommodationGroups: Joi.array().items({
         title: Joi.string().required(),
         pricePerNight: Joi.number().min(0).required(),
-        rooms: Joi.array().items(
-            Joi.object({
-                roomType: Joi.string().required(),
-                bedType: Joi.string().required(),
-                roomCode: Joi.string().required(),
-            }).min(1),
-        ),
-    }),
-    roomGroupDetails: Joi.array().items(
-        Joi.object({
-            title: Joi.string().required(),
-            pricePerNight: Joi.number().min(0).required(),
-            bedType: Joi.string().required(),
-            rooms: Joi.array()
-                .items(
-                    Joi.object({
-                        roomCode: Joi.string().required(),
-                    }),
-                )
-                .min(1),
+        type: Joi.string().valid(ENTIRE_HOUSE, SPECIFIC_ROOM).required(),
+
+        // Just for specific-room
+        bedType: Joi.when("type", {
+            is: SPECIFIC_ROOM,
+            then: Joi.string().required(),
+            otherwise: Joi.forbidden(),
         }),
-    ),
+
+        accommodations: Joi.array()
+            .min(1)
+            .items({
+                // Just for specific-room
+                roomCode: Joi.when(Joi.ref("type", { ancestor: 3 }), {
+                    is: SPECIFIC_ROOM,
+                    then: Joi.string().required(),
+                    otherwise: Joi.forbidden(),
+                }),
+
+                // Just for entire-house
+                rooms: Joi.when(Joi.ref("type", { ancestor: 3 }), {
+                    is: ENTIRE_HOUSE,
+                    then: Joi.array()
+                        .min(1)
+                        .items({
+                            bedType: Joi.string().required(),
+                            roomType: Joi.string().required(),
+                        })
+                        .required(),
+                    otherwise: Joi.forbidden(),
+                }),
+            })
+            .required(),
+    }),
 }

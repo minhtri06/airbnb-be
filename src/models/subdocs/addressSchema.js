@@ -8,10 +8,10 @@ const { Schema } = mongoose
 const { Error } = mongoose
 
 const addressSchema = new Schema({
-    address: { type: String },
-    district: { type: Schema.Types.ObjectId, ref: "District" },
+    address: { type: String, required: true },
+    district: { type: Schema.Types.ObjectId, ref: "District", required: true },
     districtName: { type: String },
-    province: { type: Schema.Types.ObjectId, ref: "Province" },
+    province: { type: Schema.Types.ObjectId, ref: "Province", required: true },
     provinceName: { type: String },
 })
 

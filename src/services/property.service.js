@@ -1,7 +1,10 @@
 const createError = require("http-errors")
 
 const { Property } = require("../models")
-const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").propertyType
+const {
+    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+    accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
+} = require("../constants")
 
 const createProperty = async (body) => {
     const property = new Property(body)
