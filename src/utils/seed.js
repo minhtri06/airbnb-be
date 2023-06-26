@@ -1,4 +1,6 @@
-const { District, Province, User } = require("../models")
+const moment = require("moment")
+
+const { District, Province, User, Property } = require("../models")
 const { connectMongoDb } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
@@ -143,9 +145,80 @@ const seedUsers = async () => {
     ])
 }
 
+const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)]
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+const generateCurrentBookingDates = (n) => {
+    let bookIn
+    let bookOut = moment()
+    const currentBookingDates = []
+    for (let i = 0; i < n; i++) {
+        bookIn = moment(bookOut).add(getRandomNumber(3, 5), "days")
+        bookOut = moment(bookIn).add(getRandomNumber(2, 4), "days")
+        currentBookingDates.push({
+            bookIn: `${bookIn.year()}/${bookIn.month()}/${bookIn.date()}`,
+            bookOut: `${bookOut.year()}/${bookOut.month()}/${bookOut.date()}`,
+        })
+    }
+    console.log(currentBookingDates)
+    return currentBookingDates
+}
+
 const seedProperty = async () => {
-    const propertyData = require("../../crawl-data/hotel-data/da-lat-hotels.json")
-    console.log(propertyData)
+    const users = await User.find()
+    if (users.length === 0) {
+        return
+    }
+    const accommodationGroupTitles = [
+        "Standard Room",
+        "Vip Room",
+        "Family Room",
+        "Two-bed Room",
+        "Japaneses-Style",
+        "Double Room",
+        "Standard Double Room",
+    ]
+    const locationInfo = {
+        daLat: {
+            dataFilePath: "../../crawl-data/hotel-data/da-lat-hotels.json",
+            address: {
+                address: "48, Nguyen Thi Minh Khai",
+                district: "6499991e74f757e3f4d955db",
+                province: "6499991e74f757e3f4d955d9",
+            },
+        },
+    }
+    for (let l of Object.values(locationInfo)) {
+        const propertyData = require(l.dataFilePath)
+        const property = propertyData[2]
+        property.owner = getRandomElementInArray(users)._id
+        property.address = l.address
+        property.accommodationGroups = [
+            {
+                title: getRandomElementInArray(accommodationGroupTitles),
+                pricePerNight: getRandomNumber(10, 100) * 10000,
+                type: "specific-room",
+                bedType: "Single Bed",
+                accommodations: [
+                    {
+                        roomCode: "AA1",
+                        currentBookingDates: generateCurrentBookingDates(
+                            getRandomNumber(0, 3),
+                        ),
+                    },
+                    {
+                        roomCode: "AA2",
+                        currentBookingDates: generateCurrentBookingDates(
+                            getRandomNumber(0, 3),
+                        ),
+                    },
+                ],
+            },
+        ]
+        console.log(
+            (await Property.create(property)).accommodationGroups[0].accommodations[0]
+                .currentBookingDates,
+        )
+    }
 }
 
 connectMongoDb().then(async () => {

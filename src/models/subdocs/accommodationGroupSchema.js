@@ -29,7 +29,8 @@ const accommodationGroupSchema = new Schema({
             {
                 currentBookingDates: [currentBookingDatesSchema],
 
-                roomCode: String,
+                // Just for specific-room accommodation
+                roomCode: { type: String },
 
                 // Just for entire-house accommodation
                 rooms: {

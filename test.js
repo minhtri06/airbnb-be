@@ -1,12 +1,6 @@
 const { connectMongoDb } = require("./src/db")
 const { Property, User } = require("./src/models")
-
-const addAccommodation = async (accommodationGroupId) => {
-    const property = await Property.findOne({
-        accommodationGroups: { _id: accommodationGroupId },
-    })
-    console.log(property)
-}
+const moment = require("moment")
 
 // connectMongoDb().then(async () => {
 //     const uCursor = User.where().cursor()
@@ -15,6 +9,21 @@ const addAccommodation = async (accommodationGroupId) => {
 //     }
 // })
 
-let a = undefined
-a = a || 1
-console.log(a)
+const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)]
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+const generateCurrentBookingDates = (n) => {
+    let bookIn
+    let bookOut = moment()
+    const currentBookingDates = []
+    for (let i = 0; i < n; i++) {
+        bookIn = bookOut.add(getRandomNumber(3, 5), "days")
+        bookOut = bookIn.add(getRandomNumber(2, 4), "days")
+        currentBookingDates.push({
+            bookIn: bookIn.calendar(),
+            bookOut: bookOut.calendar(),
+        })
+    }
+    return currentBookingDates
+}
+
+console.log(generateCurrentBookingDates(3))

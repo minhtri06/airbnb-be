@@ -8,8 +8,9 @@ const getAllProvinces = async (req, res) => {
     return res.json({ provinces })
 }
 
+/** @type {import('express').RequestHandler} */
 const getAllDistricts = async (req, res) => {
-    const districts = await service.getAllDistricts()
+    const districts = await service.getAllDistricts(req.query)
     return res.json({ districts })
 }
 

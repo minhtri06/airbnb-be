@@ -6,8 +6,12 @@ const getAllProvinces = async () => {
     return await Province.find()
 }
 
-const getAllDistricts = async () => {
-    return await District.find()
+const getAllDistricts = async ({ provinceCode }) => {
+    const query = District.where()
+    if (provinceCode) {
+        query.where({ provinceCode })
+    }
+    return await query.exec()
 }
 
 module.exports = {
