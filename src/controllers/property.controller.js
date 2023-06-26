@@ -11,16 +11,28 @@ const createProperty = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
-const addAccommodations = async (req, res) => {
-    const { propertyId, accomGroupId } = req.params
-    const { newAccoms } = req.body
-    const property = await service.addAccommodations(
+const addAccommodationGroup = async (req, res) => {
+    const { propertyId } = req.params
+    const { newAccommodationGroup } = req.body
+    const property = await service.addAccommodationGroup(
         propertyId,
         req.user._id,
-        accomGroupId,
-        newAccoms,
+        newAccommodationGroup,
     )
     return res.json({ property })
 }
 
-module.exports = { createProperty, addAccommodations }
+/** @type {import('express').RequestHandler} */
+const addAccommodations = async (req, res) => {
+    const { propertyId, accomGroupId } = req.params
+    const { newAccommodations } = req.body
+    const property = await service.addAccommodations(
+        propertyId,
+        req.user._id,
+        accomGroupId,
+        newAccommodations,
+    )
+    return res.json({ property })
+}
+
+module.exports = { createProperty, addAccommodationGroup, addAccommodations }

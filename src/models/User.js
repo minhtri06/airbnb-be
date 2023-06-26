@@ -18,9 +18,11 @@ const userSchema = new Schema({
         unique: true,
         trim: true,
         lowercase: true,
-        validate(value) {
-            if (!validator.default.isEmail(value)) {
-                throw new Error("Invalid email")
+        validate(email) {
+            if (this.isModified("email")) {
+                if (!validator.default.isEmail(value)) {
+                    throw new Error("Invalid email")
+                }
             }
         },
     },
@@ -38,10 +40,12 @@ const userSchema = new Schema({
         },
         minlength: 6,
         validate(value) {
-            if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-                throw new Error(
-                    "Password must contain at least one letter and one number",
-                )
+            if (this.isModified("password")) {
+                if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+                    throw new Error(
+                        "Password must contain at least one letter and one number",
+                    )
+                }
             }
         },
         private: true, // used by the toJSON plugin
@@ -52,12 +56,14 @@ const userSchema = new Schema({
         enum: Object.values(roles),
         private: true,
         validate(values) {
-            // In case array have undefined value
-            values.forEach((value) => {
-                if (!value) {
-                    throw new Error(`Invalid role '${value}'`)
-                }
-            })
+            if (this.isModified("roles")) {
+                // In case array have undefined value
+                values.forEach((value) => {
+                    if (!value) {
+                        throw new Error(`Invalid role '${value}'`)
+                    }
+                })
+            }
         },
     },
     avatar: { type: String },
@@ -65,7 +71,11 @@ const userSchema = new Schema({
     dateOfBirth: {
         type: Date,
         validate(value) {
-            return moment(value).isBefore(new Date())
+            if (this.isModified("dateOfBirth")) {
+                if (moment(value).isAfter(new Date())) {
+                    throw new Error("Date of birth must be before current time")
+                }
+            }
         },
     },
     gender: { type: String, lowercase: true, enum: Object.values(genders) },

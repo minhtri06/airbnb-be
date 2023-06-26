@@ -12,6 +12,16 @@ const createProperty = async (body) => {
     return property
 }
 
+const addAccommodationGroup = async (propertyId, ownerId, newAccomGroup) => {
+    const property = await Property.findOne({ _id: propertyId, owner: ownerId })
+    if (!property) {
+        throw createError.NotFound("Property not found")
+    }
+    property.accommodationGroups.push(newAccomGroup)
+    await property.save()
+    return property
+}
+
 const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) => {
     if (newAccoms.length === 0) {
         throw new Error("newAccoms must have at least one accommodation")
@@ -31,5 +41,6 @@ const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) =
 
 module.exports = {
     createProperty,
+    addAccommodationGroup,
     addAccommodations,
 }

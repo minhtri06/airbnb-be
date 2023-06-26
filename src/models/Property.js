@@ -40,6 +40,15 @@ const propertySchema = new Schema({
     ],
     accommodationGroups: {
         type: [accommodationGroupSchema],
+        validate(accomGroups) {
+            if (this.isModified("accommodationGroups")) {
+                for (let accomGroup of accomGroups) {
+                    if (!accomGroup) {
+                        throw new Error("accommodationGroup can not be null or undefined")
+                    }
+                }
+            }
+        },
     },
 })
 

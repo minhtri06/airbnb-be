@@ -43,9 +43,14 @@ const accommodationGroupSchema = new Schema({
             },
         ],
         validate(accommodations) {
+            if (!this.isModified("accommodations")) {
+                return
+            }
+
             if (accommodations.length < 1) {
                 throw new Error("Must have at least one accommodation")
             }
+
             if (this.get("type") === ENTIRE_HOUSE) {
                 if (accommodations.length !== 1) {
                     throw new Error(
@@ -59,6 +64,7 @@ const accommodationGroupSchema = new Schema({
                 }
                 this.bedType = undefined
             }
+
             if (this.get("type") === SPECIFIC_ROOM) {
                 for (let accommodation of accommodations) {
                     if (!accommodation.roomCode) {
@@ -71,6 +77,7 @@ const accommodationGroupSchema = new Schema({
                             `${SPECIFIC_ROOM} accommodation cannot have rooms property`,
                         )
                     }
+                    accommodation.rooms = undefined
                 }
             }
         },

@@ -16,16 +16,23 @@ module.exports = {
         }),
     },
 
-    addRooms: {
+    addAccommodationGroup: {
         [BODY]: Joi.object({
-            rooms: Joi.array().items(
-                Joi.object({
-                    roomType: Joi.string(),
-                    bedType: Joi.string(),
-                    roomCode: Joi.string(),
-                }),
-            ),
-            roomGroupIndex: Joi.number().integer(),
+            newAccommodationGroup: property.accommodationGroup.required(),
+        }),
+        [PARAMS]: Joi.object({
+            propertyId: property.id.required(),
+        }),
+    },
+
+    addAccommodations: {
+        [BODY]: Joi.object({
+            newAccommodations: Joi.array()
+                .min(1)
+                .items({
+                    roomCode: Joi.string().required(),
+                })
+                .required(),
         }),
     },
 }
