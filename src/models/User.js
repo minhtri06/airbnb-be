@@ -20,7 +20,7 @@ const userSchema = new Schema({
         lowercase: true,
         validate(email) {
             if (this.isModified("email")) {
-                if (!validator.default.isEmail(value)) {
+                if (!validator.default.isEmail(email)) {
                     throw new Error("Invalid email")
                 }
             }
@@ -81,7 +81,7 @@ const userSchema = new Schema({
     gender: { type: String, lowercase: true, enum: Object.values(genders) },
     address: {
         type: addressSchema,
-        default: () => ({}),
+        default: undefined,
     },
 })
 

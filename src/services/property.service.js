@@ -12,6 +12,18 @@ const createProperty = async (body) => {
     return property
 }
 
+const searchProperties = async ({ districtId, provinceId }) => {
+    const query = Property.where().select("-selectedQuestions")
+    if (districtId) {
+        query.where({ "address.district": districtId })
+    }
+    if (provinceId) {
+        query.where({ "address.province": provinceId })
+    }
+    const properties = await query.exec()
+    return properties
+}
+
 const addAccommodationGroup = async (propertyId, ownerId, newAccomGroup) => {
     const property = await Property.findOne({ _id: propertyId, owner: ownerId })
     if (!property) {
@@ -41,6 +53,7 @@ const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) =
 
 module.exports = {
     createProperty,
+    searchProperties,
     addAccommodationGroup,
     addAccommodations,
 }
