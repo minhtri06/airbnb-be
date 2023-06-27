@@ -28,6 +28,26 @@ module.exports = {
         }),
     },
 
+    getPropertyById: {
+        [PARAMS]: Joi.object({
+            propertyId: property.id.required(),
+        }),
+        [QUERY]: Joi.object({
+            bookInDate: Joi.date().iso(),
+            bookOutDate: Joi.date().iso(),
+        }),
+    },
+
+    getPropertyByPageName: {
+        [PARAMS]: Joi.object({
+            pageName: property.pageName.required(),
+        }),
+        [QUERY]: Joi.object({
+            bookInDate: Joi.date().iso(),
+            bookOutDate: Joi.date().iso(),
+        }),
+    },
+
     addAccommodationGroup: {
         [BODY]: Joi.object({
             newAccommodationGroup: property.accommodationGroup.required(),

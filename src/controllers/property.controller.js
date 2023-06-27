@@ -17,6 +17,24 @@ const searchProperties = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
+const getPropertyById = async (req, res) => {
+    const property = await service.getPropertyDetail({
+        propertyId: req.params.propertyId,
+        ...req.query,
+    })
+    return res.json({ property })
+}
+
+/** @type {import('express').RequestHandler} */
+const getPropertyByPageName = async (req, res) => {
+    const property = await service.getPropertyDetail({
+        pageName: req.params.pageName,
+        ...req.query,
+    })
+    return res.json({ property })
+}
+
+/** @type {import('express').RequestHandler} */
 const addAccommodationGroup = async (req, res) => {
     const { propertyId } = req.params
     const { newAccommodationGroup } = req.body
@@ -44,6 +62,8 @@ const addAccommodations = async (req, res) => {
 module.exports = {
     createProperty,
     searchProperties,
+    getPropertyById,
+    getPropertyByPageName,
     addAccommodationGroup,
     addAccommodations,
 }

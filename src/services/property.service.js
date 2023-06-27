@@ -141,6 +141,42 @@ const searchProperties = async ({
     return properties
 }
 
+const getPropertyById = async (propertyId) => {
+    const property = await Property.findById(propertyId)
+    if (!property) {
+        throw createError.NotFound("Property not found")
+    }
+    return property
+}
+
+const getPropertyByPageName = async (pageName) => {
+    const property = await Property.findOne({ pageName })
+    if (!property) {
+        throw createError.NotFound("Property not found")
+    }
+    return property
+}
+
+const getPropertyDetail = async ({ propertyId, pageName, bookInDate, bookOutDate }) => {
+    const query = Property.findOne().lean()
+    if (propertyId) {
+        query.where({ _id: propertyId })
+    } else {
+        query.where({ pageName })
+    }
+
+    const property = await query.exec()
+    if (!property) {
+        throw createError.NotFound("Property not found")
+    }
+
+    if (bookInDate && bookOutDate) {
+        addAvailabilityFieldsToProperty(property, bookInDate, bookOutDate)
+    }
+
+    return property
+}
+
 const addAccommodationGroup = async (propertyId, ownerId, newAccomGroup) => {
     const property = await Property.findOne({ _id: propertyId, owner: ownerId })
     if (!property) {
@@ -171,6 +207,9 @@ const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) =
 module.exports = {
     createProperty,
     searchProperties,
+    getPropertyById,
+    getPropertyByPageName,
+    getPropertyDetail,
     addAccommodationGroup,
     addAccommodations,
 }

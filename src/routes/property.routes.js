@@ -13,6 +13,16 @@ router
     .get(validate(validation.searchProperties), controller.searchProperties)
     .post(auth(), validate(validation.createProperty), controller.createProperty)
 
+router.get(
+    "/page-name::pageName",
+    validate(validation.getPropertyByPageName),
+    controller.getPropertyByPageName,
+)
+
+router
+    .route("/:propertyId")
+    .get(validate(validation.getPropertyById), controller.getPropertyById)
+
 router
     .route("/:propertyId/accom-groups")
     .post(
