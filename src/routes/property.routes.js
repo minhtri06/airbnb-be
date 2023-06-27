@@ -10,7 +10,7 @@ const { propertyController: controller } = require("../controllers")
 
 router
     .route("/")
-    .get(controller.searchProperties)
+    .get(validate(validation.searchProperties), controller.searchProperties)
     .post(auth(), validate(validation.createProperty), controller.createProperty)
 
 router

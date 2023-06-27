@@ -13,6 +13,68 @@ const createProperty = async (body) => {
     return property
 }
 
+const isAccommodationAvailable = (accom, bookIn, bookOut) => {
+    let isAvailable = false
+    const cbDates = accom.currentBookingDates
+
+    if (
+        cbDates.length === 0 ||
+        bookOut < cbDates[0].bookIn ||
+        bookIn > cbDates[cbDates.length - 1].bookOut
+    ) {
+        isAvailable = true
+    } else {
+        for (let i = 1; i < cbDates.length; i++) {
+            if (bookOut < cbDates[i].bookIn) {
+                if (bookIn > cbDates[i - 1].bookOut) {
+                    isAvailable = true
+                }
+                break
+            }
+        }
+    }
+    return isAvailable
+}
+
+const isPropertyAvailable = (property, bookIn, bookOut) => {
+    for (let accomGroup of property.accommodationGroups) {
+        for (let accom of accomGroup.accommodations) {
+            if (isAccommodationAvailable(accom, bookIn, bookOut)) {
+                return true
+            }
+        }
+    }
+    return false
+}
+
+/**
+ * @param {{
+ *  accommodationGroups: [{
+ *      accommodations
+ *  }]
+ * }} property
+ * @param {InstanceType<Date>} bookIn
+ * @param {InstanceType<Date>} bookOut
+ */
+const addAvailabilityFieldsToProperty = (property, bookIn, bookOut) => {
+    property.isAvailable = false
+
+    for (let accomGroup of property.accommodationGroups) {
+        accomGroup.availableCount = 0
+
+        for (let accom of accomGroup.accommodations) {
+            // Check if this accommodation is available
+            if (isAccommodationAvailable(accom, bookIn, bookOut)) {
+                property.isAvailable = true
+                accomGroup.availableCount++
+                accom.isAvailable = true
+            } else {
+                accom.isAvailable = false
+            }
+        }
+    }
+}
+
 const searchProperties = async ({
     districtId,
     provinceId,
@@ -21,7 +83,9 @@ const searchProperties = async ({
     page,
     limit,
 }) => {
-    const query = Property.where().select("-selectedQuestions")
+    const query = Property.where({ isClosed: false })
+        .lean()
+        .select("-selectedQuestions -images -description -facilities")
 
     if (districtId) {
         query.where({ "address.district": districtId })
@@ -31,12 +95,47 @@ const searchProperties = async ({
     }
 
     let properties
-    page = page || 1
     limit = limit || envConfig.DEFAULT_PAGE_LIMIT
+    page = page || 1
+    let skip = (page - 1) * limit
 
     if (bookInDate && bookOutDate) {
+        if (!(bookInDate instanceof Date) || !(bookOutDate instanceof Date)) {
+            throw createError.BadRequest(
+                "bookInDate and bookOutDate must be instances of Date",
+            )
+        }
+        if (bookInDate >= bookOutDate) {
+            throw createError.BadRequest("bookInDate must be before bookOutDate")
+        }
+
+        // Find available properties
+        const cursor = query.cursor()
+        properties = []
+        for (
+            let property = await cursor.next();
+            property !== null;
+            property = await cursor.next()
+        ) {
+            if (skip !== 0) {
+                if (isPropertyAvailable(property, bookInDate, bookOutDate)) {
+                    skip--
+                }
+                continue
+            }
+            if (limit !== 0) {
+                addAvailabilityFieldsToProperty(property, bookInDate, bookOutDate)
+                if (property.isAvailable) {
+                    limit--
+                    properties.push(property)
+                }
+            }
+            if (limit === 0 && skip === 0) {
+                break
+            }
+        }
     } else {
-        query.skip((page - 1) * limit).limit(limit)
+        query.skip(skip).limit(limit)
         properties = await query.exec()
     }
     return properties

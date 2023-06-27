@@ -12,8 +12,7 @@ const createProperty = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const searchProperties = async (req, res) => {
-    const { districtId } = req.query
-    const properties = await service.searchProperties(districtId)
+    const properties = await service.searchProperties(req.query)
     return res.json({ properties })
 }
 
