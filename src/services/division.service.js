@@ -6,10 +6,13 @@ const getAllProvinces = async () => {
     return await Province.find()
 }
 
-const getAllDistricts = async ({ provinceCode }) => {
+const getAllDistricts = async ({ provinceCode, provinceId }) => {
     const query = District.where()
     if (provinceCode) {
         query.where({ provinceCode })
+    }
+    if (provinceId) {
+        query.where({ province: provinceId })
     }
     return await query.exec()
 }
