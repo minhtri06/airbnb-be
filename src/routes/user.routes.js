@@ -1,11 +1,17 @@
 const router = require("express").Router()
 
+const { ADMIN, NORMAL_USER } = require("../configs/roles")
 const { userController: controller } = require("../controllers")
+const { userValidation: validation } = require("../validation")
 const {
     validate,
     upload: { uploadImage },
+    auth,
 } = require("../middlewares")
 
-router.route("/").get(controller.getUsers).post(controller.createUser)
+router
+    .route("/")
+    .get(controller.getUsers)
+    .post(auth([ADMIN]), validate(validation.createAUser), controller.createUser)
 
 module.exports = router

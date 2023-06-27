@@ -3,11 +3,18 @@ const { redisClient } = require("../db")
 const { DEFAULT_EXPIRATION } = require("../configs/envConfig").redis
 
 const getUser = async (userId) => {
-    return JSON.parse(await redisClient.get(`user:${userId}`))
+    return User.hydrate(JSON.parse(await redisClient.get(`user:${userId}`)))
 }
 
+/**
+ * @param {InstanceType<User>} user
+ */
 const cacheUser = async (user) => {
-    await redisClient.setEx(`user:${user._id}`, DEFAULT_EXPIRATION, JSON.stringify(user))
+    await redisClient.setEx(
+        `user:${user._id}`,
+        DEFAULT_EXPIRATION,
+        JSON.stringify(user.toObject()),
+    )
 }
 
 const getOrCacheGetUser = async (userId) => {

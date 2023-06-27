@@ -22,6 +22,7 @@ const verifyCallBack = (allowedRoles, required, req, next) => async (err, user, 
 
         if (allowedRoles.length !== 0) {
             // if every roles of user is not included in allowedRoles => throw Forbidden error
+            console.log(user)
             if (user.roles.every((role) => !allowedRoles.includes(role))) {
                 throw createError.Forbidden("Forbidden")
             }
