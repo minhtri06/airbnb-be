@@ -204,6 +204,13 @@ const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) =
     return property
 }
 
+const getMyProperties = async (myUserId) => {
+    const myProperties = await Property.find({ owner: myUserId }).select(
+        "-selectedQuestions -images -description -facilities -accommodationGroups",
+    )
+    return myProperties
+}
+
 module.exports = {
     createProperty,
     searchProperties,
@@ -212,4 +219,5 @@ module.exports = {
     getPropertyDetail,
     addAccommodationGroup,
     addAccommodations,
+    getMyProperties,
 }

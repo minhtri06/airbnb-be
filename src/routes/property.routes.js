@@ -13,6 +13,8 @@ router
     .get(validate(validation.searchProperties), controller.searchProperties)
     .post(auth(), validate(validation.createProperty), controller.createProperty)
 
+router.route("/my-properties").get(auth(), controller.getMyProperties)
+
 router.get(
     "/page-name::pageName",
     validate(validation.getPropertyByPageName),

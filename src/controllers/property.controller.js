@@ -59,6 +59,12 @@ const addAccommodations = async (req, res) => {
     return res.json({ property })
 }
 
+/** @type {import('express').RequestHandler} */
+const getMyProperties = async (req, res) => {
+    const myProperties = await service.getMyProperties(req.user._id)
+    return res.json({ myProperties })
+}
+
 module.exports = {
     createProperty,
     searchProperties,
@@ -66,4 +72,5 @@ module.exports = {
     getPropertyByPageName,
     addAccommodationGroup,
     addAccommodations,
+    getMyProperties,
 }

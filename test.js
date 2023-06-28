@@ -11,5 +11,4 @@ const Joi = require("joi")
 //     console.log(property.accommodationGroups[0].accommodations[1])
 // })
 
-const id = new mongoose.Types.ObjectId()
-console.log(id)
+const a = () => {}
