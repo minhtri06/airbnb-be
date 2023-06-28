@@ -11,7 +11,14 @@ const updateMyProfile = async (req, res) => {
     return res.json({ myProfile })
 }
 
+/** @type {import('express').RequestHandler} */
+const replaceMyAvatar = async (req, res) => {
+    const avatar = await service.replaceMyAvatar(req.user, req.file)
+    return res.json({ avatar })
+}
+
 module.exports = {
     getMyProfile,
     updateMyProfile,
+    replaceMyAvatar,
 }

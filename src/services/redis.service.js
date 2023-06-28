@@ -18,13 +18,15 @@ const cacheUser = async (user) => {
     )
 }
 
+const removeUser = async (userId) => {
+    await redisClient.del(`user:${userId}`)
+}
+
 const getOrCacheGetUser = async (userId) => {
     let user = await getUser(userId)
 
     if (!user) {
         user = await User.findById(userId)
-            .populate("address.province")
-            .populate("address.district")
 
         if (!user) {
             return null
@@ -37,5 +39,6 @@ const getOrCacheGetUser = async (userId) => {
 module.exports = {
     getUser,
     cacheUser,
+    removeUser,
     getOrCacheGetUser,
 }

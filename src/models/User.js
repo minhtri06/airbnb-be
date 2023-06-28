@@ -7,6 +7,7 @@ const { toJSON } = require("./plugins")
 const moment = require("moment")
 const bcrypt = require("bcryptjs")
 const { addressSchema } = require("./subdocs")
+const { redisClient } = require("../db")
 
 const { Schema } = mongoose
 
@@ -118,6 +119,12 @@ userSchema.pre("save", async function (next) {
         user.password = await bcrypt.hash(user.password, 8)
     }
     next()
+})
+
+// Every time we save, we delete cache
+userSchema.post("save", async function (doc) {
+    const user = doc
+    await redisClient.del(`user:${user._id}`)
 })
 
 const User = mongoose.model("User", userSchema)
