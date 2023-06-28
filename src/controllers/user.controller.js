@@ -21,8 +21,15 @@ const createUser = async (req, res) => {
     return res.status(StatusCodes.CREATED).json({ user })
 }
 
+/** @type {import('express').RequestHandler} */
+const updateUser = async (req, res) => {
+    const user = await service.updateUser(req.params.userId, req.body)
+    return res.json({ user })
+}
+
 module.exports = {
     getUsers,
     getUserById,
     createUser,
+    updateUser,
 }

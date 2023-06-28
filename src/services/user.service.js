@@ -2,7 +2,7 @@ const createError = require("http-errors")
 
 const { User } = require("../models")
 const envConfig = require("../configs/envConfig")
-// const { updateImage } = require("../utils")
+const { pickFields } = require("../utils")
 
 const getUserById = async (userId) => {
     const user = await User.findById(userId)
@@ -34,7 +34,7 @@ const queryUser = async ({
         query.where({ email })
     }
     if (role) {
-        query.where({ role })
+        query.where({ roles: role })
     }
     if (phoneNumber) {
         query.where({ phoneNumber })
@@ -60,9 +60,27 @@ const createUser = async (userBody) => {
     return user
 }
 
+const updateUser = async (userId, updateBody) => {
+    updateBody = pickFields(
+        updateBody,
+        "name",
+        "email",
+        "roles",
+        "phoneNumber",
+        "dateOfBirth",
+        "gender",
+        "address",
+    )
+    const user = await User.findById(userId)
+    Object.assign(user, updateBody)
+    await user.save()
+    return user
+}
+
 module.exports = {
     getUserById,
     getUserByEmail,
     queryUser,
     createUser,
+    updateUser,
 }

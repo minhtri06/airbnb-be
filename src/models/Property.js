@@ -9,7 +9,7 @@ const { Schema } = mongoose
 const propertySchema = new Schema({
     title: { type: String, required: true, trim: true },
     isClosed: { type: Boolean, default: false },
-    owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    owner: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
     pageName: { type: String, required: true, unique: true, lowercase: true },
     score: { type: Number, min: 0, max: 10 },
     description: { type: String },

@@ -21,4 +21,19 @@ module.exports = {
             userId: user.id.required(),
         }),
     },
+
+    updateUser: {
+        [PARAMS]: Joi.object({
+            userId: user.id.required(),
+        }),
+        [BODY]: Joi.object({
+            name: user.name,
+            email: user.email,
+            roles: user.roles,
+            phoneNumber: user.phoneNumber,
+            dateOfBirth: user.dateOfBirth,
+            gender: user.gender,
+            address: user.address,
+        }),
+    },
 }
