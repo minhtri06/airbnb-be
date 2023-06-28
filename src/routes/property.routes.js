@@ -4,6 +4,7 @@ const {
     validate,
     auth,
     upload: { uploadImage },
+    propertyMiddleware: { getPropertyById, getPropertyByPageName, requireToOwnProperty },
 } = require("../middlewares")
 const { propertyValidation: validation } = require("../validation")
 const { propertyController: controller } = require("../controllers")
@@ -18,12 +19,13 @@ router.route("/my-properties").get(auth(), controller.getMyProperties)
 router.get(
     "/page-name::pageName",
     validate(validation.getPropertyByPageName),
-    controller.getPropertyByPageName,
+    getPropertyByPageName(),
+    controller.getProperty,
 )
 
 router
     .route("/:propertyId")
-    .get(validate(validation.getPropertyById), controller.getPropertyById)
+    .get(validate(validation.getPropertyById), getPropertyById(), controller.getProperty)
 
 router
     .route("/:propertyId/accom-groups")

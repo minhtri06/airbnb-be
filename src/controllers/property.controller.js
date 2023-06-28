@@ -1,5 +1,9 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
+// const { Property } =
+/**
+ * @typedef {InstanceType<import('../models/Property')>} property
+ */
 
 const { propertyService: service } = require("../services")
 
@@ -17,21 +21,16 @@ const searchProperties = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
-const getPropertyById = async (req, res) => {
-    const property = await service.getPropertyDetail({
-        propertyId: req.params.propertyId,
-        ...req.query,
-    })
-    return res.json({ property })
-}
+const getProperty = async (req, res) => {
+    /** @type {property} */
+    const property = req.property
 
-/** @type {import('express').RequestHandler} */
-const getPropertyByPageName = async (req, res) => {
-    const property = await service.getPropertyDetail({
-        pageName: req.params.pageName,
-        ...req.query,
-    })
-    return res.json({ property })
+    const { bookInDate, bookOutDate } = req.query
+    if (bookInDate && bookOutDate) {
+        service.setAvailabilityFields(property, bookInDate, bookOutDate)
+    }
+
+    return res.json({ property: property.toJSON({ virtuals: true }) })
 }
 
 /** @type {import('express').RequestHandler} */
@@ -68,8 +67,7 @@ const getMyProperties = async (req, res) => {
 module.exports = {
     createProperty,
     searchProperties,
-    getPropertyById,
-    getPropertyByPageName,
+    getProperty,
     addAccommodationGroup,
     addAccommodations,
     getMyProperties,

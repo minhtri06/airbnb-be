@@ -56,6 +56,8 @@ const propertySchema = new Schema({
 
 propertySchema.plugin(toJSON)
 
+propertySchema.virtual("isAvailable")
+
 const Property = mongoose.model("Property", propertySchema)
 
 module.exports = Property

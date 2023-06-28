@@ -48,15 +48,11 @@ const isPropertyAvailable = (property, bookIn, bookOut) => {
 }
 
 /**
- * @param {{
- *  accommodationGroups: [{
- *      accommodations
- *  }]
- * }} property
+ * @param { InstanceType<Property> | Object} property
  * @param {InstanceType<Date>} bookIn
  * @param {InstanceType<Date>} bookOut
  */
-const addAvailabilityFieldsToProperty = (property, bookIn, bookOut) => {
+const setAvailabilityFields = (property, bookIn, bookOut) => {
     property.isAvailable = false
 
     for (let accomGroup of property.accommodationGroups) {
@@ -124,7 +120,7 @@ const searchProperties = async ({
                 continue
             }
             if (limit !== 0) {
-                addAvailabilityFieldsToProperty(property, bookInDate, bookOutDate)
+                setAvailabilityFields(property, bookInDate, bookOutDate)
                 if (property.isAvailable) {
                     limit--
                     properties.push(property)
@@ -141,37 +137,24 @@ const searchProperties = async ({
     return properties
 }
 
-const getPropertyById = async (propertyId) => {
-    const property = await Property.findById(propertyId)
-    if (!property) {
-        throw createError.NotFound("Property not found")
-    }
-    return property
-}
+const getProperty = async ({ propertyId, pageName, select }) => {
+    const query = Property.findOne()
 
-const getPropertyByPageName = async (pageName) => {
-    const property = await Property.findOne({ pageName })
-    if (!property) {
-        throw createError.NotFound("Property not found")
-    }
-    return property
-}
-
-const getPropertyDetail = async ({ propertyId, pageName, bookInDate, bookOutDate }) => {
-    const query = Property.findOne().lean()
     if (propertyId) {
         query.where({ _id: propertyId })
-    } else {
+    } else if (pageName) {
         query.where({ pageName })
+    } else {
+        throw createError.NotFound("Property not found")
+    }
+
+    if (select) {
+        query.select(select)
     }
 
     const property = await query.exec()
     if (!property) {
         throw createError.NotFound("Property not found")
-    }
-
-    if (bookInDate && bookOutDate) {
-        addAvailabilityFieldsToProperty(property, bookInDate, bookOutDate)
     }
 
     return property
@@ -213,10 +196,9 @@ const getMyProperties = async (myUserId) => {
 
 module.exports = {
     createProperty,
+    setAvailabilityFields,
     searchProperties,
-    getPropertyById,
-    getPropertyByPageName,
-    getPropertyDetail,
+    getProperty,
     addAccommodationGroup,
     addAccommodations,
     getMyProperties,

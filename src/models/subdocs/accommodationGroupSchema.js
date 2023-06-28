@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const {
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../../constants")
-const currentBookingDatesSchema = require("./currentBookingDatesSchema")
+const accommodationSchema = require("./accommodationSchema")
 
 const { Schema } = mongoose
 
@@ -25,24 +25,7 @@ const accommodationGroupSchema = new Schema({
     },
 
     accommodations: {
-        type: [
-            {
-                currentBookingDates: [currentBookingDatesSchema],
-
-                // Just for specific-room accommodation
-                roomCode: { type: String },
-
-                // Just for entire-house accommodation
-                rooms: {
-                    type: [
-                        {
-                            bedType: { type: String, required: true },
-                            roomType: { type: String, required: true },
-                        },
-                    ],
-                },
-            },
-        ],
+        type: [accommodationSchema],
         validate(accommodations) {
             if (!this.isModified("accommodations")) {
                 return
@@ -84,5 +67,7 @@ const accommodationGroupSchema = new Schema({
         },
     },
 })
+
+accommodationGroupSchema.virtual("availableCount")
 
 module.exports = accommodationGroupSchema
