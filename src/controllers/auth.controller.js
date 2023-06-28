@@ -13,7 +13,6 @@ const registerUser = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body
     const { user, authTokens } = await service.login(email, password)
-    console.log(authTokens)
     return res.json({ user, authTokens })
 }
 

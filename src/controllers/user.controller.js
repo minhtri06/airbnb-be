@@ -12,9 +12,6 @@ const getUsers = async (req, res) => {
 /** @type {import('express').RequestHandler} */
 const getUserById = async (req, res) => {
     const user = await service.getUserById(req.params.userId)
-    if (!user) {
-        throw createError.NotFound("User not found")
-    }
     return res.json({ user })
 }
 

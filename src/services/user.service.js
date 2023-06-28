@@ -4,12 +4,12 @@ const { User } = require("../models")
 const envConfig = require("../configs/envConfig")
 // const { updateImage } = require("../utils")
 
-const getUserById = async (userId, { populateDivision }) => {
-    const query = User.findById(userId)
-    if (populateDivision) {
-        query.populate(["address.province", "address.district"])
+const getUserById = async (userId) => {
+    const user = await User.findById(userId)
+    if (!user) {
+        throw new createError.NotFound("User not found")
     }
-    return await query.exec()
+    return user
 }
 
 const getUserByEmail = async (email) => {
@@ -46,9 +46,10 @@ const queryUser = async ({
         query.where({ "address.province": provinceId })
     }
     limit = limit || envConfig.DEFAULT_PAGE_LIMIT
-    page = ((page || 1) - 1) * envConfig.DEFAULT_PAGE_LIMIT
+    page = page || 1
+    let skip = (page - 1) * limit
     query.limit(limit)
-    query.skip(page)
+    query.skip(skip)
     return await query.exec()
 }
 

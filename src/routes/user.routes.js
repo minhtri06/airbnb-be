@@ -13,5 +13,8 @@ router
     .route("/")
     .get(controller.getUsers)
     .post(auth([ADMIN]), validate(validation.createAUser), controller.createUser)
+router
+    .route("/:userId")
+    .get(auth([ADMIN]), validate(validation.getUserById), controller.getUserById)
 
 module.exports = router

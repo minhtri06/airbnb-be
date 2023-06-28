@@ -3,7 +3,8 @@ const { redisClient } = require("../db")
 const { DEFAULT_EXPIRATION } = require("../configs/envConfig").redis
 
 const getUser = async (userId) => {
-    return User.hydrate(JSON.parse(await redisClient.get(`user:${userId}`)))
+    const userObj = JSON.parse(await redisClient.get(`user:${userId}`))
+    return userObj ? User.hydrate(userObj) : null
 }
 
 /**
@@ -19,11 +20,13 @@ const cacheUser = async (user) => {
 
 const getOrCacheGetUser = async (userId) => {
     let user = await getUser(userId)
-    if (user === null) {
+
+    if (!user) {
         user = await User.findById(userId)
             .populate("address.province")
             .populate("address.district")
-        if (user === null) {
+
+        if (!user) {
             return null
         }
         cacheUser(user)

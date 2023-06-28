@@ -15,4 +15,10 @@ module.exports = {
             address: user.address,
         }),
     },
+
+    getUserById: {
+        [PARAMS]: Joi.object({
+            userId: user.id.required(),
+        }),
+    },
 }
