@@ -25,7 +25,7 @@ const imageStorage = multer.diskStorage({
     },
 })
 
-const uploadImage = (fieldName) =>
+const uploadSingleImage = (fieldName) =>
     util.promisify(
         multer({
             storage: imageStorage,
@@ -43,4 +43,20 @@ const uploadManyImages = (fieldName) =>
         }).array(fieldName),
     )
 
-module.exports = { uploadImage, uploadManyImages }
+const uploadFieldsImages = (fields) => {
+    util.promisify(
+        multer({
+            storage: imageStorage,
+            limits: { fileSize: maxSize },
+            fileFilter: imageFilter,
+        }).fields(fields),
+    )
+}
+
+module.exports = {
+    uploadImage: {
+        single: uploadSingleImage,
+        many: uploadManyImages,
+        fields: uploadFieldsImages,
+    },
+}

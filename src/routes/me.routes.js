@@ -14,6 +14,6 @@ router
     .get(controller.getMyProfile)
     .patch(validate(validation.updateMyProfile), controller.updateMyProfile)
 
-router.route("/avatars").put(uploadImage("avatar"), controller.replaceMyAvatar)
+router.route("/avatars").put(uploadImage.single("avatar"), controller.replaceMyAvatar)
 
 module.exports = router

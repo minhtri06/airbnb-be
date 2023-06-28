@@ -27,7 +27,7 @@ const updateMyProfile = async (myProfile, updateBody) => {
  */
 const replaceMyAvatar = async (me, file) => {
     if (!file) {
-        throw createError.BadRequest("File is required")
+        throw createError.BadRequest("Avatar is required")
     }
     if (me.avatar) {
         await deleteStaticFile(me.avatar)

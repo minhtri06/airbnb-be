@@ -3,7 +3,7 @@ const router = require("express").Router()
 const {
     validate,
     auth,
-    upload: { uploadManyImages, uploadManyImage },
+    upload: { uploadImage },
 } = require("../middlewares")
 const { propertyValidation: validation } = require("../validation")
 const { propertyController: controller } = require("../controllers")

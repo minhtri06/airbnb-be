@@ -8,8 +8,5 @@ router.post("/register", validate(validation.registerUser), controller.registerU
 router.post("/login", validate(validation.login), controller.login)
 router.post("/logout", validate(validation.logout), controller.logout)
 router.post("/refresh-token", validate(validation.refreshToken), controller.refreshToken)
-router.post("/test", auth(), (req, res) => {
-    return res.send("Ok")
-})
 
 module.exports = router
