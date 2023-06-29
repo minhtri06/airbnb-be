@@ -33,6 +33,17 @@ router
     .get(validate(validation.getPropertyById), getPropertyById(), controller.getProperty)
 
 router
+    .route("/:propertyId/thumbnails")
+    .put(
+        uploadImage.single("thumbnail"),
+        validate(validation.replaceThumbnail),
+        auth(),
+        getPropertyById(),
+        requireToOwnProperty(),
+        controller.replaceThumbnail,
+    )
+
+router
     .route("/:propertyId/accom-groups")
     .post(
         auth(),

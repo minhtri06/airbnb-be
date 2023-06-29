@@ -56,6 +56,18 @@ const getMyProperties = async (req, res) => {
     return res.json({ myProperties })
 }
 
+/** @type {import('express').RequestHandler} */
+const replaceThumbnail = async (req, res) => {
+    const thumbnail = await service.replaceThumbnail(req.property, req.file)
+    return res.json({ thumbnail })
+}
+
+/** @type {import('express').RequestHandler} */
+const addImages = async (req, res) => {
+    console.log(req.files)
+    return res.send("adfoj")
+}
+
 module.exports = {
     createProperty,
     searchProperties,
@@ -63,4 +75,6 @@ module.exports = {
     addAccommodationGroup,
     addAccommodations,
     getMyProperties,
+    replaceThumbnail,
+    addImages,
 }

@@ -6,6 +6,9 @@ const {
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
     accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
 } = require("../constants")
+const {
+    file: { deleteStaticFile },
+} = require("../utils")
 
 /**
  * @typedef {InstanceType<import('../models/Property')>} property
@@ -200,6 +203,25 @@ const getMyProperties = async (myUserId) => {
     return myProperties
 }
 
+/**
+ *
+ * @param {property} property
+ * @param {string} thumbnail
+ */
+const replaceThumbnail = async (property, thumbnailFile) => {
+    const oldThumbnail = property.thumbnail
+    property.thumbnail = `/img/${thumbnailFile.filename}`
+    await property.save()
+    // Delete old file after saving because saving may throw error.
+    // If we delete first, we may lose the old file
+    if (oldThumbnail) {
+        deleteStaticFile(oldThumbnail)
+    }
+    return property.thumbnail
+}
+
+// const addImages = async(property)
+
 module.exports = {
     createProperty,
     setAvailabilityFields,
@@ -209,4 +231,5 @@ module.exports = {
     getAccomGroupById,
     addAccommodations,
     getMyProperties,
+    replaceThumbnail,
 }

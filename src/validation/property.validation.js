@@ -67,4 +67,10 @@ module.exports = {
                 .required(),
         }),
     },
+
+    replaceThumbnail: {
+        [PARAMS]: Joi.object({
+            propertyId: property.id.required(),
+        }),
+    },
 }
