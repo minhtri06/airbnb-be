@@ -3,4 +3,5 @@ module.exports = {
     property: require("./property"),
     province: require("./province"),
     district: require("./district"),
+    booking: require("./booking"),
 }

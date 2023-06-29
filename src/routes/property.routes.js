@@ -4,7 +4,12 @@ const {
     validate,
     auth,
     upload: { uploadImage },
-    propertyMiddleware: { getPropertyById, getPropertyByPageName, requireToOwnProperty },
+    propertyMiddleware: {
+        getPropertyById,
+        getPropertyByPageName,
+        getAccomGroupById,
+        requireToOwnProperty,
+    },
 } = require("../middlewares")
 const { propertyValidation: validation } = require("../validation")
 const { propertyController: controller } = require("../controllers")
@@ -32,11 +37,20 @@ router
     .post(
         auth(),
         validate(validation.addAccommodationGroup),
+        getPropertyById(),
+        requireToOwnProperty(),
         controller.addAccommodationGroup,
     )
 
 router
     .route("/:propertyId/accom-groups/:accomGroupId/accoms")
-    .post(auth(), controller.addAccommodations)
+    .post(
+        auth(),
+        validate(validation.addAccommodations),
+        getPropertyById(),
+        getAccomGroupById(),
+        requireToOwnProperty(),
+        controller.addAccommodations,
+    )
 
 module.exports = router

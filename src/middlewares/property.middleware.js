@@ -3,7 +3,7 @@ const createError = require("http-errors")
 const { ADMIN } = require("../configs/roles")
 
 /** @return {import('express').RequestHandler} */
-const getPropertyById = (select = undefined) => {
+const getPropertyById = ({ select } = {}) => {
     return async (req, res, next) => {
         req.property = await service.getProperty({
             propertyId: req.params.propertyId,
@@ -14,34 +14,48 @@ const getPropertyById = (select = undefined) => {
 }
 
 /** @return {import('express').RequestHandler} */
-const getPropertyByPageName = (select = undefined) => {
+const getPropertyByPageName = ({ select } = {}) => {
     return async (req, res, next) => {
         req.property = await service.getProperty({
             pageName: req.params.pageName,
             select,
         })
-        next()
+        return next()
     }
 }
 
-/** @return {import('express').RequestHandler} */
-const requireToOwnProperty = (allowAdmin = true) => {
+/**
+ * Must call after getPropertyById middleware
+ * @return {import('express').RequestHandler} */
+const getAccomGroupById = ({} = {}) => {
     return async (req, res, next) => {
-        if (!req.user || !req.property) {
-            throw createError.NotFound("Property not found")
-        }
+        const accomGroup = await service.getAccomGroupById(
+            req.property,
+            req.params.accomGroupId,
+        )
+        req.accomGroup = accomGroup
+        return next()
+    }
+}
+
+/**
+ * Must call after auth and getPropertyById middleware
+ * @return {import('express').RequestHandler}*/
+const requireToOwnProperty = ({ allowAdmin } = {}) => {
+    return async (req, res, next) => {
         if (allowAdmin && req.user.roles.includes(ADMIN)) {
-            next()
+            return next()
         }
         if (!req.property.owner.equals(req.user._id)) {
-            throw createError.NotFound("Property not found")
+            throw createError.Forbidden("Forbidden")
         }
-        next()
+        return next()
     }
 }
 
 module.exports = {
     getPropertyById,
     getPropertyByPageName,
+    getAccomGroupById,
     requireToOwnProperty,
 }

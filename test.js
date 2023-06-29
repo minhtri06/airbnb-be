@@ -4,8 +4,11 @@ const mongoose = require("mongoose")
 const moment = require("moment")
 const Joi = require("joi")
 
-connectMongoDb().then(async () => {
-    const province = await Province.findOne()
-    province.a = 10
-    console.log(province.toObject({ virtuals: true }))
-})
+// connectMongoDb().then(async () => {
+//     const province = await Province.findOne()
+//     province.a = 10
+//     console.log(province.toObject({ virtuals: true }))
+// })
+
+const a = {}
+delete a.a

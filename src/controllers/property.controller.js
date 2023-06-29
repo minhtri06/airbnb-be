@@ -1,11 +1,11 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
-// const { Property } =
+
+const { propertyService: service } = require("../services")
+
 /**
  * @typedef {InstanceType<import('../models/Property')>} property
  */
-
-const { propertyService: service } = require("../services")
 
 /** @type {import('express').RequestHandler} */
 const createProperty = async (req, res) => {
@@ -22,24 +22,18 @@ const searchProperties = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getProperty = async (req, res) => {
-    /** @type {property} */
-    const property = req.property
-
     const { bookInDate, bookOutDate } = req.query
     if (bookInDate && bookOutDate) {
-        service.setAvailabilityFields(property, bookInDate, bookOutDate)
+        service.setAvailabilityFields(req.property, bookInDate, bookOutDate)
     }
-
-    return res.json({ property: property.toJSON({ virtuals: true }) })
+    return res.json({ property: req.property.toJSON({ virtuals: true }) })
 }
 
 /** @type {import('express').RequestHandler} */
 const addAccommodationGroup = async (req, res) => {
-    const { propertyId } = req.params
     const { newAccommodationGroup } = req.body
     const property = await service.addAccommodationGroup(
-        propertyId,
-        req.user._id,
+        req.property,
         newAccommodationGroup,
     )
     return res.json({ property })
@@ -47,12 +41,10 @@ const addAccommodationGroup = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const addAccommodations = async (req, res) => {
-    const { propertyId, accomGroupId } = req.params
     const { newAccommodations } = req.body
     const property = await service.addAccommodations(
-        propertyId,
-        req.user._id,
-        accomGroupId,
+        req.property,
+        req.accomGroup,
         newAccommodations,
     )
     return res.json({ property })

@@ -7,6 +7,10 @@ const {
     accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
 } = require("../constants")
 
+/**
+ * @typedef {InstanceType<import('../models/Property')>} property
+ */
+
 const createProperty = async (body) => {
     const property = new Property(body)
     await property.save()
@@ -160,27 +164,29 @@ const getProperty = async ({ propertyId, pageName, select }) => {
     return property
 }
 
-const addAccommodationGroup = async (propertyId, ownerId, newAccomGroup) => {
-    const property = await Property.findOne({ _id: propertyId, owner: ownerId })
-    if (!property) {
-        throw createError.NotFound("Property not found")
-    }
+/**
+ *
+ * @param {property} property
+ * @param {Object} newAccomGroup
+ * @returns
+ */
+const addAccommodationGroup = async (property, newAccomGroup) => {
     property.accommodationGroups.push(newAccomGroup)
     await property.save()
     return property
 }
 
-const addAccommodations = async (propertyId, ownerId, accomGroupId, newAccoms) => {
+const getAccomGroupById = async (property, accomGroupId) => {
+    const accomGroup = property.accommodationGroups.id(accomGroupId)
+    if (!accomGroup) {
+        throw createError.NotFound("Accommodation group not found")
+    }
+    return accomGroup
+}
+
+const addAccommodations = async (property, accoGroup, newAccoms) => {
     if (newAccoms.length === 0) {
         throw new Error("newAccoms must have at least one accommodation")
-    }
-    const property = await Property.findOne({ _id: propertyId, owner: ownerId })
-    if (!property) {
-        throw createError.NotFound("Property not found")
-    }
-    const accoGroup = property.accommodationGroups.id(accomGroupId)
-    if (!accoGroup) {
-        throw createError.NotFound("Accommodation group not found")
     }
     accoGroup.accommodations.push(...newAccoms)
     await property.save()
@@ -200,6 +206,7 @@ module.exports = {
     searchProperties,
     getProperty,
     addAccommodationGroup,
+    getAccomGroupById,
     addAccommodations,
     getMyProperties,
 }
