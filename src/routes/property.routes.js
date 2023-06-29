@@ -24,21 +24,23 @@ router.route("/my-properties").get(auth(), controller.getMyProperties)
 router.get(
     "/page-name::pageName",
     validate(validation.getPropertyByPageName),
-    getPropertyByPageName(),
+    getPropertyByPageName,
     controller.getProperty,
 )
 
+router.param("propertyId", getPropertyById)
+router.param("accomGroupId", getAccomGroupById)
+
 router
     .route("/:propertyId")
-    .get(validate(validation.getPropertyById), getPropertyById(), controller.getProperty)
+    .get(validate(validation.getPropertyById), controller.getProperty)
 
 router
     .route("/:propertyId/thumbnails")
     .put(
         uploadImage.single("thumbnail"),
-        validate(validation.replaceThumbnail),
         auth(),
-        getPropertyById(),
+        validate(validation.replaceThumbnail),
         requireToOwnProperty(),
         controller.replaceThumbnail,
     )
@@ -48,7 +50,6 @@ router
     .post(
         auth(),
         validate(validation.addAccommodationGroup),
-        getPropertyById(),
         requireToOwnProperty(),
         controller.addAccommodationGroup,
     )
@@ -58,8 +59,6 @@ router
     .post(
         auth(),
         validate(validation.addAccommodations),
-        getPropertyById(),
-        getAccomGroupById(),
         requireToOwnProperty(),
         controller.addAccommodations,
     )
