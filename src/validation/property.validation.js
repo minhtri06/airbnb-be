@@ -77,4 +77,13 @@ module.exports = {
             propertyId: objectId.required(),
         }),
     },
+
+    deleteImages: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            deletedIndexes: Joi.array().max(100).items(Joi.number().min(0)).required(),
+        }),
+    },
 }

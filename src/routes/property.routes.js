@@ -53,7 +53,12 @@ router
         requireToOwnProperty(),
         controller.addImages,
     )
-    .delete(auth(), requireToOwnProperty())
+    .delete(
+        auth(),
+        requireToOwnProperty(),
+        validate(validation.deleteImages),
+        controller.deleteImages,
+    )
 
 router
     .route("/:propertyId/accom-groups")
