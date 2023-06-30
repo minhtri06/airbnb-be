@@ -10,6 +10,7 @@ const { Schema } = mongoose
 const accommodationGroupSchema = new Schema({
     title: { type: String, trim: true, required: true },
     pricePerNight: { type: Number, min: 0, required: true },
+
     type: {
         type: String,
         enum: [ENTIRE_HOUSE, SPECIFIC_ROOM],

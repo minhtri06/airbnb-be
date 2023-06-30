@@ -1,11 +1,11 @@
 const mongoose = require("mongoose")
 
-const currentBookingDatesSchema = require("./currentBookingDatesSchema")
+const bookingDatesSchema = require("./bookingDatesSchema")
 
 const { Schema } = mongoose
 
 const accommodationSchema = new Schema({
-    currentBookingDates: [currentBookingDatesSchema],
+    currentBookingDates: [bookingDatesSchema],
 
     // Just for specific-room accommodation
     roomCode: { type: String },
