@@ -12,11 +12,23 @@ const {
 router
     .route("/")
     .get(controller.getUsers)
-    .post(auth([ADMIN]), validate(validation.createAUser), controller.createUser)
+    .post(
+        auth({ requireRole: [ADMIN] }),
+        validate(validation.createAUser),
+        controller.createUser,
+    )
 
 router
     .route("/:userId")
-    .get(auth([ADMIN]), validate(validation.getUserById), controller.getUserById)
-    .patch(auth([ADMIN]), validate(validation.updateUser), controller.updateUser)
+    .get(
+        auth({ requireRole: [ADMIN] }),
+        validate(validation.getUserById),
+        controller.getUserById,
+    )
+    .patch(
+        auth({ requireRole: [ADMIN] }),
+        validate(validation.updateUser),
+        controller.updateUser,
+    )
 
 module.exports = router

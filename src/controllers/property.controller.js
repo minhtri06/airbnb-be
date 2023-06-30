@@ -26,6 +26,11 @@ const getProperty = async (req, res) => {
     if (bookInDate && bookOutDate) {
         service.setAvailabilityFields(req.property, bookInDate, bookOutDate)
     }
+    /** @type {property} */
+    const property = req.property
+    if (req.user && property.owner.equals(req.user._id)) {
+        property.caller.isOwner = true
+    }
     return res.json({ property: req.property.toJSON({ virtuals: true }) })
 }
 

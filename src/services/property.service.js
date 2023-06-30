@@ -142,6 +142,9 @@ const searchProperties = async ({
         query.skip(skip).limit(limit)
         properties = await query.exec()
     }
+    for (let property of properties) {
+        Property.removeBookingDateFields(property)
+    }
     return properties
 }
 

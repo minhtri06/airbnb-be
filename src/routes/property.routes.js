@@ -33,7 +33,11 @@ router.param("accomGroupId", getAccomGroupById)
 
 router
     .route("/:propertyId")
-    .get(validate(validation.getPropertyById), controller.getProperty)
+    .get(
+        auth({ required: false }),
+        validate(validation.getPropertyById),
+        controller.getProperty,
+    )
     .patch(
         auth(),
         requireToOwnProperty(),
