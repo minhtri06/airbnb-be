@@ -58,18 +58,12 @@ const getMyProperties = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const replaceThumbnail = async (req, res) => {
-    if (!req.file) {
-        throw createError.BadRequest("thumbnail is required")
-    }
     const thumbnail = await service.replaceThumbnail(req.property, req.file)
     return res.json({ thumbnail })
 }
 
 /** @type {import('express').RequestHandler} */
 const addImages = async (req, res) => {
-    if (!req.files) {
-        throw createError.BadRequest("images is required")
-    }
     const newImages = await service.addImages(req.property, req.files)
     return res.status(StatusCodes.CREATED).json({ newImages })
 }

@@ -25,32 +25,61 @@ const imageStorage = multer.diskStorage({
     },
 })
 
-const uploadSingleImage = (fieldName) =>
-    util.promisify(
-        multer({
-            storage: imageStorage,
-            limits: { fileSize: maxSize },
-            fileFilter: imageFilter,
-        }).single(fieldName),
-    )
+const uploadSingleImage = (fieldName, { required } = { required: true }) => {
+    return [
+        util.promisify(
+            multer({
+                storage: imageStorage,
+                limits: { fileSize: maxSize },
+                fileFilter: imageFilter,
+            }).single(fieldName),
+        ),
+        (req, res, next) => {
+            if (required && !req.file) {
+                throw createError.BadRequest(`${fieldName} is required`)
+            }
+            return next()
+        },
+    ]
+}
 
-const uploadManyImages = (...fieldName) =>
-    util.promisify(
-        multer({
-            storage: imageStorage,
-            limits: { fileSize: maxSize },
-            fileFilter: imageFilter,
-        }).array(...fieldName),
-    )
+const uploadManyImages = (
+    fieldName,
+    { maxCount, required } = { maxCount: 100, required: true },
+) => {
+    return [
+        util.promisify(
+            multer({
+                storage: imageStorage,
+                limits: { fileSize: maxSize },
+                fileFilter: imageFilter,
+            }).array(fieldName, maxCount),
+        ),
+        (req, res, next) => {
+            if (required && !req.files) {
+                throw createError.BadRequest(`${fieldName} is required`)
+            }
+            return next()
+        },
+    ]
+}
 
-const uploadFieldsImages = (fields) => {
-    util.promisify(
-        multer({
-            storage: imageStorage,
-            limits: { fileSize: maxSize },
-            fileFilter: imageFilter,
-        }).fields(fields),
-    )
+const uploadFieldsImages = (fields, { required } = { required: true }) => {
+    return [
+        util.promisify(
+            multer({
+                storage: imageStorage,
+                limits: { fileSize: maxSize },
+                fileFilter: imageFilter,
+            }).fields(fields),
+        ),
+        (req, res, next) => {
+            if (required && !req.files) {
+                throw createError.BadRequest("Image fields is required")
+            }
+            next()
+        },
+    ]
 }
 
 module.exports = {
