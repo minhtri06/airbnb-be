@@ -7,6 +7,7 @@ const {
     accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
 } = require("../constants")
 const {
+    pickFields,
     file: { deleteStaticFile, deleteManyStaticFiles },
 } = require("../utils")
 
@@ -257,6 +258,21 @@ const deleteImages = async (property, deletedIndexes) => {
     return property.images
 }
 
+const updateProperty = async (property, updateBody) => {
+    updateBody = pickFields(
+        updateBody,
+        "title",
+        "isClosed",
+        "pageName",
+        "description",
+        "facilities",
+        "address",
+    )
+    Object.assign(property, updateBody)
+    await property.save()
+    return property
+}
+
 module.exports = {
     createProperty,
     setAvailabilityFields,
@@ -269,4 +285,5 @@ module.exports = {
     replaceThumbnail,
     addImages,
     deleteImages,
+    updateProperty,
 }

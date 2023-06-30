@@ -75,6 +75,12 @@ const deleteImages = async (req, res) => {
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
+/** @type {import('express').RequestHandler} */
+const updateProperty = async (req, res) => {
+    await service.updateProperty(req.property, req.body)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
 module.exports = {
     createProperty,
     searchProperties,
@@ -85,4 +91,5 @@ module.exports = {
     replaceThumbnail,
     addImages,
     deleteImages,
+    updateProperty,
 }

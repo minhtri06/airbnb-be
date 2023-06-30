@@ -86,4 +86,18 @@ module.exports = {
             deletedIndexes: Joi.array().max(100).items(Joi.number().min(0)).required(),
         }),
     },
+
+    updateProperty: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            title: property.title,
+            isClosed: property.isClosed,
+            pageName: property.pageName,
+            description: property.description,
+            facilities: property.facilities,
+            address: property.address,
+        }),
+    },
 }

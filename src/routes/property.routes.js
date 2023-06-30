@@ -34,6 +34,12 @@ router.param("accomGroupId", getAccomGroupById)
 router
     .route("/:propertyId")
     .get(validate(validation.getPropertyById), controller.getProperty)
+    .patch(
+        auth(),
+        requireToOwnProperty(),
+        validate(validation.updateProperty),
+        controller.updateProperty,
+    )
 
 router
     .route("/:propertyId/thumbnails")
