@@ -46,6 +46,16 @@ router
     )
 
 router
+    .route("/:propertyId/images")
+    .post(
+        uploadImage.many("images"),
+        auth(),
+        requireToOwnProperty(),
+        controller.addImages,
+    )
+    .delete(auth(), requireToOwnProperty())
+
+router
     .route("/:propertyId/accom-groups")
     .post(
         auth(),

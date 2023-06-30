@@ -7,7 +7,7 @@ const {
     accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
 } = require("../constants")
 const {
-    file: { deleteStaticFile },
+    file: { deleteStaticFile, deleteManyStaticFiles },
 } = require("../utils")
 
 /**
@@ -220,7 +220,42 @@ const replaceThumbnail = async (property, thumbnailFile) => {
     return property.thumbnail
 }
 
-// const addImages = async(property)
+/**
+ *
+ * @param {property} property
+ * @param {[]} imageFiles
+ */
+const addImages = async (property, imageFiles) => {
+    if (!imageFiles) {
+        throw createError.BadRequest("Images are required")
+    }
+    const newImages = imageFiles.map((file) => `/img/${file.filename}`)
+    property.images.push(...newImages)
+    await property.save()
+    return newImages
+}
+
+/**
+ *
+ * @param {property} property
+ * @param {number[]} deletedIndexes
+ */
+const deleteImages = async (property, deletedIndexes) => {
+    if (deletedIndexes.length > 100) {
+        throw createError.BadRequest("deletedIndexes length excess 100")
+    }
+    const deletedImgs = []
+    property.images = property.images.filter((image, index) => {
+        if (deletedIndexes.includes(index)) {
+            deletedImgs.push(image)
+            return false
+        }
+        return true
+    })
+    await property.save()
+    await deleteManyStaticFiles(deletedImgs)
+    return property.images
+}
 
 module.exports = {
     createProperty,
@@ -232,4 +267,6 @@ module.exports = {
     addAccommodations,
     getMyProperties,
     replaceThumbnail,
+    addImages,
+    deleteImages,
 }

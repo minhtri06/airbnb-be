@@ -4,7 +4,7 @@ const {
     request: { BODY, PARAMS, QUERY },
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../constants")
-const { property, district, province, booking } = require("./common")
+const { property, district, province, booking, objectId } = require("./common")
 
 module.exports = {
     createProperty: {
@@ -19,8 +19,8 @@ module.exports = {
 
     searchProperties: {
         [QUERY]: Joi.object({
-            districtId: district.id,
-            provinceId: province.id,
+            districtId: objectId,
+            provinceId: objectId,
             bookInDate: Joi.date().iso(),
             bookOutDate: Joi.date().iso(),
             page: Joi.number().integer().min(1).max(50),
@@ -30,7 +30,7 @@ module.exports = {
 
     getPropertyById: {
         [PARAMS]: Joi.object({
-            propertyId: property.id.required(),
+            propertyId: objectId.required(),
         }),
         [QUERY]: Joi.object({
             bookInDate: booking.bookInDate,
@@ -53,7 +53,7 @@ module.exports = {
             newAccommodationGroup: property.accommodationGroup.required(),
         }),
         [PARAMS]: Joi.object({
-            propertyId: property.id.required(),
+            propertyId: objectId.required(),
         }),
     },
 
@@ -66,11 +66,15 @@ module.exports = {
                 })
                 .required(),
         }),
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+            accomGroupId: objectId.required(),
+        }),
     },
 
     replaceThumbnail: {
         [PARAMS]: Joi.object({
-            propertyId: property.id.required(),
+            propertyId: objectId.required(),
         }),
     },
 }

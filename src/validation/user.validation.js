@@ -1,5 +1,5 @@
 const Joi = require("joi")
-const { user } = require("./common")
+const { user, objectId } = require("./common")
 const { BODY, QUERY, PARAMS, FILE } = require("../constants").request
 
 module.exports = {
@@ -18,13 +18,13 @@ module.exports = {
 
     getUserById: {
         [PARAMS]: Joi.object({
-            userId: user.id.required(),
+            userId: objectId.required(),
         }),
     },
 
     updateUser: {
         [PARAMS]: Joi.object({
-            userId: user.id.required(),
+            userId: objectId.required(),
         }),
         [BODY]: Joi.object({
             name: user.name,

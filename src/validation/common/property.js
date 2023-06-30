@@ -4,7 +4,7 @@ const {
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
     accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
 } = require("../../constants")
-const { objectId } = require("./custom")
+const objectId = require("./objectId")
 
 const accommodationGroup = {
     title: Joi.string().required(),
@@ -45,10 +45,9 @@ const accommodationGroup = {
 }
 
 module.exports = {
-    id: Joi.string().custom(objectId),
     title: Joi.string(),
     isClosed: Joi.boolean(),
-    owner: Joi.string().custom(objectId),
+    owner: objectId,
     pageName: Joi.string(),
     score: Joi.number().min(0).max(10),
     reviewCount: Joi.number().min(0),
@@ -56,8 +55,8 @@ module.exports = {
     facilities: Joi.array().items(Joi.string()),
     address: Joi.object({
         address: Joi.string().required(),
-        district: Joi.string().custom(objectId).required(),
-        province: Joi.string().custom(objectId).required(),
+        district: objectId.required(),
+        province: objectId.required(),
     }),
     images: Joi.array().items(Joi.string()),
     accommodationGroups: Joi.array().items(accommodationGroup),

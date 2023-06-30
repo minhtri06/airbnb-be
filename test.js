@@ -10,5 +10,6 @@ const Joi = require("joi")
 //     console.log(province.toObject({ virtuals: true }))
 // })
 
-const a = {}
-delete a.a
+const a = [1, 2, 3, 4]
+console.log(a.filter((v, index) => index !== 1))
+// delete a[3]

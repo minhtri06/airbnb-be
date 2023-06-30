@@ -1,3 +1,4 @@
+const createError = require("http-errors")
 const { meService: service } = require("../services")
 
 /** @type {import('express').RequestHandler} */
@@ -13,6 +14,9 @@ const updateMyProfile = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const replaceMyAvatar = async (req, res) => {
+    if (!req.file) {
+        throw createError.BadRequest("avatar is required")
+    }
     const avatar = await service.replaceMyAvatar(req.user, req.file)
     return res.json({ avatar })
 }

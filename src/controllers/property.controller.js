@@ -58,14 +58,27 @@ const getMyProperties = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const replaceThumbnail = async (req, res) => {
+    if (!req.file) {
+        throw createError.BadRequest("thumbnail is required")
+    }
     const thumbnail = await service.replaceThumbnail(req.property, req.file)
     return res.json({ thumbnail })
 }
 
 /** @type {import('express').RequestHandler} */
 const addImages = async (req, res) => {
-    console.log(req.files)
-    return res.send("adfoj")
+    if (!req.files) {
+        throw createError.BadRequest("images is required")
+    }
+    const newImages = await service.addImages(req.property, req.files)
+    return res.status(StatusCodes.CREATED).json({ newImages })
+}
+
+/** @type {import('express').RequestHandler} */
+const deleteImages = async (req, res) => {
+    const { deletedIndexes } = req.body
+    await service.deleteImages(req.property, deletedIndexes)
+    return res.status(StatusCodes.NO_CONTENT).send()
 }
 
 module.exports = {
@@ -77,4 +90,5 @@ module.exports = {
     getMyProperties,
     replaceThumbnail,
     addImages,
+    deleteImages,
 }

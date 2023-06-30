@@ -2,10 +2,9 @@ const Joi = require("joi")
 
 const { genders } = require("../../constants")
 const { ADMIN, NORMAL_USER } = require("../../configs/roles")
-const { objectId } = require("./custom")
+const objectId = require("./objectId")
 
 module.exports = {
-    id: Joi.string().custom(objectId),
     name: Joi.string(),
     email: Joi.string().email(),
     roles: Joi.array().items(Joi.string().valid(ADMIN, NORMAL_USER)),
@@ -16,7 +15,7 @@ module.exports = {
     gender: Joi.string().valid(...Object.values(genders)),
     address: Joi.object({
         address: Joi.string().required(),
-        district: Joi.string().custom(objectId).required(),
-        province: Joi.string().custom(objectId).required(),
+        district: objectId.required(),
+        province: objectId.required(),
     }),
 }

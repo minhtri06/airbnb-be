@@ -4,4 +4,5 @@ module.exports = {
     province: require("./province"),
     district: require("./district"),
     booking: require("./booking"),
+    objectId: require("./objectId"),
 }
