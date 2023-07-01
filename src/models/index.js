@@ -5,4 +5,5 @@ module.exports = {
     Province: require("./Province"),
     RefreshToken: require("./RefreshToken"),
     User: require("./User"),
+    Review: require("./Review"),
 }
