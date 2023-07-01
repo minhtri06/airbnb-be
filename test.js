@@ -6,8 +6,6 @@ const Joi = require("joi")
 const { createMongooseValidationErr } = require("./src/utils")
 
 connectMongoDb().then(async () => {
-    const property = (await Property.find())[1]
-    property.accommodationGroups = null
-    await property.save()
-    console.log(property)
+    const property = new Property()
+    console.log(property.validate())
 })

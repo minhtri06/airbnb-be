@@ -55,7 +55,6 @@ const propertySchema = new Schema(
         accommodationGroups: {
             type: [accommodationGroupSchema],
             validate(accomGroups) {
-                console.log(this.isModified("accommodationGroups"))
                 if (this.isModified("accommodationGroups")) {
                     for (let accomGroup of accomGroups || []) {
                         if (!accomGroup) {
