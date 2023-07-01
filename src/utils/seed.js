@@ -1,7 +1,7 @@
 const moment = require("moment")
 
 const { District, Province, User, Property } = require("../models")
-const { connectMongoDb } = require("../db")
+const { connectMongoDb, redisClient } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
 
@@ -147,7 +147,7 @@ const seedUsers = async () => {
 
 const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)]
 const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-const generateCurrentBookingDates = (n) => {
+const generateCurrentBookingDates = (n, users) => {
     let bookIn
     let bookOut = moment()
     const currentBookingDates = []
@@ -157,6 +157,7 @@ const generateCurrentBookingDates = (n) => {
         currentBookingDates.push({
             bookIn: `${bookIn.year()}/${bookIn.month()}/${bookIn.date()}`,
             bookOut: `${bookOut.year()}/${bookOut.month()}/${bookOut.date()}`,
+            guest: getRandomElementInArray(users)._id,
         })
     }
     return currentBookingDates
@@ -181,40 +182,40 @@ const seedProperty = async () => {
             dataFilePath: "../../crawl-data/hotel-data/da-lat-hotels.json",
             address: {
                 address: "48, Nguyen Thi Minh Khai",
-                district: "6499991e74f757e3f4d955db",
-                province: "6499991e74f757e3f4d955d9",
+                district: (await District.findOne({ code: 672 }))._id,
+                province: (await District.findOne({ code: 672 })).province,
             },
         },
         binhThuan: {
             dataFilePath: "../../crawl-data/hotel-data/binh-thuan-hotels.json",
             address: {
                 address: "Bo bien Tuoi Sang",
-                district: "6499991e74f757e3f4d95590",
-                province: "6499991e74f757e3f4d9558e",
+                district: (await District.findOne({ provinceCode: 60 }))._id,
+                province: (await Province.findOne({ code: 60 }))._id,
             },
         },
         daNang: {
             dataFilePath: "../../crawl-data/hotel-data/da-nang-hotels.json",
             address: {
                 address: "Bo bien Buoi Sang",
-                district: "6499991d74f757e3f4d95530",
-                province: "6499991d74f757e3f4d9552e",
+                district: (await District.findOne({ provinceCode: 48 }))._id,
+                province: (await Province.findOne({ code: 48 }))._id,
             },
         },
         haNoi: {
             dataFilePath: "../../crawl-data/hotel-data/ha-noi-hotels.json",
             address: {
                 address: "Bo bien Buoi Sang",
-                district: "6499991d74f757e3f4d95371",
-                province: "6499991d74f757e3f4d9536a",
+                district: (await District.findOne({ provinceCode: 1 }))._id,
+                province: (await Province.findOne({ code: 1 }))._id,
             },
         },
         hcm: {
             dataFilePath: "../../crawl-data/hotel-data/ho-chi-minh-hotels.json",
             address: {
                 address: "Bo bien Buoi Sang",
-                district: "6499991e74f757e3f4d95629",
-                province: "6499991e74f757e3f4d95627",
+                district: (await District.findOne({ provinceCode: 79 }))._id,
+                province: (await Province.findOne({ code: 79 }))._id,
             },
         },
     }
@@ -235,12 +236,14 @@ const seedProperty = async () => {
                                 roomCode: "AA1",
                                 currentBookingDates: generateCurrentBookingDates(
                                     getRandomNumber(0, 3),
+                                    users,
                                 ),
                             },
                             {
                                 roomCode: "AA2",
                                 currentBookingDates: generateCurrentBookingDates(
                                     getRandomNumber(0, 3),
+                                    users,
                                 ),
                             },
                         ],
@@ -254,7 +257,9 @@ const seedProperty = async () => {
 }
 
 connectMongoDb().then(async () => {
-    // await seedDivisions()
-    // await seedUsers()
+    await redisClient.connect()
+    await seedDivisions()
+    await seedUsers()
     await seedProperty()
+    console.log("Done")
 })

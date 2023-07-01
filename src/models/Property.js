@@ -7,8 +7,14 @@ const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").accommodationTyp
 const { Schema } = mongoose
 
 const removeBookingDateFields = (obj) => {
+    if (!obj.accommodationGroups) {
+        return
+    }
     for (let accomGroup of obj.accommodationGroups) {
         delete accomGroup.pendingBookingDates
+        if (!accomGroup.accommodations) {
+            continue
+        }
         for (let accom of accomGroup.accommodations) {
             delete accom.currentBookingDates
         }

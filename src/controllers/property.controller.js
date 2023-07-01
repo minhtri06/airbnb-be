@@ -58,6 +58,9 @@ const addAccommodations = async (req, res) => {
 /** @type {import('express').RequestHandler} */
 const getMyProperties = async (req, res) => {
     const myProperties = await service.getMyProperties(req.user._id)
+    myProperties.forEach((property) => {
+        property.caller.isOwner = true
+    })
     return res.json({ myProperties })
 }
 
