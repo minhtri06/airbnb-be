@@ -29,10 +29,11 @@ bookingSchema.plugin(toJSON)
 
 bookingSchema.pre("save", async function (next) {
     const booking = this
-    const isModified = booking.isModified
 
     if (
-        (isModified("property") || isModified("accomGroupId") || isModified("accomId")) &&
+        (booking.isModified("property") ||
+            booking.isModified("accomGroupId") ||
+            booking.isModified("accomId")) &&
         !(await Property.findOne({
             _id: booking.property,
             "accommodationGroups._id": booking.accomGroupId,
@@ -46,7 +47,7 @@ bookingSchema.pre("save", async function (next) {
     }
 
     if (
-        (isModified("bookIn") || isModified("bookOut")) &&
+        (booking.isModified("bookIn") || booking.isModified("bookOut")) &&
         (await Booking.findOne({
             accomId: booking.accomId,
             bookOut: { $gte: booking.bookIn },
