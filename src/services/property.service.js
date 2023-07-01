@@ -89,7 +89,7 @@ const searchProperties = async ({
 }) => {
     const query = Property.where({ isClosed: false })
         .lean()
-        .select("-selectedQuestions -images -description -facilities")
+        .select("-images -description -facilities")
 
     if (districtId) {
         query.where({ "address.district": districtId })
@@ -202,7 +202,7 @@ const addAccommodations = async (property, accoGroup, newAccoms) => {
 
 const getMyProperties = async (myUserId) => {
     const myProperties = await Property.find({ owner: myUserId }).select(
-        "-selectedQuestions -images -description -facilities -accommodationGroups",
+        "-images -description -facilities -accommodationGroups",
     )
     return myProperties
 }

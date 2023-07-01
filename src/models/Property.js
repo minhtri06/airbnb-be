@@ -45,13 +45,6 @@ const propertySchema = new Schema(
         },
         thumbnail: { type: String },
         images: [String],
-        selectedQuestions: [
-            {
-                question: { type: String, required: true },
-                answer: { type: String, required: true },
-                questioner: { type: Schema.Types.ObjectId, ref: "User", required: true },
-            },
-        ],
         accommodationGroups: {
             type: [accommodationGroupSchema],
             validate(accomGroups) {
