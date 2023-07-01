@@ -69,6 +69,7 @@ const propertySchema = new Schema(
                 delete ret.caller
             },
         },
+        timestamps: true,
     },
 )
 

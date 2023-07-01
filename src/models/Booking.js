@@ -7,23 +7,26 @@ const Property = require("./Property")
 
 const { Schema } = mongoose
 
-const bookingSchema = new Schema({
-    bookIn: { type: Date, required: true },
-    bookOut: { type: Date, required: true },
-    guest: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    property: { type: Schema.Types.ObjectId, ref: "Property", required: true },
-    accomGroupId: { type: Schema.Types.ObjectId, required: true },
-    accomId: { type: Schema.Types.ObjectId, required: true },
-    status: {
-        type: String,
-        required: true,
-        enum: ["canceled", "booked"],
-        default: "booked",
+const bookingSchema = new Schema(
+    {
+        bookIn: { type: Date, required: true },
+        bookOut: { type: Date, required: true },
+        guest: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
+        property: { type: Schema.Types.ObjectId, ref: "Property", required: true },
+        accomGroupId: { type: Schema.Types.ObjectId, required: true },
+        accomId: { type: Schema.Types.ObjectId, required: true },
+        status: {
+            type: String,
+            required: true,
+            enum: ["canceled", "booked"],
+            default: "booked",
+        },
+        pricePerNight: { type: Number, min: 0, required: true },
+        numberOfDays: { type: Number, min: 0 },
+        totalPrice: { type: Number, min: 0 },
     },
-    pricePerNight: { type: Number, min: 0, required: true },
-    numberOfDays: { type: Number, min: 0 },
-    totalPrice: { type: Number, min: 0 },
-})
+    { timestamps: true },
+)
 
 bookingSchema.plugin(toJSON)
 

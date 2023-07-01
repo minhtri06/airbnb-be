@@ -11,80 +11,83 @@ const { redisClient } = require("../db")
 
 const { Schema } = mongoose
 
-const userSchema = new Schema({
-    name: { type: String, required: true, trim: true },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-        validate(email) {
-            if (this.isModified("email")) {
-                if (!validator.default.isEmail(email)) {
-                    throw new Error("Invalid email")
-                }
-            }
-        },
-    },
-    authType: {
-        type: String,
-        enum: Object.values(authTypes), // local or google validation
-        default: authTypes.LOCAL,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: function () {
-            // If use local authentication, then password's required
-            return this.get("authType") === authTypes.LOCAL
-        },
-        minlength: 6,
-        validate(value) {
-            if (this.isModified("password")) {
-                if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-                    throw new Error(
-                        "Password must contain at least one letter and one number",
-                    )
-                }
-            }
-        },
-        private: true, // used by the toJSON plugin
-    },
-    roles: {
-        type: [String],
-        default: [roles.NORMAL_USER],
-        enum: Object.values(roles),
-        private: true,
-        validate(values) {
-            if (this.isModified("roles")) {
-                // In case array have undefined value
-                values.forEach((value) => {
-                    if (!value) {
-                        throw new Error(`Invalid role '${value}'`)
+const userSchema = new Schema(
+    {
+        name: { type: String, required: true, trim: true },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true,
+            lowercase: true,
+            validate(email) {
+                if (this.isModified("email")) {
+                    if (!validator.default.isEmail(email)) {
+                        throw new Error("Invalid email")
                     }
-                })
-            }
-        },
-    },
-    avatar: { type: String },
-    phoneNumber: { type: String, trim: true },
-    dateOfBirth: {
-        type: Date,
-        validate(value) {
-            if (this.isModified("dateOfBirth")) {
-                if (moment(value).isAfter(new Date())) {
-                    throw new Error("Date of birth must be before current time")
                 }
-            }
+            },
+        },
+        authType: {
+            type: String,
+            enum: Object.values(authTypes), // local or google validation
+            default: authTypes.LOCAL,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: function () {
+                // If use local authentication, then password's required
+                return this.get("authType") === authTypes.LOCAL
+            },
+            minlength: 6,
+            validate(value) {
+                if (this.isModified("password")) {
+                    if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+                        throw new Error(
+                            "Password must contain at least one letter and one number",
+                        )
+                    }
+                }
+            },
+            private: true, // used by the toJSON plugin
+        },
+        roles: {
+            type: [String],
+            default: [roles.NORMAL_USER],
+            enum: Object.values(roles),
+            private: true,
+            validate(values) {
+                if (this.isModified("roles")) {
+                    // In case array have undefined value
+                    values.forEach((value) => {
+                        if (!value) {
+                            throw new Error(`Invalid role '${value}'`)
+                        }
+                    })
+                }
+            },
+        },
+        avatar: { type: String },
+        phoneNumber: { type: String, trim: true },
+        dateOfBirth: {
+            type: Date,
+            validate(value) {
+                if (this.isModified("dateOfBirth")) {
+                    if (moment(value).isAfter(new Date())) {
+                        throw new Error("Date of birth must be before current time")
+                    }
+                }
+            },
+        },
+        gender: { type: String, lowercase: true, enum: Object.values(genders) },
+        address: {
+            type: addressSchema,
+            default: undefined,
         },
     },
-    gender: { type: String, lowercase: true, enum: Object.values(genders) },
-    address: {
-        type: addressSchema,
-        default: undefined,
-    },
-})
+    { timestamps: true },
+)
 
 userSchema.plugin(toJSON)
 
