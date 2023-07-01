@@ -3,13 +3,11 @@ const { Property, User, Province } = require("./src/models")
 const mongoose = require("mongoose")
 const moment = require("moment")
 const Joi = require("joi")
+const { createMongooseValidationErr } = require("./src/utils")
 
-// connectMongoDb().then(async () => {
-//     const province = await Province.findOne()
-//     province.a = 10
-//     console.log(province.toObject({ virtuals: true }))
-// })
-
-const a = [1, 2, 3, 4]
-console.log(a.filter((v, index) => index !== 1))
-// delete a[3]
+connectMongoDb().then(async () => {
+    const property = (await Property.find())[1]
+    property.accommodationGroups = null
+    await property.save()
+    console.log(property)
+})

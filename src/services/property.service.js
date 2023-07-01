@@ -45,8 +45,8 @@ const isAccommodationAvailable = (accom, bookIn, bookOut) => {
 }
 
 const isPropertyAvailable = (property, bookIn, bookOut) => {
-    for (let accomGroup of property.accommodationGroups) {
-        for (let accom of accomGroup.accommodations) {
+    for (let accomGroup of property.accommodationGroups || []) {
+        for (let accom of accomGroup.accommodations || []) {
             if (isAccommodationAvailable(accom, bookIn, bookOut)) {
                 return true
             }
@@ -63,10 +63,10 @@ const isPropertyAvailable = (property, bookIn, bookOut) => {
 const setAvailabilityFields = (property, bookIn, bookOut) => {
     property.isAvailable = false
 
-    for (let accomGroup of property.accommodationGroups) {
+    for (let accomGroup of property.accommodationGroups || []) {
         accomGroup.availableCount = 0
 
-        for (let accom of accomGroup.accommodations) {
+        for (let accom of accomGroup.accommodations || []) {
             // Check if this accommodation is available
             if (isAccommodationAvailable(accom, bookIn, bookOut)) {
                 property.isAvailable = true

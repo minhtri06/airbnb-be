@@ -1,6 +1,6 @@
 const moment = require("moment")
 
-const { District, Province, User, Property } = require("../models")
+const { District, Province, User, Property, Booking } = require("../models")
 const { connectMongoDb, redisClient } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
@@ -231,22 +231,7 @@ const seedProperty = async () => {
                         pricePerNight: getRandomNumber(10, 100) * 10000,
                         type: "specific-room",
                         bedType: "Single Bed",
-                        accommodations: [
-                            {
-                                roomCode: "AA1",
-                                currentBookingDates: generateCurrentBookingDates(
-                                    getRandomNumber(0, 3),
-                                    users,
-                                ),
-                            },
-                            {
-                                roomCode: "AA2",
-                                currentBookingDates: generateCurrentBookingDates(
-                                    getRandomNumber(0, 3),
-                                    users,
-                                ),
-                            },
-                        ],
+                        accommodations: [{ roomCode: "AA1" }, { roomCode: "AA2" }],
                     },
                 ]
                 const property = new Property(propertyData)
@@ -256,10 +241,43 @@ const seedProperty = async () => {
     }
 }
 
+const seedBooking = async () => {
+    const users = await User.find()
+    if (users.length === 0) {
+        return
+    }
+    const properties = await Property.find()
+    for (let property of properties) {
+        if (!property.accommodationGroups) {
+            continue
+        }
+        for (let accomGroup of property.accommodationGroups) {
+            for (let accom of accomGroup.accommodations) {
+                const currentBookingDates = generateCurrentBookingDates(
+                    getRandomNumber(0, 3),
+                    users,
+                )
+                accom.currentBookingDates = currentBookingDates
+                for (let cbd of currentBookingDates) {
+                    await Booking.create({
+                        ...cbd,
+                        property: property._id,
+                        accomGroupId: accomGroup._id,
+                        accomId: accom._id,
+                        pricePerNight: accomGroup.pricePerNight,
+                    })
+                }
+            }
+        }
+        await property.save()
+    }
+}
+
 connectMongoDb().then(async () => {
     await redisClient.connect()
     await seedDivisions()
     await seedUsers()
     await seedProperty()
+    await seedBooking()
     console.log("Done")
 })

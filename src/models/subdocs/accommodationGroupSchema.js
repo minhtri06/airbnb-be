@@ -51,7 +51,7 @@ const accommodationGroupSchema = new Schema({
             }
 
             if (this.get("type") === SPECIFIC_ROOM) {
-                for (let accommodation of accommodations) {
+                for (let accommodation of accommodations || []) {
                     if (!accommodation.roomCode) {
                         throw new Error(
                             `roomCode is required in ${SPECIFIC_ROOM} accommodation`,

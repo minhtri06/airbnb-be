@@ -1,7 +1,8 @@
 module.exports = {
-    Province: require("./Province"),
+    Booking: require("./Booking"),
     District: require("./District"),
     Property: require("./Property"),
-    User: require("./User"),
+    Province: require("./Province"),
     RefreshToken: require("./RefreshToken"),
+    User: require("./User"),
 }

@@ -10,12 +10,8 @@ const removeBookingDateFields = (obj) => {
     if (!obj.accommodationGroups) {
         return
     }
-    for (let accomGroup of obj.accommodationGroups) {
-        delete accomGroup.pendingBookingDates
-        if (!accomGroup.accommodations) {
-            continue
-        }
-        for (let accom of accomGroup.accommodations) {
+    for (let accomGroup of obj.accommodationGroups || []) {
+        for (let accom of accomGroup.accommodations || []) {
             delete accom.currentBookingDates
         }
     }
@@ -59,8 +55,9 @@ const propertySchema = new Schema(
         accommodationGroups: {
             type: [accommodationGroupSchema],
             validate(accomGroups) {
+                console.log(this.isModified("accommodationGroups"))
                 if (this.isModified("accommodationGroups")) {
-                    for (let accomGroup of accomGroups) {
+                    for (let accomGroup of accomGroups || []) {
                         if (!accomGroup) {
                             throw new Error(
                                 "accommodationGroup can not be null or undefined",
@@ -77,10 +74,17 @@ const propertySchema = new Schema(
                 if (!doc.caller.isOwner) {
                     removeBookingDateFields(ret)
                 }
+                delete ret.caller
             },
         },
     },
 )
+
+propertySchema.index({
+    _id: 1,
+    "accommodationGroups._id": 1,
+    "accommodationGroups.accommodations._id": 1,
+})
 
 propertySchema.plugin(toJSON)
 
