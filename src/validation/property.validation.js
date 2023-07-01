@@ -4,7 +4,7 @@ const {
     request: { BODY, PARAMS, QUERY },
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../constants")
-const { property, district, province, booking, objectId } = require("./common")
+const { property, district, province, booking, objectId, query } = require("./common")
 
 module.exports = {
     createProperty: {
@@ -23,8 +23,8 @@ module.exports = {
             provinceId: objectId,
             bookInDate: Joi.date().iso(),
             bookOutDate: Joi.date().iso(),
-            page: Joi.number().integer().min(1).max(50),
-            limit: Joi.number().integer().min(0).max(100),
+            page: query.page,
+            limit: query.limit,
         }),
     },
 
