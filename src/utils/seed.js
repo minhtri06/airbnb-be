@@ -1,10 +1,58 @@
 const moment = require("moment")
 
-const { District, Province, User, Property, Booking } = require("../models")
+const { District, Province, User, Property, Booking, Review } = require("../models")
 const { connectMongoDb, redisClient } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
 
+// Helpers
+const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)]
+
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+
+const generateCurrentBookingDates = (n, users) => {
+    let bookIn
+    let bookOut = moment()
+    const currentBookingDates = []
+    for (let i = 0; i < n; i++) {
+        bookIn = moment(bookOut).add(getRandomNumber(3, 5), "days")
+        bookOut = moment(bookIn).add(getRandomNumber(2, 4), "days")
+        currentBookingDates.push({
+            bookIn: `${bookIn.year()}/${bookIn.month()}/${bookIn.date()}`,
+            bookOut: `${bookOut.year()}/${bookOut.month()}/${bookOut.date()}`,
+            guest: getRandomElementInArray(users)._id,
+        })
+    }
+    return currentBookingDates
+}
+
+const generateReviews = (numOfReviews, users, propertyId) => {
+    const reviewSamples = [
+        "Khá tốt cho gia đình",
+        "Good",
+        "Kì nghỉ tuyệt vời",
+        "Tôi khá thích lò sưởi ở đây",
+        "Nhân viên không thân thiện lắm",
+        "Thoải mái cho một chuyến công tác",
+        "Thank You! For Supporting me during my working time. I will recommend to other friends",
+        "Chủ nhà khó khăn, hay chửi khách",
+        " wonderful. Beautiful house",
+        "Far from the center and the road is a bit difficult",
+        "Stable and good for the price spent with all amenities",
+    ]
+    const reviews = []
+    for (let i = 0; i < numOfReviews; i++) {
+        reviews.push({
+            reviewer: getRandomElementInArray(users)._id,
+            score: Math.round(getRandomNumber(7, 10)),
+            property: propertyId,
+            body: getRandomElementInArray(reviewSamples),
+        })
+    }
+    return reviews
+}
+
+// Seeders
 const seedDivisions = async () => {
     for (let province of provinces) {
         const provinceObj = await Province.create({
@@ -145,24 +193,6 @@ const seedUsers = async () => {
     ])
 }
 
-const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)]
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-const generateCurrentBookingDates = (n, users) => {
-    let bookIn
-    let bookOut = moment()
-    const currentBookingDates = []
-    for (let i = 0; i < n; i++) {
-        bookIn = moment(bookOut).add(getRandomNumber(3, 5), "days")
-        bookOut = moment(bookIn).add(getRandomNumber(2, 4), "days")
-        currentBookingDates.push({
-            bookIn: `${bookIn.year()}/${bookIn.month()}/${bookIn.date()}`,
-            bookOut: `${bookOut.year()}/${bookOut.month()}/${bookOut.date()}`,
-            guest: getRandomElementInArray(users)._id,
-        })
-    }
-    return currentBookingDates
-}
-
 const seedProperty = async () => {
     const users = await User.find()
     if (users.length === 0) {
@@ -273,11 +303,37 @@ const seedBooking = async () => {
     }
 }
 
+const seedReviews = async () => {
+    const users = await User.find()
+    if (users.length === 0) {
+        return
+    }
+    const properties = await Property.find()
+    if (properties.length === 0) {
+        return
+    }
+
+    for (let property of properties) {
+        const reviews = generateReviews(getRandomNumber(0, 4), users, property._id)
+        if (reviews.length === 0) {
+            continue
+        }
+        const averageScore =
+            reviews.reduce((sum, review) => sum + review.score, 0) / reviews.length
+        property.score = averageScore
+        property.reviewCount = reviews.length
+        await Review.insertMany(reviews)
+        await property.save()
+    }
+}
+
+// Run seed
 connectMongoDb().then(async () => {
     await redisClient.connect()
     await seedDivisions()
     await seedUsers()
     await seedProperty()
     await seedBooking()
+    await seedReviews()
     console.log("Done")
 })
