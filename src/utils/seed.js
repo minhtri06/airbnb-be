@@ -1,4 +1,5 @@
 const moment = require("moment")
+const mongoose = require("mongoose")
 
 const { District, Province, User, Property, Booking, Review } = require("../models")
 const { connectMongoDb, redisClient } = require("../db")
@@ -327,13 +328,27 @@ const seedReviews = async () => {
     }
 }
 
+const truncateData = async () => {
+    await Promise.all([
+        District.deleteMany(),
+        Province.deleteMany(),
+        User.deleteMany(),
+        Property.deleteMany(),
+        Booking.deleteMany(),
+        Review.deleteMany(),
+    ])
+}
+
 // Run seed
 connectMongoDb().then(async () => {
     await redisClient.connect()
+    await truncateData()
     await seedDivisions()
     await seedUsers()
     await seedProperty()
     await seedBooking()
     await seedReviews()
     console.log("Done")
+    await redisClient.quit()
+    await mongoose.connection.close()
 })
