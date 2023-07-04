@@ -17,12 +17,7 @@ const app = express()
 
 app.use(helmet())
 
-app.use(
-    cors({
-        origin: envConfig.CLIENT_URL,
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    }),
-)
+app.use(cors())
 
 app.use(logger("dev"))
 
