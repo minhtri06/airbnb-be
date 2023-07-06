@@ -1,6 +1,6 @@
 const createError = require("http-errors")
 
-const { Property } = require("../models")
+const { Property, Booking } = require("../models")
 const envConfig = require("../configs/envConfig")
 const {
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
@@ -284,6 +284,14 @@ const updateProperty = async (property, updateBody) => {
     return property
 }
 
+const getBookingOfAccom = async (accomId, minBookIn, maxBookIn) => {
+    const bookings = await Booking.find({
+        accomId,
+        bookIn: { $gte: minBookIn, $lte: maxBookIn },
+    })
+    return bookings
+}
+
 module.exports = {
     createProperty,
     setAvailabilityFields,
@@ -298,4 +306,5 @@ module.exports = {
     addImages,
     deleteImages,
     updateProperty,
+    getBookingOfAccom,
 }

@@ -89,6 +89,16 @@ const updateProperty = async (req, res) => {
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
+/** @type {import('express').RequestHandler} */
+const getBookingsOfAccom = async (req, res) => {
+    const bookings = await service.getBookingOfAccom(
+        req.accom._id,
+        req.query.minBookIn,
+        req.query.maxBookIn,
+    )
+    return res.json({ bookings })
+}
+
 module.exports = {
     createProperty,
     searchProperties,
@@ -100,4 +110,5 @@ module.exports = {
     addImages,
     deleteImages,
     updateProperty,
+    getBookingsOfAccom,
 }

@@ -90,4 +90,13 @@ router
         controller.addAccommodations,
     )
 
+router
+    .route("/:propertyId/accom-groups/:accomGroupId/accoms/:accomId/bookings")
+    .get(
+        auth(),
+        validate(validation.getBookingsOfAccom),
+        requireToOwnProperty(),
+        controller.getBookingsOfAccom,
+    )
+
 module.exports = router

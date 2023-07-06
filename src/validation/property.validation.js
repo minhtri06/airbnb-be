@@ -1,4 +1,5 @@
 const Joi = require("joi")
+const moment = require("moment")
 
 const {
     request: { BODY, PARAMS, QUERY },
@@ -98,6 +99,20 @@ module.exports = {
             description: property.description,
             facilities: property.facilities,
             address: property.address,
+        }),
+    },
+
+    getBookingsOfAccom: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+            accomGroupId: objectId.required(),
+            accomId: objectId.required(),
+        }),
+        [QUERY]: Joi.object({
+            // Default is the first date of this month
+            minBookIn: Joi.date().iso().default(moment(new Date()).set("date", 1)),
+            // Default is the last date of this month
+            maxBookIn: Joi.date().iso().default(moment().add(1, "month").set("date", 0)),
         }),
     },
 }
