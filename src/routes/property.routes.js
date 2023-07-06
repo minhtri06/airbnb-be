@@ -8,6 +8,7 @@ const {
         getPropertyById,
         getPropertyByPageName,
         getAccomGroupById,
+        getAccomById,
         requireToOwnProperty,
     },
 } = require("../middlewares")
@@ -30,6 +31,7 @@ router.get(
 
 router.param("propertyId", getPropertyById)
 router.param("accomGroupId", getAccomGroupById)
+router.param("accomId", getAccomById)
 
 router
     .route("/:propertyId")

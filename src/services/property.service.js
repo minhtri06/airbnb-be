@@ -191,6 +191,14 @@ const getAccomGroupById = async (property, accomGroupId) => {
     return accomGroup
 }
 
+const getAccomById = (accomGroup, accomId) => {
+    const accom = accomGroup.accommodations.id(accomId)
+    if (!accom) {
+        throw createError.NotFound("Accommodation not found")
+    }
+    return accom
+}
+
 const addAccommodations = async (property, accoGroup, newAccoms) => {
     if (newAccoms.length === 0) {
         throw new Error("newAccoms must have at least one accommodation")
@@ -283,6 +291,7 @@ module.exports = {
     getProperty,
     addAccommodationGroup,
     getAccomGroupById,
+    getAccomById,
     addAccommodations,
     getMyProperties,
     replaceThumbnail,

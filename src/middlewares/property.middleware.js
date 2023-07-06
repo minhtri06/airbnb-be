@@ -18,13 +18,22 @@ const getPropertyByPageName = async (req, res, next) => {
 
 /**
  * Must call after getPropertyById middleware
- * @return {import('express').RequestHandler} */
+ * @type {import('express').RequestHandler} */
 const getAccomGroupById = async (req, res, next) => {
     const accomGroup = await service.getAccomGroupById(
         req.property,
         req.params.accomGroupId,
     )
     req.accomGroup = accomGroup
+    return next()
+}
+
+/**
+ * Must call after getAccomGroupById middleware
+ * @type {import('express').RequestHandler} */
+const getAccomById = async (req, res, next) => {
+    const accom = await service.getAccomById(req.accomGroup, req.params.accomId)
+    req.accom = accom
     return next()
 }
 
@@ -48,5 +57,6 @@ module.exports = {
     getPropertyById,
     getPropertyByPageName,
     getAccomGroupById,
+    getAccomById,
     requireToOwnProperty,
 }
