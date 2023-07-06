@@ -63,9 +63,7 @@ const propertySchema = new Schema(
     {
         toJSON: {
             transform: function (doc, ret) {
-                if (!doc.caller.isOwner) {
-                    removeBookingDateFields(ret)
-                }
+                removeBookingDateFields(ret)
                 delete ret.caller
             },
         },
