@@ -38,6 +38,12 @@ bookingSchema.pre("save", async function (next) {
         booking.isModified("accomGroupId") ||
         booking.isModified("accomId")
     ) {
+        if (!booking.isNew) {
+            throw createMongooseValidationErr(
+                "property, accomGroupId, accomId",
+                "Cannot update property, accomGroupId or accomId",
+            )
+        }
         const property = await Property.findOne({
             _id: booking.property,
             "accommodationGroups._id": booking.accomGroupId,
