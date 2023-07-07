@@ -34,19 +34,23 @@ bookingSchema.pre("save", async function (next) {
     const booking = this
 
     if (
-        (booking.isModified("property") ||
-            booking.isModified("accomGroupId") ||
-            booking.isModified("accomId")) &&
-        !(await Property.findOne({
+        booking.isModified("property") ||
+        booking.isModified("accomGroupId") ||
+        booking.isModified("accomId")
+    ) {
+        const property = await Property.findOne({
             _id: booking.property,
             "accommodationGroups._id": booking.accomGroupId,
             "accommodationGroups.accommodations._id": booking.accomId,
-        }))
-    ) {
-        throw createMongooseValidationErr(
-            "property, accomGroupId, accomId",
-            "Property not found",
-        )
+        })
+        if (!property) {
+            throw createMongooseValidationErr(
+                "property, accomGroupId, accomId",
+                "Property not found",
+            )
+        }
+        const accomGroup = property.accommodationGroups.id(booking.accomGroupId)
+        booking.set("pricePerNight", accomGroup.pricePerNight)
     }
 
     if (
@@ -70,7 +74,7 @@ bookingSchema.pre("save", async function (next) {
         )
     }
     booking.set("numberOfDays", moment(booking.bookOut).diff(booking.bookIn, "days"))
-    booking.set("totalPrice", this.numberOfDays * this.pricePerNight)
+    booking.set("totalPrice", booking.numberOfDays * booking.pricePerNight)
 
     next()
 })
