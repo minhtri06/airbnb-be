@@ -1,12 +1,18 @@
 const router = require("express").Router()
 
-const { validate, auth } = require("../middlewares")
+const {
+    validate,
+    auth,
+    bookingMiddleware: { getBookingById },
+} = require("../middlewares")
 const { bookingController: controller } = require("../controllers")
 const { bookingValidation: validation } = require("../validation")
 
 router
     .route("/")
     .post(auth(), validate(validation.createBooking), controller.createBooking)
+
+router.param("bookingId", getBookingById)
 
 router
     .route("/my-bookings")

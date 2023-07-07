@@ -9,6 +9,11 @@ const createBooking = async (body) => {
     return booking
 }
 
+const getBookingById = async (bookingId) => {
+    const booking = await Booking.findById(bookingId)
+    return booking
+}
+
 const getMyBookings = async ({ userId, sortBy, page, limit }) => {
     const query = Booking.find({ guest: userId })
 
@@ -26,4 +31,4 @@ const getMyBookings = async ({ userId, sortBy, page, limit }) => {
     return await query.exec()
 }
 
-module.exports = { createBooking, getMyBookings }
+module.exports = { createBooking, getBookingById, getMyBookings }
