@@ -5,6 +5,10 @@ const { bookingController: controller } = require("../controllers")
 const { bookingValidation: validation } = require("../validation")
 
 router
+    .route("/")
+    .post(auth(), validate(validation.createBooking), controller.createBooking)
+
+router
     .route("/my-bookings")
     .get(auth(), validate(validation.getMyBookings), controller.getMyBookings)
 

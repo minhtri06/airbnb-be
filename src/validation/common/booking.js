@@ -1,9 +1,9 @@
 const Joi = require("joi")
 
 module.exports = {
-    bookInDate: Joi.date().iso(),
-    bookOutDate: Joi.when("bookInDate", {
+    bookIn: Joi.date().iso(),
+    bookOut: Joi.when("bookIn", {
         not: undefined,
-        then: Joi.date().iso().greater(Joi.ref("bookInDate")),
+        then: Joi.date().iso().greater(Joi.ref("bookIn")),
     }),
 }

@@ -82,8 +82,8 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
 const searchProperties = async ({
     districtId,
     provinceId,
-    bookInDate,
-    bookOutDate,
+    bookIn,
+    bookOut,
     page,
     limit,
 }) => {
@@ -103,14 +103,12 @@ const searchProperties = async ({
     page = page || 1
     let skip = (page - 1) * limit
 
-    if (bookInDate && bookOutDate) {
-        if (!(bookInDate instanceof Date) || !(bookOutDate instanceof Date)) {
-            throw createError.BadRequest(
-                "bookInDate and bookOutDate must be instances of Date",
-            )
+    if (bookIn && bookOut) {
+        if (!(bookIn instanceof Date) || !(bookOut instanceof Date)) {
+            throw createError.BadRequest("bookIn and bookOut must be instances of Date")
         }
-        if (bookInDate >= bookOutDate) {
-            throw createError.BadRequest("bookInDate must be before bookOutDate")
+        if (bookIn >= bookOut) {
+            throw createError.BadRequest("bookIn must be before bookOut")
         }
 
         // Find available properties
@@ -122,13 +120,13 @@ const searchProperties = async ({
             property = await cursor.next()
         ) {
             if (skip !== 0) {
-                if (isPropertyAvailable(property, bookInDate, bookOutDate)) {
+                if (isPropertyAvailable(property, bookIn, bookOut)) {
                     skip--
                 }
                 continue
             }
             if (limit !== 0) {
-                setAvailabilityFields(property, bookInDate, bookOutDate)
+                setAvailabilityFields(property, bookIn, bookOut)
                 if (property.isAvailable) {
                     limit--
                     properties.push(property)

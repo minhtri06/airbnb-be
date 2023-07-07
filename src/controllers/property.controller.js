@@ -22,9 +22,9 @@ const searchProperties = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getProperty = async (req, res) => {
-    const { bookInDate, bookOutDate } = req.query
-    if (bookInDate && bookOutDate) {
-        service.setAvailabilityFields(req.property, bookInDate, bookOutDate)
+    const { bookIn, bookOut } = req.query
+    if (bookIn && bookOut) {
+        service.setAvailabilityFields(req.property, bookIn, bookOut)
     }
     /** @type {property} */
     const property = req.property

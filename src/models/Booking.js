@@ -21,7 +21,7 @@ const bookingSchema = new Schema(
             enum: ["canceled", "booked"],
             default: "booked",
         },
-        pricePerNight: { type: Number, min: 0, required: true },
+        pricePerNight: { type: Number, min: 0 },
         numberOfDays: { type: Number, min: 0 },
         totalPrice: { type: Number, min: 0 },
     },

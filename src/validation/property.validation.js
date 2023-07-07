@@ -22,8 +22,8 @@ module.exports = {
         [QUERY]: Joi.object({
             districtId: objectId,
             provinceId: objectId,
-            bookInDate: Joi.date().iso(),
-            bookOutDate: Joi.date().iso(),
+            bookIn: Joi.date().iso(),
+            bookOut: Joi.date().iso(),
             page: query.page,
             limit: query.limit,
         }),
@@ -34,8 +34,8 @@ module.exports = {
             propertyId: objectId.required(),
         }),
         [QUERY]: Joi.object({
-            bookInDate: booking.bookInDate,
-            bookOutDate: booking.bookOutDate,
+            bookIn: booking.bookIn,
+            bookOut: booking.bookOut,
         }),
     },
 
@@ -44,8 +44,8 @@ module.exports = {
             pageName: property.pageName.required(),
         }),
         [QUERY]: Joi.object({
-            bookInDate: booking.bookInDate,
-            bookOutDate: booking.bookOutDate,
+            bookIn: booking.bookIn,
+            bookOut: booking.bookOut,
         }),
     },
 

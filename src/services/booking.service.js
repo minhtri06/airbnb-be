@@ -3,6 +3,12 @@ const createError = require("http-errors")
 const { Booking } = require("../models")
 const envConfig = require("../configs/envConfig")
 
+const createBooking = async (body) => {
+    const booking = new Booking(body)
+    await booking.save()
+    return booking
+}
+
 const getMyBookings = async ({ userId, sortBy, page, limit }) => {
     const query = Booking.find({ guest: userId })
 
@@ -20,4 +26,4 @@ const getMyBookings = async ({ userId, sortBy, page, limit }) => {
     return await query.exec()
 }
 
-module.exports = { getMyBookings }
+module.exports = { createBooking, getMyBookings }
