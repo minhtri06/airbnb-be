@@ -1,14 +1,15 @@
-const { propertyService: service } = require("../services")
 const createError = require("http-errors")
+
+const { propertyService: service } = require("../services")
 const { ADMIN } = require("../configs/roles")
 
-/** @return {import('express').RequestHandler} */
+/** @type {import('express').RequestHandler} */
 const getPropertyById = async (req, res, next) => {
     req.property = await service.getProperty({ propertyId: req.params.propertyId })
     next()
 }
 
-/** @return {import('express').RequestHandler} */
+/** @type {import('express').RequestHandler} */
 const getPropertyByPageName = async (req, res, next) => {
     req.property = await service.getProperty({
         pageName: req.params.pageName,
