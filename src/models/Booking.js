@@ -13,6 +13,7 @@ const bookingSchema = new Schema(
         bookOut: { type: Date, required: true },
         guest: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
         property: { type: Schema.Types.ObjectId, ref: "Property", required: true },
+        propertyOwner: { type: Schema.Types.ObjectId, ref: "User" },
         accomGroupId: { type: Schema.Types.ObjectId, required: true },
         accomId: { type: Schema.Types.ObjectId, required: true },
         status: {
@@ -44,6 +45,7 @@ bookingSchema.pre("save", async function (next) {
                 "Cannot update property, accomGroupId or accomId",
             )
         }
+
         const property = await Property.findOne({
             _id: booking.property,
             "accommodationGroups._id": booking.accomGroupId,
@@ -55,6 +57,9 @@ bookingSchema.pre("save", async function (next) {
                 "Property not found",
             )
         }
+
+        booking.set("propertyOwner", property.owner)
+
         const accomGroup = property.accommodationGroups.id(booking.accomGroupId)
         booking.set("pricePerNight", accomGroup.pricePerNight)
     }
