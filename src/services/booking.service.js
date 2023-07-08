@@ -51,9 +51,28 @@ const paginateBookings = async (filter, queryOptions) => {
     return await Booking.paginate(filter, queryOptions)
 }
 
+/**
+ *
+ * @param {number} month
+ * @param {bookingFilter} filter
+ * @returns
+ */
+const getBookingsInMonth = async (month, filter = {}) => {
+    // First and last date in month 'month'
+    const minBookIn = moment()
+        .set("month", month - 1)
+        .set("date", 1)
+    const maxBookIn = moment().set("month", month).set("date", 0)
+
+    filter.bookIn = { $gte: minBookIn, $lte: maxBookIn }
+
+    return await Booking.find(filter).sort("bookIn")
+}
+
 module.exports = {
     createBooking,
     getBookingById,
     cancelBooking,
     paginateBookings,
+    getBookingsInMonth,
 }

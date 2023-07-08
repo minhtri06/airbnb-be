@@ -1,7 +1,7 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
-const { propertyService: service } = require("../services")
+const { propertyService: service, bookingService } = require("../services")
 
 /**
  * @typedef {InstanceType<import('../models/Property')>} property
@@ -82,11 +82,9 @@ const updateProperty = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getAccommodationBookings = async (req, res) => {
-    const bookings = await service.getAccommodationBookings(
-        req.accom._id,
-        req.query.minBookIn,
-        req.query.maxBookIn,
-    )
+    const bookings = await bookingService.getBookingsInMonth(req.query.month, {
+        accomId: req.accom._id,
+    })
     return res.json({ bookings })
 }
 

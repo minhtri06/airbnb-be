@@ -109,10 +109,12 @@ module.exports = {
             accomId: objectId.required(),
         }),
         [QUERY]: Joi.object({
-            // Default is the first date of this month
-            minBookIn: Joi.date().iso().default(moment(new Date()).set("date", 1)),
-            // Default is the last date of this month
-            maxBookIn: Joi.date().iso().default(moment().add(1, "month").set("date", 0)),
+            // Default is this month
+            month: Joi.number()
+                .integer()
+                .min(1)
+                .max(12)
+                .default(moment().month() + 1),
         }),
     },
 

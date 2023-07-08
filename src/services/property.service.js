@@ -293,25 +293,6 @@ const updateProperty = async (property, updateBody) => {
     return property
 }
 
-const getAccommodationBookings = async (accomId, minBookIn, maxBookIn) => {
-    const bookings = await Booking.find({
-        accomId,
-        bookIn: { $gte: minBookIn, $lte: maxBookIn },
-    })
-    return bookings
-}
-
-const getPropertyReviews = async ({ propertyId, page, limit }) => {
-    const query = Review.find({ property: propertyId })
-
-    let skip = (page - 1) * limit
-    query.skip(skip).limit(limit)
-
-    query.sort("-createdAt")
-
-    return await query.exec()
-}
-
 module.exports = {
     createProperty,
     paginateProperties,
@@ -326,6 +307,4 @@ module.exports = {
     addImages,
     deleteImages,
     updateProperty,
-    getAccommodationBookings,
-    getPropertyReviews,
 }
