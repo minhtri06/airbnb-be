@@ -1,4 +1,5 @@
 const createError = require("http-errors")
+const { StatusCodes } = require("http-status-codes")
 
 const { bookingService: service } = require("../services")
 
@@ -10,9 +11,15 @@ const createBooking = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
+const cancelBooking = async (req, res) => {
+    await service.cancelBooking(req.booking)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+/** @type {import('express').RequestHandler} */
 const getMyBookings = async (req, res) => {
     const bookings = await service.getMyBookings({ userId: req.user._id, ...req.query })
     return res.json({ bookings })
 }
 
-module.exports = { createBooking, getMyBookings }
+module.exports = { createBooking, cancelBooking, getMyBookings }

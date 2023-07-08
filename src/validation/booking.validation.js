@@ -14,6 +14,12 @@ module.exports = {
         }),
     },
 
+    cancelBooking: {
+        [PARAMS]: Joi.object({
+            bookingId: objectId.required(),
+        }),
+    },
+
     getMyBookings: {
         [QUERY]: Joi.object({
             limit: query.limit,
