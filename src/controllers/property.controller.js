@@ -105,7 +105,6 @@ module.exports = {
     getProperty,
     addAccommodationGroup,
     addAccommodations,
-    getMyProperties,
     replaceThumbnail,
     addImages,
     deleteImages,

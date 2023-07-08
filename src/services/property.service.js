@@ -303,7 +303,6 @@ module.exports = {
     getAccomGroupById,
     getAccomById,
     addAccommodations,
-    getMyProperties,
     replaceThumbnail,
     addImages,
     deleteImages,
