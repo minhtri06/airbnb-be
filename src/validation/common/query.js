@@ -1,4 +1,5 @@
 const Joi = require("joi")
+const envConfig = require("../../configs/envConfig")
 
 module.exports = {
     sortBy: (...fields) =>
@@ -13,6 +14,6 @@ module.exports = {
             }
             return sortObj
         }),
-    page: Joi.number().integer().min(1).max(50),
-    limit: Joi.number().integer().min(0).max(100),
+    page: Joi.number().integer().min(1).max(50).default(1),
+    limit: Joi.number().integer().min(0).max(100).default(envConfig.DEFAULT_PAGE_LIMIT),
 }
