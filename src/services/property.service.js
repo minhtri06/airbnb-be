@@ -13,12 +13,30 @@ const {
 
 /**
  * @typedef {InstanceType<import('../models/Property')>} property
+ *
+ * @typedef {Object} propertyFilter
+ * @property {string} owner
+ *
+ * @typedef {Object} queryOptions
+ * @property {Object} sortBy
+ * @property {number} page
+ * @property {number} limit
  */
 
 const createProperty = async (body) => {
     const property = new Property(body)
     await property.save()
     return property
+}
+
+/**
+ *
+ * @param {propertyFilter} filter
+ * @param {queryOptions} queryOptions
+ * @returns
+ */
+const queryProperties = async (filter, queryOptions) => {
+    return await Property.paginate(filter, queryOptions)
 }
 
 const isAccommodationAvailable = (accom, bookIn, bookOut) => {
@@ -296,6 +314,7 @@ const getPropertyReviews = async ({ propertyId, page, limit }) => {
 
 module.exports = {
     createProperty,
+    queryProperties,
     setAvailabilityFields,
     searchProperties,
     getProperty,

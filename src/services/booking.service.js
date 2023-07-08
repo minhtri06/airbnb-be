@@ -39,14 +39,9 @@ const queryBookings = async (filter, queryOptions) => {
     return await Booking.paginate(filter, queryOptions)
 }
 
-const queryBookingsByGuest = async (guestId, queryOptions) => {
-    return await queryBookings({ guest: guestId }, queryOptions)
-}
-
 module.exports = {
     createBooking,
     getBookingById,
     cancelBooking,
     queryBookings,
-    queryBookingsByGuest,
 }
