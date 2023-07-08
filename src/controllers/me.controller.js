@@ -18,8 +18,14 @@ const replaceMyAvatar = async (req, res) => {
     return res.json({ avatar })
 }
 
+const getMyProperties = async (req, res) => {
+    const myProperties = await service.getMyProperties(req.user)
+    return res.json({ myProperties })
+}
+
 module.exports = {
     getMyProfile,
     updateMyProfile,
     replaceMyAvatar,
+    getMyProperties,
 }

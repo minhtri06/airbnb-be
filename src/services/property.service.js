@@ -206,13 +206,6 @@ const addAccommodations = async (property, accoGroup, newAccoms) => {
     return property
 }
 
-const getMyProperties = async (myUserId) => {
-    const myProperties = await Property.find({ owner: myUserId }).select(
-        "-images -description -facilities -accommodationGroups",
-    )
-    return myProperties
-}
-
 /**
  *
  * @param {property} property

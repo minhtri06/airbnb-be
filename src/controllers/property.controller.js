@@ -56,15 +56,6 @@ const addAccommodations = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
-const getMyProperties = async (req, res) => {
-    const myProperties = await service.getMyProperties(req.user._id)
-    myProperties.forEach((property) => {
-        property.caller.isOwner = true
-    })
-    return res.json({ myProperties })
-}
-
-/** @type {import('express').RequestHandler} */
 const replaceThumbnail = async (req, res) => {
     const thumbnail = await service.replaceThumbnail(req.property, req.file)
     return res.json({ thumbnail })

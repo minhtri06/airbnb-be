@@ -16,4 +16,6 @@ router
 
 router.route("/avatars").put(uploadImage.single("avatar"), controller.replaceMyAvatar)
 
+router.get("/properties", controller.getMyProperties)
+
 module.exports = router
