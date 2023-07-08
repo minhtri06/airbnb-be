@@ -19,8 +19,8 @@ const generateCurrentBookingDates = (n, users) => {
         bookIn = moment(bookOut).add(getRandomNumber(3, 5), "days")
         bookOut = moment(bookIn).add(getRandomNumber(2, 4), "days")
         currentBookingDates.push({
-            bookIn: `${bookIn.year()}/${bookIn.month()}/${bookIn.date()}`,
-            bookOut: `${bookOut.year()}/${bookOut.month()}/${bookOut.date()}`,
+            bookIn,
+            bookOut,
             guest: getRandomElementInArray(users)._id,
         })
     }
