@@ -71,6 +71,7 @@ bookingSchema.pre("save", async function (next) {
             accomId: booking.accomId,
             bookOut: { $gte: booking.bookIn },
             bookIn: { $lte: booking.bookOut },
+            status: "booked",
         }))
     ) {
         throw createMongooseValidationErr(
