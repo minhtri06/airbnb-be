@@ -3,7 +3,7 @@ const validator = require("validator")
 
 const { authTypes, genders } = require("../constants")
 const roles = require("../configs/roles")
-const { toJSON } = require("./plugins")
+const { toJSON, paginate } = require("./plugins")
 const moment = require("moment")
 const bcrypt = require("bcryptjs")
 const { addressSchema } = require("./subdocs")
@@ -90,6 +90,7 @@ const userSchema = new Schema(
 )
 
 userSchema.plugin(toJSON)
+userSchema.plugin(paginate)
 
 /**
  * Check if email is taken

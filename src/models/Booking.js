@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const moment = require("moment")
 
 const { createMongooseValidationErr } = require("../utils")
-const { toJSON } = require("./plugins")
+const { toJSON, paginate } = require("./plugins")
 const Property = require("./Property")
 
 const { Schema } = mongoose
@@ -30,6 +30,7 @@ const bookingSchema = new Schema(
 )
 
 bookingSchema.plugin(toJSON)
+bookingSchema.plugin(paginate)
 
 bookingSchema.pre("save", async function (next) {
     const booking = this

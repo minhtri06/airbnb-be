@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 
+const { toJSON, paginate } = require("./plugins")
 const Property = require("./Property")
 const { createMongooseValidationErr } = require("../utils")
 
@@ -42,6 +43,9 @@ reviewSchema.post("save", async function (doc) {
         await property.save()
     }
 })
+
+reviewSchema.plugin(toJSON)
+reviewSchema.plugin(paginate)
 
 const Review = mongoose.model("Review", reviewSchema)
 

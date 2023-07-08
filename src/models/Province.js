@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { toJSON } = require("./plugins")
+const { toJSON, paginate } = require("./plugins")
 
 const { Schema } = mongoose
 
@@ -13,6 +13,7 @@ const provinceSchema = new Schema(
 )
 
 provinceSchema.plugin(toJSON)
+provinceSchema.plugin(paginate)
 
 const Province = mongoose.model("Province", provinceSchema)
 

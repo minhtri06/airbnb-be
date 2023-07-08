@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { toJSON } = require("./plugins")
+const { toJSON, paginate } = require("./plugins")
 
 const { Schema } = mongoose
 
@@ -15,6 +15,7 @@ const districtSchema = new Schema(
 )
 
 districtSchema.plugin(toJSON)
+districtSchema.plugin(paginate)
 
 const District = mongoose.model("District", districtSchema)
 

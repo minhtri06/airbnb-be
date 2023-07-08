@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const { addressSchema, accommodationGroupSchema } = require("./subdocs")
-const { toJSON } = require("./plugins")
+const { toJSON, paginate } = require("./plugins")
 const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").accommodationTypes
 
 const { Schema } = mongoose
@@ -78,6 +78,7 @@ propertySchema.index({
 })
 
 propertySchema.plugin(toJSON)
+propertySchema.plugin(paginate)
 
 propertySchema.virtual("isAvailable")
 propertySchema.virtual("caller.isOwner")
