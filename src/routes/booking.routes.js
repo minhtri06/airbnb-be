@@ -23,8 +23,4 @@ router
         controller.cancelBooking,
     )
 
-router
-    .route("/my-bookings")
-    .get(auth(), validate(validation.getMyBookings), controller.getMyBookings)
-
 module.exports = router

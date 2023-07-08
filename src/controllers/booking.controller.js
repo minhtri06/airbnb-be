@@ -16,10 +16,4 @@ const cancelBooking = async (req, res) => {
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
-/** @type {import('express').RequestHandler} */
-const getMyBookings = async (req, res) => {
-    const bookings = await service.getMyBookings({ userId: req.user._id, ...req.query })
-    return res.json({ bookings })
-}
-
-module.exports = { createBooking, cancelBooking, getMyBookings }
+module.exports = { createBooking, cancelBooking }

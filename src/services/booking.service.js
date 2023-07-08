@@ -6,6 +6,11 @@ const envConfig = require("../configs/envConfig")
 
 /**
  * @typedef {InstanceType<import('../models/Booking')>} booking
+ *
+ * @typedef {Object} queryOptions
+ * @property {number} queryOptions.limit
+ * @property {number} queryOptions.page
+ * @property {Object} queryOptions.sortBy
  */
 
 const createBooking = async (body) => {
@@ -30,21 +35,18 @@ const cancelBooking = async (booking) => {
     await booking.save()
 }
 
-const getMyBookings = async ({ userId, sortBy, page, limit }) => {
-    const query = Booking.find({ guest: userId })
-
-    if (sortBy) {
-        query.sort(sortBy)
-    } else {
-        query.sort("-bookIn")
-    }
-
-    limit = limit || envConfig.DEFAULT_PAGE_LIMIT
-    page = page || 1
-    let skip = (page - 1) * limit
-    query.skip(skip).limit(limit)
-
-    return await query.exec()
+const queryBookings = async (filter, queryOptions) => {
+    return await Booking.paginate(filter, queryOptions)
 }
 
-module.exports = { createBooking, getBookingById, cancelBooking, getMyBookings }
+const queryBookingsByGuest = async (guestId, queryOptions) => {
+    return await queryBookings({ guest: guestId }, queryOptions)
+}
+
+module.exports = {
+    createBooking,
+    getBookingById,
+    cancelBooking,
+    queryBookings,
+    queryBookingsByGuest,
+}

@@ -1,5 +1,5 @@
 const createError = require("http-errors")
-const { meService: service } = require("../services")
+const { meService: service, bookingService } = require("../services")
 
 /** @type {import('express').RequestHandler} */
 const getMyProfile = async (req, res) => {
@@ -18,9 +18,16 @@ const replaceMyAvatar = async (req, res) => {
     return res.json({ avatar })
 }
 
+/** @type {import('express').RequestHandler} */
 const getMyProperties = async (req, res) => {
-    const myProperties = await service.getMyProperties(req.user)
-    return res.json({ myProperties })
+    const properties = await service.getMyProperties(req.user)
+    return res.json({ properties })
+}
+
+/** @type {import('express').RequestHandler} */
+const getMyBookings = async (req, res) => {
+    const bookings = await bookingService.queryBookingsByGuest(req.user._id, req.query)
+    return res.json({ bookings })
 }
 
 module.exports = {
@@ -28,4 +35,5 @@ module.exports = {
     updateMyProfile,
     replaceMyAvatar,
     getMyProperties,
+    getMyBookings,
 }
