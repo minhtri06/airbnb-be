@@ -99,6 +99,15 @@ const getBookingsOfAccom = async (req, res) => {
     return res.json({ bookings })
 }
 
+/** @type {import('express').RequestHandler} */
+const getPropertyReviews = async (req, res) => {
+    const reviews = await service.getPropertyReviews({
+        propertyId: req.property._id,
+        ...req.query,
+    })
+    return res.json({ reviews })
+}
+
 module.exports = {
     createProperty,
     searchProperties,
@@ -111,4 +120,5 @@ module.exports = {
     deleteImages,
     updateProperty,
     getBookingsOfAccom,
+    getPropertyReviews,
 }

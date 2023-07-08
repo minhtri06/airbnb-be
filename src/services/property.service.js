@@ -1,6 +1,6 @@
 const createError = require("http-errors")
 
-const { Property, Booking } = require("../models")
+const { Property, Booking, Review } = require("../models")
 const envConfig = require("../configs/envConfig")
 const {
     accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
@@ -290,6 +290,17 @@ const getBookingOfAccom = async (accomId, minBookIn, maxBookIn) => {
     return bookings
 }
 
+const getPropertyReviews = async ({ propertyId, page, limit }) => {
+    const query = Review.find({ property: propertyId })
+
+    let skip = (page - 1) * limit
+    query.skip(skip).limit(limit)
+
+    query.sort("-createdAt")
+
+    return await query.exec()
+}
+
 module.exports = {
     createProperty,
     setAvailabilityFields,
@@ -305,4 +316,5 @@ module.exports = {
     deleteImages,
     updateProperty,
     getBookingOfAccom,
+    getPropertyReviews,
 }

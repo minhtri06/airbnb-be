@@ -115,4 +115,14 @@ module.exports = {
             maxBookIn: Joi.date().iso().default(moment().add(1, "month").set("date", 0)),
         }),
     },
+
+    getPropertyReviews: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+        }),
+        [QUERY]: Joi.object({
+            limit: query.limit,
+            page: query.page,
+        }),
+    },
 }

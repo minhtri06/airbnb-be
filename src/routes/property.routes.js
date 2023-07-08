@@ -99,4 +99,10 @@ router
         controller.getBookingsOfAccom,
     )
 
+router.get(
+    "/:propertyId/reviews",
+    validate(validation.getPropertyReviews),
+    controller.getPropertyReviews,
+)
+
 module.exports = router
