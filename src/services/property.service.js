@@ -282,7 +282,7 @@ const updateProperty = async (property, updateBody) => {
     return property
 }
 
-const getBookingOfAccom = async (accomId, minBookIn, maxBookIn) => {
+const getAccommodationBookings = async (accomId, minBookIn, maxBookIn) => {
     const bookings = await Booking.find({
         accomId,
         bookIn: { $gte: minBookIn, $lte: maxBookIn },
@@ -315,6 +315,6 @@ module.exports = {
     addImages,
     deleteImages,
     updateProperty,
-    getBookingOfAccom,
+    getAccommodationBookings,
     getPropertyReviews,
 }

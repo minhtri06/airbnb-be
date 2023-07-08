@@ -90,8 +90,8 @@ const updateProperty = async (req, res) => {
 }
 
 /** @type {import('express').RequestHandler} */
-const getBookingsOfAccom = async (req, res) => {
-    const bookings = await service.getBookingOfAccom(
+const getAccommodationBookings = async (req, res) => {
+    const bookings = await service.getAccommodationBookings(
         req.accom._id,
         req.query.minBookIn,
         req.query.maxBookIn,
@@ -119,6 +119,6 @@ module.exports = {
     addImages,
     deleteImages,
     updateProperty,
-    getBookingsOfAccom,
+    getAccommodationBookings,
     getPropertyReviews,
 }

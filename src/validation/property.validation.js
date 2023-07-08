@@ -102,7 +102,7 @@ module.exports = {
         }),
     },
 
-    getBookingsOfAccom: {
+    getAccommodationBookings: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
             accomGroupId: objectId.required(),

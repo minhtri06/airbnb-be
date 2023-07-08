@@ -94,9 +94,9 @@ router
     .route("/:propertyId/accom-groups/:accomGroupId/accoms/:accomId/bookings")
     .get(
         auth(),
-        validate(validation.getBookingsOfAccom),
+        validate(validation.getAccommodationBookings),
         requireToOwnProperty(),
-        controller.getBookingsOfAccom,
+        controller.getAccommodationBookings,
     )
 
 router.get(
