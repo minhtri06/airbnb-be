@@ -1,6 +1,5 @@
 /node_modules
 /.env
 /.vscode
-
-test.js
-dump.rdb
+/test.js
+/dump.rdb
