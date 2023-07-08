@@ -20,7 +20,7 @@ const replaceMyAvatar = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getMyProperties = async (req, res) => {
-    const properties = await propertyService.queryProperties(
+    const properties = await propertyService.paginateProperties(
         { owner: req.user._id },
         req.query,
     )
@@ -29,7 +29,7 @@ const getMyProperties = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getMyBookings = async (req, res) => {
-    const bookings = await bookingService.queryBookings(
+    const bookings = await bookingService.paginateBookings(
         { guest: req.user._id },
         req.query,
     )

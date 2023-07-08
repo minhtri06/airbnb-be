@@ -35,7 +35,7 @@ const createProperty = async (body) => {
  * @param {queryOptions} queryOptions
  * @returns
  */
-const queryProperties = async (filter, queryOptions) => {
+const paginateProperties = async (filter, queryOptions) => {
     return await Property.paginate(filter, queryOptions)
 }
 
@@ -314,7 +314,7 @@ const getPropertyReviews = async ({ propertyId, page, limit }) => {
 
 module.exports = {
     createProperty,
-    queryProperties,
+    paginateProperties,
     setAvailabilityFields,
     searchProperties,
     getProperty,

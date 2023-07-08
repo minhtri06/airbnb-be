@@ -7,6 +7,12 @@ const envConfig = require("../configs/envConfig")
 /**
  * @typedef {InstanceType<import('../models/Booking')>} booking
  *
+ * @typedef {Object} bookingFilter
+ * @property {string} guest
+ * @property {string} property
+ * @property {string} accomId
+ * @property {string} propertyOwner
+ *
  * @typedef {Object} queryOptions
  * @property {number} queryOptions.limit
  * @property {number} queryOptions.page
@@ -35,7 +41,13 @@ const cancelBooking = async (booking) => {
     await booking.save()
 }
 
-const queryBookings = async (filter, queryOptions) => {
+/**
+ *
+ * @param {bookingFilter} filter
+ * @param {queryOptions} queryOptions
+ * @returns
+ */
+const paginateBookings = async (filter, queryOptions) => {
     return await Booking.paginate(filter, queryOptions)
 }
 
@@ -43,5 +55,5 @@ module.exports = {
     createBooking,
     getBookingById,
     cancelBooking,
-    queryBookings,
+    paginateBookings,
 }
