@@ -1,5 +1,8 @@
 const mongoose = require("mongoose")
 
+const Property = require("./Property")
+const { createMongooseValidationErr } = require("../utils")
+
 const { Schema } = mongoose
 
 const reviewSchema = new Schema(
@@ -21,6 +24,24 @@ const reviewSchema = new Schema(
     },
     { timestamps: true },
 )
+
+reviewSchema.post("save", async function (doc) {
+    const review = doc
+    const property = await Property.findById(review.property)
+    if (!property) {
+        await Review.deleteOne({ _id: review._id })
+        throw createMongooseValidationErr("property", "Property not found")
+    }
+
+    if (review.isModified("score")) {
+        // Re-evaluate property score
+        property.score =
+            (property.score * property.reviewCount + review.score) /
+            (property.reviewCount + 1)
+        property.reviewCount++
+        await property.save()
+    }
+})
 
 const Review = mongoose.model("Review", reviewSchema)
 
