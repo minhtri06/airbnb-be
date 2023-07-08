@@ -125,6 +125,7 @@ module.exports = {
         [QUERY]: Joi.object({
             limit: query.limit,
             page: query.page,
+            sortBy: query.sortBy("createdAt", "score").default("-createdAt"),
         }),
     },
 }

@@ -24,6 +24,7 @@ module.exports = {
         [QUERY]: Joi.object({
             limit: query.limit,
             page: query.page,
+            // Default is newest booking to oldest booking
             sortBy: query.sortBy("bookIn").default("-bookIn"),
         }),
     },

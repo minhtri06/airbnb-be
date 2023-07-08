@@ -1,7 +1,7 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
-const { propertyService: service, bookingService } = require("../services")
+const { propertyService: service, bookingService, reviewService } = require("../services")
 
 /**
  * @typedef {InstanceType<import('../models/Property')>} property
@@ -90,10 +90,10 @@ const getAccommodationBookings = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getPropertyReviews = async (req, res) => {
-    const reviews = await service.getPropertyReviews({
-        propertyId: req.property._id,
-        ...req.query,
-    })
+    const reviews = await reviewService.paginateReviews(
+        { property: req.property._id },
+        req.query,
+    )
     return res.json({ reviews })
 }
 
