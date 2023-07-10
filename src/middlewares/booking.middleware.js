@@ -10,6 +10,9 @@ const { bookingService: service } = require("../services")
 /** @type {import('express').RequestHandler} */
 const getBookingById = async (req, res, next) => {
     const booking = await service.getBookingById(req.params.bookingId)
+    if (!booking) {
+        throw createError("Booking not found")
+    }
     req.booking = booking
     return next()
 }

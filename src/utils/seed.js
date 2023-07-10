@@ -2,6 +2,7 @@ const moment = require("moment")
 const mongoose = require("mongoose")
 
 const { District, Province, User, Property, Booking, Review } = require("../models")
+const { bookingService } = require("../services")
 const { connectMongoDb, redisClient } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
@@ -288,19 +289,16 @@ const seedBooking = async () => {
                     getRandomNumber(0, 3),
                     users,
                 )
-                accom.currentBookingDates = currentBookingDates
                 for (let cbd of currentBookingDates) {
-                    await Booking.create({
+                    await bookingService.createBooking({
                         ...cbd,
                         property: property._id,
                         accomGroupId: accomGroup._id,
                         accomId: accom._id,
-                        pricePerNight: accomGroup.pricePerNight,
                     })
                 }
             }
         }
-        await property.save()
     }
 }
 

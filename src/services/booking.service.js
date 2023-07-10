@@ -1,7 +1,7 @@
 const createError = require("http-errors")
 const moment = require("moment")
 
-const { Booking } = require("../models")
+const { Booking, Property } = require("../models")
 const envConfig = require("../configs/envConfig")
 
 /**
@@ -21,7 +21,9 @@ const envConfig = require("../configs/envConfig")
 
 const createBooking = async (body) => {
     const booking = new Booking(body)
+
     await booking.save()
+
     return booking
 }
 
@@ -37,15 +39,15 @@ const cancelBooking = async (booking) => {
     if (moment().isAfter(booking.bookIn)) {
         throw createError.BadRequest("Cannot cancel past booking")
     }
+
     booking.status = "canceled"
+
     await booking.save()
 }
 
 /**
- *
  * @param {bookingFilter} filter
  * @param {queryOptions} queryOptions
- * @returns
  */
 const paginateBookings = async (filter, queryOptions) => {
     return await Booking.paginate(filter, queryOptions)

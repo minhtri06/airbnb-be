@@ -85,6 +85,69 @@ propertySchema.virtual("caller.isOwner")
 
 propertySchema.statics.removeBookingDateFields = removeBookingDateFields
 
+// Add current booking dates to accom so that bookIn is increasing
+propertySchema.statics.addCurrentBookingDateToAccom = function (
+    propertyId,
+    accomGroupId,
+    accomId,
+    newCBDate,
+) {
+    const updateQuery = Property.updateOne(
+        { _id: propertyId },
+        {
+            $push: {
+                "accommodationGroups.$[i].accommodations.$[j].currentBookingDates": {
+                    $each: [newCBDate],
+                    $sort: { bookIn: 1 },
+                },
+            },
+        },
+        { arrayFilters: [{ "i._id": accomGroupId }, { "j._id": accomId }] },
+    )
+    return updateQuery
+}
+
+propertySchema.statics.removeCurrentBookingDateFromAccom = function (
+    propertyId,
+    accomGroupId,
+    accomId,
+    removedCBDateId,
+) {
+    const updateQuery = Property.updateOne(
+        { _id: propertyId },
+        {
+            $pull: {
+                "accommodationGroups.$[i].accommodations.$[j].currentBookingDates": {
+                    _id: removedCBDateId,
+                },
+            },
+        },
+        { arrayFilters: [{ "i._id": accomGroupId }, { "j._id": accomId }] },
+    )
+    return updateQuery
+}
+
+propertySchema.statics.getPropertyAccomGroupAndAccom = async function (
+    propertyId,
+    accomGroupId,
+    accomId,
+) {
+    const property = await Property.findById(propertyId)
+    const accomGroup = property ? property.accommodationGroups.id(accomGroupId) : null
+    const accom = accomGroup ? accomGroup.accommodations.id(accomId) : null
+    return { property, accomGroup, accom }
+}
+
+propertySchema.statics.getAccomGroupAndAccom = function (
+    property,
+    accomGroupId,
+    accomId,
+) {
+    const accomGroup = property ? property.accommodationGroups.id(accomGroupId) : null
+    const accom = accomGroup ? accomGroup.accommodations.id(accomId) : null
+    return { accomGroup, accom }
+}
+
 const Property = mongoose.model("Property", propertySchema)
 
 module.exports = Property
