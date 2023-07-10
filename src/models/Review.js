@@ -34,22 +34,31 @@ const reviewSchema = new Schema(
     { timestamps: true },
 )
 
-reviewSchema.post("save", async function (doc) {
-    const review = doc
-    const property = await Property.findById(review.property)
-    if (!property) {
-        await Review.deleteOne({ _id: review._id })
-        throw createMongooseValidationErr("property", "Property not found")
-    }
+reviewSchema.pre("save", async function (next) {
+    const review = this
 
-    if (review.isModified("score")) {
+    if (review.isModified("score", "property")) {
+        const property = await Property.findById(review.property)
+        if (!property) {
+            await Review.deleteOne({ _id: review._id })
+            throw createMongooseValidationErr("property", "Property not found")
+        }
+
         // Re-evaluate property score
-        property.score =
-            (property.score * property.reviewCount + review.score) /
-            (property.reviewCount + 1)
-        property.reviewCount++
+        if (property.reviewCount === 0) {
+            property.score = review.score
+            property.reviewCount = 1
+        } else {
+            property.score =
+                (property.score * property.reviewCount + review.score) /
+                (property.reviewCount + 1)
+            property.reviewCount++
+        }
+
         await property.save()
     }
+
+    return next()
 })
 
 reviewSchema.plugin(toJSON)

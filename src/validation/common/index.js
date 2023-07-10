@@ -5,5 +5,6 @@ module.exports = {
     property: require("./property"),
     province: require("./province"),
     query: require("./query"),
+    review: require("./review"),
     user: require("./user"),
 }

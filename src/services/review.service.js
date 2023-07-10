@@ -25,4 +25,9 @@ const paginateReviews = async (filter, queryOptions) => {
     return await Review.paginate(filter, queryOptions)
 }
 
-module.exports = { paginateReviews }
+const createReview = async (body) => {
+    const review = new Review(body)
+    return review.save()
+}
+
+module.exports = { paginateReviews, createReview }
