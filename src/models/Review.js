@@ -8,12 +8,19 @@ const { Schema } = mongoose
 
 const reviewSchema = new Schema(
     {
-        reviewer: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        reviewer: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+            immutable: true,
+        },
         body: { type: String, required: true },
         score: {
             type: Number,
             get: (v) => Math.round(v),
             set: (v) => Math.round(v),
+            min: 0,
+            max: 10,
             required: true,
         },
         property: {
@@ -21,6 +28,7 @@ const reviewSchema = new Schema(
             ref: "Property",
             index: true,
             required: true,
+            immutable: true,
         },
     },
     { timestamps: true },
