@@ -303,8 +303,7 @@ const updateProperty = async (property, updateBody) => {
         "address",
     )
     Object.assign(property, updateBody)
-    await property.updateOne(updateBody)
-    return property
+    return property.save()
 }
 
 module.exports = {
