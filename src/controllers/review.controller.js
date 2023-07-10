@@ -13,4 +13,10 @@ const addReview = async (req, res) => {
     return res.json({ review })
 }
 
-module.exports = { addReview }
+/** @type {controller} */
+const editReview = async (req, res) => {
+    await service.updateReview(req.review, req.body)
+    return res.json({ review: req.review })
+}
+
+module.exports = { addReview, editReview }

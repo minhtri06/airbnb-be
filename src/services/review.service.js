@@ -1,6 +1,7 @@
 const createError = require("http-errors")
 
 const { Review } = require("../models")
+const { pickFields } = require("../utils")
 
 /**
  * @typedef {Object} reviewFilter
@@ -25,9 +26,23 @@ const paginateReviews = async (filter, queryOptions) => {
     return await Review.paginate(filter, queryOptions)
 }
 
+const getReviewById = async (reviewId) => {
+    const review = await Review.findById(reviewId)
+    if (!review) {
+        throw createError.NotFound("Review not found")
+    }
+    return review
+}
+
 const createReview = async (body) => {
     const review = new Review(body)
     return review.save()
 }
 
-module.exports = { paginateReviews, createReview }
+const updateReview = async (review, updateBody) => {
+    updateBody = pickFields(updateBody, "body", "score")
+    Object.assign(review, updateBody)
+    return review.save()
+}
+
+module.exports = { paginateReviews, getReviewById, createReview, updateReview }

@@ -1,9 +1,23 @@
 const router = require("express").Router()
 
-const { auth, validate } = require("../middlewares")
+const {
+    auth,
+    validate,
+    reviewMiddleware: { getReviewById, requireToBeReviewer },
+} = require("../middlewares")
 const { reviewController: controller } = require("../controllers")
 const { reviewValidation: validation } = require("../validation")
 
+router.param("reviewId", getReviewById)
+
 router.route("/").post(auth(), validate(validation.addReview), controller.addReview)
+router
+    .route("/:reviewId")
+    .patch(
+        auth(),
+        requireToBeReviewer,
+        validate(validation.editReview),
+        controller.editReview,
+    )
 
 module.exports = router

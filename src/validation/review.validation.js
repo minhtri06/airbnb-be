@@ -11,4 +11,14 @@ module.exports = {
             property: objectId.required(),
         }),
     },
+
+    editReview: {
+        [PARAMS]: Joi.object({
+            reviewId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            body: review.body,
+            score: review.score,
+        }),
+    },
 }
