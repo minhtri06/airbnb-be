@@ -15,7 +15,18 @@ const {
  * @typedef {InstanceType<import('../models/Property')>} property
  *
  * @typedef {Object} propertyFilter
+ * @property {string} title
+ * @property {boolean} isClosed
  * @property {string} owner
+ * @property {string} pageName
+ * @property {number} score
+ * @property {string} description
+ * @property {[string]} facilities
+ * @property {number} reviewCount
+ * @property {Object} address
+ * @property {string} thumbnail
+ * @property {[string]} images
+ * @property {[Object]} accommodationGroups
  *
  * @typedef {Object} queryOptions
  * @property {Object} sortBy
@@ -40,6 +51,8 @@ const paginateProperties = async (filter, queryOptions) => {
 }
 
 const isAccommodationAvailable = (accom, bookIn, bookOut) => {
+    // We don't need to check in Booking, because its currentBookingDates keeps
+    // all the future bookings. We just need to check currentBookingDates
     let isAvailable = false
     const cbDates = accom.currentBookingDates
 
@@ -195,8 +208,7 @@ const getProperty = async ({ propertyId, pageName, select }) => {
  */
 const addAccommodationGroup = async (property, newAccomGroup) => {
     property.accommodationGroups.push(newAccomGroup)
-    await property.save()
-    return property
+    return property.save()
 }
 
 const getAccomGroupById = async (property, accomGroupId) => {
@@ -220,12 +232,10 @@ const addAccommodations = async (property, accoGroup, newAccoms) => {
         throw new Error("newAccoms must have at least one accommodation")
     }
     accoGroup.accommodations.push(...newAccoms)
-    await property.save()
-    return property
+    return property.save()
 }
 
 /**
- *
  * @param {property} property
  * @param {string} thumbnail
  */
@@ -278,6 +288,10 @@ const deleteImages = async (property, deletedIndexes) => {
     return property.images
 }
 
+/**
+ * @param {property} property
+ * @param {Object} updateBody
+ */
 const updateProperty = async (property, updateBody) => {
     updateBody = pickFields(
         updateBody,
@@ -289,7 +303,7 @@ const updateProperty = async (property, updateBody) => {
         "address",
     )
     Object.assign(property, updateBody)
-    await property.save()
+    await property.updateOne(updateBody)
     return property
 }
 

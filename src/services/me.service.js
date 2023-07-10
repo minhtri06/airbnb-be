@@ -6,7 +6,7 @@ const {
 const { User, Property } = require("../models")
 const userService = require("./user.service")
 
-const updateMyProfile = async (myProfile, updateBody) => {
+const updateMyProfile = async (me, updateBody) => {
     updateBody = pickFields(
         updateBody,
         "name",
@@ -15,9 +15,9 @@ const updateMyProfile = async (myProfile, updateBody) => {
         "gender",
         "address",
     )
-    Object.assign(myProfile, updateBody)
-    await myProfile.save()
-    return myProfile
+    Object.assign(me, updateBody)
+    await me.save()
+    return me
 }
 
 /**
