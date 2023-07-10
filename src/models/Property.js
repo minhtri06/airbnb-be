@@ -138,16 +138,6 @@ propertySchema.statics.getPropertyAccomGroupAndAccom = async function (
     return { property, accomGroup, accom }
 }
 
-propertySchema.statics.getAccomGroupAndAccom = function (
-    property,
-    accomGroupId,
-    accomId,
-) {
-    const accomGroup = property ? property.accommodationGroups.id(accomGroupId) : null
-    const accom = accomGroup ? accomGroup.accommodations.id(accomId) : null
-    return { accomGroup, accom }
-}
-
 const Property = mongoose.model("Property", propertySchema)
 
 module.exports = Property
