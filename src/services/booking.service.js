@@ -22,9 +22,7 @@ const envConfig = require("../configs/envConfig")
 const createBooking = async (body) => {
     const booking = new Booking(body)
 
-    await booking.save()
-
-    return booking
+    return booking.save()
 }
 
 const getBookingById = async (bookingId) => {
