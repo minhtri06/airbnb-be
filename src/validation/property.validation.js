@@ -7,6 +7,9 @@ const {
 } = require("../constants")
 const { property, district, province, booking, objectId, query } = require("./common")
 
+const { accommodationGroups } = property
+const { accommodations } = accommodationGroups
+
 module.exports = {
     createProperty: {
         [BODY]: Joi.object({
@@ -14,7 +17,24 @@ module.exports = {
             pageName: property.pageName.required(),
             address: property.address.required(),
             description: property.description,
-            accommodationGroups: property.accommodationGroups,
+            accommodationGroups: Joi.array().items({
+                title: accommodationGroups.title.required(),
+                pricePerNight: accommodationGroups.pricePerNight.required(),
+                type: accommodationGroups.type.required(),
+                bedType: accommodationGroups.bedType,
+                accommodations: Joi.array()
+                    .min(1)
+                    .items({
+                        roomCode: accommodations.roomCode,
+
+                        // Just for entire-house
+                        rooms: Joi.array().min(1).items({
+                            bedType: accommodations.rooms.bedType.required(),
+                            roomType: accommodations.rooms.roomType.required(),
+                        }),
+                    })
+                    .required(),
+            }),
         }),
     },
 
@@ -51,7 +71,23 @@ module.exports = {
 
     addAccommodationGroup: {
         [BODY]: Joi.object({
-            newAccommodationGroup: property.accommodationGroup.required(),
+            newAccommodationGroup: Joi.object({
+                title: accommodationGroups.title.required(),
+                pricePerNight: accommodationGroups.pricePerNight.required(),
+                type: accommodationGroups.type.required(),
+                bedType: accommodationGroups.bedType,
+                accommodations: Joi.array()
+                    .min(1)
+                    .items({
+                        roomCode: accommodations.roomCode,
+
+                        rooms: Joi.array().min(1).items({
+                            bedType: accommodations.rooms.bedType.required(),
+                            roomType: accommodations.rooms.roomType.required(),
+                        }),
+                    })
+                    .required(),
+            }).required(),
         }),
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
@@ -63,7 +99,7 @@ module.exports = {
             newAccommodations: Joi.array()
                 .min(1)
                 .items({
-                    roomCode: Joi.string().required(),
+                    roomCode: accommodations.roomCode.required(),
                 })
                 .required(),
         }),
