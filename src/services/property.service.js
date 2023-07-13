@@ -306,6 +306,12 @@ const updateProperty = async (property, updateBody) => {
     return property.save()
 }
 
+const updateAccomGroup = (property, accomGroup, updateBody) => {
+    updateBody = pickFields(updateBody, "title", "pricePerNight", "bedType")
+    Object.assign(accomGroup, updateBody)
+    return property.save()
+}
+
 module.exports = {
     createProperty,
     paginateProperties,
@@ -320,4 +326,5 @@ module.exports = {
     addImages,
     deleteImages,
     updateProperty,
+    updateAccomGroup,
 }

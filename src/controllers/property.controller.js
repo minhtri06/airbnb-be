@@ -5,22 +5,24 @@ const { propertyService: service, bookingService, reviewService } = require("../
 
 /**
  * @typedef {InstanceType<import('../models/Property')>} property
+ *
+ * @typedef {import('express').RequestHandler} controller
  */
 
-/** @type {import('express').RequestHandler} */
+/** @type  {controller}*/
 const createProperty = async (req, res) => {
     req.body.owner = req.user._id
     const property = await service.createProperty(req.body)
     return res.status(StatusCodes.CREATED).json({ property })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const searchProperties = async (req, res) => {
     const properties = await service.searchProperties(req.query)
     return res.json({ properties })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const getProperty = async (req, res) => {
     const { bookIn, bookOut } = req.query
     if (bookIn && bookOut) {
@@ -34,7 +36,7 @@ const getProperty = async (req, res) => {
     return res.json({ property: req.property.toJSON({ virtuals: true }) })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const addAccommodationGroup = async (req, res) => {
     const { newAccommodationGroup } = req.body
     const property = await service.addAccommodationGroup(
@@ -44,7 +46,7 @@ const addAccommodationGroup = async (req, res) => {
     return res.json({ property })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const addAccommodations = async (req, res) => {
     const { newAccommodations } = req.body
     const property = await service.addAccommodations(
@@ -55,32 +57,32 @@ const addAccommodations = async (req, res) => {
     return res.json({ property })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const replaceThumbnail = async (req, res) => {
     const thumbnail = await service.replaceThumbnail(req.property, req.file)
     return res.json({ thumbnail })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const addImages = async (req, res) => {
     const newImages = await service.addImages(req.property, req.files)
     return res.status(StatusCodes.CREATED).json({ newImages })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const deleteImages = async (req, res) => {
     const { deletedIndexes } = req.body
     await service.deleteImages(req.property, deletedIndexes)
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const updateProperty = async (req, res) => {
     await service.updateProperty(req.property, req.body)
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const getAccommodationBookings = async (req, res) => {
     const bookings = await bookingService.getBookingsInMonth(req.query.month, {
         accomId: req.accom._id,
@@ -88,13 +90,19 @@ const getAccommodationBookings = async (req, res) => {
     return res.json({ bookings })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const getPropertyReviews = async (req, res) => {
     const reviews = await reviewService.paginateReviews(
         { property: req.property._id },
         req.query,
     )
     return res.json({ reviews })
+}
+
+/** @type {controller} */
+const updateAccomGroup = async (req, res) => {
+    await service.updateAccomGroup(req.property, req.accomGroup, req.body)
+    return res.json({ message: "Update successfully" })
 }
 
 module.exports = {
@@ -109,4 +117,5 @@ module.exports = {
     updateProperty,
     getAccommodationBookings,
     getPropertyReviews,
+    updateAccomGroup,
 }

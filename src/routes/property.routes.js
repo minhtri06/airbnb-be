@@ -80,6 +80,15 @@ router
     )
 
 router
+    .route("/:propertyId/accom-groups/:accomGroupId")
+    .patch(
+        auth(),
+        validate(validation.updateAccomGroup),
+        requireToOwnProperty(),
+        controller.updateAccomGroup,
+    )
+
+router
     .route("/:propertyId/accom-groups/:accomGroupId/accoms")
     .post(
         auth(),

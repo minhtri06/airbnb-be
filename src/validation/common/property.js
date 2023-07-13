@@ -21,9 +21,9 @@ module.exports = {
     }),
     images: Joi.array().items(Joi.string()),
     accommodationGroups: {
-        title: Joi.string().required(),
-        pricePerNight: Joi.number().min(0).required(),
-        type: Joi.string().valid(ENTIRE_HOUSE, SPECIFIC_ROOM).required(),
+        title: Joi.string(),
+        pricePerNight: Joi.number().min(0),
+        type: Joi.string().valid(ENTIRE_HOUSE, SPECIFIC_ROOM),
 
         // Just for specific-room
         bedType: Joi.string(),

@@ -138,6 +138,18 @@ module.exports = {
         }),
     },
 
+    updateAccomGroup: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+            accomGroupId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            title: accommodationGroups.title,
+            pricePerNight: accommodationGroups.pricePerNight,
+            bedType: accommodationGroups.bedType,
+        }),
+    },
+
     getAccommodationBookings: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
