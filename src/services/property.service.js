@@ -288,6 +288,21 @@ const deleteImages = async (property, deletedIndexes) => {
     return property.images
 }
 
+const deleteAccomGroup = async (propertyId, accomGroupId) => {
+    await Property.updateOne(
+        { _id: propertyId },
+        { $pull: { accommodationGroups: { _id: accomGroupId } } },
+    )
+}
+
+const deleteAccom = async (propertyId, accomGroupId, accomId) => {
+    await Property.updateOne(
+        { _id: propertyId },
+        { $pull: { "accommodationGroups.$[i].accommodations": { _id: accomId } } },
+        { arrayFilters: [{ "i._id": accomGroupId }] },
+    )
+}
+
 /**
  * @param {property} property
  * @param {Object} updateBody
@@ -326,6 +341,8 @@ module.exports = {
     replaceThumbnail,
     addImages,
     deleteImages,
+    deleteAccomGroup,
+    deleteAccom,
     updateProperty,
     updateAccomGroup,
 }

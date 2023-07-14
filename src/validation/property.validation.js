@@ -134,6 +134,13 @@ module.exports = {
         }),
     },
 
+    deleteAccomGroup: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+            accomGroupId: objectId.required(),
+        }),
+    },
+
     updateProperty: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),

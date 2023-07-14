@@ -62,13 +62,16 @@ const getPropertyPendingBookings = async (req, res) => {
 
     for (let booking of bookings) {
         const accomGroup = property.accommodationGroups.id(booking.accomGroupId)
-        booking.availableAccoms = accomGroup.accommodations.filter((accom) => {
-            return service.isAccommodationAvailable(
-                accom,
-                booking.bookIn,
-                booking.bookOut,
-            )
-        })
+
+        booking.availableAccoms = !accomGroup
+            ? []
+            : accomGroup.accommodations.filter((accom) => {
+                  return service.isAccommodationAvailable(
+                      accom,
+                      booking.bookIn,
+                      booking.bookOut,
+                  )
+              })
     }
 
     for (let booking of bookings) {
@@ -111,6 +114,12 @@ const deleteImages = async (req, res) => {
 }
 
 /** @type {controller} */
+const deleteAccomGroup = async (req, res) => {
+    await service.deleteAccomGroup(req.property._id, req.accomGroup._id)
+    return res.json({ message: "Delete accommodation group successfully" })
+}
+
+/** @type {controller} */
 const updateProperty = async (req, res) => {
     await service.updateProperty(req.property, req.body)
     return res.status(StatusCodes.NO_CONTENT).send()
@@ -149,6 +158,7 @@ module.exports = {
     replaceThumbnail,
     addImages,
     deleteImages,
+    deleteAccomGroup,
     updateProperty,
     getAccommodationBookings,
     getPropertyReviews,

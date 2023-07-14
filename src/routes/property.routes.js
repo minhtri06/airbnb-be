@@ -95,6 +95,12 @@ router
         requireToOwnProperty(),
         controller.updateAccomGroup,
     )
+    .delete(
+        auth(),
+        validate(validation.deleteAccomGroup),
+        requireToOwnProperty(),
+        controller.deleteAccomGroup,
+    )
 
 router
     .route("/:propertyId/accom-groups/:accomGroupId/accoms")
