@@ -35,7 +35,7 @@ const requireToBePropertyOwner = async (req, res, next) => {
     if (user._id.equals(booking.propertyOwner)) {
         return next()
     }
-    throw createError.Forbidden("Require to be guest or property owner")
+    throw createError.Forbidden("Require to be property owner")
 }
 
 module.exports = {
