@@ -20,6 +20,7 @@ const replaceMyAvatar = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getMyProperties = async (req, res) => {
+    req.query.select = "-images -description -facilities -owner -accommodationGroups"
     const properties = await propertyService.paginateProperties(
         { owner: req.user._id },
         req.query,
@@ -29,6 +30,9 @@ const getMyProperties = async (req, res) => {
 
 /** @type {import('express').RequestHandler} */
 const getMyBookings = async (req, res) => {
+    req.query.populate = [
+        { path: "property", select: "thumbnail title pageName address score" },
+    ]
     const bookings = await bookingService.paginateBookings(
         { guest: req.user._id },
         req.query,
