@@ -1,5 +1,8 @@
 const mongoose = require("mongoose")
 
+const {
+    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+} = require("../constants")
 const { toJSON, paginate } = require("./plugins")
 
 const { Schema } = mongoose
@@ -28,6 +31,12 @@ const bookingSchema = new Schema(
             required: true,
         },
         accomGroupId: { type: Schema.Types.ObjectId, required: true, immutable: true },
+        accomGroupTitle: { type: String, required: true },
+        accomGroupType: {
+            type: String,
+            required: true,
+            enum: [ENTIRE_HOUSE, SPECIFIC_ROOM],
+        },
         accomId: { type: Schema.Types.ObjectId },
         status: {
             type: String,

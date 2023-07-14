@@ -49,6 +49,8 @@ const createBooking = async (body) => {
 
     booking.propertyOwner = property.owner
     booking.pricePerNight = accomGroup.pricePerNight
+    booking.accomGroupTitle = accomGroup.title
+    booking.accomGroupType = accomGroup.type
     booking.numberOfDays = moment(booking.bookOut).diff(booking.bookIn, "days")
     booking.totalPrice = booking.numberOfDays * booking.pricePerNight
     booking.status = "pending"
