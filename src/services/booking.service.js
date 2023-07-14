@@ -25,14 +25,11 @@ const createBooking = async (body) => {
     await booking.validate()
 
     if (moment().isAfter(booking.bookIn)) {
-        throw createMongooseValidationErr("bookIn", "bookIn must be after now")
+        throw createError.BadRequest("bookIn must be after now")
     }
 
     if (booking.bookIn > booking.bookOut) {
-        throw createMongooseValidationErr(
-            "bookIn, bookOut",
-            "bookIn must be before bookOut",
-        )
+        throw createError.BadRequest("bookIn must be before bookOut")
     }
 
     const { property, accomGroup } = await Property.getPropertyAndAccomGroup(
@@ -41,10 +38,7 @@ const createBooking = async (body) => {
     )
 
     if (!property || !accomGroup) {
-        throw createMongooseValidationErr(
-            "property, accomGroupId",
-            "property or accomGroup not found",
-        )
+        throw createError.NotFound("property or accomGroup not found")
     }
 
     booking.propertyOwner = property.owner
@@ -91,7 +85,7 @@ const approveBookingToAccom = async (booking, accomId) => {
     booking.accomId = accomId
     booking.status = "booked"
 
-    // Add booking info to accom's currentBookingDates
+    // Add booking info to accommodation's currentBookingDates
     const { property, accomGroup, accom } = await Property.getPropertyAccomGroupAndAccom(
         booking.property,
         booking.accomGroupId,
