@@ -48,7 +48,7 @@ const addAccommodationGroup = async (req, res) => {
 
 /** @type {controller} */
 const getPropertyPendingBookings = async (req, res) => {
-    const bookings = bookingService.paginateBookings(
+    const bookings = await bookingService.paginateBookings(
         {
             property: req.property._id,
             bookIn: { $gte: Date.now() },
