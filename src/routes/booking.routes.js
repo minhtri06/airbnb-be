@@ -3,7 +3,11 @@ const router = require("express").Router()
 const {
     validate,
     auth,
-    bookingMiddleware: { getBookingById, requireToBeBookingGuestOrPropOwner },
+    bookingMiddleware: {
+        getBookingById,
+        requireToBeGuestOrPropertyOwner,
+        requireToBePropertyOwner,
+    },
 } = require("../middlewares")
 const { bookingController: controller } = require("../controllers")
 const { bookingValidation: validation } = require("../validation")
@@ -14,13 +18,20 @@ router
 
 router.param("bookingId", getBookingById)
 
-router
-    .route("/:bookingId/cancel")
-    .patch(
-        auth(),
-        validate(validation.cancelBooking),
-        requireToBeBookingGuestOrPropOwner,
-        controller.cancelBooking,
-    )
+router.patch(
+    "/:bookingId/cancel",
+    auth(),
+    validate(validation.cancelBooking),
+    requireToBeGuestOrPropertyOwner,
+    controller.cancelBooking,
+)
+
+router.patch(
+    "/:bookingId/approve",
+    auth(),
+    validate(validation.approveBookingToAccom),
+    requireToBePropertyOwner,
+    controller.approveBookingToAccom,
+)
 
 module.exports = router

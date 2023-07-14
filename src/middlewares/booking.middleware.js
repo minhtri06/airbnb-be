@@ -5,9 +5,10 @@ const { bookingService: service } = require("../services")
 /**
  * @typedef {InstanceType<import('../models/User')>} user
  * @typedef {InstanceType<import('../models/Booking')>} booking
+ * @typedef {import('express').RequestHandler} middleware
  */
 
-/** @type {import('express').RequestHandler} */
+/** @type {middleware} */
 const getBookingById = async (req, res, next) => {
     const booking = await service.getBookingById(req.params.bookingId)
     if (!booking) {
@@ -17,8 +18,8 @@ const getBookingById = async (req, res, next) => {
     return next()
 }
 
-/** @type {import('express').RequestHandler} */
-const requireToBeBookingGuestOrPropOwner = async (req, res, next) => {
+/** @type {middleware} */
+const requireToBeGuestOrPropertyOwner = async (req, res, next) => {
     const user = req.user
     const booking = req.booking
     if (user._id.equals(booking.guest) || user._id.equals(booking.propertyOwner)) {
@@ -27,7 +28,18 @@ const requireToBeBookingGuestOrPropOwner = async (req, res, next) => {
     throw createError.Forbidden("Require to be guest or property owner")
 }
 
+/** @type {middleware} */
+const requireToBePropertyOwner = async (req, res, next) => {
+    const user = req.user
+    const booking = req.booking
+    if (user._id.equals(booking.propertyOwner)) {
+        return next()
+    }
+    throw createError.Forbidden("Require to be guest or property owner")
+}
+
 module.exports = {
     getBookingById,
-    requireToBeBookingGuestOrPropOwner,
+    requireToBeGuestOrPropertyOwner,
+    requireToBePropertyOwner,
 }

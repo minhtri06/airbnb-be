@@ -18,4 +18,13 @@ module.exports = {
             bookingId: objectId.required(),
         }),
     },
+
+    approveBookingToAccom: {
+        [PARAMS]: Joi.object({
+            bookingId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            accomId: objectId.required(),
+        }),
+    },
 }
