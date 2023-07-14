@@ -141,6 +141,14 @@ module.exports = {
         }),
     },
 
+    deleteAccom: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+            accomGroupId: objectId.required(),
+            accomId: objectId.required(),
+        }),
+    },
+
     updateProperty: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),

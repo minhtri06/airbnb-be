@@ -11,7 +11,7 @@ const {
 
 router
     .route("/")
-    .get(controller.getUsers)
+    .get(auth({ requireRole: [ADMIN] }), controller.getUsers)
     .post(
         auth({ requireRole: [ADMIN] }),
         validate(validation.createAUser),

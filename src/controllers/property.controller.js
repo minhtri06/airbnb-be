@@ -120,6 +120,12 @@ const deleteAccomGroup = async (req, res) => {
 }
 
 /** @type {controller} */
+const deleteAccom = async (req, res) => {
+    await service.deleteAccom(req.property._id, req.accomGroup._id, req.accom._id)
+    return res.json({ message: "Delete accommodation successfully" })
+}
+
+/** @type {controller} */
 const updateProperty = async (req, res) => {
     await service.updateProperty(req.property, req.body)
     return res.status(StatusCodes.NO_CONTENT).send()
@@ -159,6 +165,7 @@ module.exports = {
     addImages,
     deleteImages,
     deleteAccomGroup,
+    deleteAccom,
     updateProperty,
     getAccommodationBookings,
     getPropertyReviews,

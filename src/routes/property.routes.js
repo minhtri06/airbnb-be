@@ -112,6 +112,15 @@ router
     )
 
 router
+    .route("/:propertyId/accom-groups/:accomGroupId/accoms/:accomId")
+    .delete(
+        auth(),
+        validate(validation.deleteAccom),
+        requireToOwnProperty(),
+        controller.deleteAccom,
+    )
+
+router
     .route("/:propertyId/accom-groups/:accomGroupId/accoms/:accomId/bookings")
     .get(
         auth(),
