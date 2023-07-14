@@ -146,6 +146,7 @@ const cancelBooking = async (booking) => {
 /**
  * @param {bookingFilter} filter
  * @param {queryOptions} queryOptions
+ * @return {Promise<booking[]}
  */
 const paginateBookings = async (filter, queryOptions) => {
     return await Booking.paginate(filter, queryOptions)

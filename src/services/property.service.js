@@ -315,6 +315,7 @@ const updateAccomGroup = (property, accomGroup, updateBody) => {
 module.exports = {
     createProperty,
     paginateProperties,
+    isAccommodationAvailable,
     setAvailabilityFields,
     searchProperties,
     getProperty,

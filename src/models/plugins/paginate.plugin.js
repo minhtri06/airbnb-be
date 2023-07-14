@@ -3,7 +3,7 @@ const envConfig = require("../../configs/envConfig")
 const paginate = (schema) => {
     schema.statics.paginate = async function (
         filter,
-        { sortBy, page, limit, select, populate } = {},
+        { sortBy, page, limit, select, populate, lean } = {},
     ) {
         const query = this.find(filter)
 
@@ -17,6 +17,9 @@ const paginate = (schema) => {
             for (let populateOptions of populate) {
                 query.populate(populateOptions)
             }
+        }
+        if (lean) {
+            query.lean()
         }
 
         page = page || 1

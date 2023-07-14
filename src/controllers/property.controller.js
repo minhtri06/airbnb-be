@@ -48,14 +48,35 @@ const addAccommodationGroup = async (req, res) => {
 
 /** @type {controller} */
 const getPropertyPendingBookings = async (req, res) => {
-    const bookings = await bookingService.paginateBookings(
+    /** @type {property} */
+    const property = req.property
+    req.query.lean = true
+    let bookings = await bookingService.paginateBookings(
         {
-            property: req.property._id,
+            property: property._id,
             bookIn: { $gte: Date.now() },
             status: "pending",
         },
         req.query,
     )
+
+    for (let booking of bookings) {
+        const accomGroup = property.accommodationGroups.id(booking.accomGroupId)
+        booking.availableAccoms = accomGroup.accommodations.filter((accom) => {
+            return service.isAccommodationAvailable(
+                accom,
+                booking.bookIn,
+                booking.bookOut,
+            )
+        })
+    }
+
+    for (let booking of bookings) {
+        for (let accom of booking.availableAccoms) {
+            accom.currentBookingDates = undefined
+        }
+    }
+
     return res.json({ bookings })
 }
 
