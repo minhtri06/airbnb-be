@@ -94,7 +94,21 @@ module.exports = {
         }),
     },
 
+    getPropertyPendingBookings: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+        }),
+        [QUERY]: Joi.object({
+            limit: query.limit,
+            page: query.page,
+        }),
+    },
+
     addAccommodations: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+            accomGroupId: objectId.required(),
+        }),
         [BODY]: Joi.object({
             newAccommodations: Joi.array()
                 .min(1)
@@ -102,10 +116,6 @@ module.exports = {
                     roomCode: accommodations.roomCode.required(),
                 })
                 .required(),
-        }),
-        [PARAMS]: Joi.object({
-            propertyId: objectId.required(),
-            accomGroupId: objectId.required(),
         }),
     },
 

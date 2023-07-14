@@ -47,6 +47,19 @@ const addAccommodationGroup = async (req, res) => {
 }
 
 /** @type {controller} */
+const getPropertyPendingBookings = async (req, res) => {
+    const bookings = bookingService.paginateBookings(
+        {
+            property: req.property._id,
+            bookIn: { $gte: Date.now() },
+            status: "pending",
+        },
+        req.query,
+    )
+    return res.json({ bookings })
+}
+
+/** @type {controller} */
 const addAccommodations = async (req, res) => {
     const { newAccommodations } = req.body
     const property = await service.addAccommodations(
@@ -110,6 +123,7 @@ module.exports = {
     searchProperties,
     getProperty,
     addAccommodationGroup,
+    getPropertyPendingBookings,
     addAccommodations,
     replaceThumbnail,
     addImages,

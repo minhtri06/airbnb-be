@@ -14,6 +14,9 @@ const envConfig = require("../configs/envConfig")
  * @property {string} property
  * @property {string} accomId
  * @property {string} propertyOwner
+ * @property {Date} bookIn
+ * @property {Date} bookOut
+ * @property {"pending" | "booked" | "canceled"} status
  *
  * @typedef {Object} queryOptions
  * @property {number} queryOptions.limit

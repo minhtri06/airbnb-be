@@ -79,6 +79,14 @@ router
         controller.addAccommodationGroup,
     )
 
+router.get(
+    "/:propertyId/pending-bookings",
+    auth(),
+    validate(validation.getPropertyPendingBookings),
+    requireToOwnProperty(),
+    controller.getPropertyPendingBookings,
+)
+
 router
     .route("/:propertyId/accom-groups/:accomGroupId")
     .patch(
