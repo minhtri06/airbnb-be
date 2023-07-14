@@ -290,12 +290,12 @@ const seedBooking = async () => {
                     users,
                 )
                 for (let cbd of currentBookingDates) {
-                    await bookingService.createBooking({
+                    const booking = await bookingService.createBooking({
                         ...cbd,
                         property: property._id,
                         accomGroupId: accomGroup._id,
-                        accomId: accom._id,
                     })
+                    await bookingService.approveBookingToAccom(booking, accom._id)
                 }
             }
         }

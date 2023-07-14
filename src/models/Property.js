@@ -127,13 +127,24 @@ propertySchema.statics.removeCurrentBookingDateFromAccom = function (
     return updateQuery
 }
 
+propertySchema.statics.getPropertyAndAccomGroup = async function (
+    propertyId,
+    accomGroupId,
+) {
+    const property = await Property.findById(propertyId)
+    const accomGroup = property ? property.accommodationGroups.id(accomGroupId) : null
+    return { property, accomGroup }
+}
+
 propertySchema.statics.getPropertyAccomGroupAndAccom = async function (
     propertyId,
     accomGroupId,
     accomId,
 ) {
-    const property = await Property.findById(propertyId)
-    const accomGroup = property ? property.accommodationGroups.id(accomGroupId) : null
+    const { property, accomGroup } = await Property.getPropertyAndAccomGroup(
+        propertyId,
+        accomGroupId,
+    )
     const accom = accomGroup ? accomGroup.accommodations.id(accomId) : null
     return { property, accomGroup, accom }
 }

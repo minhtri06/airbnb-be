@@ -22,12 +22,92 @@ const envConfig = require("../configs/envConfig")
 const createBooking = async (body) => {
     const booking = new Booking(body)
 
+    await booking.validate()
+
+    if (moment().isAfter(booking.bookIn)) {
+        throw createMongooseValidationErr("bookIn", "bookIn must be after now")
+    }
+
+    if (booking.bookIn > booking.bookOut) {
+        throw createMongooseValidationErr(
+            "bookIn, bookOut",
+            "bookIn must be before bookOut",
+        )
+    }
+
+    const { property, accomGroup } = await Property.getPropertyAndAccomGroup(
+        booking.property,
+        booking.accomGroupId,
+    )
+
+    if (!property || !accomGroup) {
+        throw createMongooseValidationErr(
+            "property, accomGroupId",
+            "property or accomGroup not found",
+        )
+    }
+
+    booking.propertyOwner = property.owner
+    booking.pricePerNight = accomGroup.pricePerNight
+    booking.numberOfDays = moment(booking.bookOut).diff(booking.bookIn, "days")
+    booking.totalPrice = booking.numberOfDays * booking.pricePerNight
+    booking.status = "pending"
+
     return booking.save()
 }
 
 const getBookingById = async (bookingId) => {
     const booking = await Booking.findById(bookingId)
     return booking
+}
+
+/**
+ * Approve a booking and assign it to a accommodation
+ * @param {booking} booking
+ * @param {string} accomId
+ */
+const approveBookingToAccom = async (booking, accomId) => {
+    if (booking.bookIn < Date.now()) {
+        throw createError.BadRequest("Cannot approve past booking")
+    }
+    if (!accomId) {
+        throw createError.BadRequest("accomId is required")
+    }
+
+    // Verify booking availability of the accommodation
+    if (
+        await Booking.findOne({
+            accomId,
+            bookOut: { $gte: booking.bookIn },
+            bookIn: { $lte: booking.bookOut },
+            status: "booked",
+        })
+    ) {
+        throw createError.NotAcceptable(
+            `Already have another booking between ${booking.bookIn} - ${booking.bookOut}`,
+        )
+    }
+
+    booking.accomId = accomId
+    booking.status = "booked"
+
+    // Add booking info to accom's currentBookingDates
+    const { property, accomGroup, accom } = await Property.getPropertyAccomGroupAndAccom(
+        booking.property,
+        booking.accomGroupId,
+        booking.accomId,
+    )
+    if (!accom) {
+        throw createError.NotFound("accommodation not found")
+    }
+    await Property.addCurrentBookingDateToAccom(property._id, accomGroup._id, accom._id, {
+        _id: booking._id,
+        bookIn: booking.bookIn,
+        bookOut: booking.bookOut,
+        guest: booking.guest,
+    })
+
+    return booking.save()
 }
 
 /**
@@ -40,7 +120,19 @@ const cancelBooking = async (booking) => {
 
     booking.status = "canceled"
 
-    await booking.save()
+    if (booking.accomId) {
+        // If this booking has accomId and it's not until bookOut date,
+        // this booking is still kept in the corresponding accom's currentBookingDates.
+        // So we have to remove it
+        await Property.removeCurrentBookingDateFromAccom(
+            booking.property,
+            booking.accomGroupId,
+            booking.accomId,
+            booking._id,
+        )
+    }
+
+    return booking.save()
 }
 
 /**
@@ -73,6 +165,7 @@ module.exports = {
     createBooking,
     getBookingById,
     cancelBooking,
+    approveBookingToAccom,
     paginateBookings,
     getBookingsInMonth,
 }
