@@ -75,6 +75,19 @@ const approveBookingToAccom = async (booking, accomId) => {
         throw createError.BadRequest("accomId is required")
     }
 
+    booking.accomId = accomId
+    booking.status = "booked"
+
+    // Check accomId exists or not
+    const { accom } = await Property.getPropertyAccomGroupAndAccom(
+        booking.property,
+        booking.accomGroupId,
+        accomId,
+    )
+    if (!accom) {
+        throw createError.NotFound("Accommodation not found")
+    }
+
     // Verify booking availability of the accommodation
     if (
         await Booking.findOne({
@@ -88,9 +101,6 @@ const approveBookingToAccom = async (booking, accomId) => {
             `Already have another booking between ${booking.bookIn} - ${booking.bookOut}`,
         )
     }
-
-    booking.accomId = accomId
-    booking.status = "booked"
 
     // Add booking info to accommodation's currentBookingDates
     await Property.addCurrentBookingDateToAccom(
