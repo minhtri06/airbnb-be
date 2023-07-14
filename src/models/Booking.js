@@ -24,7 +24,12 @@ const bookingSchema = new Schema(
             required: true,
             immutable: true,
         },
-        propertyOwner: { type: Schema.Types.ObjectId, ref: "User", immutable: true },
+        propertyOwner: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            immutable: true,
+            required: true,
+        },
         accomGroupId: { type: Schema.Types.ObjectId, required: true, immutable: true },
         accomId: { type: Schema.Types.ObjectId },
         status: {
@@ -45,9 +50,9 @@ const bookingSchema = new Schema(
                 }
             },
         },
-        pricePerNight: { type: Number, min: 0, immutable: true },
-        numberOfDays: { type: Number, min: 0, immutable: true },
-        totalPrice: { type: Number, min: 0, immutable: true },
+        pricePerNight: { type: Number, min: 0, immutable: true, required: true },
+        numberOfDays: { type: Number, min: 0, immutable: true, required: true },
+        totalPrice: { type: Number, min: 0, immutable: true, required: true },
     },
     { timestamps: true },
 )
@@ -56,6 +61,7 @@ bookingSchema.plugin(toJSON)
 bookingSchema.plugin(paginate)
 
 bookingSchema.index({ accomId: 1, bookIn: 1, bookOut: 1 })
+bookingSchema.index({ property: 1 })
 
 const Booking = mongoose.model("Booking", bookingSchema)
 

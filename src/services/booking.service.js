@@ -2,6 +2,7 @@ const createError = require("http-errors")
 const moment = require("moment")
 
 const { Booking, Property } = require("../models")
+const { requireFields } = require("../utils")
 const envConfig = require("../configs/envConfig")
 
 /**
@@ -20,9 +21,9 @@ const envConfig = require("../configs/envConfig")
  */
 
 const createBooking = async (body) => {
-    const booking = new Booking(body)
+    requireFields(body, "bookIn", "bookOut", "guest", "property", "accomGroupId")
 
-    await booking.validate()
+    const booking = new Booking(body)
 
     if (moment().isAfter(booking.bookIn)) {
         throw createError.BadRequest("bookIn must be after now")
