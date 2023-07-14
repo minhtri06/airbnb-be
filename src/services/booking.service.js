@@ -6,7 +6,8 @@ const { requireFields } = require("../utils")
 const envConfig = require("../configs/envConfig")
 
 /**
- * @typedef {InstanceType<import('../models/Booking')>} booking
+ *
+ *  @typedef {InstanceType<import('../models/Booking')>} booking
  *
  * @typedef {Object} bookingFilter
  * @property {string} guest
@@ -18,6 +19,7 @@ const envConfig = require("../configs/envConfig")
  * @property {number} queryOptions.limit
  * @property {number} queryOptions.page
  * @property {Object} queryOptions.sortBy
+ *
  */
 
 const createBooking = async (body) => {
@@ -47,6 +49,7 @@ const createBooking = async (body) => {
     booking.numberOfDays = moment(booking.bookOut).diff(booking.bookIn, "days")
     booking.totalPrice = booking.numberOfDays * booking.pricePerNight
     booking.status = "pending"
+    booking.accomId = undefined
 
     return booking.save()
 }
@@ -87,20 +90,17 @@ const approveBookingToAccom = async (booking, accomId) => {
     booking.status = "booked"
 
     // Add booking info to accommodation's currentBookingDates
-    const { property, accomGroup, accom } = await Property.getPropertyAccomGroupAndAccom(
+    await Property.addCurrentBookingDateToAccom(
         booking.property,
         booking.accomGroupId,
-        booking.accomId,
+        accomId,
+        {
+            _id: booking._id,
+            bookIn: booking.bookIn,
+            bookOut: booking.bookOut,
+            guest: booking.guest,
+        },
     )
-    if (!accom) {
-        throw createError.NotFound("accommodation not found")
-    }
-    await Property.addCurrentBookingDateToAccom(property._id, accomGroup._id, accom._id, {
-        _id: booking._id,
-        bookIn: booking.bookIn,
-        bookOut: booking.bookOut,
-        guest: booking.guest,
-    })
 
     return booking.save()
 }
