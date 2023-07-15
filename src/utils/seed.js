@@ -85,6 +85,7 @@ const seedUsers = async () => {
             roles: ["admin"],
             dateOfBirth: "2001/01/06",
             gender: "Male",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Ngo Toai",
@@ -93,6 +94,7 @@ const seedUsers = async () => {
             roles: ["admin"],
             dateOfBirth: "2001/01/06",
             gender: "Male",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Tuan Rose",
@@ -101,6 +103,7 @@ const seedUsers = async () => {
             roles: ["admin"],
             dateOfBirth: "2001/01/06",
             gender: "Male",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Nguyen Anh Khoa",
@@ -110,6 +113,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/2.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Pham Hong Nhan",
@@ -119,6 +123,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "female",
             avatar: "/static/img/3.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Tuan Rose",
@@ -128,6 +133,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/4.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Minh Tri",
@@ -137,6 +143,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/5.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Ngo Toai",
@@ -146,6 +153,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/1.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Bui Thi Lien Hoan",
@@ -155,6 +163,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "female",
             avatar: "/static/img/6.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Pham Ngoc Long",
@@ -164,6 +173,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "female",
             avatar: "/static/img/7.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Nguyen Trong Hoan",
@@ -173,6 +183,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/8.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Huynh Nhat Quoc Bao",
@@ -182,6 +193,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/9.jpg",
+            isEmailVerified: true,
         }),
         User.create({
             name: "Nguyen Quang Nhut",
@@ -191,6 +203,7 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             avatar: "/static/img/10.jpg",
+            isEmailVerified: true,
         }),
     ])
 }
