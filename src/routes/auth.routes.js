@@ -9,5 +9,11 @@ router.post("/login", validate(validation.localLogin), controller.localLogin)
 router.post("/logout", validate(validation.logout), controller.logout)
 router.post("/refresh-token", validate(validation.refreshToken), controller.refreshToken)
 router.post("/verify-email", validate(validation.verifyEmail), controller.verifyEmail)
+router.post(
+    "/forgot-password",
+    validate(validation.forgotPassword),
+    controller.forgotPassword,
+)
+router.post("/reset-password", validate(validation.resetPassword), controller)
 
 module.exports = router

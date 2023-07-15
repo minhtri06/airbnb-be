@@ -40,4 +40,19 @@ module.exports = {
             token: Joi.string().required(),
         }),
     },
+
+    forgotPassword: {
+        [BODY]: Joi.object({
+            email: user.email.required(),
+        }),
+    },
+
+    resetPassword: {
+        [QUERY]: Joi.object({
+            token: Joi.string().required(),
+        }),
+        [BODY]: Joi.object({
+            newPassword: user.password.required(),
+        }),
+    },
 }

@@ -13,7 +13,7 @@ const getUserById = async (userId) => {
 }
 
 const getUserByEmail = async (email) => {
-    return await User.findOne({ email })
+    return User.findOne({ email })
 }
 
 const queryUser = async ({

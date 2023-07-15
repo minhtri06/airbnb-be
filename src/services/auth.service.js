@@ -83,26 +83,41 @@ const refreshAuthTokens = async (aToken, rToken) => {
 }
 
 const verifyEmail = async (verifyEmailToken) => {
-    try {
-        tokenService.verifyToken(verifyEmailToken, VERIFY_EMAIL)
-        const tokenDoc = await Token.findOne({
-            body: verifyEmailToken,
-            type: VERIFY_EMAIL,
-        })
-        if (!tokenDoc) {
-            throw createError.NotFound("Token not found")
-        }
-        const user = await User.findById(tokenDoc.user)
-        if (!user) {
-            throw createError.NotFound("User not found")
-        }
-        await Promise.all([
-            User.updateOne({ _id: user._id }, { $set: { isEmailVerified: true } }),
-            Token.deleteMany({ user: user._id, type: VERIFY_EMAIL }),
-        ])
-    } catch (error) {
-        throw createError.Unauthorized("Email verification failed")
+    tokenService.verifyToken(verifyEmailToken, VERIFY_EMAIL)
+    const tokenDoc = await Token.findOne({
+        body: verifyEmailToken,
+        type: VERIFY_EMAIL,
+    })
+    if (!tokenDoc) {
+        throw createError.NotFound("Token not found")
     }
+    const user = await User.findById(tokenDoc.user)
+    if (!user) {
+        throw createError.NotFound("User not found")
+    }
+    await Promise.all([
+        User.updateOne({ _id: user._id }, { $set: { isEmailVerified: true } }),
+        Token.deleteMany({ user: user._id, type: VERIFY_EMAIL }),
+    ])
+}
+
+const resetPassword = async (resetPasswordToken, newPassword) => {
+    tokenService.verifyToken(resetPasswordToken, RESET_PASSWORD)
+    const tokenDoc = await Token.findOne({
+        body: resetPasswordToken,
+        type: RESET_PASSWORD,
+    })
+    if (!tokenDoc) {
+        throw createError.NotFound("Token not found")
+    }
+    const user = await User.findById(tokenDoc.user)
+    if (!user) {
+        throw createError.NotFound("User not found")
+    }
+    await Promise.all([
+        User.updateOne({ _id: user._id }, { $set: { password: newPassword } }),
+        Token.deleteMany({ user: user._id, type: RESET_PASSWORD }),
+    ])
 }
 
 module.exports = {
@@ -110,4 +125,5 @@ module.exports = {
     logout,
     refreshAuthTokens,
     verifyEmail,
+    resetPassword,
 }

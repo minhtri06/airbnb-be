@@ -50,4 +50,29 @@ const verifyEmail = async (req, res) => {
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
-module.exports = { registerUser, localLogin, logout, refreshToken, verifyEmail }
+/** @type {controller} */
+const forgotPassword = async (req, res) => {
+    const user = await userService.getUserByEmail(req.body.email)
+    if (!user) {
+        throw createError.NotFound("User not found")
+    }
+    const resetPasswordToken = await tokenService.createResetPasswordToken(user._id)
+    await emailService.sendResetPasswordEmail(user.email, resetPasswordToken)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+/** @type {controller} */
+const resetPassword = async (req, res) => {
+    await service.resetPassword(req.query.token, req.body.newPassword)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+module.exports = {
+    registerUser,
+    localLogin,
+    logout,
+    refreshToken,
+    verifyEmail,
+    forgotPassword,
+    resetPassword,
+}
