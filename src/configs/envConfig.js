@@ -22,6 +22,8 @@ const envSchema = Joi.object({
     JWT_SECRET: Joi.string().required(),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().integer().min(1).required(),
     JWT_REFRESH_EXPIRATION_DAYS: Joi.number().integer().min(1).required(),
+    JWT_RESET_PASSWORD_EXPIRATION_MINUTES: Joi.number().integer().min(1).required(),
+    JWT_VERIFY_EMAIL_EXPIRATION_MINUTES: Joi.number().integer().min(1).required(),
 
     SMTP_HOST: Joi.string().required(),
     SMTP_PORT: Joi.number().integer().required(),
@@ -56,6 +58,8 @@ const envConfig = {
         SECRET: envVars.JWT_SECRET,
         ACCESS_EXPIRATION_MINUTES: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
         REFRESH_EXPIRATION_DAYS: envVars.JWT_REFRESH_EXPIRATION_DAYS,
+        RESET_PASSWORD_EXPIRATION_MINUTES: envVars.JWT_RESET_PASSWORD_EXPIRATION_MINUTES,
+        VERIFY_EMAIL_EXPIRATION_MINUTES: envVars.JWT_VERIFY_EMAIL_EXPIRATION_MINUTES,
     },
 
     email: {

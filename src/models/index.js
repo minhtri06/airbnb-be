@@ -3,7 +3,7 @@ module.exports = {
     District: require("./District"),
     Property: require("./Property"),
     Province: require("./Province"),
-    RefreshToken: require("./RefreshToken"),
+    Token: require("./Token"),
     User: require("./User"),
     Review: require("./Review"),
 }

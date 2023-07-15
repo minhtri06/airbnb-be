@@ -3,6 +3,7 @@ const createError = require("http-errors")
 const { ACCESS, REFRESH } = require("../constants").tokenTypes
 const userService = require("./user.service")
 const tokenService = require("./token.service")
+const { Token } = require("../models")
 
 const registerUser = async (userBody) => {
     const { name, email, password, dateOfBirth, gender, address } = userBody
@@ -23,6 +24,9 @@ const login = async (email, password) => {
     if (!user) {
         throw createError.BadRequest("Email has not registered")
     }
+    if (!user.isEmailVerified) {
+        throw createError.Forbidden("User email has not verified")
+    }
     if (!(await user.isPasswordMatch(password))) {
         throw createError.BadRequest("Wrong password")
     }
@@ -31,7 +35,7 @@ const login = async (email, password) => {
 }
 
 const logout = async (rTokenBody) => {
-    const rToken = await tokenService.getRefreshTokenByTokenBody(rTokenBody)
+    const rToken = await Token.findOne({ body: rTokenBody, type: REFRESH })
     if (!rToken) {
         throw createError.NotFound("Token not found")
     }
@@ -69,11 +73,12 @@ const refreshAuthTokens = async (aToken, rToken) => {
         throw createError.BadRequest("Refresh token has expired")
     }
 
-    const rTokenInst = await tokenService.getRefreshTokenByTokenBody(rToken)
+    // const rTokenInst = await tokenService.getRefreshTokenByTokenBody(rToken)
+    const rTokenInst = await Token.findOne({ body: rToken, type: REFRESH })
     if (!rTokenInst) {
         throw createError.BadRequest("Token not found")
     }
-    if (rTokenInst.isBlacklisted || rTokenInst.accessToken !== aToken) {
+    if (rTokenInst.isBlacklisted) {
         throw createError.Unauthorized("Unauthorized")
     }
 

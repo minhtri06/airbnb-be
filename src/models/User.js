@@ -14,6 +14,7 @@ const { Schema } = mongoose
 const userSchema = new Schema(
     {
         name: { type: String, required: true, trim: true },
+
         email: {
             type: String,
             required: true,
@@ -28,12 +29,16 @@ const userSchema = new Schema(
                 }
             },
         },
+
+        isEmailVerified: { type: Boolean, default: false, private: true, required: true },
+
         authType: {
             type: String,
             enum: Object.values(authTypes), // local or google validation
             default: authTypes.LOCAL,
             required: true,
         },
+
         password: {
             type: String,
             required: function () {
@@ -52,6 +57,7 @@ const userSchema = new Schema(
             },
             private: true, // used by the toJSON plugin
         },
+
         roles: {
             type: [String],
             default: [roles.NORMAL_USER],
@@ -68,8 +74,11 @@ const userSchema = new Schema(
                 }
             },
         },
+
         avatar: { type: String },
+
         phoneNumber: { type: String, trim: true },
+
         dateOfBirth: {
             type: Date,
             validate(value) {
@@ -80,7 +89,9 @@ const userSchema = new Schema(
                 }
             },
         },
+
         gender: { type: String, lowercase: true, enum: Object.values(genders) },
+
         address: {
             type: addressSchema,
             default: undefined,
@@ -122,7 +133,15 @@ userSchema.pre("save", async function (next) {
     if (user.isModified("password")) {
         user.password = await bcrypt.hash(user.password, 8)
     }
-    next()
+    return next()
+})
+
+userSchema.pre("save", async function (next) {
+    const user = this
+    if (user.authType === authTypes.GOOGLE) {
+        user.isEmailVerified = true
+    }
+    return next()
 })
 
 // Every time we save, we delete cache

@@ -1,11 +1,18 @@
 const jwt = require("jsonwebtoken")
 const moment = require("moment")
 
-const { ACCESS, REFRESH } = require("../constants").tokenTypes
+const { Token } = require("../models")
+const { ACCESS, REFRESH, RESET_PASSWORD, VERIFY_EMAIL } =
+    require("../constants").tokenTypes
 const {
-    jwt: { SECRET, ACCESS_EXPIRATION_MINUTES, REFRESH_EXPIRATION_DAYS },
+    jwt: {
+        SECRET,
+        ACCESS_EXPIRATION_MINUTES,
+        REFRESH_EXPIRATION_DAYS,
+        RESET_PASSWORD_EXPIRATION_MINUTES,
+        VERIFY_EMAIL_EXPIRATION_MINUTES,
+    },
 } = require("../configs/envConfig")
-const { RefreshToken } = require("../models")
 
 const generateToken = (userId, expires, type) => {
     const payload = {
@@ -22,13 +29,38 @@ const generateAccessToken = (userId) => {
     return `Bearer ${generateToken(userId, expires, ACCESS)}`
 }
 
-const createRefreshToken = async (userId, accessToken) => {
+const createRefreshToken = async (userId) => {
     const expires = moment().add(REFRESH_EXPIRATION_DAYS, "days")
     const token = generateToken(userId, expires, REFRESH)
-    return await RefreshToken.create({
+    return await Token.create({
         body: token,
         user: userId,
-        accessToken: accessToken.slice(7), // Remove Bearer
+        type: REFRESH,
+        expires: expires.toDate(),
+        isRevoked: false,
+        isUsed: false,
+        isBlacklisted: false,
+    })
+}
+
+const createResetPasswordToken = async (userId) => {
+    const expires = moment().add(RESET_PASSWORD_EXPIRATION_MINUTES, "minutes")
+    const token = generateToken(userId, expires, RESET_PASSWORD)
+    return Token.create({
+        body: token,
+        user: userId,
+        type: RESET_PASSWORD,
+        expires: expires.toDate(),
+    })
+}
+
+const createEmailVerifyToken = async (userId) => {
+    const expires = moment().add(VERIFY_EMAIL_EXPIRATION_MINUTES, "minutes")
+    const token = generateToken(userId, expires, VERIFY_EMAIL)
+    return Token.create({
+        body: token,
+        user: userId,
+        type: VERIFY_EMAIL,
         expires: expires.toDate(),
     })
 }
@@ -42,26 +74,17 @@ const createAuthTokens = async (userId) => {
     }
 }
 
-const getPayload = (token) => {
-    return jwt.decode(token, SECRET)
-}
-
 const getTokenInfo = (token) => {
-    const info = getPayload(token)
+    const info = jwt.decode(token, SECRET)
     if (info) {
         info.isExpired = info.exp < moment().unix()
     }
     return info
 }
 
-const getRefreshTokenByTokenBody = async (tokenBody) => {
-    const refreshToken = await RefreshToken.findOne({ body: tokenBody })
-    return refreshToken
-}
-
 const blackListAUser = async (userId) => {
-    await RefreshToken.updateMany(
-        { user: userId, isUsed: false, isRevoked: false },
+    await Token.updateMany(
+        { user: userId, type: REFRESH, isUsed: false, isRevoked: false },
         { isBlacklisted: true },
     )
 }
@@ -69,9 +92,10 @@ const blackListAUser = async (userId) => {
 module.exports = {
     generateToken,
     generateAccessToken,
+    createRefreshToken,
+    createResetPasswordToken,
+    createEmailVerifyToken,
     createAuthTokens,
-    getPayload,
     getTokenInfo,
-    getRefreshTokenByTokenBody,
     blackListAUser,
 }
