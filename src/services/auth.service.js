@@ -1,25 +1,12 @@
 const createError = require("http-errors")
 
-const { ACCESS, REFRESH } = require("../constants").tokenTypes
+const { ACCESS, REFRESH, RESET_PASSWORD, VERIFY_EMAIL } =
+    require("../constants").tokenTypes
 const userService = require("./user.service")
 const tokenService = require("./token.service")
-const { Token } = require("../models")
+const { Token, User } = require("../models")
 
-const registerUser = async (userBody) => {
-    const { name, email, password, dateOfBirth, gender, address } = userBody
-    const user = await userService.createUser({
-        name,
-        email,
-        password,
-        dateOfBirth,
-        gender,
-        address,
-    })
-    const authTokens = await tokenService.createAuthTokens(user._id)
-    return { user, authTokens }
-}
-
-const login = async (email, password) => {
+const localLogin = async (email, password) => {
     const user = await userService.getUserByEmail(email)
     if (!user) {
         throw createError.BadRequest("Email has not registered")
@@ -73,7 +60,6 @@ const refreshAuthTokens = async (aToken, rToken) => {
         throw createError.BadRequest("Refresh token has expired")
     }
 
-    // const rTokenInst = await tokenService.getRefreshTokenByTokenBody(rToken)
     const rTokenInst = await Token.findOne({ body: rToken, type: REFRESH })
     if (!rTokenInst) {
         throw createError.BadRequest("Token not found")
@@ -96,9 +82,32 @@ const refreshAuthTokens = async (aToken, rToken) => {
     return tokenService.createAuthTokens(userId)
 }
 
+const verifyEmail = async (verifyEmailToken) => {
+    try {
+        tokenService.verifyToken(verifyEmailToken, VERIFY_EMAIL)
+        const tokenDoc = await Token.findOne({
+            body: verifyEmailToken,
+            type: VERIFY_EMAIL,
+        })
+        if (!tokenDoc) {
+            throw createError.NotFound("Token not found")
+        }
+        const user = await User.findById(tokenDoc.user)
+        if (!user) {
+            throw createError.NotFound("User not found")
+        }
+        await Promise.all([
+            User.updateOne({ _id: user._id }, { $set: { isEmailVerified: true } }),
+            Token.deleteMany({ user: user._id, type: VERIFY_EMAIL }),
+        ])
+    } catch (error) {
+        throw createError.Unauthorized("Email verification failed")
+    }
+}
+
 module.exports = {
-    registerUser,
-    login,
+    localLogin,
     logout,
     refreshAuthTokens,
+    verifyEmail,
 }

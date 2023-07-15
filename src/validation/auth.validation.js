@@ -15,7 +15,7 @@ module.exports = {
         }),
     },
 
-    login: {
+    localLogin: {
         [BODY]: Joi.object({
             email: user.email.required(),
             password: user.password.required(),
@@ -32,6 +32,12 @@ module.exports = {
         [BODY]: Joi.object({
             refreshToken: Joi.string().required(),
             accessToken: Joi.string().required(),
+        }),
+    },
+
+    verifyEmail: {
+        [QUERY]: Joi.object({
+            token: Joi.string().required(),
         }),
     },
 }

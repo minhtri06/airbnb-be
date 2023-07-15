@@ -1,32 +1,53 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
-const { authService: service } = require("../services")
+const {
+    authService: service,
+    emailService,
+    userService,
+    tokenService,
+} = require("../services")
 
-/** @type {import('express').RequestHandler} */
+/**
+ * @typedef {import('express').RequestHandler} controller
+ */
+
+/** @type {controller} */
 const registerUser = async (req, res) => {
-    const { user, authTokens } = await service.registerUser(req.body)
-    return res.status(StatusCodes.CREATED).json({ user, authTokens })
+    const user = await userService.createUser(req.body)
+
+    const verifyEmailToken = await tokenService.createEmailVerifyToken(user._id)
+    await emailService.sendVerificationEmail(user.email, verifyEmailToken)
+
+    return res
+        .status(StatusCodes.CREATED)
+        .json({ message: "Verify your email to finish sign up", user })
 }
 
-/** @type {import('express').RequestHandler} */
-const login = async (req, res) => {
+/** @type {controller} */
+const localLogin = async (req, res) => {
     const { email, password } = req.body
-    const { user, authTokens } = await service.login(email, password)
+    const { user, authTokens } = await service.localLogin(email, password)
     return res.json({ user, authTokens })
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const logout = async (req, res) => {
     await service.logout(req.body.refreshToken)
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {controller} */
 const refreshToken = async (req, res) => {
     const { accessToken, refreshToken } = req.body
     const authTokens = await service.refreshAuthTokens(accessToken, refreshToken)
     return res.json({ authTokens })
 }
 
-module.exports = { registerUser, login, logout, refreshToken }
+/** @type {controller} */
+const verifyEmail = async (req, res) => {
+    await service.verifyEmail(req.query.token)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+module.exports = { registerUser, localLogin, logout, refreshToken, verifyEmail }

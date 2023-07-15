@@ -7,5 +7,6 @@ module.exports = {
     propertyService: require("./property.service"),
     redisService: require("./redis.service"),
     reviewService: require("./review.service"),
+    tokenService: require("./token.service"),
     userService: require("./user.service"),
 }

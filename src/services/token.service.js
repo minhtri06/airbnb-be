@@ -1,3 +1,4 @@
+const createError = require("http-errors")
 const jwt = require("jsonwebtoken")
 const moment = require("moment")
 
@@ -74,10 +75,30 @@ const createAuthTokens = async (userId) => {
     }
 }
 
+/**
+ * @param {string} token
+ * @returns {{sub, iat, exp, type, isExpired}}
+ */
 const getTokenInfo = (token) => {
     const info = jwt.decode(token, SECRET)
     if (info) {
         info.isExpired = info.exp < moment().unix()
+    }
+    return info
+}
+
+/**
+ * @param {string} token
+ * @param {string} type
+ * @returns {{ sub, iat, exp, type, isExpired }}
+ */
+const verifyToken = (token, type) => {
+    const info = getTokenInfo(token)
+    if (!info || info.type !== type) {
+        throw createError.BadRequest(`Invalid ${type} token`)
+    }
+    if (info.isExpired) {
+        throw createError.BadRequest(`${type} token has expired`)
     }
     return info
 }
@@ -97,5 +118,6 @@ module.exports = {
     createEmailVerifyToken,
     createAuthTokens,
     getTokenInfo,
+    verifyToken,
     blackListAUser,
 }
