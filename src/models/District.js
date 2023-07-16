@@ -11,7 +11,7 @@ const districtSchema = new Schema(
         provinceCode: { type: Number, required: true, index: true },
         province: { type: Schema.Types.ObjectId, ref: "Province", required: true },
     },
-    { timestamps: true },
+    { timestamps: true, optimisticConcurrency: true },
 )
 
 districtSchema.plugin(toJSON)

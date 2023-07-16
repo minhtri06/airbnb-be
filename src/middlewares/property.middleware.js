@@ -5,13 +5,13 @@ const { ADMIN } = require("../configs/roles")
 
 /** @type {import('express').RequestHandler} */
 const getPropertyById = async (req, res, next) => {
-    req.property = await service.getProperty({ propertyId: req.params.propertyId })
+    req.property = await service.getOneProperty({ _id: req.params.propertyId })
     next()
 }
 
 /** @type {import('express').RequestHandler} */
 const getPropertyByPageName = async (req, res, next) => {
-    req.property = await service.getProperty({
+    req.property = await service.getOneProperty({
         pageName: req.params.pageName,
     })
     return next()

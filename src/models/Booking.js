@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const {
-    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+    accommodationTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../constants")
 const { toJSON, paginate } = require("./plugins")
 
@@ -58,7 +58,7 @@ const bookingSchema = new Schema(
 
         totalPrice: { type: Number, min: 0, required: true, immutable: true },
     },
-    { timestamps: true },
+    { timestamps: true, optimisticConcurrency: true },
 )
 
 bookingSchema.plugin(toJSON)

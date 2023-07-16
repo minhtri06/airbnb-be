@@ -35,7 +35,7 @@ const reviewSchema = new Schema(
         },
     },
 
-    { timestamps: true },
+    { timestamps: true, optimisticConcurrency: true },
 )
 
 reviewSchema.path("score").set(function (newScore) {

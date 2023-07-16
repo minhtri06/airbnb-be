@@ -51,6 +51,7 @@ const propertySchema = new Schema(
             },
         },
         timestamps: true,
+        optimisticConcurrency: true,
     },
 )
 

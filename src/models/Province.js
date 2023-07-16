@@ -12,7 +12,7 @@ const provinceSchema = new Schema(
         code: { type: Number, unique: true, required: true },
     },
 
-    { timestamps: true },
+    { timestamps: true, optimisticConcurrency: true },
 )
 
 provinceSchema.plugin(toJSON)

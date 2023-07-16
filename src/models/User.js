@@ -97,7 +97,7 @@ const userSchema = new Schema(
             default: undefined,
         },
     },
-    { timestamps: true },
+    { timestamps: true, optimisticConcurrency: true },
 )
 
 userSchema.plugin(toJSON)

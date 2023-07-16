@@ -21,7 +21,7 @@ const tokenSchema = new Schema(
 
         isBlacklisted: { type: Boolean },
     },
-    { timestamps: true },
+    { timestamps: true, optimisticConcurrency: true },
 )
 
 tokenSchema.plugin(toJSON)
