@@ -5,10 +5,13 @@ const { Schema } = mongoose
 
 const provinceSchema = new Schema(
     {
-        name: { type: String, required: true, trim: true },
-        divisionType: { type: String, required: true, trim: true },
-        code: { type: Number, required: true, unique: true },
+        name: { type: String, trim: true, required: true },
+
+        divisionType: { type: String, trim: true, required: true },
+
+        code: { type: Number, unique: true, required: true },
     },
+
     { timestamps: true },
 )
 

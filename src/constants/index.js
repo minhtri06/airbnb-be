@@ -25,13 +25,9 @@ const commonConstants = {
         MALE: "male",
         FEMALE: "female",
     },
-    accommodationGroupTypes: {
+    accommodationTypes: {
         ENTIRE_HOUSE: "entire-house",
         SPECIFIC_ROOM: "specific-room",
-    },
-    accommodationTypes: {
-        ONE_ROOM: "one-room",
-        MULTI_ROOMS: "multi-rooms",
     },
 }
 

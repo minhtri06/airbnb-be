@@ -14,7 +14,9 @@ const reviewSchema = new Schema(
             required: true,
             immutable: true,
         },
+
         body: { type: String, required: true },
+
         score: {
             type: Number,
             get: (v) => Math.round(v),
@@ -23,6 +25,7 @@ const reviewSchema = new Schema(
             max: 10,
             required: true,
         },
+
         property: {
             type: Schema.Types.ObjectId,
             ref: "Property",
@@ -31,6 +34,7 @@ const reviewSchema = new Schema(
             immutable: true,
         },
     },
+
     { timestamps: true },
 )
 
@@ -46,7 +50,6 @@ reviewSchema.pre("save", async function (next) {
         // Re-evaluate property score
         const property = await Property.findById(review.property)
         if (!property) {
-            await Review.deleteOne({ _id: review._id })
             throw createMongooseValidationErr("property", "Property not found")
         }
 

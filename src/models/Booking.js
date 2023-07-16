@@ -10,55 +10,53 @@ const { Schema } = mongoose
 const bookingSchema = new Schema(
     {
         bookIn: { type: Date, required: true, immutable: true },
+
         bookOut: { type: Date, required: true, immutable: true },
+
         guest: {
             type: Schema.Types.ObjectId,
             ref: "User",
-            required: true,
             index: true,
+            required: true,
             immutable: true,
         },
+
         property: {
             type: Schema.Types.ObjectId,
             ref: "Property",
             required: true,
             immutable: true,
         },
+
         propertyOwner: {
             type: Schema.Types.ObjectId,
             ref: "User",
             immutable: true,
             required: true,
         },
-        accomGroupId: { type: Schema.Types.ObjectId, required: true, immutable: true },
-        accomGroupTitle: { type: String, required: true },
-        accomGroupType: {
+
+        accomTitle: { type: String, required: true },
+
+        accomType: {
             type: String,
-            required: true,
             enum: [ENTIRE_HOUSE, SPECIFIC_ROOM],
+            required: true,
         },
-        accomId: { type: Schema.Types.ObjectId },
+
+        accomId: { type: Schema.Types.ObjectId, required: true },
+
         status: {
             type: String,
+            enum: ["booked", "canceled"],
+            default: "booked",
             required: true,
-            enum: ["pending", "booked", "canceled"],
-            default: "pending",
-            validate(status) {
-                if (status === "pending") {
-                    if (this.accomId) {
-                        throw new Error("Cannot set accomId in pending booking")
-                    }
-                }
-                if (status === "booked") {
-                    if (!this.accomId) {
-                        throw new Error("accomId is required in booked booking")
-                    }
-                }
-            },
         },
-        pricePerNight: { type: Number, min: 0, immutable: true, required: true },
-        numberOfDays: { type: Number, min: 0, immutable: true, required: true },
-        totalPrice: { type: Number, min: 0, immutable: true, required: true },
+
+        pricePerNight: { type: Number, min: 0, required: true, immutable: true },
+
+        numberOfDays: { type: Number, min: 0, required: true, immutable: true },
+
+        totalPrice: { type: Number, min: 0, required: true, immutable: true },
     },
     { timestamps: true },
 )

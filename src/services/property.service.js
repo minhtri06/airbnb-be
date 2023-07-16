@@ -87,7 +87,7 @@ const isPropertyAvailable = (property, bookIn, bookOut) => {
 }
 
 /**
- * @param { InstanceType<Property> | Object} property
+ * @param { InstanceType<Property> | Object } property
  * @param {InstanceType<Date>} bookIn
  * @param {InstanceType<Date>} bookOut
  */
