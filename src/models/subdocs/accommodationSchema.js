@@ -12,6 +12,8 @@ const accommodationSchema = new Schema({
 
     pricePerNight: { type: Number, min: 0, required: true },
 
+    maximumGuest: { type: Number, min: 1, required: true },
+
     type: {
         type: String,
         enum: [ENTIRE_HOUSE, SPECIFIC_ROOM],
