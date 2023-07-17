@@ -9,7 +9,7 @@ const {
         getPropertyByPageName,
         getAccomGroupById,
         getAccomById,
-        requireToOwnProperty,
+        requireToBePropertyOwner,
     },
 } = require("../middlewares")
 const { propertyValidation: validation } = require("../validation")
@@ -40,7 +40,7 @@ router
     )
     .patch(
         auth(),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         validate(validation.updateProperty),
         controller.updateProperty,
     )
@@ -51,7 +51,7 @@ router
         uploadImage.single("thumbnail"),
         auth(),
         validate(validation.replaceThumbnail),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.replaceThumbnail,
     )
 
@@ -60,12 +60,12 @@ router
     .post(
         uploadImage.many("images"),
         auth(),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.addImages,
     )
     .delete(
         auth(),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         validate(validation.deleteImages),
         controller.deleteImages,
     )
@@ -75,7 +75,7 @@ router
     .post(
         auth(),
         validate(validation.addAccommodationGroup),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.addAccommodationGroup,
     )
 
@@ -83,7 +83,7 @@ router.get(
     "/:propertyId/pending-bookings",
     auth(),
     validate(validation.getPropertyPendingBookings),
-    requireToOwnProperty(),
+    requireToBePropertyOwner(),
     controller.getPropertyPendingBookings,
 )
 
@@ -92,13 +92,13 @@ router
     .patch(
         auth(),
         validate(validation.updateAccomGroup),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.updateAccomGroup,
     )
     .delete(
         auth(),
         validate(validation.deleteAccomGroup),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.deleteAccomGroup,
     )
 
@@ -107,7 +107,7 @@ router
     .post(
         auth(),
         validate(validation.addAccommodations),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.addAccommodations,
     )
 
@@ -116,7 +116,7 @@ router
     .delete(
         auth(),
         validate(validation.deleteAccom),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.deleteAccom,
     )
 
@@ -125,7 +125,7 @@ router
     .get(
         auth(),
         validate(validation.getAccommodationBookings),
-        requireToOwnProperty(),
+        requireToBePropertyOwner(),
         controller.getAccommodationBookings,
     )
 

@@ -303,7 +303,7 @@ const updateAccommodation = (property, accom, updateBody) => {
         updateBody,
         "title",
         "pricePerNight",
-        "maximumGuest",
+        "maximumOfGuests",
         "bed",
         "rooms",
     )
@@ -356,8 +356,10 @@ module.exports = {
  * @typedef {InstanceType<import('../models/Property')>} property
  *
  * @typedef {Object} accommodation
+ * @property {string} _id
  * @property {string} title
  * @property {number} pricePerNight
+ * @property {number} maximumOfGuests
  * @property { 'specific-room' | 'entire-house' } type
  * @property {Object} bed
  * @property {[]} rooms

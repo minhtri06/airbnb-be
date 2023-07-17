@@ -8,7 +8,7 @@ module.exports = {
             name: user.name.required(),
             password: user.password.required(),
             email: user.email.required(),
-            roles: user.roles.required(),
+            role: user.role.required(),
             phoneNumber: user.phoneNumber,
             dateOfBirth: user.dateOfBirth,
             gender: user.gender,
@@ -29,7 +29,7 @@ module.exports = {
         [BODY]: Joi.object({
             name: user.name,
             email: user.email,
-            roles: user.roles,
+            role: user.role,
             phoneNumber: user.phoneNumber,
             dateOfBirth: user.dateOfBirth,
             gender: user.gender,

@@ -1,41 +1,45 @@
 const createError = require("http-errors")
 
+const { ADMIN } = require("../configs/roles")
 const { bookingService: service } = require("../services")
-
-/**
- * @typedef {InstanceType<import('../models/User')>} user
- * @typedef {InstanceType<import('../models/Booking')>} booking
- * @typedef {import('express').RequestHandler} middleware
- */
 
 /** @type {middleware} */
 const getBookingById = async (req, res, next) => {
     const booking = await service.getBookingById(req.params.bookingId)
-    if (!booking) {
-        throw createError("Booking not found")
-    }
-    req.booking = booking
+    req._booking = booking
     return next()
 }
 
-/** @type {middleware} */
-const requireToBeGuestOrPropertyOwner = async (req, res, next) => {
-    const user = req.user
-    const booking = req.booking
-    if (user._id.equals(booking.guest) || user._id.equals(booking.propertyOwner)) {
+/** @return {middleware} */
+const requireToBeGuestOrPropertyOwner = ({ allowAdmin } = {}) => {
+    return async (req, res, next) => {
+        if (!req.user) {
+            throw createError.Forbidden("Forbidden")
+        }
+        if (allowAdmin && req.user.role === ADMIN) {
+            return next()
+        }
+        if (!user._id.equals(booking.guest) && !user._id.equals(booking.propertyOwner)) {
+            throw createError.Forbidden("Forbidden")
+        }
         return next()
     }
-    throw createError.Forbidden("Require to be guest or property owner")
 }
 
-/** @type {middleware} */
-const requireToBePropertyOwner = async (req, res, next) => {
-    const user = req.user
-    const booking = req.booking
-    if (user._id.equals(booking.propertyOwner)) {
+/** @return {middleware} */
+const requireToBePropertyOwner = ({ allowAdmin } = {}) => {
+    return async (req, res, next) => {
+        if (!req.user) {
+            throw createError.Forbidden("Forbidden")
+        }
+        if (allowAdmin && req.user.role === ADMIN) {
+            return next()
+        }
+        if (!req.user || !req.user._id.equals(req._booking.propertyOwner)) {
+            throw createError.Forbidden("Require to be property owner")
+        }
         return next()
     }
-    throw createError.Forbidden("Require to be property owner")
 }
 
 module.exports = {
@@ -43,3 +47,25 @@ module.exports = {
     requireToBeGuestOrPropertyOwner,
     requireToBePropertyOwner,
 }
+
+/**
+ * @typedef {InstanceType<import("../models/Property")>} property
+ * @typedef {InstanceType<import("../models/User")>} user
+ * @typedef {InstanceType<import("../models/Booking")>} booking
+ *
+ * @typedef {{
+ *   user: user,
+ *   _user: user,
+ *   _property: property,
+ *   _booking: booking
+ * }} attachedData
+ *
+ * @typedef {import('express').Request & attachedData} req
+ * @typedef {import('express').Response} res
+ * @typedef {import('express').NextFunction} next
+ *
+ * @callback middleware
+ * @param {req} req
+ * @param {res} res
+ * @param {next} next
+ */

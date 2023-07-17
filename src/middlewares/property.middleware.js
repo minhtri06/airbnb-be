@@ -3,53 +3,44 @@ const createError = require("http-errors")
 const { propertyService: service } = require("../services")
 const { ADMIN } = require("../configs/roles")
 
-/** @type {import('express').RequestHandler} */
+/** @type {middleware} */
 const getPropertyById = async (req, res, next) => {
-    req.property = await service.getOneProperty({ _id: req.params.propertyId })
+    req._property = await service.getOneProperty({ _id: req.params.propertyId })
     next()
 }
 
-/** @type {import('express').RequestHandler} */
+/** @type {middleware} */
 const getPropertyByPageName = async (req, res, next) => {
-    req.property = await service.getOneProperty({
+    req._property = await service.getOneProperty({
         pageName: req.params.pageName,
     })
     return next()
 }
 
 /**
- * Must call after getPropertyById middleware
- * @type {import('express').RequestHandler} */
-const getAccomGroupById = async (req, res, next) => {
-    const accomGroup = await service.getAccomGroupById(
-        req.property,
-        req.params.accomGroupId,
-    )
-    req.accomGroup = accomGroup
-    return next()
-}
-
-/**
- * Must call after getAccomGroupById middleware
- * @type {import('express').RequestHandler} */
-const getAccomById = async (req, res, next) => {
-    const accom = await service.getAccomById(req.accomGroup, req.params.accomId)
-    req.accom = accom
+ * Get accommodation by id
+ * @type {middleware} */
+const getAccommodationById = async (req, res, next) => {
+    const accom = service.getAccommodationById(req._property, req.params.accomId)
+    req._accom = accom
     return next()
 }
 
 /**
  * Must call after auth and getPropertyById middleware
- * @return {import('express').RequestHandler}*/
-const requireToOwnProperty = ({ allowAdmin } = {}) => {
+ * @return {middleware}*/
+const requireToBePropertyOwner = ({ allowAdmin } = {}) => {
     return async (req, res, next) => {
-        if (allowAdmin && req.user.roles.includes(ADMIN)) {
-            return next()
-        }
-        if (!req.property.owner.equals(req.user._id)) {
+        if (!req.user) {
             throw createError.Forbidden("Forbidden")
         }
-        req.property.caller.isOwner = true
+        if (allowAdmin && req.user.role === ADMIN) {
+            return next()
+        }
+        if (!req._property.owner.equals(req.user._id)) {
+            throw createError.Forbidden("Forbidden")
+        }
+        req._property.caller.isOwner = true
         return next()
     }
 }
@@ -57,7 +48,27 @@ const requireToOwnProperty = ({ allowAdmin } = {}) => {
 module.exports = {
     getPropertyById,
     getPropertyByPageName,
-    getAccomGroupById,
-    getAccomById,
-    requireToOwnProperty,
+    requireToBePropertyOwner,
 }
+
+/**
+ * @typedef {InstanceType<import("../models/Property")>} property
+ * @typedef {InstanceType<import("../models/User")>} user
+ * @typedef {InstanceType<import("../models/Booking")>} booking
+ *
+ * @typedef {{
+ *   user: user,
+ *   _user: user,
+ *   _property: property,
+ *   _booking: booking
+ * }} attachedData
+ *
+ * @typedef {import('express').Request & attachedData} req
+ * @typedef {import('express').Response} res
+ * @typedef {import('express').NextFunction} next
+ *
+ * @callback middleware
+ * @param {req} req
+ * @param {res} res
+ * @param {next} next
+ */

@@ -2,18 +2,18 @@ const passport = require("passport")
 const createError = require("http-errors")
 
 /**
- *
- * @param {string[] | false} require
- * @param {object} req
- * @param {function} next
- * @returns {function}
+ * @param {string[] | undefined} allowedRoles
+ * @param {boolean} required
+ * @param {Object} req
+ * @param {function()} next
  */
-const verifyCallBack = (requireRole, required, req, next) => async (err, user, info) => {
+const verifyCallBack = (allowedRoles, required, req, next) => async (err, user, info) => {
     try {
         if (!required) {
-            req.user = user
+            req.user = undefined
             return next()
         }
+
         if (err) {
             throw err
         }
@@ -23,34 +23,34 @@ const verifyCallBack = (requireRole, required, req, next) => async (err, user, i
 
         req.user = user
 
-        if (requireRole.length !== 0) {
-            // if every roles of user is not included in requireRole => throw Forbidden error
-            if (user.roles.every((role) => !requireRole.includes(role))) {
+        if (allowedRoles) {
+            if (!allowedRoles.includes(user.role)) {
                 throw createError.Forbidden("Forbidden")
             }
         }
         return next()
     } catch (error) {
-        next(error)
+        return next(error)
     }
 }
 
 /**
- * Check authentication & authorization
- * @param {{requireRole, required}} options
- * @param {string[]} options.requireRole Allowed roles. Only work if required = true
- * @param {boolean} options.required Require authentication or not.
- * @returns
+ * Returns a middleware that check authentication & authorization
+ * @param {Object} options
+ * allowed roles. If undefined => allows all roles. Only work if required = true.
+ * @param {string[] | undefined} options.allowedRoles
+ * @param {boolean | undefined} options.required Require authentication or not.
+ * @returns {import('express').RequestHandler}
  */
-const auth = ({ requireRole, required } = {}) => {
+const auth = ({ allowedRoles, required } = {}) => {
     required = required !== undefined ? required : true
-    requireRole = requireRole || []
+    allowedRoles = allowedRoles
 
     return async (req, res, next) => {
         passport.authenticate(
             "jwt",
             { session: false },
-            verifyCallBack(requireRole, required, req, next),
+            verifyCallBack(allowedRoles, required, req, next),
         )(req, res, next)
     }
 }

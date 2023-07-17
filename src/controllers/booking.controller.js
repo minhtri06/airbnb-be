@@ -3,10 +3,6 @@ const { StatusCodes } = require("http-status-codes")
 
 const { bookingService: service } = require("../services")
 
-/**
- * @typedef {import('express').RequestHandler} controller
- */
-
 /** @type {controller} */
 const createBooking = async (req, res) => {
     req.body.guest = req.user._id
@@ -16,14 +12,28 @@ const createBooking = async (req, res) => {
 
 /** @type {controller} */
 const cancelBooking = async (req, res) => {
-    await service.cancelBooking(req.booking)
+    await service.cancelBooking(req._booking)
     return res.json({ message: "Cancel booking successfully" })
 }
 
-/** @type {controller} */
-const approveBookingToAccom = async (req, res) => {
-    await service.approveBookingToAccom(req.booking, req.body.accomId)
-    return res.json({ message: "Approve booking successfully" })
-}
-
 module.exports = { createBooking, cancelBooking, approveBookingToAccom }
+
+/**
+ * @typedef {InstanceType<import("../models/Property")>} property
+ * @typedef {InstanceType<import("../models/User")>} user
+ * @typedef {InstanceType<import("../models/Booking")>} booking
+ *
+ * @typedef {{
+ *   user: user,
+ *   _user: user,
+ *   _property: property,
+ *   _booking: booking
+ * }} attachedData
+ *
+ * @typedef {import('express').Request & attachedData} req
+ * @typedef {import('express').Response} res
+ *
+ * @callback controller
+ * @param {req} req
+ * @param {res} res
+ */

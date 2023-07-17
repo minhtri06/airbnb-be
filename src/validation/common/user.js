@@ -7,7 +7,7 @@ const objectId = require("./objectId")
 module.exports = {
     name: Joi.string(),
     email: Joi.string().email(),
-    roles: Joi.array().items(Joi.string().valid(ADMIN, NORMAL_USER)),
+    role: Joi.string().valid(ADMIN, NORMAL_USER),
     authType: Joi.string(),
     password: Joi.string().min(6).max(30),
     phoneNumber: Joi.string(),
