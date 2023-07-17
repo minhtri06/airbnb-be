@@ -1,31 +1,44 @@
 const createError = require("http-errors")
 
-const { ACCESS, REFRESH, RESET_PASSWORD, VERIFY_EMAIL } =
-    require("../constants").tokenTypes
+const {
+    tokenTypes: { ACCESS, REFRESH, RESET_PASSWORD, VERIFY_EMAIL },
+    authTypes: { LOCAL, GOOGLE },
+} = require("../constants")
 const userService = require("./user.service")
 const tokenService = require("./token.service")
-const { Token, User } = require("../models")
 
+/**
+ * Local login
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<{ user, token }>}
+ */
 const localLogin = async (email, password) => {
-    const user = await userService.getUserByEmail(email)
-    if (!user) {
-        throw createError.BadRequest("Email has not registered")
+    const user = await userService.getOneUser({ email })
+
+    if (user.authType !== LOCAL) {
+        throw createError.BadRequest("Your authentication is not local authentication")
     }
+
     if (!user.isEmailVerified) {
         throw createError.Forbidden("User email has not verified")
     }
+
     if (!(await user.isPasswordMatch(password))) {
         throw createError.BadRequest("Wrong password")
     }
+
     const authTokens = await tokenService.createAuthTokens(user._id)
+
     return { user, authTokens }
 }
 
+/**
+ * Logout
+ * @param {string} rTokenBody
+ */
 const logout = async (rTokenBody) => {
-    const rToken = await Token.findOne({ body: rTokenBody, type: REFRESH })
-    if (!rToken) {
-        throw createError.NotFound("Token not found")
-    }
+    const rToken = await tokenService.getOneToken({ body: rTokenBody, type: REFRESH })
     rToken.isRevoked = true
     await rToken.save()
 }
@@ -34,7 +47,7 @@ const logout = async (rTokenBody) => {
  * Refresh Auth tokens
  * @param {string} aToken
  * @param {string} rToken
- * @returns {Promise<object>}
+ * @returns {Promise<{ accessToken, refreshToken }>}
  */
 const refreshAuthTokens = async (aToken, rToken) => {
     // Remove Bearer
@@ -60,10 +73,8 @@ const refreshAuthTokens = async (aToken, rToken) => {
         throw createError.BadRequest("Refresh token has expired")
     }
 
-    const rTokenInst = await Token.findOne({ body: rToken, type: REFRESH })
-    if (!rTokenInst) {
-        throw createError.BadRequest("Token not found")
-    }
+    const rTokenInst = await tokenService.getOneToken({ body: rToken, type: REFRESH })
+
     if (rTokenInst.isBlacklisted) {
         throw createError.Unauthorized("Unauthorized")
     }
@@ -82,41 +93,44 @@ const refreshAuthTokens = async (aToken, rToken) => {
     return tokenService.createAuthTokens(userId)
 }
 
+/**
+ * Verify email
+ * @param {string} verifyEmailToken
+ */
 const verifyEmail = async (verifyEmailToken) => {
     tokenService.verifyToken(verifyEmailToken, VERIFY_EMAIL)
-    const tokenDoc = await Token.findOne({
+
+    const tokenDoc = await tokenService.getOneToken({
         body: verifyEmailToken,
         type: VERIFY_EMAIL,
     })
-    if (!tokenDoc) {
-        throw createError.NotFound("Token not found")
-    }
-    const user = await User.findById(tokenDoc.user)
-    if (!user) {
-        throw createError.NotFound("User not found")
-    }
+
+    const user = await userService.getUserById(tokenDoc.user)
+
     await Promise.all([
-        User.updateOne({ _id: user._id }, { $set: { isEmailVerified: true } }),
-        Token.deleteMany({ user: user._id, type: VERIFY_EMAIL }),
+        userService.updateUser(user, { isEmailVerified: true }),
+        tokenService.deleteManyTokens({ user: user._id, type: VERIFY_EMAIL }),
     ])
 }
 
+/**
+ * Reset password
+ * @param {string} resetPasswordToken
+ * @param {string} newPassword
+ */
 const resetPassword = async (resetPasswordToken, newPassword) => {
     tokenService.verifyToken(resetPasswordToken, RESET_PASSWORD)
-    const tokenDoc = await Token.findOne({
+
+    const tokenDoc = await tokenService.getOneToken({
         body: resetPasswordToken,
         type: RESET_PASSWORD,
     })
-    if (!tokenDoc) {
-        throw createError.NotFound("Token not found")
-    }
-    const user = await User.findById(tokenDoc.user)
-    if (!user) {
-        throw createError.NotFound("User not found")
-    }
+
+    const user = await userService.getUserById(tokenDoc.user)
+
     await Promise.all([
-        User.updateOne({ _id: user._id }, { $set: { password: newPassword } }),
-        Token.deleteMany({ user: user._id, type: RESET_PASSWORD }),
+        userService.updateUser(user, { password: newPassword }),
+        tokenService.deleteManyTokens({ user: user._id, type: RESET_PASSWORD }),
     ])
 }
 
@@ -127,3 +141,9 @@ module.exports = {
     verifyEmail,
     resetPassword,
 }
+
+/**
+ * @typedef {import('../models/User')} user
+ *
+ * @typedef {import('../models/Token')} token
+ */

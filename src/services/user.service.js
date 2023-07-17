@@ -1,86 +1,202 @@
 const createError = require("http-errors")
+const bcrypt = require("bcryptjs")
 
 const { User } = require("../models")
 const envConfig = require("../configs/envConfig")
+const {
+    authTypes: { LOCAL, GOOGLE },
+} = require("../constants")
 const { pickFields } = require("../utils")
 
-const getUserById = async (userId) => {
-    const user = await User.findById(userId)
+/**
+ * Hash password
+ * @param {string} password
+ * @returns {Promise<string>}
+ */
+const hashPassword = async (password) => {
+    return await bcrypt.hash(password, 8)
+}
+
+/**
+ * Check if email is taken
+ * @param {string} email
+ * @param {string} excludedUserId - If given, specify a user to be excluded
+ * @returns {Promise<boolean>}
+ */
+const isEmailTaken = async (email, excludedUserId = undefined) => {
+    const query = User.findOne({ email })
+    if (excludedUserId) {
+        query.where({ _id: { $ne: excludedUserId } })
+    }
+    const user = await query.exec()
+    return user !== null
+}
+
+/**
+ * Paginate users
+ * @param {userFilter} filter
+ * @param {queryOptions} queryOptions
+ * @returns {Promise<user[]>}
+ */
+const paginateUsers = async (filter, queryOptions) => {
+    return User.paginate(filter, queryOptions)
+}
+
+/**
+ * Find one user, return null if not found
+ * @param {userFilter} filter
+ * @returns {Promise<user | null>}
+ */
+const findOneUser = async (filter) => {
+    return User.findOne(filter)
+}
+
+/**
+ * Find user by id, return null if not found
+ * @param {string} userId
+ * @returns {Promise<user | null>}
+ */
+const findUserById = async (userId) => {
+    return findOneUser({ _id: userId })
+}
+
+/**
+ * Get one user, throw error if not found
+ * @param {userFilter} filter
+ * @returns {Promise<user>}
+ */
+const getOneUser = async (filter) => {
+    const user = await findOneUser(filter)
     if (!user) {
-        throw new createError.NotFound("User not found")
+        throw createError.NotFound("User not found")
     }
     return user
 }
 
-const getUserByEmail = async (email) => {
-    return User.findOne({ email })
-}
-
-const queryUser = async ({
-    name,
-    email,
-    role,
-    phoneNumber,
-    districtId,
-    provinceId,
-    limit,
-    page,
-}) => {
-    const query = User.where()
-    if (name) {
-        query.where({ name: { $regex: ".*" + name + ".*" } })
-    }
-    if (email) {
-        query.where({ email })
-    }
-    if (role) {
-        query.where({ roles: role })
-    }
-    if (phoneNumber) {
-        query.where({ phoneNumber })
-    }
-    if (districtId) {
-        query.where({ "address.district": districtId })
-    }
-    if (provinceId) {
-        query.where({ "address.province": provinceId })
-    }
-    limit = limit || envConfig.DEFAULT_PAGE_LIMIT
-    page = page || 1
-    let skip = (page - 1) * limit
-    query.limit(limit)
-    query.skip(skip)
-    return await query.exec()
-}
-
-const createUser = async (userBody) => {
-    const user = new User(userBody)
-    await user.save()
-    await user.populate(["address.province", "address.district"])
+/**
+ * Get user by id, throw error if not found
+ * @param {string} userId
+ * @returns {Promise<user>}
+ */
+const getUserById = async (userId) => {
+    const user = await getOneUser({ _id: userId })
     return user
 }
 
-const updateUser = async (userId, updateBody) => {
-    updateBody = pickFields(
-        updateBody,
+/**
+ * Create a new user
+ * @param {{
+ *   name,
+ *   email,
+ *   authType,
+ *   password,
+ *   role,
+ *   phoneNumber,
+ *   dateOfBirth,
+ *   gender,
+ *   address,
+ * }} body
+ * @returns
+ */
+const createUser = async (body) => {
+    body = pickFields(
+        body,
         "name",
         "email",
-        "roles",
+        "authType",
+        "password",
+        "role",
         "phoneNumber",
         "dateOfBirth",
         "gender",
         "address",
     )
-    const user = await User.findById(userId)
+
+    const user = new User(body)
+
+    if (user.authType === LOCAL) {
+        if (!user.password) {
+            throw createError.BadRequest("password field is required")
+        }
+        user.password = await hashPassword(user.password)
+    }
+    if (user.authType === GOOGLE) {
+        user.password = undefined
+        user.isEmailVerified = true
+    }
+
+    await user.save()
+
+    return user
+}
+
+/**
+ * Update a user
+ * @param {user} user
+ * @param {{
+ *   name,
+ *   isEmailVerified,
+ *   password,
+ *   phoneNumber,
+ *   dateOfBirth,
+ *   gender,
+ *   address,
+ * }} updateBody
+ * @returns {Promise<user>}
+ */
+const updateUser = async (user, updateBody) => {
+    updateBody.updateBody = pickFields(
+        updateBody,
+        "name",
+        "isEmailVerified",
+        "password",
+        "phoneNumber",
+        "dateOfBirth",
+        "gender",
+        "address",
+    )
+
+    if (updateBody.password) {
+        updateBody.password = await hashPassword(updateBody.password)
+    }
+
     Object.assign(user, updateBody)
     await user.save()
+
     return user
 }
 
 module.exports = {
+    isEmailTaken,
+    paginateUsers,
+    findOneUser,
+    findUserById,
+    getOneUser,
     getUserById,
-    getUserByEmail,
-    queryUser,
     createUser,
     updateUser,
 }
+
+/**
+ * @typedef {InstanceType<User>} user
+ *
+ * @typedef {Object} userFilter
+ * @property {String} _id
+ * @property {String} name
+ * @property {String} email
+ * @property {boolean} isEmailVerified
+ * @property {string} authType
+ * @property {String} role
+ * @property {String} phoneNumber
+ * @property {String} dateOfBirth
+ * @property {String} gender
+ * @property {String} address
+ *
+ * @typedef {Object} queryOptions
+ * @property {Object} sortBy
+ * @property {number} page
+ * @property {number} limit
+ * @property {string} select
+ * @property {string} populate
+ * @property {boolean} lean
+ */

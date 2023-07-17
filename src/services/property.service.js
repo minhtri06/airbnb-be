@@ -1,58 +1,70 @@
 const createError = require("http-errors")
 
-const { Property, Booking, Review } = require("../models")
+const { Property } = require("../models")
 const envConfig = require("../configs/envConfig")
 const {
-    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
-    accommodationTypes: { ONE_ROOM, MULTI_ROOMS },
+    accommodationTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../constants")
 const {
     pickFields,
     file: { deleteStaticFile, deleteManyStaticFiles },
 } = require("../utils")
 
-/**
- * @typedef {InstanceType<import('../models/Property')>} property
- *
- * @typedef {Object} propertyFilter
- * @property {string} title
- * @property {boolean} isClosed
- * @property {string} owner
- * @property {string} pageName
- * @property {number} score
- * @property {string} description
- * @property {[string]} facilities
- * @property {number} reviewCount
- * @property {Object} address
- * @property {string} thumbnail
- * @property {[string]} images
- * @property {[Object]} accommodationGroups
- *
- * @typedef {Object} queryOptions
- * @property {Object} sortBy
- * @property {number} page
- * @property {number} limit
- */
-
 const createProperty = async (body) => {
+    body = pickFields(
+        body,
+        "title",
+        "isClosed",
+        "owner",
+        "pageName",
+        "description",
+        "facilityCodes",
+        "address",
+        "accommodations",
+    )
     const property = new Property(body)
-    await property.save()
-    return property
+    property.score = null
+    property.sumScore = 0
+    property.reviewCount = 0
+    return property.save()
 }
 
 /**
- *
+ * update Property
+ * @param {property} property
+ * @param {Object} updateBody
+ */
+const updateProperty = async (property, updateBody) => {
+    updateBody = pickFields(
+        updateBody,
+        "title",
+        "isClosed",
+        "pageName",
+        "description",
+        "facilities",
+    )
+    Object.assign(property, updateBody)
+    return property.save()
+}
+
+/**
+ * Paginate properties
  * @param {propertyFilter} filter
  * @param {queryOptions} queryOptions
- * @returns
+ * @returns {Promise<property[]>}
  */
 const paginateProperties = async (filter, queryOptions) => {
-    return await Property.paginate(filter, queryOptions)
+    return Property.paginate(filter, queryOptions)
 }
 
+/**
+ * Check accommodation is available from bookIn date to bookOut date
+ * @param {accommodation} accom
+ * @param {Date} bookIn
+ * @param {Date} bookOut
+ * @returns {boolean}
+ */
 const isAccommodationAvailable = (accom, bookIn, bookOut) => {
-    // We don't need to check in Booking, because its currentBookingDates keeps
-    // all the future bookings. We just need to check currentBookingDates
     let isAvailable = false
     const cbDates = accom.currentBookingDates
 
@@ -75,37 +87,37 @@ const isAccommodationAvailable = (accom, bookIn, bookOut) => {
     return isAvailable
 }
 
+/**
+ * Check property is available from bookIn date to bookOut date
+ * @param {property} property
+ * @param {Date} bookIn
+ * @param {Date} bookOut
+ * @returns {boolean}
+ */
 const isPropertyAvailable = (property, bookIn, bookOut) => {
-    for (let accomGroup of property.accommodationGroups || []) {
-        for (let accom of accomGroup.accommodations || []) {
-            if (isAccommodationAvailable(accom, bookIn, bookOut)) {
-                return true
-            }
+    for (let accom of property.accommodations || []) {
+        if (isAccommodationAvailable(accom, bookIn, bookOut)) {
+            return true
         }
     }
     return false
 }
 
 /**
- * @param { InstanceType<Property> | Object } property
- * @param {InstanceType<Date>} bookIn
- * @param {InstanceType<Date>} bookOut
+ * @param {property} property
+ * @param {Date} bookIn
+ * @param {Date} bookOut
  */
 const setAvailabilityFields = (property, bookIn, bookOut) => {
     property.isAvailable = false
 
-    for (let accomGroup of property.accommodationGroups || []) {
-        accomGroup.availableCount = 0
-
-        for (let accom of accomGroup.accommodations || []) {
-            // Check if this accommodation is available
-            if (isAccommodationAvailable(accom, bookIn, bookOut)) {
-                property.isAvailable = true
-                accomGroup.availableCount++
-                accom.isAvailable = true
-            } else {
-                accom.isAvailable = false
-            }
+    for (let accom of property.accommodations || []) {
+        // Check if this accommodation is available
+        if (isAccommodationAvailable(accom, bookIn, bookOut)) {
+            property.isAvailable = true
+            accom.isAvailable = true
+        } else {
+            accom.isAvailable = false
         }
     }
 }
@@ -121,6 +133,7 @@ const searchProperties = async ({
     const query = Property.where({ isClosed: false })
         .lean()
         .select("-images -description -facilities")
+        .sort("-score")
 
     if (districtId) {
         query.where({ "address.district": districtId })
@@ -135,13 +148,6 @@ const searchProperties = async ({
     let skip = (page - 1) * limit
 
     if (bookIn && bookOut) {
-        if (!(bookIn instanceof Date) || !(bookOut instanceof Date)) {
-            throw createError.BadRequest("bookIn and bookOut must be instances of Date")
-        }
-        if (bookIn >= bookOut) {
-            throw createError.BadRequest("bookIn must be before bookOut")
-        }
-
         // Find available properties
         const cursor = query.cursor()
         properties = []
@@ -171,26 +177,17 @@ const searchProperties = async ({
         query.skip(skip).limit(limit)
         properties = await query.exec()
     }
-    for (let property of properties) {
-        Property.removeBookingDateFields(property)
-    }
+
     return properties
 }
 
-const getProperty = async ({ propertyId, pageName, select }) => {
-    const query = Property.findOne()
-
-    if (propertyId) {
-        query.where({ _id: propertyId })
-    } else if (pageName) {
-        query.where({ pageName })
-    } else {
-        throw createError.NotFound("Property not found")
-    }
-
-    if (select) {
-        query.select(select)
-    }
+/**
+ * Get one property
+ * @param {{ _id, pageName }} filter
+ * @returns {Promise<property>}
+ */
+const getOneProperty = async (filter) => {
+    const query = Property.findOne(filter)
 
     const property = await query.exec()
     if (!property) {
@@ -201,49 +198,15 @@ const getProperty = async ({ propertyId, pageName, select }) => {
 }
 
 /**
- *
+ * Replace thumbnail
  * @param {property} property
- * @param {Object} newAccomGroup
- * @returns
- */
-const addAccommodationGroup = async (property, newAccomGroup) => {
-    property.accommodationGroups.push(newAccomGroup)
-    return property.save()
-}
-
-const getAccomGroupById = async (property, accomGroupId) => {
-    const accomGroup = property.accommodationGroups.id(accomGroupId)
-    if (!accomGroup) {
-        throw createError.NotFound("Accommodation group not found")
-    }
-    return accomGroup
-}
-
-const getAccomById = (accomGroup, accomId) => {
-    const accom = accomGroup.accommodations.id(accomId)
-    if (!accom) {
-        throw createError.NotFound("Accommodation not found")
-    }
-    return accom
-}
-
-const addAccommodations = async (property, accoGroup, newAccoms) => {
-    if (newAccoms.length === 0) {
-        throw new Error("newAccoms must have at least one accommodation")
-    }
-    accoGroup.accommodations.push(...newAccoms)
-    return property.save()
-}
-
-/**
- * @param {property} property
- * @param {string} thumbnail
+ * @param {Object} thumbnailFile
  */
 const replaceThumbnail = async (property, thumbnailFile) => {
     const oldThumbnail = property.thumbnail
     property.thumbnail = `/img/${thumbnailFile.filename}`
     await property.save()
-    // Delete old file after saving because saving may throw error.
+    // Delete old file after saving because saving may fail.
     // If we delete first, we may lose the old file
     if (oldThumbnail) {
         deleteStaticFile(oldThumbnail)
@@ -252,7 +215,7 @@ const replaceThumbnail = async (property, thumbnailFile) => {
 }
 
 /**
- *
+ * Add images
  * @param {property} property
  * @param {[]} imageFiles
  */
@@ -267,7 +230,7 @@ const addImages = async (property, imageFiles) => {
 }
 
 /**
- *
+ * Delete images
  * @param {property} property
  * @param {number[]} deletedIndexes
  */
@@ -288,43 +251,86 @@ const deleteImages = async (property, deletedIndexes) => {
     return property.images
 }
 
-const deleteAccomGroup = async (propertyId, accomGroupId) => {
-    await Property.updateOne(
-        { _id: propertyId },
-        { $pull: { accommodationGroups: { _id: accomGroupId } } },
-    )
+/**
+ * Add new accommodation
+ * @param {property} property
+ * @param {accommodation} newAccom
+ * @returns {Promise<property>}
+ */
+const addAccommodation = async (property, newAccom) => {
+    if (!newAccom) {
+        throw createError.BadRequest("Accommodation is required")
+    }
+    property.accommodations.push(newAccom)
+    return property.save()
 }
 
-const deleteAccom = async (propertyId, accomGroupId, accomId) => {
+/**
+ * Get accommodation by id
+ * @param {property} property
+ * @param {string} accomId
+ * @returns {accommodation}
+ */
+const getAccommodationById = async (property, accomId) => {
+    const accom = property.accommodations.id(accomId)
+    if (!accom) {
+        throw createError.NotFound("Accommodation not found")
+    }
+    return accom
+}
+
+/**
+ * Delete accommodation
+ * @param {string} propertyId
+ * @param {string} accomId
+ */
+const deleteAccommodation = async (propertyId, accomId) => {
     await Property.updateOne(
         { _id: propertyId },
-        { $pull: { "accommodationGroups.$[i].accommodations": { _id: accomId } } },
-        { arrayFilters: [{ "i._id": accomGroupId }] },
+        { $pull: { accommodations: { _id: accomId } } },
     )
 }
 
 /**
+ * Update accommodation
  * @param {property} property
+ * @param {accommodation} accom
  * @param {Object} updateBody
+ * @returns {Promise<property>}
  */
-const updateProperty = async (property, updateBody) => {
+const updateAccommodation = (property, accom, updateBody) => {
     updateBody = pickFields(
         updateBody,
         "title",
-        "isClosed",
-        "pageName",
-        "description",
-        "facilities",
-        "address",
+        "pricePerNight",
+        "maximumGuest",
+        "bed",
+        "rooms",
     )
-    Object.assign(property, updateBody)
+    Object.assign(accom, updateBody)
     return property.save()
 }
 
-const updateAccomGroup = (property, accomGroup, updateBody) => {
-    updateBody = pickFields(updateBody, "title", "pricePerNight", "bedType")
-    Object.assign(accomGroup, updateBody)
-    return property.save()
+/**
+ * Get property and its accommodation
+ * @param {string} propertyId
+ * @param {string} accomId
+ * @returns {Promise<{ property: property, accom: accommodation}>}
+ */
+const getPropertyAndAccommodation = async (propertyId, accomId) => {
+    const property = await Property.findById(propertyId)
+    const accom = property ? property.accommodations.id(accomId) : null
+    return { property, accom }
+}
+
+/**
+ * Add new current booking date to an existing currentBookingDates array
+ * @param {Object[]} cBDates
+ * @param {Object} newDate
+ */
+const addCurrentBookingDate = (cBDates, newDate) => {
+    cBDates.push(newDate)
+    cBDates.sort((a, b) => a.bookIn - b.bookIn)
 }
 
 module.exports = {
@@ -333,16 +339,49 @@ module.exports = {
     isAccommodationAvailable,
     setAvailabilityFields,
     searchProperties,
-    getProperty,
-    addAccommodationGroup,
-    getAccomGroupById,
-    getAccomById,
-    addAccommodations,
+    getOneProperty,
     replaceThumbnail,
     addImages,
     deleteImages,
-    deleteAccomGroup,
-    deleteAccom,
+    addAccommodation,
+    getAccommodationById,
+    deleteAccommodation,
     updateProperty,
-    updateAccomGroup,
+    updateAccommodation,
+    getPropertyAndAccommodation,
+    addCurrentBookingDate,
 }
+
+/**
+ * @typedef {InstanceType<import('../models/Property')>} property
+ *
+ * @typedef {Object} accommodation
+ * @property {string} title
+ * @property {number} pricePerNight
+ * @property { 'specific-room' | 'entire-house' } type
+ * @property {Object} bed
+ * @property {[]} rooms
+ * @property {[]} currentBookingDates
+ *
+ * @typedef {Object} propertyFilter
+ * @property {string} title
+ * @property {boolean} isClosed
+ * @property {string} owner
+ * @property {string} pageName
+ * @property {number} score
+ * @property {string} description
+ * @property {[string]} facilities
+ * @property {number} reviewCount
+ * @property {Object} address
+ * @property {string} thumbnail
+ * @property {[string]} images
+ * @property {[Object]} accommodationGroups
+ *
+ * @typedef {Object} queryOptions
+ * @property {Object} sortBy
+ * @property {number} page
+ * @property {number} limit
+ * @property {string} select
+ * @property {string} populate
+ * @property {boolean} lean
+ */

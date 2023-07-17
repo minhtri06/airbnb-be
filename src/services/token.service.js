@@ -15,6 +15,13 @@ const {
     },
 } = require("../configs/envConfig")
 
+/**
+ * Generate a token
+ * @param {string} userId
+ * @param {moment.Moment} expires
+ * @param {string} type
+ * @returns {string}
+ */
 const generateToken = (userId, expires, type) => {
     const payload = {
         sub: userId,
@@ -25,11 +32,21 @@ const generateToken = (userId, expires, type) => {
     return jwt.sign(payload, SECRET)
 }
 
+/**
+ * Generate a new access token
+ * @param {string} userId
+ * @returns {string}
+ */
 const generateAccessToken = (userId) => {
     const expires = moment().add(ACCESS_EXPIRATION_MINUTES, "minutes")
     return `Bearer ${generateToken(userId, expires, ACCESS)}`
 }
 
+/**
+ * Create a refresh token for a user
+ * @param {string} userId
+ * @returns {Promise<token>}
+ */
 const createRefreshToken = async (userId) => {
     const expires = moment().add(REFRESH_EXPIRATION_DAYS, "days")
     const token = generateToken(userId, expires, REFRESH)
@@ -44,6 +61,11 @@ const createRefreshToken = async (userId) => {
     })
 }
 
+/**
+ * Create reset password token for a user
+ * @param {string} userId
+ * @returns {Promise<token>}
+ */
 const createResetPasswordToken = async (userId) => {
     const expires = moment().add(RESET_PASSWORD_EXPIRATION_MINUTES, "minutes")
     const token = generateToken(userId, expires, RESET_PASSWORD)
@@ -55,7 +77,12 @@ const createResetPasswordToken = async (userId) => {
     })
 }
 
-const createEmailVerifyToken = async (userId) => {
+/**
+ * Create verify verify token for a user
+ * @param {string} userId
+ * @returns {Promise<token>}
+ */
+const createVerifyEmailToken = async (userId) => {
     const expires = moment().add(VERIFY_EMAIL_EXPIRATION_MINUTES, "minutes")
     const token = generateToken(userId, expires, VERIFY_EMAIL)
     return Token.create({
@@ -66,6 +93,11 @@ const createEmailVerifyToken = async (userId) => {
     })
 }
 
+/**
+ * Create auth tokens
+ * @param {string} userId
+ * @returns {Promise<{ accessToken, refreshToken }>}
+ */
 const createAuthTokens = async (userId) => {
     const accessToken = generateAccessToken(userId)
     const refreshToken = await createRefreshToken(userId, accessToken)
@@ -76,6 +108,7 @@ const createAuthTokens = async (userId) => {
 }
 
 /**
+ * Get token info
  * @param {string} token
  * @returns {{sub, iat, exp, type, isExpired}}
  */
@@ -88,6 +121,7 @@ const getTokenInfo = (token) => {
 }
 
 /**
+ * Verify a token and return token's info
  * @param {string} token
  * @param {string} type
  * @returns {{ sub, iat, exp, type, isExpired }}
@@ -103,6 +137,10 @@ const verifyToken = (token, type) => {
     return info
 }
 
+/**
+ * Blacklist all usable tokens of a user
+ * @param {string} userId
+ */
 const blackListAUser = async (userId) => {
     await Token.updateMany(
         { user: userId, type: REFRESH, isUsed: false, isRevoked: false },
@@ -110,14 +148,57 @@ const blackListAUser = async (userId) => {
     )
 }
 
+/**
+ * Get one token
+ * @param {{
+ *   body,
+ *   user,
+ *   type,
+ *   expires,
+ *   isRevoked,
+ *   isUsed,
+ *   isBlacklisted,
+ * }} filter
+ * @returns {Promise<token>}
+ */
+const getOneToken = async (filter) => {
+    const token = await Token.findOne(filter)
+    if (!token) {
+        throw createError.NotFound("Token not found")
+    }
+    return token
+}
+
+/**
+ * Delete many tokens
+ * @param {{
+ *   body,
+ *   user,
+ *   type,
+ *   expires,
+ *   isRevoked,
+ *   isUsed,
+ *   isBlacklisted,
+ * }} filter
+ */
+const deleteManyTokens = async (filter) => {
+    return Token.deleteMany(filter)
+}
+
 module.exports = {
     generateToken,
     generateAccessToken,
     createRefreshToken,
     createResetPasswordToken,
-    createEmailVerifyToken,
+    createVerifyEmailToken,
     createAuthTokens,
     getTokenInfo,
     verifyToken,
     blackListAUser,
+    getOneToken,
+    deleteManyTokens,
 }
+
+/**
+ * @typedef {InstanceType<Token>} token
+ */

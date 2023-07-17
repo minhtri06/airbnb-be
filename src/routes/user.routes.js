@@ -11,9 +11,9 @@ const {
 
 router
     .route("/")
-    .get(auth({ requireRole: [ADMIN] }), controller.getUsers)
+    .get(auth({ allowedRoles: [ADMIN] }), controller.getUsers)
     .post(
-        auth({ requireRole: [ADMIN] }),
+        auth({ allowedRoles: [ADMIN] }),
         validate(validation.createAUser),
         controller.createUser,
     )
@@ -21,12 +21,12 @@ router
 router
     .route("/:userId")
     .get(
-        auth({ requireRole: [ADMIN] }),
+        auth({ allowedRoles: [ADMIN] }),
         validate(validation.getUserById),
         controller.getUserById,
     )
     .patch(
-        auth({ requireRole: [ADMIN] }),
+        auth({ allowedRoles: [ADMIN] }),
         validate(validation.updateUser),
         controller.updateUser,
     )

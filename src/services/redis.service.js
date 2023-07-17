@@ -2,13 +2,19 @@ const { User } = require("../models")
 const { redisClient } = require("../db")
 const { DEFAULT_EXPIRATION } = require("../configs/envConfig").redis
 
+/**
+ * Get user from redis, return null if not found
+ * @param {string} userId
+ * @returns {Promise<user | null>}
+ */
 const getUser = async (userId) => {
     const userObj = JSON.parse(await redisClient.get(`user:${userId}`))
     return userObj ? User.hydrate(userObj) : null
 }
 
 /**
- * @param {InstanceType<User>} user
+ * Cache user to redis
+ * @param {user} user
  */
 const cacheUser = async (user) => {
     await redisClient.setEx(
@@ -18,21 +24,32 @@ const cacheUser = async (user) => {
     )
 }
 
+/**
+ * Remove user from redis
+ * @param {string} userId
+ */
 const removeUser = async (userId) => {
     await redisClient.del(`user:${userId}`)
 }
 
+/**
+ * Get user from redis, if not found get from database,
+ * return null if not found in database
+ * @param {string} userId
+ * @returns {Promise<user | null>}
+ */
 const getOrCacheGetUser = async (userId) => {
     let user = await getUser(userId)
 
     if (!user) {
-        user = await User.findById(userId)
-
+        const userService = require("./user.service")
+        user = await userService.findUserById(userId)
         if (!user) {
             return null
         }
         cacheUser(user)
     }
+
     return user
 }
 
@@ -42,3 +59,7 @@ module.exports = {
     removeUser,
     getOrCacheGetUser,
 }
+
+/**
+ * @typedef {InstanceType<User>} user
+ */

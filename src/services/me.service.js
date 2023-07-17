@@ -4,7 +4,6 @@ const {
     file: { deleteStaticFile },
 } = require("../utils")
 const { User, Property } = require("../models")
-const userService = require("./user.service")
 
 const updateMyProfile = async (me, updateBody) => {
     updateBody = pickFields(
@@ -37,15 +36,7 @@ const replaceMyAvatar = async (me, file) => {
     return me.avatar
 }
 
-const getMyProperties = async (me) => {
-    const myProperties = await Property.find({ owner: me._id }).select(
-        "-images -description -facilities -accommodationGroups",
-    )
-    return myProperties
-}
-
 module.exports = {
     updateMyProfile,
     replaceMyAvatar,
-    getMyProperties,
 }
