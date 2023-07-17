@@ -2,7 +2,6 @@ const mongoose = require("mongoose")
 
 const { addressSchema, accommodationSchema } = require("./subdocs")
 const { toJSON, paginate } = require("./plugins")
-const { ENTIRE_HOUSE, SPECIFIC_ROOM } = require("../constants").accommodationTypes
 
 const { Schema } = mongoose
 
@@ -17,6 +16,8 @@ const propertySchema = new Schema(
         pageName: { type: String, unique: true, lowercase: true, required: true },
 
         score: { type: Number, min: 0, max: 10 },
+
+        sumScore: { type: Number, min: 0, default: 0, required: true },
 
         description: { type: String },
 
@@ -60,53 +61,6 @@ propertySchema.plugin(paginate)
 
 propertySchema.virtual("isAvailable")
 propertySchema.virtual("caller.isOwner")
-
-/**
- * Add current booking date to an accommodation so that bookIn is increasing
- * @param {string} propertyId
- * @param {string} accomId
- * @param {Object} newCBDate
- */
-propertySchema.statics.addCBDateToAccom = function (propertyId, accomId, newCBDate) {
-    const updateQuery = Property.updateOne(
-        { _id: propertyId },
-        {
-            $push: {
-                "accommodations.$[i].currentBookingDates": {
-                    $each: [newCBDate],
-                    $sort: { bookIn: 1 },
-                },
-            },
-        },
-        { arrayFilters: [{ "i._id": accomId }] },
-    )
-    return updateQuery
-}
-
-/**
- * Remove one currentBookingDates from an accommodation
- * @param {string} propertyId
- * @param {string} accomId
- * @param {string} removedCBDateId
- */
-propertySchema.statics.removeCBDateFromAccom = function (
-    propertyId,
-    accomId,
-    removedCBDateId,
-) {
-    const updateQuery = Property.updateOne(
-        { _id: propertyId },
-        {
-            $pull: {
-                "accommodations.$[i].currentBookingDates": {
-                    _id: removedCBDateId,
-                },
-            },
-        },
-        { arrayFilters: [{ "i._id": accomId }] },
-    )
-    return updateQuery
-}
 
 const Property = mongoose.model("Property", propertySchema)
 

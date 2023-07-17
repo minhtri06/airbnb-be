@@ -38,54 +38,6 @@ const reviewSchema = new Schema(
     { timestamps: true, optimisticConcurrency: true },
 )
 
-reviewSchema.path("score").set(function (newScore) {
-    this._previousScore = this.score
-    return newScore
-})
-
-reviewSchema.pre("save", async function (next) {
-    const review = this
-
-    if (review.isNew) {
-        // Re-evaluate property score
-        const property = await Property.findById(review.property)
-        if (!property) {
-            throw createMongooseValidationErr("property", "Property not found")
-        }
-
-        if (property.reviewCount === 0) {
-            property.score = review.score
-            property.reviewCount = 1
-        } else {
-            property.score =
-                (property.score * property.reviewCount + review.score) /
-                (property.reviewCount + 1)
-            property.reviewCount++
-        }
-
-        await property.save()
-    } else {
-        if (review.isModified("score")) {
-            // Re-evaluate property score
-            const property = await Property.findById(review.property)
-            if (!property) {
-                await Review.deleteOne({ _id: review._id })
-                throw createMongooseValidationErr("property", "Property not found")
-            }
-
-            property.score =
-                (property.score * property.reviewCount -
-                    review._previousScore +
-                    review.score) /
-                property.reviewCount
-
-            await property.save()
-        }
-    }
-
-    return next()
-})
-
 reviewSchema.plugin(toJSON)
 reviewSchema.plugin(paginate)
 

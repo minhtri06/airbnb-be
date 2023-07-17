@@ -35,6 +35,8 @@ const bookingSchema = new Schema(
             required: true,
         },
 
+        accomId: { type: Schema.Types.ObjectId, required: true },
+
         accomTitle: { type: String, required: true },
 
         accomType: {
@@ -42,8 +44,6 @@ const bookingSchema = new Schema(
             enum: [ENTIRE_HOUSE, SPECIFIC_ROOM],
             required: true,
         },
-
-        accomId: { type: Schema.Types.ObjectId, required: true },
 
         status: {
             type: String,

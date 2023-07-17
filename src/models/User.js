@@ -2,10 +2,9 @@ const mongoose = require("mongoose")
 const validator = require("validator")
 
 const { authTypes, genders } = require("../constants")
-const roles = require("../configs/roles")
+const { NORMAL_USER, ADMIN } = require("../configs/roles")
 const { toJSON, paginate } = require("./plugins")
 const moment = require("moment")
-const bcrypt = require("bcryptjs")
 const { addressSchema } = require("./subdocs")
 const { redisClient } = require("../db")
 
@@ -58,21 +57,12 @@ const userSchema = new Schema(
             private: true, // used by the toJSON plugin
         },
 
-        roles: {
-            type: [String],
-            default: [roles.NORMAL_USER],
-            enum: Object.values(roles),
+        role: {
+            type: String,
+            default: [NORMAL_USER],
+            enum: [NORMAL_USER, ADMIN],
             private: true,
-            validate(values) {
-                if (this.isModified("roles")) {
-                    // In case array have undefined value
-                    values.forEach((value) => {
-                        if (!value) {
-                            throw new Error(`Invalid role '${value}'`)
-                        }
-                    })
-                }
-            },
+            required: true,
         },
 
         avatar: { type: String },
@@ -104,21 +94,6 @@ userSchema.plugin(toJSON)
 userSchema.plugin(paginate)
 
 /**
- * Check if email is taken
- * @param {string} email
- * @param {ObjectId} excludedUserId - If given, specify a user to be excluded
- * @returns {Promise<boolean>}
- */
-userSchema.statics.isEmailTaken = async function (email, excludedUserId = undefined) {
-    const query = this.findOne({ email })
-    if (excludedUserId) {
-        query.where({ _id: { $ne: excludedUserId } })
-    }
-    const user = await query.exec()
-    return !!user
-}
-
-/**
  * Check if password matches user's password
  * @param {string} password
  * @returns {Promise<boolean>}
@@ -127,22 +102,6 @@ userSchema.methods.isPasswordMatch = async function (password) {
     const user = this
     return bcrypt.compare(password, user.password)
 }
-
-userSchema.pre("save", async function (next) {
-    const user = this
-    if (user.isModified("password")) {
-        user.password = await bcrypt.hash(user.password, 8)
-    }
-    return next()
-})
-
-userSchema.pre("save", async function (next) {
-    const user = this
-    if (user.authType === authTypes.GOOGLE) {
-        user.isEmailVerified = true
-    }
-    return next()
-})
 
 // Every time we save, we delete cache
 userSchema.post("save", async function (doc) {
