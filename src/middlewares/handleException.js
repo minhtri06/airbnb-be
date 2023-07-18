@@ -1,6 +1,8 @@
 const createError = require("http-errors")
 const { ValidationError } = require("mongoose").Error
-const { StatusCodes } = require("http-status-codes")
+const {
+    StatusCodes: { BAD_REQUEST, INTERNAL_SERVER_ERROR },
+} = require("http-status-codes")
 
 const { PRODUCTION } = require("../constants").nodeEnv
 const envConfig = require("../configs/envConfig")
@@ -8,6 +10,8 @@ const { deleteFile } = require("../utils").file
 
 /** @type {import('express').ErrorRequestHandler} */
 const handleException = async (err, req, res, next) => {
+    // Delete uploading files
+
     if (req.file) {
         deleteFile(req.file.path)
     }
@@ -17,31 +21,29 @@ const handleException = async (err, req, res, next) => {
         }
     }
 
+    // Response to the client
+
+    if (err instanceof createError.HttpError) {
+        return res.status(err.statusCode).json({ message: err.message })
+    }
+
+    if (err instanceof ValidationError) {
+        return res.status(BAD_REQUEST).json({ message: err.message.replaceAll('"', "'") })
+    }
+
+    if (err.code === 11000) {
+        const { keyValue } = err
+        const message = Object.keys(keyValue)
+            .map((key) => `${key} with value '${keyValue[key]}' already exists`)
+            .join(", ")
+        return res.status(BAD_REQUEST).json({ message })
+    }
+
     if (envConfig.NODE_ENV !== PRODUCTION) {
-        if (err instanceof createError.HttpError) {
-            return res.status(err.statusCode).json({ message: err.message })
-        } else if (err instanceof ValidationError || err.code === 11000) {
-            // Validation error or duplicate key error
-            return res
-                .status(StatusCodes.BAD_REQUEST)
-                .json({ message: err.message.replaceAll('"', "'") })
-        } else {
-            console.log(err)
-            return res
-                .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                .json({ message: err.message })
-        }
+        console.log(err)
+        return res.status(INTERNAL_SERVER_ERROR).json({ message: err.message })
     } else {
-        if (err instanceof createError.HttpError) {
-            return res.status(err.statusCode).json({ message: err.message })
-        } else if (err instanceof ValidationError || err.code === 11000) {
-            // Validation error or duplicate key error
-            return res.status(StatusCodes.BAD_REQUEST).json({ message: "Bad request" })
-        } else {
-            return res
-                .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                .json({ message: "Something went wrong" })
-        }
+        return res.status(INTERNAL_SERVER_ERROR).json({ message: "Something went wrong" })
     }
 }
 
