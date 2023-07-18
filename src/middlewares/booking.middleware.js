@@ -19,7 +19,10 @@ const requireToBeGuestOrPropertyOwner = ({ allowAdmin } = {}) => {
         if (allowAdmin && req.user.role === ADMIN) {
             return next()
         }
-        if (!user._id.equals(booking.guest) && !user._id.equals(booking.propertyOwner)) {
+        if (
+            !req.user._id.equals(req._booking.guest) &&
+            !req.user._id.equals(req._booking.propertyOwner)
+        ) {
             throw createError.Forbidden("Forbidden")
         }
         return next()

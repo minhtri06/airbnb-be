@@ -87,14 +87,14 @@ const updateReview = async (review, updateBody) => {
 
     let previousScore
     if (updateBody.score !== review.score) {
-        previousScore = updateBody.score
+        previousScore = review.score
     }
 
     Object.assign(review, updateBody)
 
     await review.save()
 
-    if (previousScore) {
+    if (previousScore !== undefined) {
         await PropertyScoreChange.insertMany([
             { scoreChange: -previousScore, property: review.property },
             { scoreChange: review.score, property: review.property },

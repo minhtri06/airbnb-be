@@ -79,8 +79,11 @@ const createBooking = async (body) => {
             status: "booked",
         })
     ) {
+        const bookInStr = moment(booking.bookIn).format("D-MM-YYYY")
+        const bookOutStr = moment(booking.bookOut).format("D-MM-YYYY")
+
         throw createError.NotAcceptable(
-            `Already have another booking between ${booking.bookIn} - ${booking.bookOut}`,
+            `Already have another booking between ${bookInStr} and ${bookOutStr}`,
         )
     }
 

@@ -6,10 +6,10 @@ const { BODY, QUERY, PARAMS, FILE } = require("../constants").request
 module.exports = {
     createBooking: {
         [BODY]: Joi.object({
-            bookIn: booking.bookIn.required(),
-            bookOut: booking.bookOut.required(),
+            bookIn: Joi.date().iso().greater(Date.now()).required(),
+            bookOut: Joi.date().iso().greater(Date.now()).required(),
             property: objectId.required(),
-            accomGroupId: objectId.required(),
+            accomId: objectId.required(),
         }),
     },
 
