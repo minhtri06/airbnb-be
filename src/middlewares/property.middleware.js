@@ -5,7 +5,7 @@ const { ADMIN } = require("../configs/roles")
 
 /** @type {middleware} */
 const getPropertyById = async (req, res, next) => {
-    req._property = await service.getOneProperty({ _id: req.params.propertyId })
+    req._property = await service.getPropertyById(req.params.propertyId)
     next()
 }
 
@@ -21,8 +21,7 @@ const getPropertyByPageName = async (req, res, next) => {
  * Get accommodation by id
  * @type {middleware} */
 const getAccommodationById = async (req, res, next) => {
-    const accom = service.getAccommodationById(req._property, req.params.accomId)
-    req._accom = accom
+    req._accom = service.getAccommodationById(req._property, req.params.accomId)
     return next()
 }
 

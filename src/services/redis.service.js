@@ -3,11 +3,11 @@ const { redisClient } = require("../db")
 const { DEFAULT_EXPIRATION } = require("../configs/envConfig").redis
 
 /**
- * Get user from redis, return null if not found
+ * find user from redis, return null if not found
  * @param {string} userId
  * @returns {Promise<user | null>}
  */
-const getUser = async (userId) => {
+const findUserById = async (userId) => {
     const userObj = JSON.parse(await redisClient.get(`user:${userId}`))
     return userObj ? User.hydrate(userObj) : null
 }
@@ -33,13 +33,13 @@ const removeUser = async (userId) => {
 }
 
 /**
- * Get user from redis, if not found get from database,
- * return null if not found in database
+ * Find user from redis. If not found, find from database.
+ * If not found in database, return null
  * @param {string} userId
  * @returns {Promise<user | null>}
  */
-const getOrCacheGetUser = async (userId) => {
-    let user = await getUser(userId)
+const findOrCacheFindUserById = async (userId) => {
+    let user = await findUserById(userId)
 
     if (!user) {
         const userService = require("./user.service")
@@ -54,10 +54,10 @@ const getOrCacheGetUser = async (userId) => {
 }
 
 module.exports = {
-    getUser,
+    findUserById,
     cacheUser,
     removeUser,
-    getOrCacheGetUser,
+    findOrCacheFindUserById,
 }
 
 /**

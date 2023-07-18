@@ -143,6 +143,19 @@ const cancelBooking = async (booking) => {
 }
 
 /**
+ * Cancel all bookings of an accommodation
+ * @param {property} property
+ * @param {accommodation} accom
+ */
+const cancelAllAccommodationBookings = async (property, accom) => {
+    accom.currentBookingDates = []
+    await Promise.all([
+        Booking.updateMany({ accomId: accom._id }, { $set: { status: "canceled" } }),
+        property.save(),
+    ])
+}
+
+/**
  * Paginate booking
  * @param {bookingFilter} filter
  * @param {queryOptions} queryOptions
@@ -178,12 +191,14 @@ module.exports = {
     getBookingById,
     createBooking,
     cancelBooking,
+    cancelAllAccommodationBookings,
     paginateBookings,
     findBookingsInMonth,
 }
 
 /**
- *  @typedef {InstanceType<import('../models/Booking')>} booking
+ * @typedef {InstanceType<import('../models/Booking')>} booking
+ * @typedef {InstanceType<import('../models/Property')>} property
  *
  * @typedef {Object} bookingFilter
  * @property {string} _id
@@ -202,4 +217,14 @@ module.exports = {
  * @property {string} select
  * @property {string} populate
  * @property {boolean} lean
+ *
+ * @typedef {Object} accommodation
+ * @property {string} _id
+ * @property {string} title
+ * @property {number} pricePerNight
+ * @property {number} maximumOfGuests
+ * @property { 'specific-room' | 'entire-house' } type
+ * @property {Object} bed
+ * @property {[]} rooms
+ * @property {[]} currentBookingDates
  */

@@ -9,7 +9,22 @@ const envSchema = Joi.object({
 
     NODE_ENV: Joi.string().valid(PRODUCTION, DEVELOPMENT, TEST).required(),
 
-    CLIENT_URL: Joi.string().required(),
+    SERVER_URL: Joi.string()
+        .required()
+        .custom((value, helpers) => {
+            if (value.endsWith("/")) {
+                return helpers.message("SERVER_URL in .env must not end with '/'")
+            }
+            return value
+        }),
+    CLIENT_URL: Joi.string()
+        .required()
+        .custom((value, helpers) => {
+            if (value.endsWith("/")) {
+                return helpers.message("CLIENT_URL in .env must not end with '/'")
+            }
+            return value
+        }),
 
     DEFAULT_PAGE_LIMIT: Joi.number().integer().required(),
 
@@ -40,6 +55,8 @@ if (error) {
 const envConfig = {
     PORT: envVars.PORT,
     NODE_ENV: envVars.NODE_ENV,
+
+    SERVER_URL: envVars.SERVER_URL,
     CLIENT_URL: envVars.CLIENT_URL,
 
     DEFAULT_PAGE_LIMIT: envVars.DEFAULT_PAGE_LIMIT,

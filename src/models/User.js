@@ -1,12 +1,12 @@
 const mongoose = require("mongoose")
 const validator = require("validator")
+const bcrypt = require("bcryptjs")
 
 const { authTypes, genders } = require("../constants")
 const { NORMAL_USER, ADMIN } = require("../configs/roles")
 const { toJSON, paginate } = require("./plugins")
 const moment = require("moment")
 const { addressSchema } = require("./subdocs")
-const { redisClient } = require("../db")
 
 const { Schema } = mongoose
 
@@ -59,7 +59,7 @@ const userSchema = new Schema(
 
         role: {
             type: String,
-            default: [NORMAL_USER],
+            default: NORMAL_USER,
             enum: [NORMAL_USER, ADMIN],
             private: true,
             required: true,
@@ -102,12 +102,6 @@ userSchema.methods.isPasswordMatch = async function (password) {
     const user = this
     return bcrypt.compare(password, user.password)
 }
-
-// Every time we save, we delete cache
-userSchema.post("save", async function (doc) {
-    const user = doc
-    await redisClient.del(`user:${user._id}`)
-})
 
 const User = mongoose.model("User", userSchema)
 

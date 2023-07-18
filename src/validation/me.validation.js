@@ -1,5 +1,5 @@
 const Joi = require("joi")
-const { user, query } = require("./common")
+const { user, query, property } = require("./common")
 const { BODY, QUERY, PARAMS } = require("../constants").request
 
 module.exports = {
@@ -17,6 +17,7 @@ module.exports = {
         [QUERY]: Joi.object({
             limit: query.limit,
             page: query.page,
+            isClosed: property.isClosed.default(false),
         }),
     },
 

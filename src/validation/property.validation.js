@@ -7,33 +7,41 @@ const {
 } = require("../constants")
 const { property, district, province, booking, objectId, query } = require("./common")
 
-const { accommodationGroups } = property
-const { accommodations } = accommodationGroups
+const { accommodations, address } = property
+const { bed, rooms } = accommodations
 
 module.exports = {
     createProperty: {
         [BODY]: Joi.object({
             title: property.title.required(),
+            isClosed: property.isClosed.required().default(false),
             pageName: property.pageName.required(),
-            address: property.address.required(),
-            description: property.description,
-            accommodationGroups: Joi.array().items({
-                title: accommodationGroups.title.required(),
-                pricePerNight: accommodationGroups.pricePerNight.required(),
-                type: accommodationGroups.type.required(),
-                bedType: accommodationGroups.bedType,
-                accommodations: Joi.array()
-                    .min(1)
-                    .items({
-                        roomCode: accommodations.roomCode,
-
-                        // Just for entire-house
-                        rooms: Joi.array().min(1).items({
-                            bedType: accommodations.rooms.bedType.required(),
-                            roomType: accommodations.rooms.roomType.required(),
-                        }),
-                    })
-                    .required(),
+            description: property.description.required(),
+            facilityCodes: property.facilityCodes.required(),
+            address: Joi.object({
+                address: address.address.required(),
+                district: address.district.required(),
+                province: address.province.required(),
+            }).required(),
+            accommodations: Joi.array().items({
+                title: accommodations.title.required(),
+                pricePerNight: accommodations.pricePerNight.required(),
+                maximumOfGuests: accommodations.maximumOfGuests.required(),
+                type: accommodations.type.required(),
+                bed: Joi.object({
+                    double: bed.double.required(),
+                    queen: bed.queen.required(),
+                    single: bed.single.required(),
+                    sofaBed: bed.sofaBed.required(),
+                }),
+                rooms: Joi.array().items({
+                    bed: Joi.object({
+                        double: bed.double.required(),
+                        queen: bed.queen.required(),
+                        single: bed.single.required(),
+                        sofaBed: bed.sofaBed.required(),
+                    }),
+                }),
             }),
         }),
     },
@@ -42,8 +50,8 @@ module.exports = {
         [QUERY]: Joi.object({
             districtId: objectId,
             provinceId: objectId,
-            bookIn: Joi.date().iso(),
-            bookOut: Joi.date().iso(),
+            bookIn: Joi.date().iso().greater(Date.now()),
+            bookOut: Joi.date().iso().greater(Date.now()),
             page: query.page,
             limit: query.limit,
         }),
@@ -54,8 +62,8 @@ module.exports = {
             propertyId: objectId.required(),
         }),
         [QUERY]: Joi.object({
-            bookIn: booking.bookIn,
-            bookOut: booking.bookOut,
+            bookIn: Joi.date().iso().greater(Date.now()),
+            bookOut: Joi.date().iso().greater(Date.now()),
         }),
     },
 
@@ -64,33 +72,47 @@ module.exports = {
             pageName: property.pageName.required(),
         }),
         [QUERY]: Joi.object({
-            bookIn: booking.bookIn,
-            bookOut: booking.bookOut,
+            bookIn: Joi.date().iso().greater(Date.now()),
+            bookOut: Joi.date().iso().greater(Date.now()),
         }),
     },
 
-    addAccommodationGroup: {
-        [BODY]: Joi.object({
-            newAccommodationGroup: Joi.object({
-                title: accommodationGroups.title.required(),
-                pricePerNight: accommodationGroups.pricePerNight.required(),
-                type: accommodationGroups.type.required(),
-                bedType: accommodationGroups.bedType,
-                accommodations: Joi.array()
-                    .min(1)
-                    .items({
-                        roomCode: accommodations.roomCode,
-
-                        rooms: Joi.array().min(1).items({
-                            bedType: accommodations.rooms.bedType.required(),
-                            roomType: accommodations.rooms.roomType.required(),
-                        }),
-                    })
-                    .required(),
-            }).required(),
-        }),
+    updateProperty: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            title: property.title,
+            isClosed: property.isClosed,
+            pageName: property.pageName,
+            description: property.description,
+            facilityCodes: property.facilityCodes,
+        }),
+    },
+
+    addAccommodation: {
+        [PARAMS]: Joi.object({
+            propertyId: objectId.required(),
+        }),
+        [BODY]: Joi.object({
+            title: accommodations.title.required(),
+            pricePerNight: accommodations.pricePerNight.required(),
+            maximumOfGuests: accommodations.maximumOfGuests.required(),
+            type: accommodations.type.required(),
+            bed: Joi.object({
+                double: bed.double.required(),
+                queen: bed.queen.required(),
+                single: bed.single.required(),
+                sofaBed: bed.sofaBed.required(),
+            }),
+            rooms: Joi.array().items({
+                bed: Joi.object({
+                    double: bed.double.required(),
+                    queen: bed.queen.required(),
+                    single: bed.single.required(),
+                    sofaBed: bed.sofaBed.required(),
+                }),
+            }),
         }),
     },
 
@@ -101,21 +123,6 @@ module.exports = {
         [QUERY]: Joi.object({
             limit: query.limit,
             page: query.page,
-        }),
-    },
-
-    addAccommodations: {
-        [PARAMS]: Joi.object({
-            propertyId: objectId.required(),
-            accomGroupId: objectId.required(),
-        }),
-        [BODY]: Joi.object({
-            newAccommodations: Joi.array()
-                .min(1)
-                .items({
-                    roomCode: accommodations.roomCode.required(),
-                })
-                .required(),
         }),
     },
 
@@ -134,51 +141,42 @@ module.exports = {
         }),
     },
 
-    deleteAccomGroup: {
+    updateAccommodation: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
-            accomGroupId: objectId.required(),
-        }),
-    },
-
-    deleteAccom: {
-        [PARAMS]: Joi.object({
-            propertyId: objectId.required(),
-            accomGroupId: objectId.required(),
             accomId: objectId.required(),
         }),
+        [BODY]: Joi.object({
+            title: accommodations.title,
+            pricePerNight: accommodations.pricePerNight,
+            maximumOfGuests: accommodations.maximumOfGuests,
+            bed: Joi.object({
+                double: bed.double.required(),
+                queen: bed.queen.required(),
+                single: bed.single.required(),
+                sofaBed: bed.sofaBed.required(),
+            }),
+            rooms: Joi.array().items({
+                bed: Joi.object({
+                    double: bed.double.required(),
+                    queen: bed.queen.required(),
+                    single: bed.single.required(),
+                    sofaBed: bed.sofaBed.required(),
+                }),
+            }),
+        }),
     },
 
-    updateProperty: {
+    deleteAccommodation: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
-        }),
-        [BODY]: Joi.object({
-            title: property.title,
-            isClosed: property.isClosed,
-            pageName: property.pageName,
-            description: property.description,
-            facilities: property.facilities,
-            address: property.address,
-        }),
-    },
-
-    updateAccomGroup: {
-        [PARAMS]: Joi.object({
-            propertyId: objectId.required(),
-            accomGroupId: objectId.required(),
-        }),
-        [BODY]: Joi.object({
-            title: accommodationGroups.title,
-            pricePerNight: accommodationGroups.pricePerNight,
-            bedType: accommodationGroups.bedType,
+            accomId: objectId.required(),
         }),
     },
 
     getAccommodationBookings: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
-            accomGroupId: objectId.required(),
             accomId: objectId.required(),
         }),
         [QUERY]: Joi.object({

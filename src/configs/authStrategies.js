@@ -17,7 +17,7 @@ const jwtStrategy = new JwtStrategy(
             if (payload.type !== ACCESS) {
                 throw createError.BadRequest("Invalid token type")
             }
-            const user = await redisService.getOrCacheGetUser(payload.sub)
+            const user = await redisService.findOrCacheFindUserById(payload.sub)
             if (!user) {
                 throw createError.Unauthorized("Unauthorized")
             }

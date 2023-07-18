@@ -1,9 +1,18 @@
 const moment = require("moment")
 const mongoose = require("mongoose")
 
-const { District, Province, User, Property, Booking, Review } = require("../models")
+const {
+    District,
+    Province,
+    User,
+    Property,
+    Booking,
+    Review,
+    Token,
+    PropertyScoreChange,
+} = require("../models")
 const { bookingService, userService, reviewService } = require("../services")
-const { connectMongoDb, redisClient } = require("../db")
+const { connectMongoDb } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
 
@@ -61,7 +70,7 @@ const genReviews = (numOfReviews, users, propertyId) => {
 // Seeders
 const seedDivisions = async () => {
     for (let province of provinces) {
-        const provinceObj = await Province.create({
+        const provinceDoc = await Province.create({
             name: province.name,
             divisionType: province.division_type,
             code: province.code,
@@ -73,7 +82,7 @@ const seedDivisions = async () => {
                     divisionType: district.division_type,
                     code: district.code,
                     provinceCode: district.province_code,
-                    province: provinceObj._id,
+                    province: provinceDoc._id,
                 }
             }),
         )
@@ -81,7 +90,7 @@ const seedDivisions = async () => {
 }
 
 const seedUsers = async () => {
-    const users = [
+    const usersData = [
         {
             name: "Minh Tri",
             email: "pmtri.admin@email.com",
@@ -210,9 +219,8 @@ const seedUsers = async () => {
             isEmailVerified: true,
         },
     ]
-    for (let user of users) {
-        await userService.createUser(user)
-    }
+    await Promise.all(usersData.map((userData) => userService.createUser(userData)))
+    await User.updateMany({}, { $set: { isEmailVerified: true } })
 }
 
 const seedProperty = async () => {
@@ -365,12 +373,13 @@ const truncateData = async () => {
         Property.deleteMany(),
         Booking.deleteMany(),
         Review.deleteMany(),
+        Token.deleteMany(),
+        PropertyScoreChange.deleteMany(),
     ])
 }
 
 // Run seed
 connectMongoDb().then(async () => {
-    await redisClient.connect()
     await truncateData()
     await seedDivisions()
     await seedUsers()
@@ -378,6 +387,5 @@ connectMongoDb().then(async () => {
     await seedBooking()
     await seedReviews()
     console.log("Done")
-    await redisClient.quit()
     await mongoose.connection.close()
 })

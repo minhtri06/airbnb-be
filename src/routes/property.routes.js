@@ -38,20 +38,19 @@ router
     )
     .patch(
         auth(),
-        requireToBePropertyOwner(),
+        requireToBePropertyOwner({ allowAdmin: true }),
         validate(validation.updateProperty),
         controller.updateProperty,
     )
 
-router
-    .route("/:propertyId/thumbnails")
-    .put(
-        uploadImage.single("thumbnail"),
-        auth(),
-        validate(validation.replaceThumbnail),
-        requireToBePropertyOwner(),
-        controller.replaceThumbnail,
-    )
+router.put(
+    "/:propertyId/thumbnail",
+    uploadImage.single("thumbnail"),
+    auth(),
+    validate(validation.replaceThumbnail),
+    requireToBePropertyOwner(),
+    controller.replaceThumbnail,
+)
 
 router
     .route("/:propertyId/images")
@@ -78,7 +77,7 @@ router
     .route("/:propertyId/accommodations")
     .post(
         auth(),
-        validate(validation.addAccommodationGroup),
+        validate(validation.addAccommodation),
         requireToBePropertyOwner(),
         controller.addAccommodation,
     )
@@ -87,14 +86,14 @@ router
     .route("/:propertyId/accommodations/:accomId")
     .patch(
         auth(),
-        validate(validation.updateAccomGroup),
+        validate(validation.updateAccommodation),
         requireToBePropertyOwner(),
         controller.updateAccommodation,
     )
     .delete(
         auth(),
-        validate(validation.deleteAccomGroup),
-        requireToBePropertyOwner(),
+        validate(validation.deleteAccommodation),
+        requireToBePropertyOwner({ allowAdmin: true }),
         controller.deleteAccommodation,
     )
 

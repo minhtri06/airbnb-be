@@ -19,10 +19,6 @@ const propertySchema = new Schema(
 
         sumScore: { type: Number, min: 0, default: 0, required: true },
 
-        description: { type: String },
-
-        facilityCodes: { type: [String] },
-
         reviewCount: {
             type: Number,
             get: function (value) {
@@ -35,6 +31,10 @@ const propertySchema = new Schema(
             min: 0,
             required: true,
         },
+
+        description: { type: String },
+
+        facilityCodes: { type: [String] },
 
         address: { type: addressSchema, default: () => ({}), required: true },
 

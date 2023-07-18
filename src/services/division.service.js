@@ -43,6 +43,11 @@ const getProvinceById = async (provinceId) => {
     return province
 }
 
+/**
+ * Find provinces
+ * @param {provinceFilter} filter
+ * @returns {Promise<province[]>}
+ */
 const findProvinces = async (filter) => {
     return Province.find(filter)
 }
@@ -89,7 +94,7 @@ const getDistrictById = async (districtId) => {
 }
 
 const findDistricts = async (filter) => {
-    return Province.find(filter)
+    return District.find(filter)
 }
 
 module.exports = {

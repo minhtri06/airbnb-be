@@ -6,7 +6,10 @@ const envConfig = require("../configs/envConfig")
 const {
     authTypes: { LOCAL, GOOGLE },
 } = require("../constants")
-const { pickFields } = require("../utils")
+const {
+    pickFields,
+    file: { deleteStaticFile },
+} = require("../utils")
 
 /**
  * Hash password
@@ -145,7 +148,7 @@ const createUser = async (body) => {
  * @returns {Promise<user>}
  */
 const updateUser = async (user, updateBody) => {
-    updateBody.updateBody = pickFields(
+    updateBody = pickFields(
         updateBody,
         "name",
         "isEmailVerified",
@@ -161,9 +164,39 @@ const updateUser = async (user, updateBody) => {
     }
 
     Object.assign(user, updateBody)
+
     await user.save()
 
+    // Remove cache
+    const redisService = require("./redis.service")
+    await redisService.removeUser(user._id)
+
     return user
+}
+
+/**
+ * Replace user avatar
+ * @param {user} user
+ * @param {{}} file
+ */
+const replaceUserAvatar = async (user, file) => {
+    let oldAvatar
+    if (user.avatar) {
+        oldAvatar = user.avatar.split(envConfig.SERVER_URL)[1]
+    }
+
+    user.avatar = `${envConfig.SERVER_URL}/img/${file.filename}`
+    await user.save()
+
+    if (oldAvatar) {
+        await deleteStaticFile(oldAvatar)
+    }
+
+    // Remove cache
+    const redisService = require("./redis.service")
+    await redisService.removeUser(user._id)
+
+    return user.avatar
 }
 
 module.exports = {
@@ -175,6 +208,7 @@ module.exports = {
     paginateUsers,
     createUser,
     updateUser,
+    replaceUserAvatar,
 }
 
 /**

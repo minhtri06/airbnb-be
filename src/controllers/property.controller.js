@@ -27,9 +27,9 @@ const getProperty = async (req, res) => {
 
 /** @type {controller} */
 const addAccommodation = async (req, res) => {
-    const { accommodation } = req.body
-    await service.addAccommodation(req._property, accommodation)
-    return res.json({ property })
+    await service.addAccommodation(req._property, req.body)
+    const accommodations = req._property.accommodations
+    return res.json({ accommodation: accommodations[accommodations.length - 1] })
 }
 
 /** @type {controller} */
@@ -53,6 +53,9 @@ const deleteImages = async (req, res) => {
 
 /** @type {controller} */
 const deleteAccommodation = async (req, res) => {
+    if (req._accom.currentBookingDates.length !== 0) {
+        await bookingService.cancelAllAccommodationBookings(req._property, req._accom)
+    }
     await service.deleteAccommodation(req._property._id, req._accom._id)
     return res.status(StatusCodes.NO_CONTENT).send()
 }

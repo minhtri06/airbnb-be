@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const { Schema } = mongoose
 
 const bedSchema = new Schema({
+    _id: false,
+
     double: { type: Number, min: 0, max: 20, default: 0, required: true },
 
     queen: { type: Number, min: 0, max: 20, default: 0, required: true },

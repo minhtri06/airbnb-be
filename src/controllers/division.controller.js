@@ -11,8 +11,11 @@ const getProvinces = async (req, res) => {
 
 /** @type {controller} */
 const getDistricts = async (req, res) => {
-    req.query = pickFields(req.query, "provinceCode", "provinceId")
-    const districts = await service.findDistricts(req.query)
+    req.query.province = req.query.provinceId
+    const filter = pickFields(req.query, "provinceCode", "province")
+
+    const districts = await service.findDistricts(filter)
+
     return res.json({ districts })
 }
 

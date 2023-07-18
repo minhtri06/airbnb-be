@@ -82,7 +82,7 @@ const updateProperty = async (property, updateBody) => {
         "isClosed",
         "pageName",
         "description",
-        "facilities",
+        "facilityCodes",
     )
     Object.assign(property, updateBody)
     return property.save()
@@ -163,6 +163,18 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
     }
 }
 
+/**
+ * Search properties
+ * @param {{
+ *   districtId,
+ *   provinceId,
+ *   bookIn,
+ *   bookOut,
+ *   page,
+ *   limit,
+ * }} param0
+ * @returns {Promise<property>}
+ */
 const searchProperties = async ({
     districtId,
     provinceId,
@@ -173,7 +185,7 @@ const searchProperties = async ({
 }) => {
     const query = Property.where({ isClosed: false })
         .lean()
-        .select("-images -description -facilities")
+        .select("-images -description -facilityCodes")
         .sort("-score")
 
     if (districtId) {
@@ -228,14 +240,17 @@ const searchProperties = async ({
  * @param {Object} thumbnailFile
  */
 const replaceThumbnail = async (property, thumbnailFile) => {
-    const oldThumbnail = property.thumbnail
-    property.thumbnail = `/img/${thumbnailFile.filename}`
+    const oldThumbnail = property.thumbnail.split(envConfig.SERVER_URL)[1]
+    property.thumbnail = `${envConfig.SERVER_URL}/img/${thumbnailFile.filename}`
+
     await property.save()
+
     // Delete old file after saving because saving may fail.
     // If we delete first, we may lose the old file
     if (oldThumbnail) {
         deleteStaticFile(oldThumbnail)
     }
+
     return property.thumbnail
 }
 
@@ -248,9 +263,13 @@ const addImages = async (property, imageFiles) => {
     if (!imageFiles) {
         throw createError.BadRequest("Images are required")
     }
-    const newImages = imageFiles.map((file) => `/img/${file.filename}`)
+
+    const newImages = imageFiles.map(
+        (file) => `${envConfig.SERVER_URL}/img/${file.filename}`,
+    )
     property.images.push(...newImages)
     await property.save()
+
     return newImages
 }
 
@@ -263,16 +282,18 @@ const deleteImages = async (property, deletedIndexes) => {
     if (deletedIndexes.length > 100) {
         throw createError.BadRequest("deletedIndexes length excess 100")
     }
+
     const deletedImgs = []
     property.images = property.images.filter((image, index) => {
         if (deletedIndexes.includes(index)) {
-            deletedImgs.push(image)
+            deletedImgs.push(image.split(envConfig.SERVER_URL)[1])
             return false
         }
         return true
     })
     await property.save()
     await deleteManyStaticFiles(deletedImgs)
+
     return property.images
 }
 
@@ -286,6 +307,17 @@ const addAccommodation = async (property, newAccom) => {
     if (!newAccom) {
         throw createError.BadRequest("Accommodation is required")
     }
+
+    newAccom = pickFields(
+        newAccom,
+        "title",
+        "pricePerNight",
+        "maximumOfGuests",
+        "type",
+        "bed",
+        "rooms",
+    )
+
     property.accommodations.push(newAccom)
     return property.save()
 }
@@ -296,7 +328,7 @@ const addAccommodation = async (property, newAccom) => {
  * @param {string} accomId
  * @returns {accommodation}
  */
-const getAccommodationById = async (property, accomId) => {
+const getAccommodationById = (property, accomId) => {
     const accom = property.accommodations.id(accomId)
     if (!accom) {
         throw createError.NotFound("Accommodation not found")

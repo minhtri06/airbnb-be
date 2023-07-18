@@ -1,5 +1,7 @@
 const createError = require("http-errors")
-const { meService: service, bookingService, propertyService } = require("../services")
+
+const { userService, bookingService, propertyService } = require("../services")
+const { pickFields } = require("../utils")
 
 /** @type {controller} */
 const getMyProfile = async (req, res) => {
@@ -8,22 +10,30 @@ const getMyProfile = async (req, res) => {
 
 /** @type {controller} */
 const updateMyProfile = async (req, res) => {
-    const myProfile = await service.updateMyProfile(req.user, req.body)
+    const myProfile = await userService.updateUser(req.user, req.body)
     return res.json({ myProfile })
 }
 
 /** @type {controller} */
 const replaceMyAvatar = async (req, res) => {
-    const avatar = await service.replaceMyAvatar(req.user, req.file)
+    if (!req.file) {
+        throw createError.BadRequest("avatar is required")
+    }
+    const avatar = await userService.replaceUserAvatar(req.user, req.file)
     return res.json({ avatar })
 }
 
 /** @type {controller} */
 const getMyProperties = async (req, res) => {
-    req.query.select = "-images -description -facilities -owner -accommodationGroups"
+    const filter = pickFields(req.query, "isClosed")
+    const queryOptions = pickFields(req.query, "limit", "page")
+
     const properties = await propertyService.paginateProperties(
-        { owner: req.user._id },
-        req.query,
+        { owner: req.user._id, ...filter },
+        {
+            select: "-images -description -facilityCodes -owner -accommodationGroups",
+            ...queryOptions,
+        },
     )
     return res.json({ properties })
 }
