@@ -7,7 +7,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Sơn Hùng Hotel Đà Lạt! To save at this property, all you have to do is sign in.\n\nSơn Hùng Hotel Đà Lạt is set in Da Lat, within 2 km of Dalat Palace Golf Club and 1.9 km of Lam Vien Square. The property is located 2.1 km from Xuan Huong Lake, 2.2 km from Dalat Flower Gardens and 2.2 km from Yersin Park Da Lat. The accommodation offers room service, a 24-hour front desk and luggage storage for guests.\n\nAt the hotel, all rooms are fitted with a desk and a flat-screen TV. With a private bathroom fitted with a bidet and free toiletries, rooms at Sơn Hùng Hotel Đà Lạt also have free WiFi, while certain rooms also offer a city view. At the accommodation all rooms include bed linen and towels.\n\nTruc Lam Temple is 6.4 km from Sơn Hùng Hotel Đà Lạt, while Tuyen Lam Lake is 6.5 km from the property. The nearest airport is Lien Khuong Airport, 28 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
@@ -36,14 +36,14 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Bazan Hotel Dalat! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.6 km from Yersin Park Da Lat, Bazan Hotel Dalat offers accommodation with a garden, free private parking and a shared lounge. This 3-star hotel offers room service and a concierge service. The accommodation features a 24-hour front desk, airport transfers, a shared kitchen and free WiFi throughout the property.\n\nAll guest rooms in the hotel are fitted with a flat-screen TV. Featuring a private bathroom with a bidet and free toiletries, some units at Bazan Hotel Dalat also feature a city view. At the accommodation the rooms are equipped with bed linen and towels.\n\nXuan Huong Lake is 1.8 km from Bazan Hotel Dalat, while Lam Vien Square is 1.8 km from the property. The nearest airport is Lien Khuong Airport, 25 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
       "Free parking",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Garden"
     ],
@@ -68,7 +68,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Hera Boutique Hotel! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.4 km from Lam Vien Square, Hera Boutique Hotel offers accommodation with a garden, private parking, a shared lounge and a terrace. With free WiFi, this 3-star hotel has a restaurant and a bar. The accommodation provides a 24-hour front desk, a concierge service and currency exchange for guests.\n\nAt the hotel every room includes a seating area, a flat-screen TV with cable channels, a safety deposit box and a private bathroom with a shower, free toiletries and a hairdryer. The rooms come with a kettle, while certain rooms will provide you with a balcony and others also provide guests with garden views. At Hera Boutique Hotel all rooms come with bed linen and towels.\n\nThe accommodation offers an à la carte or Asian breakfast.\n\nPopular points of interest near Hera Boutique Hotel include Xuan Huong Lake, Yersin Park Da Lat and Hang Nga Crazy House. The nearest airport is Lien Khuong, 27 km from the hotel, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -101,7 +101,12 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Feliz Dalat Homestay! To save at this property, all you have to do is sign in.\n\nBoasting a shared lounge and views of city, Feliz Dalat Homestay is a sustainable aparthotel set in Da Lat, 1.6 km from Lam Vien Square. The air-conditioned accommodation is 1.8 km from Xuan Huong Lake. The accommodation offers a lift, full-day security and luggage storage for guests.\n\nAll units in the aparthotel are equipped with a flat-screen TV with streaming services. With a private bathroom fitted with a walk-in shower and slippers, units at the aparthotel also feature free WiFi, while some rooms also feature a balcony. At the aparthotel, units come with bed linen and towels.\n\nA car rental service is available at the aparthotel.\n\nYersin Park Da Lat is 1.9 km from Feliz Dalat Homestay, while Dalat Palace Golf Club is 2.5 km from the property. The nearest airport is Lien Khuong, 28 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": ["Non-smoking rooms", "Airport shuttle", "Free WiFi", "Family rooms"],
+    "facilityCodes": [
+      "Non-smoking rooms",
+      "Airport shuttle",
+      "Free WiFi",
+      "Family rooms"
+    ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/403210649.jpg?k=658d61831602e0145011c5a925212a5fa9f1907cd8453f99ea5a3b6aea7d5923&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/403210649.jpg?k=658d61831602e0145011c5a925212a5fa9f1907cd8453f99ea5a3b6aea7d5923&o=&hp=1",
@@ -123,14 +128,14 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Raon Villa! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.6 km from Dalat Palace Golf Club, Raon Villa offers accommodation with a garden, free private parking, a shared lounge and a terrace. This 3-star hotel offers room service and a concierge service. The accommodation features a 24-hour front desk, airport transfers, a shared kitchen and free WiFi.\n\nAt the hotel, all rooms are equipped with a desk. The rooms are equipped with a kettle and a private bathroom with a bidet and free toiletries, while some rooms also feature a kitchenette fitted with a stovetop. At Raon Villa the rooms are fitted with bed linen and towels.\n\nThe area is popular for hiking, and bike hire is available at this 3-star hotel.\n\nDalat Flower Gardens is 2.1 km from the accommodation, while Xuan Huong Lake is 3.8 km from the property. The nearest airport is Lien Khuong Airport, 30 km from Raon Villa.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
       "Free parking",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Garden",
       "Bar"
@@ -156,16 +161,16 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Vuon Xuan Hotel! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.6 km from Yersin Park Da Lat, Vuon Xuan Hotel offers accommodation with a garden, free private parking and a terrace. This 3-star hotel offers a shared kitchen and room service. The accommodation features a 24-hour front desk, a concierge service and organising tours for guests.\n\nThe units at the hotel come with a seating area, a flat-screen TV with cable channels and a private bathroom with free toiletries and a bidet. All rooms have a kettle, while certain rooms here will provide you with a balcony and others also provide guests with city views. At Vuon Xuan Hotel every room has bed linen and towels.\n\nXuan Huong Lake is 1.7 km from the accommodation, while Lam Vien Square is 1.8 km away. The nearest airport is Lien Khuong, 25 km from Vuon Xuan Hotel, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free parking",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Garden",
-      "BBQ facilities",
+      "BBQ facilityCodes",
       "Terrace"
     ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/408981268.jpg?k=c705bbb624043b0065ffa4cd8ca0214d6d0bb6a21af608a23ffab2f7294ef65b&o=&hp=1",
@@ -189,14 +194,14 @@
     "displayLocation": "Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at TTR Central Apart Hotel! To save at this property, all you have to do is sign in.\n\nWith Lam Vien Square reachable in 1.8 km, TTR Central Apart Hotel provides accommodation, a restaurant, a garden, a shared lounge and a terrace. Both WiFi and private parking are available at the apartment free of charge.\n\nTTR Central Apart Hotel provides guests with a patio, city views, a seating area, a flat-screen TV, a fully equipped kitchen with a fridge and an oven, and a private bathroom with shower and free toiletries. A microwave, a minibar and stovetop are also provided, as well as a kettle.\n\nA car rental service is available at the accommodation.\n\nXuan Huong Lake is 2.1 km from TTR Central Apart Hotel, while Yersin Park Da Lat is 2.2 km away. The nearest airport is Lien Khuong, 28 km from the apartment, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
       "Free parking",
       "Family rooms",
       "Restaurant",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Garden",
       "Heating"
@@ -222,7 +227,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Thanh Thanh Premier Dalat Hotel! To save at this property, all you have to do is sign in.\n\nLocated in Da Lat and with Lam Vien Square reachable within 1.7 km, Thanh Thanh Premier Dalat Hotel provides concierge services, non-smoking rooms, a restaurant, free WiFi throughout the property and a bar. This 3-star hotel offers room service and a 24-hour front desk. The accommodation features airport transfers, while a car rental service is also available.\n\nGuest rooms are equipped with a flat-screen TV with cable channels, fridge, a kettle, a shower, free toiletries and a desk. Each room comes with a private bathroom with a hairdryer, while certain rooms include a terrace and others also offer city views. At the hotel the rooms come with bed linen and towels.\n\nThe daily breakfast offers buffet, continental or Asian options.\n\nThe area is popular for hiking and fishing, and bike hire is available at this 3-star hotel.\n\nXuan Huong Lake is 1.9 km from Thanh Thanh Premier Dalat Hotel, while Yersin Park Da Lat is 2 km away. The nearest airport is Lien Khuong Airport, 28 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -230,7 +235,7 @@
       "Family rooms",
       "Room service",
       "Restaurant",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "Bar (Temporarily closed)",
       "Superb breakfast"
     ],
@@ -255,7 +260,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Lavie Villa! To save at this property, all you have to do is sign in.\n\nLocated 2.8 km from Yersin Park Da Lat, Lavie Villa offers a garden, a shared lounge and air-conditioned accommodation with a balcony and free WiFi.\n\nThe villa provides guests with a terrace, city views, a seating area, cable flat-screen TV, a fully equipped kitchen with a fridge and an oven, and a private bathroom with bidet and free toiletries. For added convenience, the property can provide towels and bed linen for an extra charge.\n\nLavie Villa offers a barbecue.\n\nA car rental service is available at the accommodation.\n\nXuan Huong Lake is 2.8 km from Lavie Villa, while Lam Vien Square is 3.1 km away. The nearest airport is Lien Khuong, 25 km from the villa, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -265,7 +270,7 @@
       "24-hour front desk",
       "Garden",
       "Heating",
-      "BBQ facilities"
+      "BBQ facilityCodes"
     ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249212762.jpg?k=f2db871f6071336c78666f46ca864a4fc59674f638726eb823b56ebb0e3ea960&o=&hp=1",
     "images": [
@@ -288,17 +293,17 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Raon Dalat! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.9 km from Dalat Palace Golf Club, Raon Dalat offers accommodation with a garden, free private parking, a shared lounge and a terrace. This 3-star hotel offers room service and a concierge service. The accommodation provides a 24-hour front desk, airport transfers, a shared kitchen and free WiFi throughout the property.\n\nAt the hotel, every room includes a desk. Featuring a private bathroom with a bidet and a hairdryer, certain units at Raon Dalat also provide guests with a city view. At the accommodation every room has bed linen and towels.\n\nThe area is popular for hiking and cycling, and car hire is available at this 3-star hotel.\n\nDalat Flower Gardens is 2.4 km from Raon Dalat, while Xuan Huong Lake is 4.2 km away. The nearest airport is Lien Khuong Airport, 31 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
       "Free parking",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Garden",
-      "BBQ facilities"
+      "BBQ facilityCodes"
     ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/467682362.jpg?k=89f693efe75ab9b25fa6cc55e914ed1e7ca1038332ed763659968fe8dde5c42f&o=&hp=1",
     "images": [
@@ -321,7 +326,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at La Fleur 2 Luxury Garden Hotel! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 2.8 km from Lam Vien Square, La Fleur 2 Luxury Garden Hotel offers accommodation with a garden, free private parking, a shared lounge and a terrace. Offering a restaurant, the property also has a bar, as well as a hot tub. The accommodation features a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nThe units at the hotel come with a seating area, a flat-screen TV with cable channels and a private bathroom with free toiletries and a bidet. Rooms are equipped with a kettle, while selected rooms here will provide you with a balcony and others also have city views. At La Fleur 2 Luxury Garden Hotel all rooms are equipped with bed linen and towels.\n\nA buffet, à la carte or American breakfast can be enjoyed at the property.\n\nThe accommodation offers a children's playground.\n\nTruc Lam Temple is 2.8 km from La Fleur 2 Luxury Garden Hotel, while Tuyen Lam Lake is 2.9 km away. The nearest airport is Lien Khuong Airport, 26 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -329,7 +334,7 @@
       "Family rooms",
       "Room service",
       "Restaurant",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "Bar",
       "Breakfast"
     ],
@@ -354,7 +359,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at N'Queen Villa! To save at this property, all you have to do is sign in.\n\nFeaturing free bikes and views of quiet street, N'Queen Villa is a sustainable aparthotel located in Da Lat, 800 metres from Xuan Huong Lake. There is a private entrance at the aparthotel for the convenience of those who stay. The aparthotel provides city views, a sun terrace, a 24-hour front desk, and free WiFi is available throughout the property.\n\nThe units come with parquet floors and feature a fully equipped kitchen with a microwave, a dining area, a flat-screen TV with satellite channels, and a private bathroom with walk-in shower and slippers. A fridge, a stovetop and minibar are also featured, as well as a kettle. At the aparthotel, all units include bed linen and towels.\n\nThere is a snack bar, and a minimarket is also available.\n\nGuests at the aparthotel will be able to enjoy activities in and around Da Lat, like cycling and hiking.\n\nPopular points of interest near N'Queen Villa include Yersin Park Da Lat, Lam Vien Square and Dalat Flower Gardens. The nearest airport is Lien Khuong, 30 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Airport shuttle",
       "Free WiFi",
       "Free parking",
@@ -385,7 +390,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": 2,
     "description": "You're eligible for a Genius discount at Miền Nhiệt Đới 2 Hotel! To save at this property, all you have to do is sign in.\n\nSituated in Da Lat, within 1.4 km of Lam Vien Square and 1.6 km of Xuan Huong Lake, Miền Nhiệt Đới 2 Hotel features accommodation with a shared lounge and free WiFi throughout the property as well as free private parking for guests who drive. This 2-star hotel offers room service and a 24-hour front desk. The accommodation provides airport transfers, while a car rental service is also available.\n\nThe rooms are fitted with a flat-screen TV with satellite channels, fridge, a kettle, a bidet, free toiletries and a desk. Featuring a private bathroom with a shower and a hairdryer, some rooms at the hotel also boast a city view. At Miền Nhiệt Đới 2 Hotel rooms have bed linen and towels.\n\nYersin Park Da Lat is 1.8 km from the accommodation, while Dalat Flower Gardens is 2.6 km from the property. The nearest airport is Lien Khuong Airport, 28 km from Miền Nhiệt Đới 2 Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -415,7 +420,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": 4,
     "description": "Featuring 4-star accommodation, New Century Dalat Hotel is situated in Da Lat, 2.8 km from Yersin Park Da Lat and 2.8 km from Xuan Huong Lake. This 4-star hotel offers a concierge service and a tour desk. The accommodation features a 24-hour front desk, airport transfers, room service and free WiFi.\n\nThe rooms are fitted with air conditioning, a flat-screen TV with cable channels, a fridge, a kettle, a shower, free toiletries and a desk. Rooms have a private bathroom with a hairdryer, while certain rooms come with a balcony and others also boast city views. At the hotel the rooms have bed linen and towels.\n\nA buffet, à la carte or vegetarian breakfast can be enjoyed at the property. At New Century Dalat Hotel you will find a restaurant serving Asian cuisine. A vegetarian option can also be requested.\n\nThe accommodation offers 4-star accommodation with a hot tub.\n\nLam Vien Square is 3 km from New Century Dalat Hotel, while Truc Lam Temple is 4.5 km from the property. The nearest airport is Lien Khuong Airport, 25 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Airport shuttle",
       "Free WiFi",
       "Room service",
@@ -444,7 +449,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at GREENECO DA LAT HOTEL - Khách sạn Green Eco Đà Lạt! To save at this property, all you have to do is sign in.\n\nFeaturing a shared lounge and views of garden, GreenEco Da Lat Hotel is a sustainable guest house located in Da Lat, 2.2 km from Truc Lam Temple. There is a private entrance at the guest house for the convenience of those who stay. There is free private parking and the property provides paid airport shuttle service.\n\nAll units feature air conditioning and a flat-screen TV. All units come with a kettle, a private bathroom and free WiFi, while selected rooms have a terrace and some have mountain views. At the guest house, the units have bed linen and towels.\n\nA selection of options including warm dishes, local specialities and fruits is served for the à la carte breakfast.\n\nSightseeing tours are available in the vicinity. Both a bicycle rental service and a car rental service are available at the guest house.\n\nTuyen Lam Lake is 2.3 km from GreenEco Da Lat Hotel, while Lam Vien Square is 3.5 km away. The nearest airport is Lien Khuong Airport, 26 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -477,7 +482,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": 2,
     "description": "You're eligible for a Genius discount at Lovely House! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.5 km from Lam Vien Square, Lovely House offers accommodation with a garden, free private parking, a shared lounge and a terrace. This 2-star hotel offers room service and a concierge service. The accommodation features a 24-hour front desk, airport transfers, a shared kitchen and free WiFi.\n\nAt the hotel, all rooms come with a desk, a flat-screen TV, a private bathroom, bed linen and towels. All rooms include a shared bathroom with a bidet, free toiletries and a hairdryer. The units will provide guests with a fridge.\n\nThe restaurant at Lovely House serves Vietnamese, Asian and Grill Bbq cuisine.\n\nPopular points of interest near the accommodation include Xuan Huong Lake, Yersin Park Da Lat and Hang Nga Crazy House. The nearest airport is Lien Khuong Airport, 28 km from Lovely House.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -510,7 +515,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at TTR An Nam Apart Hotel! To save at this property, all you have to do is sign in.\n\nFeaturing a terrace and views of city, TTR An Nam Apart Hotel is a sustainable aparthotel located in Da Lat, 600 m from Dalat Palace Golf Club. This aparthotel provides free private parking, a 24-hour front desk and free WiFi. The accommodation offers a lift, full-day security and currency exchange for guests.\n\nThe units are equipped with a flat-screen TV with cable channels, microwave, a kettle, a bidet, slippers and a desk. All units are equipped with a private bathroom equipped with a shower and a hair dryer, while selected rooms are fitted with a fully equipped kitchen fitted with a stovetop. At the aparthotel, all units are fitted with bed linen and towels.\n\nSightseeing tours are available in the vicinity. Both a bicycle rental service and a car rental service are available at the aparthotel, while hiking can be enjoyed nearby.\n\nDalat Flower Gardens is 1.5 km from TTR An Nam Apart Hotel, while Xuan Huong Lake is 3 km away. The nearest airport is Lien Khuong, 30 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -541,7 +546,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Ngoc Mai Boutique Hotel! To save at this property, all you have to do is sign in.\n\nFeaturing 3-star accommodation, Ngoc Mai Boutique Hotel is situated in Da Lat, 2.8 km from Lam Vien Square and 2.9 km from Xuan Huong Lake. With free WiFi, this 3-star hotel offers room service and a 24-hour front desk. The hotel has family rooms.\n\nYersin Park Da Lat is 3.1 km from the hotel, while Dalat Flower Gardens is 4 km from the property. The nearest airport is Lien Khuong Airport, 29 km from Ngoc Mai Boutique Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Free WiFi",
       "Free parking",
       "Family rooms",
@@ -569,7 +574,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at La Fleur Premium Central Apartment! To save at this property, all you have to do is sign in.\n\nSituated in Da Lat, less than 1 km from Lam Vien Square and a 13-minute walk from Xuan Huong Lake, La Fleur Premium Central Apartment features accommodation with free WiFi, a garden with a terrace, city views, and access to a sauna and a hot tub.\n\nAll units come with a seating area, a flat-screen TV with satellite channels and a private bathroom with free toiletries, bidet and shower. Some units have a balcony and/or a patio with mountain or garden views.\n\nBreakfast is available each morning, and includes à la carte, continental and Asian options. At the aparthotel you will find a restaurant serving Steakhouse and Vietnamese cuisine. Vegetarian, vegan and dairy-free options can also be requested.\n\nLa Fleur Premium Central Apartment offers a children's playground.\n\nThere is a shared lounge at this property and guests can go hiking and cycling nearby.\n\nYersin Park Da Lat is 1.1 km from the accommodation, while Dalat Flower Gardens is 2.8 km from the property. The nearest airport is Lien Khuong, 27 km from La Fleur Premium Central Apartment, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -602,7 +607,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": 2,
     "description": "Featuring 2-star accommodation, Thắng Lợi 1 Hotel is set in Da Lat, 1.6 km from Lam Vien Square and 1.8 km from Xuan Huong Lake. The property is situated 1.9 km from Yersin Park Da Lat, 2.5 km from Dalat Palace Golf Club and 2.8 km from Dalat Flower Gardens. Lang Bian Moutain is 25 km from the hotel and ZooDoo Da Lat is 34 km away.\n\nTruc Lam Temple is 5.9 km from the hotel, while Tuyen Lam Lake is 5.9 km away. The nearest airport is Lien Khuong Airport, 28 km from Thắng Lợi 1 Hotel.",
-    "facilities": ["Free parking"],
+    "facilityCodes": ["Free parking"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/463567038.jpg?k=90c849ad9bffbc2e85cd0448377571bdb1a47b7d04faf9069e1e26043e7df9e0&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/463567038.jpg?k=90c849ad9bffbc2e85cd0448377571bdb1a47b7d04faf9069e1e26043e7df9e0&o=&hp=1",
@@ -624,7 +629,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Khách Sạn Đà Lạt - Villa Luxury Da Lat! To save at this property, all you have to do is sign in.\n\nKhách Sạn Đà Lạt - Villa Luxury Da Lat features city views, free WiFi and free private parking, located in Da Lat, 1.3 km from Lam Vien Square.\n\nAll units come with a seating area, a flat-screen TV and a private bathroom with free toiletries, bidet and shower. For added convenience, the property can provide towels and bed linen for an extra charge.\n\nThere is a shared lounge at this property and guests can go hiking and cycling nearby.\n\nPopular points of interest near the apartment include Xuan Huong Lake, Yersin Park Da Lat and Hang Nga Crazy House. The nearest airport is Lien Khuong, 28 km from Khách Sạn Đà Lạt - Villa Luxury Da Lat, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -655,7 +660,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at EX Villa Đà Lạt - Khách sạn cổ điển Pháp! To save at this property, all you have to do is sign in.\n\nLocated in Da Lat, 2.4 km from Yersin Park Da Lat, EX Villa Đà Lạt - Khách sạn cổ điển Pháp provides accommodation with a restaurant, free private parking and a bar. This 3-star hotel offers a concierge service and a tour desk. The accommodation features a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nAt the hotel, each room is equipped with a wardrobe, a flat-screen TV, a private bathroom, bed linen and towels. The rooms are equipped with a kettle, while some rooms are equipped with a terrace and others also offer city views.\n\nA buffet, à la carte or Asian breakfast is available daily at the property.\n\nXuan Huong Lake is 2.4 km from EX Villa Đà Lạt - Khách sạn cổ điển Pháp, while Lam Vien Square is 2.6 km away. The nearest airport is Lien Khuong Airport, 25 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -688,7 +693,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Royal Palace! To save at this property, all you have to do is sign in.\n\nSet in Da Lat, 1.2 km from Lam Vien Square, Royal Palace offers accommodation with a garden, free private parking and a shared lounge. This 3-star hotel offers room service and a 24-hour front desk. The accommodation features an ATM, a concierge service and currency exchange for guests.\n\nThe units at the hotel come with a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a bidet, free toiletries and a hairdryer. Royal Palace provides certain units with city views, and rooms are equipped with a kettle. At the accommodation all rooms come with bed linen and towels.\n\nBuffet and Asian breakfast options are available every morning at Royal Palace.\n\nThe hotel offers a sun terrace.\n\nPopular points of interest near Royal Palace include Yersin Park Da Lat, Xuan Huong Lake and Hang Nga Crazy House. The nearest airport is Lien Khuong, 27 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free parking",
@@ -719,7 +724,7 @@
     "displayLocation": "Xuan Huong Lake, Da Lat",
     "rattingStars": null,
     "description": "AMIGO HOMESTAY DALAT is set in Da Lat, within 2.6 km of Dalat Palace Golf Club and 2.8 km of Dalat Flower Gardens. The property is around 5.9 km from Truc Lam Temple, 6 km from Tuyen Lam Lake and 25 km from Lang Bian Moutain. The accommodation offers room service, a 24-hour front desk and organising tours for guests.\n\nThe hotel features certain units with city views, and all rooms have a kettle. At AMIGO HOMESTAY DALAT every room includes bed linen and towels.\n\nPopular points of interest near the accommodation include Lam Vien Square, Xuan Huong Lake and Yersin Park Da Lat. The nearest airport is Lien Khuong, 28 km from AMIGO HOMESTAY DALAT, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free parking",
@@ -748,7 +753,7 @@
     "displayLocation": "Da Lat",
     "rattingStars": null,
     "description": "Located just 2.2 km from Lam Vien Square, Maka Premium Central Apartment offers accommodation in Da Lat with access to a shared lounge, a terrace, as well as a 24-hour front desk. This apartment provides free private parking, a shared kitchen and free WiFi.\n\nThis 4-bedroom apartment will provide you with a satellite flat-screen TV and DVD player, air conditioning and a living room. The accommodation is equipped with a kitchen with a fridge and a microwave.\n\nBoth a bicycle rental service and a car rental service are available at the apartment.\n\nXuan Huong Lake is 2.4 km from Maka Premium Central Apartment, while Yersin Park Da Lat is 2.5 km away. The nearest airport is Lien Khuong Airport, 28 km from the accommodation.",
-    "facilities": ["Free WiFi", "Free parking", "24-hour front desk", "Terrace"],
+    "facilityCodes": ["Free WiFi", "Free parking", "24-hour front desk", "Terrace"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/446885565.jpg?k=69348f55ec2685bb6b7dcd37b726f2e38fea71145caa489d16b50ba20e3b7da9&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/446885565.jpg?k=69348f55ec2685bb6b7dcd37b726f2e38fea71145caa489d16b50ba20e3b7da9&o=&hp=1",

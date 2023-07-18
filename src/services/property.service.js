@@ -10,6 +10,47 @@ const {
     file: { deleteStaticFile, deleteManyStaticFiles },
 } = require("../utils")
 
+/**
+ * Find one property, return null if not found
+ * @param {propertyFilter} filter
+ * @returns {Promise<property | null>}
+ */
+const findOneProperty = async (filter) => {
+    return Property.findOne(filter)
+}
+
+/**
+ * Find property by id, return null if not found
+ * @param {string} propertyId
+ * @returns {Promise<property | null>}
+ */
+const findPropertyById = async (propertyId) => {
+    return findOneProperty({ _id: propertyId })
+}
+
+/**
+ * Get one property, throw error if not found
+ * @param {propertyFilter} filter
+ * @returns {Promise<property>}
+ */
+const getOneProperty = async (filter) => {
+    const property = await findOneProperty(filter)
+    if (!property) {
+        throw createError.NotFound("Property not found")
+    }
+    return property
+}
+
+/**
+ * Get property by id, throw error if not found
+ * @param {string} propertyId
+ * @returns {Promise<property>}
+ */
+const getPropertyById = async (propertyId) => {
+    const property = await getOneProperty({ _id: propertyId })
+    return property
+}
+
 const createProperty = async (body) => {
     body = pickFields(
         body,
@@ -182,22 +223,6 @@ const searchProperties = async ({
 }
 
 /**
- * Get one property
- * @param {{ _id, pageName }} filter
- * @returns {Promise<property>}
- */
-const getOneProperty = async (filter) => {
-    const query = Property.findOne(filter)
-
-    const property = await query.exec()
-    if (!property) {
-        throw createError.NotFound("Property not found")
-    }
-
-    return property
-}
-
-/**
  * Replace thumbnail
  * @param {property} property
  * @param {Object} thumbnailFile
@@ -334,12 +359,15 @@ const addCurrentBookingDate = (cBDates, newDate) => {
 }
 
 module.exports = {
+    findOneProperty,
+    findPropertyById,
+    getOneProperty,
+    getPropertyById,
     createProperty,
     paginateProperties,
     isAccommodationAvailable,
     setAvailabilityFields,
     searchProperties,
-    getOneProperty,
     replaceThumbnail,
     addImages,
     deleteImages,
@@ -366,18 +394,20 @@ module.exports = {
  * @property {[]} currentBookingDates
  *
  * @typedef {Object} propertyFilter
+ * @property {string} _id
  * @property {string} title
  * @property {boolean} isClosed
  * @property {string} owner
  * @property {string} pageName
  * @property {number} score
+ * @property {number} sumScore
  * @property {string} description
- * @property {[string]} facilities
+ * @property {string[]} facilityCodes
  * @property {number} reviewCount
  * @property {Object} address
  * @property {string} thumbnail
- * @property {[string]} images
- * @property {[Object]} accommodationGroups
+ * @property {string[]} images
+ * @property {accommodation[]} accommodations
  *
  * @typedef {Object} queryOptions
  * @property {Object} sortBy

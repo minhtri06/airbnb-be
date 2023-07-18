@@ -22,16 +22,8 @@ router.patch(
     "/:bookingId/cancel",
     auth(),
     validate(validation.cancelBooking),
-    requireToBeGuestOrPropertyOwner,
+    requireToBeGuestOrPropertyOwner(),
     controller.cancelBooking,
-)
-
-router.patch(
-    "/:bookingId/approve",
-    auth(),
-    validate(validation.approveBookingToAccom),
-    requireToBePropertyOwner,
-    controller.approveBookingToAccom,
 )
 
 module.exports = router

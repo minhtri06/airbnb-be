@@ -7,7 +7,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at G9 Homestay - Đề Thám! To save at this property, all you have to do is sign in.\n\nSituated in Ho Chi Minh City, near Fine Arts Museum, Takashimaya Vietnam and Ben Thanh Street Food Market, G9 Homestay - Đề Thám features free WiFi, and guests can enjoy a bar.\n\nEvery unit has a private bathroom and shower, air conditioning, a flat-screen TV and a fridge. For added convenience, the property can provide towels and bed linen for an extra charge.\n\nPopular points of interest near the homestay include Tao Dan Park, Nha Rong Wharf and Ho Chi Minh City Museum. The nearest airport is Tan Son Nhat International Airport, 8 km from G9 Homestay - Đề Thám.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Parking",
@@ -37,7 +37,7 @@
     "displayLocation": "District 2, Ho Chi Minh City",
     "rattingStars": null,
     "description": "Featuring air-conditioned accommodation with a balcony, Deluxe apartment with balcony, pool, fitness and yoga is located in Ho Chi Minh City. This recently renovated apartment is located 9.2 km from Vincom Plaza Thu Duc and 11 km from Takashimaya Vietnam. Providing free WiFi throughout the property, the non-smoking apartment has a fitness room.\n\nThe apartment with a terrace and city views features 1 bedroom, a living room, a flat-screen TV, an equipped kitchen with an oven and a microwave, and 1 bathroom with a bidet. Guests can take in the ambience of the surroundings from an outdoor dining area. The apartment offers bed linen, towels and laundry service.\n\nA minimarket is available at the apartment.\n\nGuests at the property are welcome to use the fitness room and relax in the pool with a view. For guests with children, the apartment provides kids pool and outdoor play equipment. Guests can also relax in the garden.\n\nVietnam History Museum is 11 km from Deluxe apartment with balcony, pool, fitness and yoga, while Saigon Opera House is 11 km away. The nearest airport is Tan Son Nhat International Airport, 16 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -70,7 +70,7 @@
     "displayLocation": "District 2, Ho Chi Minh City",
     "rattingStars": null,
     "description": "Featuring garden views, Sarah Homestay - Masteri Thao Dien provides accommodation with a terrace and a balcony, around 5.5 km from Vietnam History Museum. This apartment also features a private pool and free WiFi.\n\nThis 2-bedroom apartment will provide you with a flat-screen TV, air conditioning and a living room. The accommodation is equipped with a kitchen.\n\nDiamond Plaza is 6.6 km from the apartment, while Saigon Central Post Office is 6.7 km away. The nearest airport is Tan Son Nhat International Airport, 9 km from Sarah Homestay - Masteri Thao Dien.",
-    "facilities": [
+    "facilityCodes": [
       "Swimming Pool",
       "Free WiFi",
       "Parking on site",
@@ -98,7 +98,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
     "description": "Apt D1 HCMC - Fully equipped luxury apt, super central location, next to Bui Vien street and Ben Thanh Market features a balcony and is located in Ho Chi Minh City, within just less than 1 km of Fine Arts Museum and a 17-minute walk of Takashimaya Vietnam. Free WiFi is provided throughout the property and private parking is available on site. Ho Chi Minh City Museum is 1.9 km from the apartment and Ho Chi Minh City Hall is 2.6 km away.\n\nLeading onto a terrace with garden views, the air-conditioned apartment consists of 1 bedroom and a fully equipped kitchen. A flat-screen TV is offered.\n\nPopular points of interest near the apartment include Ben Thanh Street Food Market, Tao Dan Park and Nha Rong Wharf. The nearest airport is Tan Son Nhat International Airport, 8 km from Apt D1 HCMC - Fully equipped luxury apt, super central location, next to Bui Vien street and Ben Thanh Market.",
-    "facilities": ["Free WiFi", "Private parking", "Terrace", "Air conditioning"],
+    "facilityCodes": ["Free WiFi", "Private parking", "Terrace", "Air conditioning"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/452596567.jpg?k=a2ac2d9a1c078bc0c99230c087b5c1baaa356eb03c4708e06ceedc5442124d0c&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/452596567.jpg?k=a2ac2d9a1c078bc0c99230c087b5c1baaa356eb03c4708e06ceedc5442124d0c&o=&hp=1",
@@ -120,7 +120,7 @@
     "displayLocation": "District 7, Ho Chi Minh City",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Cozrum Homes - Sonata Residence! To save at this property, all you have to do is sign in.\n\nSet in Ho Chi Minh City, 1.7 km from Saigon Exhibition and Convention Center, Cozrum Homes - Sonata Residence offers accommodation with an outdoor swimming pool, private parking, a fitness centre and a garden. This 4-star hotel offers room service and a 24-hour front desk. The hotel provides a Vietnamese restaurant.\n\nAt the hotel all rooms have air conditioning, a desk, a flat-screen TV, a private bathroom, bed linen, towels and a terrace with a city view. Cozrum Homes - Sonata Residence features some units with garden views, and all rooms are equipped with a kettle. All guest rooms will provide guests with a fridge.\n\nAn à la carte breakfast is available every morning at the accommodation.\n\nNha Rong Wharf is 5.3 km from Cozrum Homes - Sonata Residence, while Fine Arts Museum is 6.3 km from the property. The nearest airport is Tan Son Nhat International Airport, 13 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "2 swimming pools",
       "Non-smoking rooms",
       "Private parking",
@@ -153,7 +153,7 @@
     "displayLocation": "District 4, Ho Chi Minh City",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Lovely 2 Bedrooms @HighFloor with Firework view! To save at this property, all you have to do is sign in.\n\nLocated 1.4 km from Nha Rong Wharf, Lovely 2 Bedrooms @HighFloor with Firework view offers an outdoor swimming pool, a garden and air-conditioned accommodation with a balcony and free WiFi. Private parking is available on site.\n\nThe apartment provides guests with a terrace, city views, a seating area, a flat-screen TV, a fully equipped kitchen with a fridge and a microwave, and a private bathroom with bidet and free toiletries. A stovetop and kettle are also provided.\n\nFine Arts Museum is 1.8 km from Lovely 2 Bedrooms @HighFloor with Firework view, while Takashimaya Vietnam is 1.9 km away. The nearest airport is Tan Son Nhat International, 8 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -186,7 +186,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 2,
     "description": "Conveniently located in Ho Chi Minh City, SAZI HOTEL Bến Thành features 2-star accommodation close to Ben Thanh Street Food Market and Tao Dan Park. This 2-star hotel offers a concierge service and a tour desk. The accommodation offers a 24-hour front desk, airport transfers, room service and free WiFi.\n\nSome rooms also offer a kitchenette with a fridge, a microwave and a minibar.\n\nPopular points of interest near the hotel include Ho Chi Minh City Museum, Takashimaya Vietnam and Vincom Shopping Center. The nearest airport is Tan Son Nhat International Airport, 7 km from SAZI HOTEL Bến Thành.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -219,7 +219,7 @@
     "displayLocation": "District 4, Ho Chi Minh City",
     "rattingStars": null,
     "description": "In the District 4 district of Ho Chi Minh City, close to Nha Rong Wharf, Summerset Apartment- RiverGate District 1 has an infinity pool and a washing machine. The air-conditioned accommodation is 1.8 km from Fine Arts Museum. Private parking can be arranged at an extra charge.\n\nFeaturing a private bathroom, units at the apartment complex also boast free WiFi, while certain rooms are fitted with a balcony.\n\nA minimarket is available at the apartment.\n\nKids pool is also available at the apartment, while guests can also relax on the sun terrace.\n\nTakashimaya Vietnam is 1.9 km from Summerset Apartment- RiverGate District 1, while Ben Thanh Street Food Market is 2.3 km from the property. The nearest airport is Tan Son Nhat International Airport, 8 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "2 swimming pools",
       "Free WiFi",
       "Private parking",
@@ -249,7 +249,7 @@
     "displayLocation": "Binh Thanh, Ho Chi Minh City",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at The Art - Tina Hotel and Apartments! To save at this property, all you have to do is sign in.\n\nLocated 3.1 km from Tan Dinh Market, The Art - Tina Hotel and Apartments is a sustainable 3-star accommodation in Ho Chi Minh City, featuring a garden, a shared lounge and parking on-site. This 3-star aparthotel offers a shared kitchen and room service. The aparthotel provides city views, a sun terrace and a 24-hour front desk.\n\nThe aparthotel provides guests with a balcony, garden views, a seating area, cable flat-screen TV, a fully equipped kitchen with a fridge and kitchenware, and a private bathroom with shower and a hair dryer. The units at the aparthotel include air conditioning and a desk.\n\nThe aparthotel has a picnic area where you can spend a day out in the open.\n\nVietnam History Museum is 3.5 km from the aparthotel, while Diamond Plaza is 4 km away. The nearest airport is Tan Son Nhat International Airport, 5 km from The Art - Tina Hotel and Apartments.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free parking",
       "Family rooms",
@@ -279,8 +279,8 @@
     "pageName": "lotus-central-saigon",
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 4,
-    "description": "You're eligible for a Genius discount at Happy Life Grand Hotel & Sky Bar! To save at this property, all you have to do is sign in.\n\nHappy Life Grand Hotel & Sky Bar features a restaurant, outdoor swimming pool, a fitness centre and bar in Ho Chi Minh City. Among the facilities at this property are a tour desk and luggage storage space, along with free WiFi throughout the property. The accommodation provides a 24-hour front desk, room service and currency exchange for guests.\n\nThe hotel also offers an à la carte breakfast.\n\nThe accommodation also provides a business centre and guests can use the fax machine and photocopier at Happy Life Grand Hotel & Sky Bar. Happy Life Grand Hotel & Sky Bar offers a sun terrace.\n\nPopular points of interest near the hotel include Fine Arts Museum, Takashimaya Vietnam and Ben Thanh Street Food Market. The nearest airport is Tan Son Nhat International, 13 km from Happy Life Grand Hotel & Sky Bar, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "description": "You're eligible for a Genius discount at Happy Life Grand Hotel & Sky Bar! To save at this property, all you have to do is sign in.\n\nHappy Life Grand Hotel & Sky Bar features a restaurant, outdoor swimming pool, a fitness centre and bar in Ho Chi Minh City. Among the facilityCodes at this property are a tour desk and luggage storage space, along with free WiFi throughout the property. The accommodation provides a 24-hour front desk, room service and currency exchange for guests.\n\nThe hotel also offers an à la carte breakfast.\n\nThe accommodation also provides a business centre and guests can use the fax machine and photocopier at Happy Life Grand Hotel & Sky Bar. Happy Life Grand Hotel & Sky Bar offers a sun terrace.\n\nPopular points of interest near the hotel include Fine Arts Museum, Takashimaya Vietnam and Ben Thanh Street Food Market. The nearest airport is Tan Son Nhat International, 13 km from Happy Life Grand Hotel & Sky Bar, and the property offers a paid airport shuttle service.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -313,7 +313,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at 345AB Sai Gon Hotel! To save at this property, all you have to do is sign in.\n\nA sustainable aparthotel in Ho Chi Minh City and within 1.7 km of Fine Arts Museum, 345AB Sai Gon Hotel has a shared lounge, comfortable allergy-free rooms and free WiFi. There is a private entrance at the aparthotel for the convenience of those who stay. The accommodation features a 24-hour front desk, a lift and luggage storage for guests.\n\nAll units in the aparthotel are fitted with air conditioning, a seating area, a flat-screen TV with streaming services, a kitchen, a dining area, a safety deposit box and a private bathroom with a walk-in shower, slippers and a hair dryer. An oven, a microwave and toaster are also available, as well as a kettle. At the aparthotel, every unit is equipped with bed linen and towels.\n\nA car rental service is available at the aparthotel.\n\nTakashimaya Vietnam is 2 km from 345AB Sai Gon Hotel, while Ben Thanh Street Food Market is 2 km from the property. The nearest airport is Tan Son Nhat International Airport, 8 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
@@ -345,8 +345,8 @@
     "pageName": "nu-apartment-the-marq-d1",
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 4,
-    "description": "You're eligible for a Genius discount at NU MarQ Saigon Luxury Apartment! To save at this property, all you have to do is sign in.\n\nOffering city views, NU MarQ Saigon Luxury Apartment in Ho Chi Minh City offers accommodation, an outdoor swimming pool, a garden, a terrace, a bar and barbecue facilities. The accommodation has a sauna.\n\nAccommodation is fitted with air conditioning, a fully equipped kitchen with a dining area, a flat-screen TV and a private bathroom with shower, free toiletries and a hairdryer. A fridge, an oven and microwave are also offered, as well as a kettle.\n\nPopular points of interest near the apartment include Diamond Plaza, Saigon Central Post Office and Vietnam History Museum. The nearest airport is Tan Son Nhat International Airport, 6 km from NU MarQ Saigon Luxury Apartment.",
-    "facilities": [
+    "description": "You're eligible for a Genius discount at NU MarQ Saigon Luxury Apartment! To save at this property, all you have to do is sign in.\n\nOffering city views, NU MarQ Saigon Luxury Apartment in Ho Chi Minh City offers accommodation, an outdoor swimming pool, a garden, a terrace, a bar and barbecue facilityCodes. The accommodation has a sauna.\n\nAccommodation is fitted with air conditioning, a fully equipped kitchen with a dining area, a flat-screen TV and a private bathroom with shower, free toiletries and a hairdryer. A fridge, an oven and microwave are also offered, as well as a kettle.\n\nPopular points of interest near the apartment include Diamond Plaza, Saigon Central Post Office and Vietnam History Museum. The nearest airport is Tan Son Nhat International Airport, 6 km from NU MarQ Saigon Luxury Apartment.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Free WiFi",
       "Parking on site",
@@ -379,7 +379,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 1,
     "description": "Situated within the Tay Ba Lo backpacker’s area, Hoai Pho Hotel is conveniently a 5-minute walk to the famous Ben Thanh Market. Free Wi-Fi access is available in the entire property.\n\nFitted with tiled flooring, air-conditioned rooms are furnished with a wardrobe, a cable TV and seating area. A small fridge and minibar are also provided for convenience. The private bathroom comes with shower and free toiletries.\n\nHoai Pho Hotel operates a 24-hour front desk that can assist guests with their requests. It also features a souvenir/gift shop for guests to bring home their memories. Free parking is available for motorbikes only.\n\nHoai Pho Hotel is just a 15-minute walk to the Reunification Palace. Tan Son Nhat International Airport is within a 30-minute drive away.",
-    "facilities": [
+    "facilityCodes": [
       "Free WiFi",
       "Free parking",
       "Family rooms",
@@ -408,7 +408,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Acorn Saigon Hotel - Bui Vien! To save at this property, all you have to do is sign in.\n\nConveniently located in Ho Chi Minh City, Acorn Saigon Hotel - Bui Vien provides 3-star accommodation close to Fine Arts Museum and Takashimaya Vietnam. With a terrace, the 3-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. The accommodation offers room service, a 24-hour front desk and organising tours for guests.\n\nAt the hotel, all rooms come with a desk. Each room has a kettle, while selected rooms also offer a balcony and others also have city views. At Acorn Saigon Hotel - Bui Vien all rooms include bed linen and towels.\n\nPopular points of interest near the accommodation include Ben Thanh Street Food Market, Tao Dan Park and Ho Chi Minh City Museum. The nearest airport is Tan Son Nhat International, 7 km from Acorn Saigon Hotel - Bui Vien, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -441,7 +441,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at Pullman Saigon Centre! To save at this property, all you have to do is sign in.\n\nPullman Saigon Centre offers modern and luxurious rooms with free Wi-Fi. Located 1 km from Ben Thanh Market, it boasts a rooftop restaurant and bar offering city views on the 31st floor and an outdoor pool on the 6th floor.\n\nLocal attractions including the Saigon River, Reunification Palace, Opera House and Notre Dame Cathedral are 1.5 km away. Tan Son Nhat International Airport is a 45-minute drive from Pullman Saigon Centre.\n\nOffering city views, each air-conditioned room features a flat-screen cable TV, minibar and safe. Private bathroom includes a shower and free toiletries.\n\nGuests can work out at the hotel’s fitness centre or relax at the sauna and spa pool. Luggage storage services are available at the 24-hour reception.\n\nThe rooftop restaurant serves breakfast and has a unique circle grill concept and live show kitchen. A selection of Vietnamese beer, tea and coffee along with Eastern and Western dishes can be ordered from the lobby bar.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle (free)",
@@ -474,7 +474,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Valentine Boutique hotel - 25 Bui Vien street! To save at this property, all you have to do is sign in.\n\nOffering modern air-conditioned rooms in Pham Ngu Lao backpackers area,Attica Hotel is just a 5-minute walk from Ben Thanh Market. Free Wi-Fi and private bathrooms are available in all rooms. A daily buffet breakfast is available at its restaurant.\n\nWarm lighting and tiled flooring feature in all room types. A flat-screen TV, minibar and personal safe are included. En suite bathrooms have a shower and hairdryer.\n\nAttica Hotel  is a 3-minute walk from the local bus interchange of Ho Chi Minh City, where buses depart regularly for Phnom Penh, Cambodia. It is a 15-minute walk from Notre Dame Cathedral and the Reunification Palace. Tan Son Nhat International Airport is a 20-minute drive away.\n\nAirport transfers can be arranged at an additional charge. The hotel also provides a tour desk, business centre and a 24-hour front desk.\n\nThe hotel's restaurant serves Asian and Western dishes. In-room dining is also possible with room service. Alternatively, there are many cafes and restaurants within a 5-minute walk away.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Parking on site",
@@ -506,8 +506,8 @@
     "pageName": "soho-residence-district-1",
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
-    "description": "In the District 1 district of Ho Chi Minh City, close to Fine Arts Museum, Soho Residence - District 1 features a garden and a washing machine. Complimentary WiFi is featured throughout the property and private parking is available on site. Featuring family rooms, this property also provides guests with a terrace.\n\nAccommodation is fitted with air conditioning, a fully equipped kitchen, a flat-screen TV and a private bathroom with bidet and a hair dryer. The units are equipped with heating facilities.\n\nPopular points of interest near the apartment include Takashimaya Vietnam, Ben Thanh Street Food Market and Tao Dan Park. The nearest airport is Tan Son Nhat International Airport, 8 km from Soho Residence - District 1.",
-    "facilities": [
+    "description": "In the District 1 district of Ho Chi Minh City, close to Fine Arts Museum, Soho Residence - District 1 features a garden and a washing machine. Complimentary WiFi is featured throughout the property and private parking is available on site. Featuring family rooms, this property also provides guests with a terrace.\n\nAccommodation is fitted with air conditioning, a fully equipped kitchen, a flat-screen TV and a private bathroom with bidet and a hair dryer. The units are equipped with heating facilityCodes.\n\nPopular points of interest near the apartment include Takashimaya Vietnam, Ben Thanh Street Food Market and Tao Dan Park. The nearest airport is Tan Son Nhat International Airport, 8 km from Soho Residence - District 1.",
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Private parking",
@@ -537,7 +537,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
     "description": "Well located in the centre of Ho Chi Minh City, Full House Hostel provides air-conditioned rooms, a garden, free WiFi and a terrace. Featuring a concierge service, this property also provides guests with a children's playground. The accommodation features evening entertainment and room service.\n\nAt the hostel, each room is fitted with a wardrobe, a flat-screen TV, a private bathroom, bed linen and towels. Guest rooms will provide guests with a fridge.\n\nSpeaking English, Vietnamese and Chinese at the 24-hour front desk, staff will be happy to provide guests with practical guidance on the area.\n\nPopular points of interest near Full House Hostel include Fine Arts Museum, Takashimaya Vietnam and Ben Thanh Street Food Market. The nearest airport is Tan Son Nhat International, 8 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -570,7 +570,7 @@
     "displayLocation": "District 4, Ho Chi Minh City",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at ANNIE SAIGON APARTMENT - RIVERGATE RESIDENCE! To save at this property, all you have to do is sign in.\n\nA sustainable apartment in Ho Chi Minh City and within 1.4 km of Nha Rong Wharf, ANNIE SAIGON APARTMENT - RIVERGATE RESIDENCE features an infinity pool, comfortable allergy-free rooms and free WiFi. Featuring a lift, this property also provides guests with a picnic area. The property provides a children's playground, private parking and an an electric vehicle charging station.\n\nThe units at the apartment complex come with air conditioning, a seating area, a flat-screen TV with streaming services, a kitchen, a dining area and a private bathroom with slippers, a walk-in shower and a hair dryer. A balcony with an outdoor dining area and lake views is offered in each unit. At the apartment complex, all units have bed linen and towels.\n\nAs an added convenience, the apartment offers packed lunches for guests to bring on excursions and other trips off-property.\n\nSightseeing tours are available in the area. A car rental service is available at ANNIE SAIGON APARTMENT - RIVERGATE RESIDENCE.\n\nFine Arts Museum is 1.8 km from the accommodation, while Takashimaya Vietnam is 1.9 km away. The nearest airport is Tan Son Nhat International, 8 km from ANNIE SAIGON APARTMENT - RIVERGATE RESIDENCE, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Airport shuttle",
       "Free WiFi",
@@ -602,8 +602,8 @@
     "pageName": "piano-district-1",
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
-    "description": "Attractively situated in the District 1 district of Ho Chi Minh City, PIANO HOTEL is situated 400 m from Fine Arts Museum, 800 m from Takashimaya Vietnam and less than 1 km from Ben Thanh Street Food Market. Among the facilities of this property are a restaurant, room service and a 24-hour front desk, along with free WiFi. Some rooms at the property have a balcony with a city view.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a minibar, a safety deposit box, a flat-screen TV and a private bathroom with a bidet. At PIANO HOTEL rooms include bed linen and towels.\n\nThe accommodation offers an à la carte or Asian breakfast.\n\nPopular points of interest near PIANO HOTEL include Tao Dan Park, Nha Rong Wharf and Ho Chi Minh City Museum. The nearest airport is Tan Son Nhat International Airport, 7 km from the hotel.",
-    "facilities": [
+    "description": "Attractively situated in the District 1 district of Ho Chi Minh City, PIANO HOTEL is situated 400 m from Fine Arts Museum, 800 m from Takashimaya Vietnam and less than 1 km from Ben Thanh Street Food Market. Among the facilityCodes of this property are a restaurant, room service and a 24-hour front desk, along with free WiFi. Some rooms at the property have a balcony with a city view.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a minibar, a safety deposit box, a flat-screen TV and a private bathroom with a bidet. At PIANO HOTEL rooms include bed linen and towels.\n\nThe accommodation offers an à la carte or Asian breakfast.\n\nPopular points of interest near PIANO HOTEL include Tao Dan Park, Nha Rong Wharf and Ho Chi Minh City Museum. The nearest airport is Tan Son Nhat International Airport, 7 km from the hotel.",
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle (free)",
       "Free WiFi",
@@ -633,7 +633,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Cherry Hotel Central! To save at this property, all you have to do is sign in.\n\nSituated just a 10-minute walk from the popular Ben Thanh Market, Cherry Hotel Central offers affordable rooms with flat-screen satellite TVs and free Wi-Fi. Feature free private parking, it also has a restaurant and business centre.\n\nElegant air-conditioned rooms at Hotel Cherry feature classic wood furnishings and neutral colours. They are fitted with a safe and fridge. Private bathrooms have a bathtub and hairdryer.\n\nTouring Ho Chi Minh city is easy with a tour offering ticket service. Staff at the 24-hour reception can provide concierge and car hire services.\n\nCherry’s restaurant offers Western and Asian dishes in a comfortable air-conditioned environment. The bar serves light refreshments. A buffet breakfast is available daily. Room service is provided on request.\n\nLocated in Ho Chi Minh’s city centre, Cherry Hotel Central is a 20-minute drive from Tan Son Nhat International Airport and only a 5-minute walk from the Opera House.\n\nOur hotel nearby US Embassy, France Embassy,..within 10-minute walk from the property you can easy find it. Nhi Dong Hosipital 5-minute drive from Chery Hotel Central.\n\nConveniently located in Ho Chi Minh city centre, Chery Hotel Central provides contemporary accommodation in District 1.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -666,7 +666,7 @@
     "displayLocation": "District 3, Ho Chi Minh City",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at La Vela Saigon Hotel! To save at this property, all you have to do is sign in.\n\nSituated in Ho Chi Minh City, 700 metres from Tan Dinh Market, La Vela Saigon Hotel features accommodation with an outdoor swimming pool, free private parking, a fitness centre and a shared lounge. Boasting room service, this property also welcomes guests with a restaurant, a casino and a terrace. The accommodation offers a 24-hour front desk, an ATM and currency exchange for guests.\n\nSelected rooms also boast a kitchen with a fridge and a minibar.\n\nA buffet, à la carte or Italian breakfast can be enjoyed at the property.\n\nWar Remnants Museum is 1.6 km from the hotel, while Reunification Palace is 1.9 km from the property. The nearest airport is Tan Son Nhat International Airport, 5 km from La Vela Saigon Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -674,7 +674,7 @@
       "Fitness centre",
       "Room service",
       "Restaurant",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "Bar",
       "Fabulous breakfast"
     ],
@@ -699,7 +699,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": null,
     "description": "Featuring a shared lounge and views of quiet street, ECO BEN THANH - Ecodotel 1 is a recently renovated apartment located in Ho Chi Minh City, 400 metres from Fine Arts Museum. This property offers access to a balcony, free private parking and free WiFi. The accommodation provides a 24-hour front desk, a lift and luggage storage for guests.\n\nAt the apartment complex, each unit is equipped with air conditioning, a flat-screen TV with cable channels, a kitchen, a dining area, a safety deposit box and a private bathroom with a walk-in shower, slippers and a hair dryer. A microwave, a fridge and stovetop are also provided, as well as a kettle. At the apartment complex, the units have bed linen and towels.\n\nAt the apartment, the family-friendly restaurant is open for dinner, lunch and brunch and serves Asian cuisine.\n\nA bicycle rental service is available at ECO BEN THANH - Ecodotel 1.\n\nPopular points of interest near the accommodation include Takashimaya Vietnam, Ben Thanh Street Food Market and Tao Dan Park. The nearest airport is Tan Son Nhat International Airport, 7 km from ECO BEN THANH - Ecodotel 1.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
@@ -732,7 +732,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 3,
     "description": "Attractively located in the centre of Ho Chi Minh City, Acnos Hotel features air-conditioned rooms with free WiFi, private parking and room service. 700 m from Ben Thanh Street Food Market and less than 1 km from Fine Arts Museum, the property offers a terrace and a bar. The accommodation provides a 24-hour front desk, a tour desk and currency exchange for guests.\n\nAt the hotel, rooms are equipped with a desk, a flat-screen TV, a private bathroom, bed linen and towels. Every room is equipped with a safety deposit box and some rooms have city views. All rooms will provide guests with a minibar.\n\nBreakfast is available each morning, and includes buffet, à la carte and Asian options. At Acnos Hotel you will find a restaurant serving local and Asian cuisine. Vegetarian, vegan and dairy-free options can also be requested.\n\nPopular points of interest near the accommodation include Tao Dan Park, Ho Chi Minh City Museum and Takashimaya Vietnam. The nearest airport is Tan Son Nhat International, 7 km from Acnos Hotel, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -765,7 +765,7 @@
     "displayLocation": "District 1, Ho Chi Minh City",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at A25 Hotel - 55 Cach Mang Thang 8! To save at this property, all you have to do is sign in.\n\nSituated in Ho Chi Minh City and with Ben Thanh Street Food Market reachable within 800 metres, A25 Hotel - 55 Cach Mang Thang 8 features concierge services, non-smoking rooms, a shared lounge, free WiFi and a restaurant. This 3-star hotel offers room service and a 24-hour front desk. The property is 400 m from the city centre and 600 m from Tao Dan Park.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a safety deposit box, a flat-screen TV and a private bathroom with a shower. All rooms have a wardrobe.\n\nA buffet breakfast is available each morning at A25 Hotel - 55 Cach Mang Thang 8.\n\nPopular points of interest near the accommodation include Ho Chi Minh City Museum, Fine Arts Museum and Takashimaya Vietnam. The nearest airport is Tan Son Nhat International, 7 km from A25 Hotel - 55 Cach Mang Thang 8, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",

@@ -3,7 +3,7 @@ const moment = require("moment")
 
 const {
     request: { BODY, PARAMS, QUERY },
-    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+    accommodationTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../constants")
 const { property, district, province, booking, objectId, query } = require("./common")
 

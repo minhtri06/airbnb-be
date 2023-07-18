@@ -16,7 +16,7 @@ const cancelBooking = async (req, res) => {
     return res.json({ message: "Cancel booking successfully" })
 }
 
-module.exports = { createBooking, cancelBooking, approveBookingToAccom }
+module.exports = { createBooking, cancelBooking }
 
 /**
  * @typedef {InstanceType<import("../models/Property")>} property

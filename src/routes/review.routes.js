@@ -15,7 +15,7 @@ router
     .route("/:reviewId")
     .patch(
         auth(),
-        requireToBeReviewer,
+        requireToBeReviewer(),
         validate(validation.editReview),
         controller.editReview,
     )

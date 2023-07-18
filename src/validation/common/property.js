@@ -1,7 +1,7 @@
 const Joi = require("joi")
 
 const {
-    accommodationGroupTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
+    accommodationTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
 } = require("../../constants")
 const objectId = require("./objectId")
 

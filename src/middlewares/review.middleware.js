@@ -9,7 +9,11 @@ const getReviewById = async (req, res, next) => {
     return next()
 }
 
-/** @return {middleware} */
+/**
+ * Return a middleware that require caller to be reviewer
+ * @param {{ allowAdmin: boolean }}
+ * @return {middleware}
+ */
 const requireToBeReviewer = ({ allowAdmin } = {}) => {
     return async (req, res, next) => {
         if (!req.user) {

@@ -7,14 +7,14 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at LALIN Apartments- Căn hộ Mường Thanh- 2 PN- biển Mỹ Khê! To save at this property, all you have to do is sign in.\n\nSet 300 m from My Khe Beach, LALIN Apartments- Căn hộ Mường Thanh- 2 PN- biển Mỹ Khê offers air-conditioned accommodation with a balcony and free WiFi.\n\nThe apartment provides guests with a terrace, a seating area, satellite flat-screen TV, a fully equipped kitchen with a fridge and an oven, and a private bathroom with bidet and free toiletries. For added convenience, the property can provide towels and bed linen for an extra charge.\n\nBoth a bicycle rental service and a car rental service are available at LALIN Apartments- Căn hộ Mường Thanh- 2 PN- biển Mỹ Khê.\n\nBac My An Beach is 1 km from the accommodation, while Love Lock Bridge Da Nang is 3 km away. The nearest airport is Da Nang International Airport, 7 km from LALIN Apartments- Căn hộ Mường Thanh- 2 PN- biển Mỹ Khê.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
       "Beachfront",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "Lift"
     ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/449747174.jpg?k=aa9aec5429754b155e750e0157f7da88eed51b11f74ed979dace5ebcadb35d0e&o=&hp=1",
@@ -37,8 +37,8 @@
     "pageName": "knp-happy-maison",
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": null,
-    "description": "KNP Happy Maison is a beachfront apartment in Da Nang, offering guests a sustainable accommodation with scenic sea views. Among the facilities at this property are a lift and a shared kitchen, along with free WiFi throughout the property. The accommodation provides full-day security, a concierge service and currency exchange for guests.\n\nThe apartment comes with 2 bedrooms, 2 bathrooms, bed linen, towels, a flat-screen TV with cable channels, a dining area, a fully equipped kitchen, and a balcony with mountain views. The accommodation is allergy-free.\n\nGuests can relax in the on-site lounge, while a minimarket is also available.\n\nBoth a bicycle rental service and a car rental service are available at the apartment, while cycling can be enjoyed nearby.\n\nMy Khe Beach is 100 metres from KNP Happy Maison, while Bac My An Beach is 1.1 km away. The nearest airport is Da Nang International Airport, 6 km from the accommodation.",
-    "facilities": [
+    "description": "KNP Happy Maison is a beachfront apartment in Da Nang, offering guests a sustainable accommodation with scenic sea views. Among the facilityCodes at this property are a lift and a shared kitchen, along with free WiFi throughout the property. The accommodation provides full-day security, a concierge service and currency exchange for guests.\n\nThe apartment comes with 2 bedrooms, 2 bathrooms, bed linen, towels, a flat-screen TV with cable channels, a dining area, a fully equipped kitchen, and a balcony with mountain views. The accommodation is allergy-free.\n\nGuests can relax in the on-site lounge, while a minimarket is also available.\n\nBoth a bicycle rental service and a car rental service are available at the apartment, while cycling can be enjoyed nearby.\n\nMy Khe Beach is 100 metres from KNP Happy Maison, while Bac My An Beach is 1.1 km away. The nearest airport is Da Nang International Airport, 6 km from the accommodation.",
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Parking",
@@ -68,7 +68,7 @@
     "displayLocation": "Han River, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Star City Riverside Hotel By Haviland! To save at this property, all you have to do is sign in.\n\nStar City Riverside Hotel By Haviland is situated along the bank of Han River and offers modern living space with panoramic views of Da Nang city. The hotel has an on-site restaurant & bar and provides free WiFi access in all areas.\n\nGuests can enjoy city views while having Vietnamese and international dishes at Restaurant, which is located on the 11th floor.\n\nAll air-conditioned units are adorned in white color with splashes of light grey from the fabric and enjoys views of the Dragon Bridge. A satellite flat-screen TV, dehumidifier and minibar are available. En suite bathroom comes with shower facility, a washlet and hairdryer. Extras include free toiletries.\n\nYou will find a 24-hour front desk at the property.\n\nSong Han Bridge is 800 metres away while Cham Museum is 2.2 km from Star City Riverside Hotel By Haviland. My An Beach is 5 km away. The nearest airport is Da Nang International Airport, 5 km from the property.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -101,7 +101,7 @@
     "displayLocation": "Bac My An Beach, Da Nang",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at Tropical Pool Villas Furama Da Nang! To save at this property, all you have to do is sign in.\n\nWith city views, Tropical Pool Villas Furama Da Nang is located in Da Nang and has a restaurant, a shared kitchen, bar, garden, year-round outdoor pool and terrace. Both WiFi and private parking are available at the villa free of charge.\n\nTropical Pool Villas Furama Da Nang provides guests with a balcony, pool views, a seating area, cable flat-screen TV, a fully equipped kitchen with a fridge and an oven, and a private bathroom with shower and free toiletries. For added convenience, the property can provide towels and bed linen for an extra charge.\n\nAn à la carte, continental or Full English/Irish breakfast can be enjoyed at the property.\n\nThe accommodation offers a children's playground.\n\nThere is a shared lounge at this property and guests can go cycling nearby.\n\nBac My An Beach is 300 m from Tropical Pool Villas Furama Da Nang, while My Khe Beach is 1.7 km away. The nearest airport is Da Nang International, 8 km from the villa, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Airport shuttle",
       "Free WiFi",
@@ -134,7 +134,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Menora Premium Da Nang - Sea Corner Boutique! To save at this property, all you have to do is sign in.\n\nFacing the beachfront, Menora Premium Da Nang - Sea Corner Boutique offers 3-star accommodation in Da Nang and features an outdoor swimming pool, terrace and restaurant. This 3-star hotel offers a concierge service and a tour desk. The accommodation provides a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a minibar, a safety deposit box, a flat-screen TV and a private bathroom with a bidet. At Menora Premium Da Nang - Sea Corner Boutique every room comes with bed linen and towels.\n\nBreakfast is available daily, and includes buffet, à la carte and continental options.\n\nGuests at the accommodation will be able to enjoy activities in and around Da Nang, like cycling.\n\nMy Khe Beach is 300 m from Menora Premium Da Nang - Sea Corner Boutique, while Bac My An Beach is less than 1 km away. The nearest airport is Da Nang International Airport, 6 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Pool - outdoor (kids)",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -167,7 +167,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Raon Danang Beach! To save at this property, all you have to do is sign in.\n\nSituated in Da Nang, within 400 metres of My Khe Beach and less than 1 km of Bac My An Beach, Raon Danang Beach features accommodation with a shared lounge and free WiFi throughout the property as well as free private parking for guests who drive. This 4-star hotel offers a concierge service and a tour desk. The accommodation offers room service, a 24-hour front desk and currency exchange for guests.\n\nAll rooms are fitted with air conditioning, a flat-screen TV with satellite channels, a fridge, a kettle, a bidet, a hairdryer and a desk. The rooms are fitted with a private bathroom with a shower, while some rooms also boast a balcony and others also feature city views. At the hotel all rooms are fitted with bed linen and towels.\n\nRaon Danang Beach offers 4-star accommodation with an indoor pool.\n\nLove Lock Bridge Da Nang is 3 km from the accommodation, while Cham Museum is 3.7 km from the property. The nearest airport is Da Nang International, 7 km from Raon Danang Beach, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Indoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -176,7 +176,7 @@
       "Beachfront",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk"
     ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249794327.jpg?k=676f3194a67cc267584f1ff50f5f1c2fdd2995772c50f9e129e8fa3743c00fd5&o=&hp=1",
@@ -200,7 +200,7 @@
     "displayLocation": "Bac My An Beach, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Senorita Boutique Hotel! To save at this property, all you have to do is sign in.\n\nSituated in Da Nang, 200 metres from My Khe Beach, Senorita Boutique Hotel features accommodation with an outdoor swimming pool, free private parking, a shared lounge and a terrace. This 3-star hotel offers a bar. The accommodation provides a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nAt the hotel rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a bidet, free toiletries and a hairdryer. Every room comes with a kettle, while certain rooms are fitted with a balcony and others also boast city views. At Senorita Boutique Hotel each room is equipped with bed linen and towels.\n\nThe daily breakfast offers buffet, à la carte or continental options. At the accommodation you will find a restaurant serving Vietnamese, local and Asian cuisine. Vegetarian, vegan and dairy-free options can also be requested.\n\nBac My An Beach is 600 metres from Senorita Boutique Hotel, while Love Lock Bridge Da Nang is 3.3 km from the property. The nearest airport is Da Nang International Airport, 7 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -233,7 +233,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Cherry Hotel & Apartment Da Nang - Phoenix 2 Hotel! To save at this property, all you have to do is sign in.\n\nCherry Hotel & Apartment Da Nang - Phoenix 2 Hotel features an outdoor swimming pool, shared lounge, a terrace and restaurant in Da Nang. This 4-star hotel offers room service and an ATM. The accommodation provides a 24-hour front desk, airport transfers, a shared kitchen and free WiFi throughout the property.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a minibar, a safety deposit box, a flat-screen TV and a private bathroom with a bidet. Some rooms are equipped with a kitchen with a stovetop. At Cherry Hotel & Apartment Da Nang - Phoenix 2 Hotel each room is equipped with bed linen and towels.\n\nMy Khe Beach is 600 metres from the accommodation, while Bac My An Beach is 1.2 km away. The nearest airport is Da Nang International Airport, 6 km from Cherry Hotel & Apartment Da Nang - Phoenix 2 Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "3 swimming pools",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -266,7 +266,7 @@
     "displayLocation": "Han River, Da Nang",
     "rattingStars": null,
     "description": "Situated in Da Nang, 2 km from My Khe Beach and 3 km from Bac My An Beach, P House features spacious air-conditioned accommodation with a balcony and free WiFi. The property is located 1.8 km from Cham Museum, 2.6 km from Song Han Bridge and 2.9 km from Indochina Riverside Mall. The property is non-smoking and is set 1.2 km from Love Lock Bridge Da Nang.\n\nThe apartment is composed of 2 bedrooms, a fully equipped kitchen, and 2 bathrooms. A flat-screen TV is available.\n\nAsia Park Danang is 4.3 km from the apartment, while Marble Mountains is 8.2 km from the property. The nearest airport is Da Nang International Airport, 6 km from P House.",
-    "facilities": ["Swimming Pool", "Free WiFi", "Free parking"],
+    "facilityCodes": ["Swimming Pool", "Free WiFi", "Free parking"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/459979975.jpg?k=edbb314abdc29d4eac8f656966d16177628bac99d644d58dce1bb6651396bb02&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/459979975.jpg?k=edbb314abdc29d4eac8f656966d16177628bac99d644d58dce1bb6651396bb02&o=&hp=1",
@@ -288,7 +288,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Golden Lotus Grand! To save at this property, all you have to do is sign in.\n\nSet in Da Nang, 400 metres from My Khe Beach, Golden Lotus Grand offers accommodation with free bikes, free private parking, an outdoor swimming pool and a terrace. Each accommodation at the 4-star hotel has city views, and guests can enjoy access to a restaurant and to a bar. The accommodation provides room service, a 24-hour front desk and currency exchange for guests.\n\nAll guest rooms at the hotel come with air conditioning, a seating area, a flat-screen TV with cable channels, a safety deposit box and a private bathroom with a shower, free toiletries and a hairdryer. Each room comes with a kettle, while some rooms also offer a balcony and others also have sea views. At Golden Lotus Grand all rooms are fitted with bed linen and towels.\n\nA buffet, American or Asian breakfast is available every morning at the property.\n\nThe accommodation offers 4-star accommodation with a hot tub. The area is popular for cycling, and car hire is available at this 4-star hotel.\n\nBac My An Beach is less than 1 km from Golden Lotus Grand, while Love Lock Bridge Da Nang is 3.1 km from the property. The nearest airport is Da Nang International Airport, 7 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -296,7 +296,7 @@
       "Family rooms",
       "Room service",
       "Restaurant",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "Bar",
       "Very good breakfast"
     ],
@@ -321,7 +321,7 @@
     "displayLocation": "Han River, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Wink Hotel Danang Centre! To save at this property, all you have to do is sign in.\n\nSituated in Da Nang, 600 metres from Cham Museum, Wink Hotel Danang Centre features accommodation with a fitness centre, free private parking, a restaurant and a bar. This 4-star hotel offers a 24-hour front desk and a business centre. The property is 2 km from the city centre and 600 metres from Indochina Riverside Mall.\n\nThe rooms are fitted with air conditioning, a flat-screen TV with cable channels, a fridge, a kettle, a shower, free toiletries and a desk. Rooms have a private bathroom with a hairdryer, while some boast city views. Guest rooms have a wardrobe.\n\nA buffet, à la carte or American breakfast can be enjoyed at the property.\n\nSong Han Bridge is 1 km from the hotel, while Love Lock Bridge Da Nang is 1.5 km from the property. The nearest airport is Da Nang International Airport, 3 km from Wink Hotel Danang Centre.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free parking",
       "Family rooms",
@@ -354,7 +354,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Din House! To save at this property, all you have to do is sign in.\n\nDin House has city views, free WiFi and free private parking, located in Da Nang, 500 m from My Khe Beach.\n\nEvery unit features a private bathroom and bidet, air conditioning, a flat-screen TV and a fridge.\n\nSong Han Bridge is 2 km from the homestay, while Love Lock Bridge Da Nang is 2.7 km away. The nearest airport is Da Nang International Airport, 6 km from Din House.",
-    "facilities": ["Free WiFi", "Free parking", "Family rooms"],
+    "facilityCodes": ["Free WiFi", "Free parking", "Family rooms"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/452650988.jpg?k=66507adefff2fd0ff3dcc36240ccc1d48b2df324ab71ecba9e5bbc10d52f1027&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/452650988.jpg?k=66507adefff2fd0ff3dcc36240ccc1d48b2df324ab71ecba9e5bbc10d52f1027&o=&hp=1",
@@ -376,7 +376,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at FIVITEL King! To save at this property, all you have to do is sign in.\n\nFacing the beachfront, FIVITEL King offers 4-star accommodation in Da Nang and features free bikes, outdoor swimming pool and fitness centre. Each accommodation at the 4-star hotel has mountain views, and guests can enjoy access to a garden and to a shared lounge. The hotel has a terrace and city views, and guests can enjoy a meal at the restaurant or a drink at the bar.\n\nAll units at the hotel come with air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, free toiletries and a hairdryer. FIVITEL King provides certain rooms with sea views, and the rooms include a kettle. At the accommodation every room is equipped with bed linen and towels.\n\nA buffet, continental or American breakfast can be enjoyed at the property.\n\nFIVITEL King offers a children's playground. You can play billiards at this 4-star hotel, and car hire is available.\n\nThere is also a business centre and a kids' club on site. Around the clock assistance is available at the reception, where staff speak English, Japanese, Korean and Vietnamese.\n\nMy Khe Beach is 700 m from the hotel, while Bac My An Beach is 1.8 km away. The nearest airport is Da Nang International, 6 km from FIVITEL King, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "2 swimming pools",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -409,7 +409,7 @@
     "displayLocation": "Han River, Da Nang",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at Wink Hotel Danang Riverside! To save at this property, all you have to do is sign in.\n\nSet in Da Nang, 2.3 km from My Khe Beach, Wink Hotel Danang Riverside offers accommodation with an outdoor swimming pool, free private parking, a fitness centre and a shared lounge. Featuring a terrace, the 5-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. Guests can enjoy American and local dishes at the restaurant or have a cocktail at the bar.\n\nAt the hotel, each room comes with a desk. The rooms come with a safety deposit box and selected rooms also feature city views. All guest rooms in Wink Hotel Danang Riverside are fitted with a flat-screen TV and free toiletries.\n\nGuests at the accommodation can enjoy a buffet breakfast.\n\nWink Hotel Danang Riverside offers a children's playground.\n\nA business centre and vending machines with snacks and drinks are available on site at the hotel. Languages spoken at the 24-hour front desk include English and Vietnamese.\n\nPopular points of interest near Wink Hotel Danang Riverside include Love Lock Bridge Da Nang, Song Han Bridge and Cham Museum. The nearest airport is Da Nang International Airport, 4 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -442,7 +442,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 3,
     "description": "Set a few steps from My Khe Beach, DA NANG BAY HOTEL offers 3-star accommodation in Da Nang and features a terrace, a restaurant and a bar. This 3-star hotel offers room service and a 24-hour front desk. The hotel has family rooms.\n\nAt the hotel, all rooms are fitted with a wardrobe. Every room has air conditioning and a flat-screen TV, and certain units at DA NANG BAY HOTEL have a city view. The units will provide guests with a desk and a kettle.\n\nA buffet, à la carte or Asian breakfast is available every morning at the property.\n\nSong Han Bridge is 3.8 km from the accommodation, while Love Lock Bridge Da Nang is 4.3 km away. The nearest airport is Da Nang International Airport, 8 km from DA NANG BAY HOTEL.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free parking",
       "Family rooms",
@@ -474,7 +474,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Dana Marina Boutique Hotel! To save at this property, all you have to do is sign in.\n\nSet in Da Nang, 1.5 km from Love Lock Bridge Da Nang, Dana Marina Boutique Hotel provides accommodation with a fitness centre. This 4-star hotel offers a 24-hour front desk, business centre and free WiFi. Local points of interest like Song Han Bridge and Indochina Riverside Mall are reachable within 2.1 km.\n\nThe rooms are equipped with a flat-screen TV with cable channels, fridge, a kettle, a bath and a desk. Each room is fitted with a private bathroom, while selected rooms come with a sea view. All units at the hotel have air conditioning and a wardrobe.\n\nA buffet breakfast can be enjoyed in the breakfast area. There is an in-house restaurant, which serves a variety of Vietnamese and Asian dishes.\n\nDana Marina Boutique Hotel offers an outdoor pool.\n\nA business centre with newspapers is at guests' disposal at the accommodation.\n\nCham Museum is 2.2 km from Dana Marina Boutique Hotel. The nearest airport is Da Nang International Airport, 5 km from the property.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -507,7 +507,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Cordial Grand Hotel! To save at this property, all you have to do is sign in.\n\nSituated in Da Nang, 700 metres from My Khe Beach, Cordial Grand Hotel features accommodation with free bikes, free private parking, an outdoor swimming pool and a fitness centre. Each accommodation at the 4-star hotel has mountain views, and guests can enjoy access to a garden and to a shared lounge. The hotel has a terrace and city views, and guests can enjoy a meal at the restaurant or a drink at the bar.\n\nAt the hotel the rooms are fitted with air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a bidet, free toiletries and a hairdryer. All rooms are equipped with a kettle, while some rooms also boast a kitchen with a microwave and a stovetop. At Cordial Grand Hotel every room comes with bed linen and towels.\n\nA buffet, à la carte or continental breakfast can be enjoyed at the property.\n\nThe accommodation offers 4-star accommodation with a hot tub.\n\nSpeaking Mandarin, English, Korean and Vietnamese, staff will be happy to provide guests with practical advice on the area at the 24-hour front desk.\n\nSong Han Bridge is 1.8 km from Cordial Grand Hotel, while Love Lock Bridge Da Nang is 2.5 km from the property. The nearest airport is Da Nang International, 6 km from the hotel, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -540,7 +540,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Raon Apartment and Hotel! To save at this property, all you have to do is sign in.\n\nRaon Apartment and Hotel is a 3-star property situated in Da Nang, facing the beach. This 3-star hotel offers a concierge service and a tour desk. The accommodation features a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nAll rooms are fitted with air conditioning, a flat-screen TV with satellite channels, a minibar, a kettle, a bidet, a hairdryer and a desk. The rooms have a private bathroom fitted with a shower and slippers, while some rooms are fitted with a kitchenette equipped with a fridge. At the hotel all rooms include bed linen and towels.\n\nThe area is popular for hiking, and car hire is available at this 3-star hotel.\n\nMy Khe Beach is 700 m from Raon Apartment and Hotel, while Song Han Bridge is 1.9 km from the property. The nearest airport is Da Nang International Airport, 6 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -548,7 +548,7 @@
       "Beachfront",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Tea/coffee maker in all rooms"
     ],
@@ -573,14 +573,14 @@
     "displayLocation": "Bac My An Beach, Da Nang",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Sun River Hotel & Apartment! To save at this property, all you have to do is sign in.\n\nLocated 700 metres from Bac My An Beach, Sun River Hotel & Apartment offers free bikes, a garden and air-conditioned accommodation with a balcony and free WiFi.\n\nThe aparthotel provides guests with a terrace, city views, a seating area, cable flat-screen TV, a fully equipped kitchen with a fridge and a microwave, and a private bathroom with bidet and free toiletries. A minibar and stovetop are also provided, as well as a kettle.\n\nA buffet, à la carte or Asian breakfast can be enjoyed at the property.\n\nGuests can also relax in the shared lounge area.\n\nMy Khe Beach is less than 1 km from Sun River Hotel & Apartment, while Asia Park Danang is 2.7 km away. The nearest airport is Da Nang International, 7 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
       "Free parking",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Terrace",
       "Fabulous breakfast"
@@ -605,8 +605,8 @@
     "pageName": "luis-mo-boutique",
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
-    "description": "You're eligible for a Genius discount at Louis Mo Apartment! To save at this property, all you have to do is sign in.\n\nSet 400 m from My Khe Beach, Louis Mo Apartment offers 4-star accommodation in Da Nang and has free bikes. Among the facilities of this property are a restaurant, a 24-hour front desk and a lift, along with free WiFi throughout the property. The apartment offers a rooftop pool with a fence, as well as a fitness room and full-day security.\n\nAll units at the apartment complex come with air conditioning, a seating area, a flat-screen TV with cable channels, a kitchen, a dining area and a private bathroom with slippers, a walk-in shower and a hair dryer. Some units feature a terrace and/or a balcony with sea views and an outdoor dining area. At the apartment complex, the units have bed linen and towels.\n\nÀ la carte and Asian breakfast options with warm dishes, local specialities and fruits are available every morning at the apartment. There is a coffee shop, and packed lunches are also available.\n\nA baby safety gate is also available for guests at Louis Mo Apartment.\n\nBac My An Beach is 1.1 km from the accommodation, while Love Lock Bridge Da Nang is 2.8 km from the property. The nearest airport is Da Nang International Airport, 6 km from Louis Mo Apartment.",
-    "facilities": [
+    "description": "You're eligible for a Genius discount at Louis Mo Apartment! To save at this property, all you have to do is sign in.\n\nSet 400 m from My Khe Beach, Louis Mo Apartment offers 4-star accommodation in Da Nang and has free bikes. Among the facilityCodes of this property are a restaurant, a 24-hour front desk and a lift, along with free WiFi throughout the property. The apartment offers a rooftop pool with a fence, as well as a fitness room and full-day security.\n\nAll units at the apartment complex come with air conditioning, a seating area, a flat-screen TV with cable channels, a kitchen, a dining area and a private bathroom with slippers, a walk-in shower and a hair dryer. Some units feature a terrace and/or a balcony with sea views and an outdoor dining area. At the apartment complex, the units have bed linen and towels.\n\nÀ la carte and Asian breakfast options with warm dishes, local specialities and fruits are available every morning at the apartment. There is a coffee shop, and packed lunches are also available.\n\nA baby safety gate is also available for guests at Louis Mo Apartment.\n\nBac My An Beach is 1.1 km from the accommodation, while Love Lock Bridge Da Nang is 2.8 km from the property. The nearest airport is Da Nang International Airport, 6 km from Louis Mo Apartment.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -639,7 +639,7 @@
     "displayLocation": "Tho Quang Beach, Da Nang",
     "rattingStars": 4,
     "description": "Facing the beachfront, Nguyen Gia Hotel offers 4-star accommodation in Da Nang and has free bikes, outdoor swimming pool and shared lounge. With free WiFi, this 4-star hotel has a terrace and a restaurant. The accommodation offers room service, a concierge service and currency exchange for guests.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a minibar, a safety deposit box, a flat-screen TV and a private bathroom with a bidet. Selected rooms also offer a kitchen with a fridge and a stovetop. All guest rooms feature a wardrobe.\n\nThe daily breakfast offers buffet, à la carte or American options.\n\nMy Khe Beach is a few steps from Nguyen Gia Hotel, while Bai But Beach is 3 km from the property. The nearest airport is Da Nang International Airport, 9 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -672,7 +672,7 @@
     "displayLocation": "Non Nuoc Beach, Da Nang",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at Glese Furama Pool Villas & Resort Danang! To save at this property, all you have to do is sign in.\n\nLocated in Da Nang, 300 m from Tan Tra Beach, Glese Furama Pool Villas & Resort Danang provides accommodation with an outdoor swimming pool, free private parking, a fitness centre and a garden. Each accommodation at the 5-star resort has pool views, and guests can enjoy access to a shared lounge and to a restaurant. The accommodation features a 24-hour front desk, airport transfers, a kids' club and free WiFi.\n\nThe resort will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a microwave, a safety deposit box, a flat-screen TV, a terrace and a private bathroom with a shower. Each room has a shared bathroom with a bath, free toiletries and a hairdryer. At Glese Furama Pool Villas & Resort Danang rooms have bed linen and towels.\n\nA buffet, continental or Full English/Irish breakfast is available daily at the property.\n\nYou can play tennis at this 5-star resort, and the area is popular for cycling.\n\nPopular points of interest near the accommodation include Non Nuoc Beach, Montgomerie Links and Montgomerie Links Vietnam Golf Club. The nearest airport is Da Nang International Airport, 14 km from Glese Furama Pool Villas & Resort Danang.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -705,7 +705,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Flower Boutique Hotel! To save at this property, all you have to do is sign in.\n\nFacing the beachfront, Flower Boutique Hotel offers 4-star accommodation in Da Nang and features an outdoor swimming pool, garden and shared lounge. Offering a restaurant, the property also has a terrace and a bar. The accommodation offers a 24-hour front desk, airport transfers, room service and free WiFi.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a kettle, a fridge, a minibar, a safety deposit box, a flat-screen TV, a patio and a private bathroom with a bidet. At Flower Boutique Hotel all rooms come with bed linen and towels.\n\nA buffet, à la carte or Asian breakfast is available every morning at the property.\n\nThe area is popular for hiking and cycling, and car hire is available at this 4-star hotel.\n\nMy Khe Beach is 300 m from the accommodation, while Bac My An Beach is 1 km away. The nearest airport is Da Nang International Airport, 6 km from Flower Boutique Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -738,7 +738,7 @@
     "displayLocation": "My Khe Beach, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Duy Tung Hotel Da Nang! To save at this property, all you have to do is sign in.\n\nSet in Da Nang, 2 km from My Khe Beach, Duy Tung Hotel Da Nang offers accommodation with a garden, free private parking, a shared lounge and a restaurant. With free WiFi, this 3-star hotel offers a shared kitchen and room service. The accommodation features a concierge service, a tour desk and currency exchange for guests.\n\nThe hotel will provide guests with air-conditioned rooms with a desk, a coffee machine, a fridge, a minibar, a safety deposit box, a flat-screen TV, a patio and a private bathroom with a bidet. With a shared bathroom equipped with a shower and free toiletries, rooms at Duy Tung Hotel Da Nang also have a city view. At the accommodation all rooms are equipped with bed linen and towels.\n\nDuy Tung Hotel Da Nang offers an à la carte or continental breakfast.\n\nThe hotel offers a sun terrace.\n\nSpeaking Afrikaans, Arabic, Azerbaijani and Belarusian at the 24-hour front desk, staff will be happy to provide guests with practical information on the area.\n\nBac My An Beach is 2.2 km from Duy Tung Hotel Da Nang, while Love Lock Bridge Da Nang is 1.7 km away. The nearest airport is Da Nang International, 5 km from the accommodation, and the property offers a paid airport shuttle service.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -771,14 +771,14 @@
     "displayLocation": "Da Nang City-Centre, Da Nang",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Minh Quân Hotel - Đà Nẵng Center! To save at this property, all you have to do is sign in.\n\nWell set in Da Nang, Minh Quân Hotel - Đà Nẵng Center provides air-conditioned rooms with free WiFi, free private parking and room service. Each accommodation at the 3-star hotel has city views, and guests can enjoy access to an outdoor swimming pool and to a shared lounge. The hotel features a terrace and a 24-hour front desk.\n\nAll units in the hotel are equipped with a flat-screen TV with cable channels. Every room is equipped with a private bathroom with a bidet, free toiletries and a hairdryer. At Minh Quân Hotel - Đà Nẵng Center the rooms are fitted with bed linen and towels.\n\nAsia Park Danang is 1.4 km from the accommodation, while Cham Museum is 3.6 km away. The nearest airport is Da Nang International Airport, 4 km from Minh Quân Hotel - Đà Nẵng Center.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
       "Family rooms",
       "Room service",
-      "Facilities for disabled guests",
+      "facilityCodes for disabled guests",
       "24-hour front desk",
       "Terrace",
       "Bar"

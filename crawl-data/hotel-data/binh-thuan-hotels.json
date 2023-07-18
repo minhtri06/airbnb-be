@@ -7,7 +7,7 @@
     "displayLocation": "Phan Thiet",
     "rattingStars": 5,
     "description": "Facing the beachfront, Mövenpick Resort Phan Thiet offers 5-star accommodation in Phan Thiet and has an outdoor swimming pool, fitness centre and garden. Boasting a kids' club, this property also welcomes guests with a restaurant and a terrace. The accommodation offers room service, a 24-hour front desk and luggage storage for guests.\n\nThe hotel will provide guests with air-conditioned rooms offering a desk, a kettle, a fridge, a minibar, a safety deposit box, a flat-screen TV, a balcony and a private bathroom with a bidet. All guest rooms feature a wardrobe.\n\nBreakfast is available every morning, and includes buffet, continental and American options.\n\nMövenpick Resort Phan Thiet offers a children's playground.\n\nTien Thanh Beach is 300 metres from the accommodation, while Phan Thiet Train Station is 13 km from the property. The nearest airport is Vung Tau Airport, 143 km from Mövenpick Resort Phan Thiet.",
-    "facilities": [
+    "facilityCodes": [
       "2 swimming pools",
       "Free parking",
       "Spa and wellness centre",
@@ -40,7 +40,12 @@
     "displayLocation": "Ấp Thiện Phước",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Ocean Vista Mui Ne - SeaLinks City! To save at this property, all you have to do is sign in.\n\nLocated 200 m from Ong Dia Rock Beach, Ocean Vista Mui Ne - SeaLinks City offers a garden, and air-conditioned accommodation with a balcony and free WiFi.\n\nEach unit comes with a terrace offering city views, a cable flat-screen TV, a dining area, a well-fitted kitchen and a private bathroom with shower and slippers. A fridge, an oven and microwave are also provided, as well as a kettle.\n\nSea Link Golf Course is 8.3 km from the apartment, while Fairy Spring is 8.9 km away. The nearest airport is Lien Khuong Airport, 138 km from Ocean Vista Mui Ne - SeaLinks City.",
-    "facilities": ["Outdoor swimming pool", "Free WiFi", "Free parking", "Family rooms"],
+    "facilityCodes": [
+      "Outdoor swimming pool",
+      "Free WiFi",
+      "Free parking",
+      "Family rooms"
+    ],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/425486514.jpg?k=afaf0cbbd64aa9470c16a74d210e31ff2308934a65d52dfc0749c4f21d75ec60&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/425486514.jpg?k=afaf0cbbd64aa9470c16a74d210e31ff2308934a65d52dfc0749c4f21d75ec60&o=&hp=1",
@@ -62,7 +67,7 @@
     "displayLocation": "Vĩnh Thạnh",
     "rattingStars": null,
     "description": "Situated in Vĩnh Thạnh, 1.6 km from Cam Binh Beach, LAGI FARMSTAY features air-conditioned accommodation and a garden. This pet-friendly resort also has free WiFi.\n\nAt the resort, the rooms come with a patio with pool view. All rooms will provide guests with an oven.\n\nA buffet breakfast is available each morning at LAGI FARMSTAY.\n\nTa Cu Moutain is 34 km from the accommodation, while Ke Ga Lighthouse is 40 km from the property. The nearest airport is Vung Tau Airport, 87 km from LAGI FARMSTAY.",
-    "facilities": [
+    "facilityCodes": [
       "Swimming Pool",
       "Free WiFi",
       "Free parking",
@@ -88,8 +93,8 @@
     "pageName": "park-diamond",
     "displayLocation": "Phan Thiet",
     "rattingStars": 4,
-    "description": "You're eligible for a Genius discount at TTC Hotel Phan Thiet! To save at this property, all you have to do is sign in.\n\nStanding tall on Nguyen Tat Thanh street, TTC Hotel Phan Thiet overlooks the ocean and ancient volcanic mountains in Phan Thiet city. The hotel features an outdoor swimming, on-site restaurant and a garden. Guests can enjoy free parking on site.\n\nWith accents of purple from the fabrics and brown from the dark wood furnishings, all units enjoy free WiFi access and air conditioning. All large units feature windows offering city/sea views, a seating area and minibar. En suite bathroom is equipped with a bathtub, free toiletries and a hairdryer.\n\nYou can fill many restaurants and shops in the surrounding. Facing Doi Duong Beach, TTC Hotel Phan Thiet is a 5-minute drive from Phan Thiet Railway Station, while Mui Ne is a 40-minute drive away.\n\nGuests can head for a tennis game, or enjoy a rejunevating massage at the spa. Staff at the 24-hour reception can arrange water facilities upon request, such as snorkelling, windsurfing, deep-sea fishing and scuba diving. Car hire and luggage storage are available.\n\nOriental Restaurant features à la carte menus and serves an array of Asian and European dishes. Room service is also possible.",
-    "facilities": [
+    "description": "You're eligible for a Genius discount at TTC Hotel Phan Thiet! To save at this property, all you have to do is sign in.\n\nStanding tall on Nguyen Tat Thanh street, TTC Hotel Phan Thiet overlooks the ocean and ancient volcanic mountains in Phan Thiet city. The hotel features an outdoor swimming, on-site restaurant and a garden. Guests can enjoy free parking on site.\n\nWith accents of purple from the fabrics and brown from the dark wood furnishings, all units enjoy free WiFi access and air conditioning. All large units feature windows offering city/sea views, a seating area and minibar. En suite bathroom is equipped with a bathtub, free toiletries and a hairdryer.\n\nYou can fill many restaurants and shops in the surrounding. Facing Doi Duong Beach, TTC Hotel Phan Thiet is a 5-minute drive from Phan Thiet Railway Station, while Mui Ne is a 40-minute drive away.\n\nGuests can head for a tennis game, or enjoy a rejunevating massage at the spa. Staff at the 24-hour reception can arrange water facilityCodes upon request, such as snorkelling, windsurfing, deep-sea fishing and scuba diving. Car hire and luggage storage are available.\n\nOriental Restaurant features à la carte menus and serves an array of Asian and European dishes. Room service is also possible.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -122,7 +127,7 @@
     "displayLocation": "Phan Thiet",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Radisson Resort Phan Thiet! To save at this property, all you have to do is sign in.\n\nFacing the beachfront, Radisson Resort Phan Thiet offers 4-star accommodation in Phan Thiet and features free bikes, outdoor swimming pool and fitness centre. With free WiFi, this 4-star hotel has a garden and a bar. The accommodation provides room service and a 24-hour front desk for guests.\n\nAt the hotel, every room is fitted with a desk.\n\nThe daily breakfast offers buffet, American or Asian options. At Radisson Resort Phan Thiet you will find a restaurant serving American, Austrian and Asian cuisine. Vegetarian and vegan options can also be requested.\n\nThe accommodation offers a children's playground.\n\nPhan Thiet Train Station is 14 km from Radisson Resort Phan Thiet, while Binh Thuan Bus Station is 15 km away. The nearest airport is Vung Tau Airport, 142 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -155,7 +160,7 @@
     "displayLocation": "Phan Thiet",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at RUBENS BOUTIQUE HOTEL! To save at this property, all you have to do is sign in.\n\nSet in Phan Thiet, 500 metres from Doi Duong Beach, RUBENS BOUTIQUE HOTEL offers accommodation with a terrace, free private parking, a restaurant and a bar. The property is located 2.2 km from Thuong Chanh Beach, 500 metres from Sea Link Golf Course and 3.1 km from Phan Thiet Train Station. The accommodation provides a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nAll guest rooms come with air conditioning, a flat-screen TV with cable channels, a kettle, a bidet, free toiletries and a wardrobe. With a private bathroom fitted with a shower and slippers, some units at the hotel also have a city view.\n\nBinh Thuan Bus Station is 3.2 km from RUBENS BOUTIQUE HOTEL, while Fairy Spring is 18 km from the property. The nearest airport is Lien Khuong Airport, 138 km from the accommodation.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -187,7 +192,7 @@
     "displayLocation": "Phan Thiet",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at Mandala Cham Bay Mui Ne! To save at this property, all you have to do is sign in.\n\nLocated in Phan Thiet, 600 m from Long Son Beach, Mandala Cham Bay Mui Ne provides accommodation with an outdoor swimming pool, free private parking, a fitness centre and a restaurant. This 5-star hotel features a spa experience, with its sauna and hot tub. The accommodation offers a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nSome rooms are equipped with a kitchenette with a minibar and a stovetop.\n\nGuests at the hotel can enjoy a buffet breakfast.\n\nMandala Cham Bay Mui Ne offers a sun terrace.\n\nRed Sand Dunes Beach is 2.5 km from the accommodation, while Fairy Spring is 16 km away. The nearest airport is Lien Khuong Airport, 113 km from Mandala Cham Bay Mui Ne.",
-    "facilities": [
+    "facilityCodes": [
       "3 swimming pools",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -220,7 +225,7 @@
     "displayLocation": "Phan Thiet",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Nhà nghỉ Hùng Hoa! To save at this property, all you have to do is sign in.\n\nSet in Phan Thiet, within 700 metres of Doi Duong Beach and 2.5 km of Sea Link Golf Course, Nhà nghỉ Hùng Hoa offers accommodation with a garden as well as free private parking for guests who drive. The property has sea and mountain views, and is 4.5 km from Binh Thuan Bus Station. The guest house features family rooms.\n\nAll units feature air conditioning and a cable flat-screen TV. Featuring a private bathroom with a walk-in shower and slippers, units at the guest house also have free WiFi, while some rooms also offer a terrace. At the guest house, the units have bed linen and towels.\n\nPhan Thiet Train Station is 4.7 km from the guest house, while Fairy Spring is 17 km from the property. The nearest airport is Lien Khuong Airport, 139 km from Nhà nghỉ Hùng Hoa.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
@@ -248,7 +253,7 @@
     "displayLocation": "Old Quarter, Mui Ne",
     "rattingStars": 4,
     "description": "You're eligible for a Genius discount at Muine Bay Resort! To save at this property, all you have to do is sign in.\n\nSteps from the beach, Muine Bay Resort offers a tranquil garden and green landscape. The resort features spacious units with private balconies. Featuring an outdoor pool with a bar, it provides free WiFi and complimentary shuttle service to Ham Tien Beach, located 10 km away.\n\nBoasting modern interiors, air-conditioned rooms have dark wood furnishings and flat-screen cable TVs. A fridge, safe and a hairdryer are provided.\n\nGuests can get an active workout at the tennis court or take a dip in the spa pool. Added conveniences include a business centre and a tour desk.\n\nA range of Asian dishes can be sampled in the casual open-air environment of Hall Restaurant. The beach bar is ideal for barbecue gatherings.\n\nMuine Bay Resort is 2 km from the Red Sand Dunes and Mui Ne Local Market. It is 30 km from Phan Thiet City and provides free parking.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -281,7 +286,7 @@
     "displayLocation": "Ấp Ngọc Hải",
     "rattingStars": null,
     "description": "Situated in Ấp Ngọc Hải, 1.3 km from Ong Dia Rock Beach and 7.5 km from Sea Link Golf Course, Biệt thự Domaine Mũi Né offers air conditioning. This property offers access to a balcony, free private parking and free WiFi. Fairy Spring is 11 km away and Ke Ga Lighthouse is 42 km from the villa.\n\nThe spacious villa has a terrace, 3 bedrooms, a living room and a well-equipped kitchen. A flat-screen TV is available. The property offers garden views.\n\nBinh Thuan Bus Station is 8.9 km from the villa, while Phan Thiet Train Station is 10 km from the property. The nearest airport is Lien Khuong Airport, 138 km from Biệt thự Domaine Mũi Né.",
-    "facilities": ["Free WiFi", "Free parking"],
+    "facilityCodes": ["Free WiFi", "Free parking"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/466126604.jpg?k=40ddbca2aa9c0cf7f9819790da1c85e9f7752bf38a5e26baeab4948eda1aeea1&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/466126604.jpg?k=40ddbca2aa9c0cf7f9819790da1c85e9f7752bf38a5e26baeab4948eda1aeea1&o=&hp=1",
@@ -303,7 +308,7 @@
     "displayLocation": "Ấp Bình Hưng",
     "rattingStars": null,
     "description": "Set in Ấp Bình Hưng, within 2.2 km of Doi Duong Beach and 1.3 km of Binh Thuan Bus Station, Every Day Guest House - Phan Thiet offers accommodation with a terrace and free WiFi throughout the property as well as free private parking for guests who drive. The property is around 2.8 km from Phan Thiet Train Station, 18 km from Fairy Spring and 35 km from Ke Ga Lighthouse. The property is non-smoking and is located 2.5 km from Sea Link Golf Course.\n\nThe units come with air conditioning, a fridge, a stovetop, a kettle, a bidet, free toiletries and a wardrobe. Every room includes a private bathroom with a shower, a hairdryer and slippers. At the guest house every room comes with bed linen and towels.\n\nAn American breakfast is available every morning at Every Day Guest House - Phan Thiet.\n\nTa Cu Moutain is 35 km from the accommodation, while Binh Thuan Post Office is 1.7 km away. The nearest airport is Lien Khuong Airport, 136 km from Every Day Guest House - Phan Thiet.",
-    "facilities": ["Free WiFi", "Free parking", "Breakfast"],
+    "facilityCodes": ["Free WiFi", "Free parking", "Breakfast"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/449299461.jpg?k=58709749967aaf66c8339cbdaa3075d3606183a4008a3ce39dfdf64016aa8656&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/449299461.jpg?k=58709749967aaf66c8339cbdaa3075d3606183a4008a3ce39dfdf64016aa8656&o=&hp=1",
@@ -325,7 +330,7 @@
     "displayLocation": "Tuy Phong",
     "rattingStars": 3,
     "description": "You're eligible for a Genius discount at Paris Hotel Bình Thuận! To save at this property, all you have to do is sign in.\n\nParis Hotel Bình Thuận is a 3-star property situated in Tuy Phong, facing the beach. With free WiFi, this 3-star hotel offers a shared lounge and room service. The accommodation features a 24-hour front desk, a concierge service and organising tours for guests.\n\nThe rooms at the hotel come with air conditioning, a seating area, a flat-screen TV with cable channels, a safety deposit box and a private bathroom with a shower, free toiletries and a hairdryer. Paris Hotel Bình Thuận offers some rooms with city views, and all rooms come with a kettle. At the accommodation rooms include bed linen and towels.\n\nWhite Sand Dunes is 23 km from Paris Hotel Bình Thuận, while Red Sand Dunes is 46 km from the property. The nearest airport is Lien Khuong Airport, 113 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Beachfront",
@@ -353,7 +358,7 @@
     "displayLocation": "La Gi",
     "rattingStars": null,
     "description": "You're eligible for a Genius discount at Thanh Binh Hotel! To save at this property, all you have to do is sign in.\n\nSet in La Gi, 29 km from Ta Cu Moutain, Thanh Binh Hotel offers accommodation with a garden, free private parking, a terrace and a bar. The accommodation provides a 24-hour front desk, airport transfers, room service and free WiFi.\n\nAt the hotel, each room comes with a desk. Complete with a private bathroom equipped with a bidet and free toiletries, the units at Thanh Binh Hotel have a flat-screen TV and air conditioning, and selected rooms will provide you with a balcony. At the accommodation all rooms come with bed linen and towels.\n\nKe Ga Lighthouse is 36 km from Thanh Binh Hotel. The nearest airport is Vung Tau Airport, 93 km from the hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -382,8 +387,8 @@
     "pageName": "huy-dat-phan-thiet-binh-thuan",
     "displayLocation": "Phan Thiet",
     "rattingStars": null,
-    "description": "Set within 2.4 km of Thuong Chanh Beach and 3.2 km of Phan Thiet Train Station, Huy Đạt Hotel offers rooms in Phan Thiet. Among the facilities at this property are room service and a 24-hour front desk, along with free WiFi throughout the property. Certain units at the property feature a balcony with a city view.\n\nAt the hotel, all rooms come with a wardrobe. Complete with a private bathroom equipped with a shower and a hairdryer, the units at Huy Đạt Hotel have a flat-screen TV and air conditioning, and selected rooms will provide you with a terrace. Guest rooms will provide guests with a fridge.\n\nPopular points of interest near the accommodation include Doi Duong Beach, Sea Link Golf Course and Binh Thuan Post Office. The nearest airport is Lien Khuong Airport, 138 km from Huy Đạt Hotel.",
-    "facilities": [
+    "description": "Set within 2.4 km of Thuong Chanh Beach and 3.2 km of Phan Thiet Train Station, Huy Đạt Hotel offers rooms in Phan Thiet. Among the facilityCodes at this property are room service and a 24-hour front desk, along with free WiFi throughout the property. Certain units at the property feature a balcony with a city view.\n\nAt the hotel, all rooms come with a wardrobe. Complete with a private bathroom equipped with a shower and a hairdryer, the units at Huy Đạt Hotel have a flat-screen TV and air conditioning, and selected rooms will provide you with a terrace. Guest rooms will provide guests with a fridge.\n\nPopular points of interest near the accommodation include Doi Duong Beach, Sea Link Golf Course and Binh Thuan Post Office. The nearest airport is Lien Khuong Airport, 138 km from Huy Đạt Hotel.",
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",
@@ -411,7 +416,7 @@
     "displayLocation": "La Gi",
     "rattingStars": 2,
     "description": "You're eligible for a Genius discount at Hoang An Hotel! To save at this property, all you have to do is sign in.\n\nLocated in La Gi, 28 km from Ta Cu Moutain, Hoang An Hotel provides accommodation with a garden, free private parking, a shared lounge and a restaurant. Providing a bar, the property is located within 34 km of Ke Ga Lighthouse. The accommodation offers a 24-hour front desk, airport transfers, room service and free WiFi throughout the property.\n\nAt the hotel every room is equipped with air conditioning, a desk, a terrace with a garden view, a private bathroom, a flat-screen TV, bed linen and towels. All units in Hoang An Hotel are equipped with free toiletries and an iPod docking station.\n\nBreakfast is available daily, and includes à la carte, continental and Asian options.\n\nThe accommodation offers a children's playground.\n\nThe nearest airport is Vung Tau Airport, 93 km from Hoang An Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Airport shuttle",
       "Free WiFi",
@@ -443,7 +448,7 @@
     "displayLocation": "East Ham Tien Beach, Mui Ne",
     "rattingStars": 5,
     "description": "You're eligible for a Genius discount at Centara Mirage Resort Mui Ne! To save at this property, all you have to do is sign in.\n\nSituated in Mui Ne, a few steps from Ham Tien Beach, Centara Mirage Resort Mui Ne features accommodation with free bikes, free private parking, an outdoor swimming pool and a fitness centre. Boasting a kids' club, this property also welcomes guests with a restaurant, a water park and a terrace. The accommodation provides room service, a 24-hour front desk and luggage storage for guests.\n\nGuests at the resort can enjoy a buffet or an Asian breakfast.\n\nCentara Mirage Resort Mui Ne offers a children's playground. The area is popular for cycling, and car hire is available at this 5-star resort.\n\nFairy Spring is 1.6 km from the accommodation, while Sea Link Golf Course is 20 km from the property. The nearest airport is Lien Khuong Airport, 127 km from Centara Mirage Resort Mui Ne.",
-    "facilities": [
+    "facilityCodes": [
       "2 swimming pools",
       "Non-smoking rooms",
       "Airport shuttle (free)",
@@ -475,8 +480,8 @@
     "pageName": "villa-mui-ne-sealinks-pe23",
     "displayLocation": "Ấp Ngọc Hải",
     "rattingStars": null,
-    "description": "Situated in Ấp Ngọc Hải in the Binh Thuan region, with Ong Dia Rock Beach and Poshanu Tower nearby, villa Mui Ne Sealinks PE85 features accommodation with free private parking. Among the facilities of this property are a restaurant, a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. The rooftop pool features a pool bar and fence.\n\nThe spacious villa features 3 bedrooms, 3 bathrooms, bed linen, towels, a flat-screen TV with cable channels, a dining area, a fully equipped kitchen, and a terrace with sea views. This villa also includes a balcony that doubles up as an outdoor dining area. The villa is allergy-free and soundproof.\n\nA children's playground is also available at villa Mui Ne Sealinks PE85, while guests can also relax in the garden.\n\nHam Tien Beach is 2.7 km from the accommodation, while Sea Link Golf Course is 8.8 km from the property. The nearest airport is Lien Khuong Airport, 139 km from villa Mui Ne Sealinks PE85.",
-    "facilities": [
+    "description": "Situated in Ấp Ngọc Hải in the Binh Thuan region, with Ong Dia Rock Beach and Poshanu Tower nearby, villa Mui Ne Sealinks PE85 features accommodation with free private parking. Among the facilityCodes of this property are a restaurant, a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. The rooftop pool features a pool bar and fence.\n\nThe spacious villa features 3 bedrooms, 3 bathrooms, bed linen, towels, a flat-screen TV with cable channels, a dining area, a fully equipped kitchen, and a terrace with sea views. This villa also includes a balcony that doubles up as an outdoor dining area. The villa is allergy-free and soundproof.\n\nA children's playground is also available at villa Mui Ne Sealinks PE85, while guests can also relax in the garden.\n\nHam Tien Beach is 2.7 km from the accommodation, while Sea Link Golf Course is 8.8 km from the property. The nearest airport is Lien Khuong Airport, 139 km from villa Mui Ne Sealinks PE85.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -508,7 +513,7 @@
     "displayLocation": "Central Mui Ne Beach, Mui Ne",
     "rattingStars": 4,
     "description": "Villa Aria Muine is a stylish boutique beach resort located next to Phan Thiet Beach, a 15-minute drive from Phan Thiet City. Offering views of the sea and bay of Mui Ne, it features a private beach area, a restaurant and an outdoor pool. Free parking and free Wi-Fi access are provided.\n\nThe guest rooms feature a blend of tropical and French-style decor, and are fully air conditioned. Spacious rooms offer amenities such as a personal safe, a minibar and a flat-screen TV with cable channels.\n\nGuests can enjoy massages or swim in the outdoor pool. The staff at the tour desk can assist with making travel arrangements.\n\nAria Restaurant and Bar features an al fresco dining area, and serves Asian and western cuisine. A daily buffet breakfast is featured.\n\nAria Villa Muine is a 5-minute drive from Sealinks Golf Course and 6 km from Poshanu Cham Tower. It is a 15-minute drive from Phan Thiet Train Station and the Ham Tien Local Market. Bau Sen and Bau Trang are both a 45-minute drive away.",
-    "facilities": [
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle (free)",
@@ -540,8 +545,8 @@
     "pageName": "sandunes-beach-resort-amp-spa",
     "displayLocation": "Mui Ne",
     "rattingStars": 4,
-    "description": "Offering access to a private beach, Sandunes Beach Resort is a luxurious property with rooms, suites and bungalows boasting a sea view balcony and free WiFi. It also features an outdoor pool and restaurant.\n\nLocated in Mui Ne, Sandunes Beach Resort is found at the foot of Red Hill. Storm Kiteboarding Centre is 6.4 km away while Surfpoint Kiteboarding Centre is 7.3 km away. This resort is 90 km from Lien Khuong Airport.\n\nEvery room, suite and bungalow is air-conditioned and comes with a flat-screen satellite/cable TV, safe, minibar and an electric kettle. A sitting area and private bathroom with shower, bathtub, hairdryer and free toiletries are included.\n\nOther facilities include a shared lounge, ticket service and tour desk. Guests can relax with a massage at the spa during their stay.",
-    "facilities": [
+    "description": "Offering access to a private beach, Sandunes Beach Resort is a luxurious property with rooms, suites and bungalows boasting a sea view balcony and free WiFi. It also features an outdoor pool and restaurant.\n\nLocated in Mui Ne, Sandunes Beach Resort is found at the foot of Red Hill. Storm Kiteboarding Centre is 6.4 km away while Surfpoint Kiteboarding Centre is 7.3 km away. This resort is 90 km from Lien Khuong Airport.\n\nEvery room, suite and bungalow is air-conditioned and comes with a flat-screen satellite/cable TV, safe, minibar and an electric kettle. A sitting area and private bathroom with shower, bathtub, hairdryer and free toiletries are included.\n\nOther facilityCodes include a shared lounge, ticket service and tour desk. Guests can relax with a massage at the spa during their stay.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -574,7 +579,7 @@
     "displayLocation": "Ấp Bình Hưng",
     "rattingStars": null,
     "description": "Minh Hoàng Hotel- Spa is set in Ấp Bình Hưng, 2.6 km from Doi Duong Beach and offers air-conditioned accommodation with free WiFi, as well as access to a terrace.\n\nThere is a private bathroom with bidet in all units, along with free toiletries and slippers.\n\nPopular points of interest near the bed and breakfast include Binh Thuan Bus Station, Phan Thiet Train Station and Binh Thuan Post Office. The nearest airport is Lien Khuong Airport, 136 km from Minh Hoàng Hotel- Spa.",
-    "facilities": ["Free WiFi", "Free parking"],
+    "facilityCodes": ["Free WiFi", "Free parking"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433509445.jpg?k=b1fc21b2279b15db82f2560c368decbca1064c93cff79f7686cb7c552093163a&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433509445.jpg?k=b1fc21b2279b15db82f2560c368decbca1064c93cff79f7686cb7c552093163a&o=&hp=1",
@@ -595,8 +600,8 @@
     "pageName": "pandanus-resort",
     "displayLocation": "Mui Ne",
     "rattingStars": 4,
-    "description": "4-star comfort awaits at Pandanus Resort, 1.6 km from Mui Ne Market. Boasting a 10-hectare tropical garden, this beachfront resort offers a large free-form outdoor pool and, a hot tub for a dozen guests and 2 on-site dining options. Guests can enjoy free use of bicycle and free shuttle bus to Ham Tien Beach.\n\nAdorned in pleasant cream shade with splashes of yellow, light brown and black, all units at Pandanus Resort enjoy free WiFi access and air conditioning. A wardrobe with personal safe, cable flat-screen TV and minibar are included. Certain units feature either a private terrace or balcony with outdoor furniture and offer views of the garden. En suite bathroom comes with a walk-in shower and free toiletries.\n\nGuests can head to Pandanus's spa centre to pamper with a wide range of rejuvenating and restorative treatmens, or enjoy sauna/steam bath sessions. Other facilities include a flood-lit tennis court and fitness centre. Staff at the tour desk and 24-hour front desk can assist you with luggage storage, airport transfer and other concierge services.\n\nThe 24-hour Café Blue Lagoon Restaurant serves an array of authentic Vietnamese dishes and European delights, while the pool-side Sun Terrace Restaurant offers BBQ buffet, snacks and light lunch.\n\nStorm Kiteboarding Center is 6.4 km from Pandanus Resort, while Surfpoint Kiteboarding Center is 7.3 km away.",
-    "facilities": [
+    "description": "4-star comfort awaits at Pandanus Resort, 1.6 km from Mui Ne Market. Boasting a 10-hectare tropical garden, this beachfront resort offers a large free-form outdoor pool and, a hot tub for a dozen guests and 2 on-site dining options. Guests can enjoy free use of bicycle and free shuttle bus to Ham Tien Beach.\n\nAdorned in pleasant cream shade with splashes of yellow, light brown and black, all units at Pandanus Resort enjoy free WiFi access and air conditioning. A wardrobe with personal safe, cable flat-screen TV and minibar are included. Certain units feature either a private terrace or balcony with outdoor furniture and offer views of the garden. En suite bathroom comes with a walk-in shower and free toiletries.\n\nGuests can head to Pandanus's spa centre to pamper with a wide range of rejuvenating and restorative treatmens, or enjoy sauna/steam bath sessions. Other facilityCodes include a flood-lit tennis court and fitness centre. Staff at the tour desk and 24-hour front desk can assist you with luggage storage, airport transfer and other concierge services.\n\nThe 24-hour Café Blue Lagoon Restaurant serves an array of authentic Vietnamese dishes and European delights, while the pool-side Sun Terrace Restaurant offers BBQ buffet, snacks and light lunch.\n\nStorm Kiteboarding Center is 6.4 km from Pandanus Resort, while Surfpoint Kiteboarding Center is 7.3 km away.",
+    "facilityCodes": [
       "2 swimming pools",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -628,8 +633,8 @@
     "pageName": "the-happy-home-mui-ne-beach-centre",
     "displayLocation": "Phan Thiet",
     "rattingStars": null,
-    "description": "Situated in Phan Thiet, a few steps from Ham Tien Beach, Catsen Bungalows & Pool Phan Thiet features accommodation with a garden, free private parking and a shared lounge. Among the facilities at this property are a concierge service and a tour desk, along with free WiFi throughout the property. The accommodation provides room service, a 24-hour front desk and currency exchange for guests.\n\nSome rooms have a kitchenette with a fridge, an oven and a stovetop.\n\nThe hotel offers a sun terrace. You can play darts at Catsen Bungalows & Pool Phan Thiet, and the area is popular for cycling.\n\nFairy Spring is 3.6 km from the accommodation, while Sea Link Golf Course is 13 km from the property. The nearest airport is Lien Khuong Airport, 132 km from Catsen Bungalows & Pool Phan Thiet.",
-    "facilities": [
+    "description": "Situated in Phan Thiet, a few steps from Ham Tien Beach, Catsen Bungalows & Pool Phan Thiet features accommodation with a garden, free private parking and a shared lounge. Among the facilityCodes at this property are a concierge service and a tour desk, along with free WiFi throughout the property. The accommodation provides room service, a 24-hour front desk and currency exchange for guests.\n\nSome rooms have a kitchenette with a fridge, an oven and a stovetop.\n\nThe hotel offers a sun terrace. You can play darts at Catsen Bungalows & Pool Phan Thiet, and the area is popular for cycling.\n\nFairy Spring is 3.6 km from the accommodation, while Sea Link Golf Course is 13 km from the property. The nearest airport is Lien Khuong Airport, 132 km from Catsen Bungalows & Pool Phan Thiet.",
+    "facilityCodes": [
       "Outdoor swimming pool",
       "Non-smoking rooms",
       "Free WiFi",
@@ -658,7 +663,7 @@
     "displayLocation": "Central Mui Ne Beach, Mui Ne",
     "rattingStars": 2,
     "description": "You're eligible for a Genius discount at Mui Ne Hills Backpackers! To save at this property, all you have to do is sign in.\n\nLocated on top of a 300-meter sand dunes hill, Mui Ne Hills Backpackers offers accommodation with free WiFi access throughout the property. It features an outdoor pool and 24 hours check-in service. The hotel is just a 10-minute walk away from the nearest beach.\n\nMui Ne Hills Backpackers offers air-conditioned private rooms with cable TV, minibar and en-suite bathrooms with rain showers. Dorms are also available with A/C from 17:00 till 9:00.\n\nThe next door restaurant serves breakfast, lunch and dinner in both Vietnamese and international styles. Guests have free access to the bar with an open air rooftop spa bath, a second swimming pool and a nightclub.\n\nGuests can book local tours and bus tickets at the tour desk. Airport transfers can be provided at an additional charge. Motorbike rental and luggage storage are available on site.\n\nFairy Stream is 6 km from Mui Ne Hills Backpackers, while Sea Link Golf Course is 5 km away.",
-    "facilities": [
+    "facilityCodes": [
       "2 swimming pools",
       "Non-smoking rooms",
       "Airport shuttle",
@@ -690,7 +695,7 @@
     "displayLocation": "Ấp Thiện Phước",
     "rattingStars": null,
     "description": "Home Stay Sen biển, a property with a garden and a bar, is located in Ấp Thiện Phước, 1.2 km from Ong Dia Rock Beach, 7.1 km from Fairy Spring, as well as 10 km from Sea Link Golf Course. This property offers access to a balcony and free private parking. Binh Thuan Bus Station is 11 km away and Phan Thiet Train Station is 12 km from the apartment.\n\nAll of the air-conditioned units feature a private bathroom, flat-screen TV, fully equipped kitchen and terrace.\n\nKe Ga Lighthouse is 44 km from the apartment, while Ta Cu Moutain is 45 km away. The nearest airport is Lien Khuong Airport, 138 km from Home Stay Sen biển.",
-    "facilities": ["Free parking", "Bar"],
+    "facilityCodes": ["Free parking", "Bar"],
     "thumbnail": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/348194928.jpg?k=97a0cdb2717035859aceb67c2cb114895c08f647dc0cfc49bd77c60a0790f8f4&o=&hp=1",
     "images": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/348194928.jpg?k=97a0cdb2717035859aceb67c2cb114895c08f647dc0cfc49bd77c60a0790f8f4&o=&hp=1",
@@ -712,7 +717,7 @@
     "displayLocation": "Tuy Phong",
     "rattingStars": 2,
     "description": "You're eligible for a Genius discount at Hoang Dang Hotel! To save at this property, all you have to do is sign in.\n\nLocated in Tuy Phong, 43 km from White Sand Dunes, Hoang Dang Hotel provides accommodation with a shared lounge, free private parking and a terrace. With free WiFi, this 2-star hotel offers room service and a 24-hour front desk. Certain units at the property include a balcony with a city view.\n\nAll units are equipped with air conditioning, a flat-screen TV with cable channels, a kettle, a shower, a hairdryer and a wardrobe. At the hotel every room is fitted with bed linen and towels.\n\nThe nearest airport is Lien Khuong Airport, 131 km from Hoang Dang Hotel.",
-    "facilities": [
+    "facilityCodes": [
       "Non-smoking rooms",
       "Free WiFi",
       "Free parking",

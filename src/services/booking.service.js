@@ -6,6 +6,47 @@ const { requireFields } = require("../utils")
 const envConfig = require("../configs/envConfig")
 
 /**
+ * Find one booking, return null if not found
+ * @param {bookingFilter} filter
+ * @returns {Promise<booking | null>}
+ */
+const findOneBooking = async (filter) => {
+    return Booking.findOne(filter)
+}
+
+/**
+ * Find booking by id, return null if not found
+ * @param {string} bookingId
+ * @returns {Promise<booking | null>}
+ */
+const findBookingById = async (bookingId) => {
+    return findOneBooking({ _id: bookingId })
+}
+
+/**
+ * Get one booking, throw error if not found
+ * @param {bookingFilter} filter
+ * @returns {Promise<booking>}
+ */
+const getOneBooking = async (filter) => {
+    const booking = await findOneBooking(filter)
+    if (!booking) {
+        throw createError.NotFound("Booking not found")
+    }
+    return booking
+}
+
+/**
+ * Get booking by id, throw error if not found
+ * @param {string} bookingId
+ * @returns {Promise<booking>}
+ */
+const getBookingById = async (bookingId) => {
+    const booking = await getOneBooking({ _id: bookingId })
+    return booking
+}
+
+/**
  * Create new booking
  * @param {Object} body
  * @param {Date} body.bookIn
@@ -73,19 +114,6 @@ const createBooking = async (body) => {
 }
 
 /**
- * Get booking by id
- * @param {string} bookingId
- * @returns {Promise<booking>}
- */
-const getBookingById = async (bookingId) => {
-    const booking = await Booking.findById(bookingId)
-    if (!booking) {
-        throw createError.NotFound("Booking not found")
-    }
-    return booking
-}
-
-/**
  * Cancel a booking
  * @param {booking} booking
  * @returns {Promise<booking>}
@@ -125,12 +153,12 @@ const paginateBookings = async (filter, queryOptions) => {
 }
 
 /**
- *
+ * Find all bookings in specific month
  * @param {number} month
  * @param {bookingFilter} filter
- * @returns
+ * @returns {Promise<booking[]>}
  */
-const getBookingsInMonth = async (month, filter = {}) => {
+const findBookingsInMonth = async (month, filter = {}) => {
     // First date in 'month'
     const minBookIn = moment()
         .set("month", month - 1)
@@ -140,22 +168,25 @@ const getBookingsInMonth = async (month, filter = {}) => {
 
     filter.bookIn = { $gte: minBookIn, $lte: maxBookIn }
 
-    return await Booking.find(filter).sort("bookIn")
+    return Booking.find(filter).sort("bookIn")
 }
 
 module.exports = {
-    createBooking,
+    findOneBooking,
+    findBookingById,
+    getOneBooking,
     getBookingById,
+    createBooking,
     cancelBooking,
     paginateBookings,
-    getBookingsInMonth,
+    findBookingsInMonth,
 }
 
 /**
- *
  *  @typedef {InstanceType<import('../models/Booking')>} booking
  *
  * @typedef {Object} bookingFilter
+ * @property {string} _id
  * @property {string} guest
  * @property {string} property
  * @property {string} accomId
@@ -171,5 +202,4 @@ module.exports = {
  * @property {string} select
  * @property {string} populate
  * @property {boolean} lean
- *
  */

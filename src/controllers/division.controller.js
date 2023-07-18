@@ -1,22 +1,24 @@
 const createError = require("http-errors")
 
+const { pickFields } = require("../utils")
 const { divisionService: service } = require("../services")
 
 /** @type {controller} */
-const getAllProvinces = async (req, res) => {
-    const provinces = await service.getAllProvinces()
+const getProvinces = async (req, res) => {
+    const provinces = await service.findProvinces({})
     return res.json({ provinces })
 }
 
 /** @type {controller} */
-const getAllDistricts = async (req, res) => {
-    const districts = await service.getAllDistricts(req.query)
+const getDistricts = async (req, res) => {
+    req.query = pickFields(req.query, "provinceCode", "provinceId")
+    const districts = await service.findDistricts(req.query)
     return res.json({ districts })
 }
 
 module.exports = {
-    getAllProvinces,
-    getAllDistricts,
+    getProvinces,
+    getDistricts,
 }
 
 /**

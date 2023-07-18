@@ -7,8 +7,7 @@ const {
     propertyMiddleware: {
         getPropertyById,
         getPropertyByPageName,
-        getAccomGroupById,
-        getAccomById,
+        getAccommodationById,
         requireToBePropertyOwner,
     },
 } = require("../middlewares")
@@ -28,8 +27,7 @@ router.get(
 )
 
 router.param("propertyId", getPropertyById)
-router.param("accomGroupId", getAccomGroupById)
-router.param("accomId", getAccomById)
+router.param("accomId", getAccommodationById)
 
 router
     .route("/:propertyId")
@@ -70,69 +68,43 @@ router
         controller.deleteImages,
     )
 
+router.get(
+    "/:propertyId/reviews",
+    validate(validation.getPropertyReviews),
+    controller.getPropertyReviews,
+)
+
 router
-    .route("/:propertyId/accom-groups")
+    .route("/:propertyId/accommodations")
     .post(
         auth(),
         validate(validation.addAccommodationGroup),
         requireToBePropertyOwner(),
-        controller.addAccommodationGroup,
+        controller.addAccommodation,
     )
 
-router.get(
-    "/:propertyId/pending-bookings",
-    auth(),
-    validate(validation.getPropertyPendingBookings),
-    requireToBePropertyOwner(),
-    controller.getPropertyPendingBookings,
-)
-
 router
-    .route("/:propertyId/accom-groups/:accomGroupId")
+    .route("/:propertyId/accommodations/:accomId")
     .patch(
         auth(),
         validate(validation.updateAccomGroup),
         requireToBePropertyOwner(),
-        controller.updateAccomGroup,
+        controller.updateAccommodation,
     )
     .delete(
         auth(),
         validate(validation.deleteAccomGroup),
         requireToBePropertyOwner(),
-        controller.deleteAccomGroup,
+        controller.deleteAccommodation,
     )
 
 router
-    .route("/:propertyId/accom-groups/:accomGroupId/accoms")
-    .post(
-        auth(),
-        validate(validation.addAccommodations),
-        requireToBePropertyOwner(),
-        controller.addAccommodations,
-    )
-
-router
-    .route("/:propertyId/accom-groups/:accomGroupId/accoms/:accomId")
-    .delete(
-        auth(),
-        validate(validation.deleteAccom),
-        requireToBePropertyOwner(),
-        controller.deleteAccom,
-    )
-
-router
-    .route("/:propertyId/accom-groups/:accomGroupId/accoms/:accomId/bookings")
+    .route("/:propertyId/accommodations/:accomId/bookings")
     .get(
         auth(),
         validate(validation.getAccommodationBookings),
         requireToBePropertyOwner(),
         controller.getAccommodationBookings,
     )
-
-router.get(
-    "/:propertyId/reviews",
-    validate(validation.getPropertyReviews),
-    controller.getPropertyReviews,
-)
 
 module.exports = router

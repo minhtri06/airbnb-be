@@ -4,7 +4,7 @@ const { BODY, QUERY, PARAMS, FILE } = require("../constants").request
 const { province, objectId } = require("./common")
 
 module.exports = {
-    getAllDistricts: {
+    getDistricts: {
         [QUERY]: Joi.object({
             provinceCode: province.code,
             provinceId: objectId,

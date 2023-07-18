@@ -16,6 +16,28 @@ const {
 } = require("../configs/envConfig")
 
 /**
+ * Find one token, return null if not found
+ * @param {tokenFilter} filter
+ * @returns {Promise<token | null>}
+ */
+const findOneToken = (filter) => {
+    return Token.findOne(filter)
+}
+
+/**
+ * Get one token, throw error if not found
+ * @param {tokenFilter} filter
+ * @returns {Promise<token>}
+ */
+const getOneToken = async (filter) => {
+    const token = await findOneToken(filter)
+    if (!token) {
+        throw createError.NotFound("Token not found")
+    }
+    return token
+}
+
+/**
  * Generate a token
  * @param {string} userId
  * @param {moment.Moment} expires
@@ -149,43 +171,16 @@ const blackListAUser = async (userId) => {
 }
 
 /**
- * Get one token
- * @param {{
- *   body,
- *   user,
- *   type,
- *   expires,
- *   isRevoked,
- *   isUsed,
- *   isBlacklisted,
- * }} filter
- * @returns {Promise<token>}
- */
-const getOneToken = async (filter) => {
-    const token = await Token.findOne(filter)
-    if (!token) {
-        throw createError.NotFound("Token not found")
-    }
-    return token
-}
-
-/**
  * Delete many tokens
- * @param {{
- *   body,
- *   user,
- *   type,
- *   expires,
- *   isRevoked,
- *   isUsed,
- *   isBlacklisted,
- * }} filter
+ * @param {tokenFilter} filter
  */
 const deleteManyTokens = async (filter) => {
     return Token.deleteMany(filter)
 }
 
 module.exports = {
+    findOneToken,
+    getOneToken,
     generateToken,
     generateAccessToken,
     createRefreshToken,
@@ -195,10 +190,19 @@ module.exports = {
     getTokenInfo,
     verifyToken,
     blackListAUser,
-    getOneToken,
     deleteManyTokens,
 }
 
 /**
  * @typedef {InstanceType<Token>} token
+ *
+ * @typedef {Object} tokenFilter
+ * @property {string} _id
+ * @property {string} body
+ * @property {string} user
+ * @property {string} type
+ * @property {Date} expires
+ * @property {boolean} isRevoked
+ * @property {boolean} isUsed
+ * @property {boolean} isBlacklisted
  */

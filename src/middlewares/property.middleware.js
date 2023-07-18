@@ -48,6 +48,7 @@ const requireToBePropertyOwner = ({ allowAdmin } = {}) => {
 module.exports = {
     getPropertyById,
     getPropertyByPageName,
+    getAccommodationById,
     requireToBePropertyOwner,
 }
 

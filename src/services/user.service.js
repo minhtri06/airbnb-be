@@ -18,31 +18,6 @@ const hashPassword = async (password) => {
 }
 
 /**
- * Check if email is taken
- * @param {string} email
- * @param {string} excludedUserId - If given, specify a user to be excluded
- * @returns {Promise<boolean>}
- */
-const isEmailTaken = async (email, excludedUserId = undefined) => {
-    const query = User.findOne({ email })
-    if (excludedUserId) {
-        query.where({ _id: { $ne: excludedUserId } })
-    }
-    const user = await query.exec()
-    return user !== null
-}
-
-/**
- * Paginate users
- * @param {userFilter} filter
- * @param {queryOptions} queryOptions
- * @returns {Promise<user[]>}
- */
-const paginateUsers = async (filter, queryOptions) => {
-    return User.paginate(filter, queryOptions)
-}
-
-/**
  * Find one user, return null if not found
  * @param {userFilter} filter
  * @returns {Promise<user | null>}
@@ -81,6 +56,31 @@ const getOneUser = async (filter) => {
 const getUserById = async (userId) => {
     const user = await getOneUser({ _id: userId })
     return user
+}
+
+/**
+ * Check if email is taken
+ * @param {string} email
+ * @param {string} excludedUserId - If given, specify a user to be excluded
+ * @returns {Promise<boolean>}
+ */
+const isEmailTaken = async (email, excludedUserId = undefined) => {
+    const query = User.findOne({ email })
+    if (excludedUserId) {
+        query.where({ _id: { $ne: excludedUserId } })
+    }
+    const user = await query.exec()
+    return user !== null
+}
+
+/**
+ * Paginate users
+ * @param {userFilter} filter
+ * @param {queryOptions} queryOptions
+ * @returns {Promise<user[]>}
+ */
+const paginateUsers = async (filter, queryOptions) => {
+    return User.paginate(filter, queryOptions)
 }
 
 /**
@@ -167,12 +167,12 @@ const updateUser = async (user, updateBody) => {
 }
 
 module.exports = {
-    isEmailTaken,
-    paginateUsers,
     findOneUser,
     findUserById,
     getOneUser,
     getUserById,
+    isEmailTaken,
+    paginateUsers,
     createUser,
     updateUser,
 }

@@ -22,7 +22,6 @@ const getProperty = async (req, res) => {
     if (bookIn && bookOut) {
         service.setAvailabilityFields(req._property, bookIn, bookOut)
     }
-
     return res.json({ property: req._property.toJSON({ virtuals: true }) })
 }
 
@@ -66,7 +65,7 @@ const updateProperty = async (req, res) => {
 
 /** @type {controller} */
 const getAccommodationBookings = async (req, res) => {
-    const bookings = await bookingService.getBookingsInMonth(req.query.month, {
+    const bookings = await bookingService.findBookingsInMonth(req.query.month, {
         accomId: req._accom._id,
     })
     return res.json({ bookings })

@@ -2,33 +2,37 @@ const moment = require("moment")
 const mongoose = require("mongoose")
 
 const { District, Province, User, Property, Booking, Review } = require("../models")
-const { bookingService } = require("../services")
+const { bookingService, userService, reviewService } = require("../services")
 const { connectMongoDb, redisClient } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
 
 // Helpers
-const getRandomElementInArray = (array) => array[Math.floor(Math.random() * array.length)]
+const pickRandElementFromArr = (array) => array[Math.floor(Math.random() * array.length)]
 
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+const genRandNum = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
-const generateCurrentBookingDates = (n, users) => {
+const genCBDates = (n) => {
     let bookIn
     let bookOut = moment()
     const currentBookingDates = []
     for (let i = 0; i < n; i++) {
-        bookIn = moment(bookOut).add(getRandomNumber(3, 5), "days")
-        bookOut = moment(bookIn).add(getRandomNumber(2, 4), "days")
-        currentBookingDates.push({
-            bookIn,
-            bookOut,
-            guest: getRandomElementInArray(users)._id,
-        })
+        bookIn = moment(bookOut).add(genRandNum(3, 5), "days")
+        bookOut = moment(bookIn).add(genRandNum(2, 4), "days")
+        currentBookingDates.push({ bookIn, bookOut })
     }
     return currentBookingDates
 }
 
-const generateReviews = (numOfReviews, users, propertyId) => {
+const genArr = (len, elementGenerator) => {
+    const arr = []
+    for (let i = 0; i < len; i++) {
+        arr.push(elementGenerator())
+    }
+    return arr
+}
+
+const genReviews = (numOfReviews, users, propertyId) => {
     const reviewSamples = [
         "Khá tốt cho gia đình",
         "Good",
@@ -45,10 +49,10 @@ const generateReviews = (numOfReviews, users, propertyId) => {
     const reviews = []
     for (let i = 0; i < numOfReviews; i++) {
         reviews.push({
-            reviewer: getRandomElementInArray(users)._id,
-            score: Math.round(getRandomNumber(7, 10)),
+            reviewer: pickRandElementFromArr(users)._id,
+            score: Math.round(genRandNum(7, 10)),
             property: propertyId,
-            body: getRandomElementInArray(reviewSamples),
+            body: pickRandElementFromArr(reviewSamples),
         })
     }
     return reviews
@@ -77,8 +81,8 @@ const seedDivisions = async () => {
 }
 
 const seedUsers = async () => {
-    await Promise.all([
-        User.create({
+    const users = [
+        {
             name: "Minh Tri",
             email: "pmtri.admin@email.com",
             password: "pmtri123",
@@ -86,8 +90,8 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Ngo Toai",
             email: "ngotoai.admin@email.com",
             password: "ngotoai123",
@@ -95,8 +99,8 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Tuan Rose",
             email: "tuanrose.admin@email.com",
             password: "tuanrose123",
@@ -104,8 +108,8 @@ const seedUsers = async () => {
             dateOfBirth: "2001/01/06",
             gender: "Male",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Nguyen Anh Khoa",
             email: "anhkhoa@email.com",
             password: "password123",
@@ -114,8 +118,8 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/2.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Pham Hong Nhan",
             email: "hongnhan@email.com",
             password: "hongnhan123",
@@ -124,8 +128,8 @@ const seedUsers = async () => {
             gender: "female",
             avatar: "/static/img/3.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Tuan Rose",
             email: "tuanrose@email.com",
             password: "tuanrose123",
@@ -134,8 +138,8 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/4.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Minh Tri",
             email: "pmtri@email.com",
             password: "pmtri123",
@@ -144,8 +148,8 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/5.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Ngo Toai",
             email: "ngotoai@email.com",
             password: "ngotoai123",
@@ -154,8 +158,8 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/1.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Bui Thi Lien Hoan",
             email: "lienhoan@email.com",
             password: "lienhoan123",
@@ -164,8 +168,8 @@ const seedUsers = async () => {
             gender: "female",
             avatar: "/static/img/6.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Pham Ngoc Long",
             email: "ngoclong@email.com",
             password: "ngoclong123",
@@ -174,8 +178,8 @@ const seedUsers = async () => {
             gender: "female",
             avatar: "/static/img/7.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Nguyen Trong Hoan",
             email: "tronghoan@email.com",
             password: "tronghoan123",
@@ -184,8 +188,8 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/8.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Huynh Nhat Quoc Bao",
             email: "qbspirit@email.com",
             password: "qbspirit123",
@@ -194,8 +198,8 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/9.jpg",
             isEmailVerified: true,
-        }),
-        User.create({
+        },
+        {
             name: "Nguyen Quang Nhut",
             email: "aquazuri@email.com",
             password: "aquazuri123",
@@ -204,8 +208,11 @@ const seedUsers = async () => {
             gender: "Male",
             avatar: "/static/img/10.jpg",
             isEmailVerified: true,
-        }),
-    ])
+        },
+    ]
+    for (let user of users) {
+        await userService.createUser(user)
+    }
 }
 
 const seedProperty = async () => {
@@ -213,15 +220,27 @@ const seedProperty = async () => {
     if (users.length === 0) {
         return
     }
-    const accommodationGroupTitles = [
-        "Standard Room",
-        "Vip Room",
-        "Family Room",
-        "Two-bed Room",
-        "Japaneses-Style",
-        "Double Room",
-        "Standard Double Room",
-    ]
+    const accomTypesAndTitles = {
+        "specific-room": [
+            "Standard room",
+            "Cozy room",
+            "Two-bed room",
+            "Double room",
+            "Standard double room",
+        ],
+        "entire-house": [
+            "Japaneses-style",
+            "Standard apartment",
+            "Christmas Villas",
+            "Cozy apartment",
+        ],
+    }
+    const bedSamples = genArr(10, () => ({
+        double: genRandNum(0, 2),
+        queen: genRandNum(0, 2),
+        single: genRandNum(0, 2),
+        sofaBed: genRandNum(0, 2),
+    }))
     const locationInfo = {
         daLat: {
             dataFilePath: "../../crawl-data/hotel-data/da-lat-hotels.json",
@@ -268,18 +287,30 @@ const seedProperty = async () => {
         const propertiesData = require(l.dataFilePath)
         await Promise.all(
             propertiesData.map((propertyData) => {
-                propertyData.owner = getRandomElementInArray(users)._id
+                propertyData.owner = pickRandElementFromArr(users)._id
                 propertyData.address = l.address
-                propertyData.accommodationGroups = [
-                    {
-                        title: getRandomElementInArray(accommodationGroupTitles),
-                        pricePerNight: getRandomNumber(10, 100) * 10000,
-                        type: "specific-room",
-                        bedType: "Single Bed",
-                        accommodations: [{ roomCode: "AA1" }, { roomCode: "AA2" }],
-                    },
-                ]
+                propertyData.accommodations = genArr(genRandNum(0, 3), () => {
+                    const accommodation = {}
+                    const type = pickRandElementFromArr(Object.keys(accomTypesAndTitles))
+                    if (type === "specific-room") {
+                        accommodation.bed = pickRandElementFromArr(bedSamples)
+                    } else {
+                        accommodation.rooms = genArr(genRandNum(1, 4), () => ({
+                            bed: pickRandElementFromArr(bedSamples),
+                        }))
+                    }
+                    accommodation.type = type
+                    accommodation.title = pickRandElementFromArr(
+                        accomTypesAndTitles[type],
+                    )
+                    accommodation.pricePerNight = genRandNum(15, 100)
+                    accommodation.maximumOfGuests = genRandNum(1, 4)
+                    return accommodation
+                })
                 const property = new Property(propertyData)
+                property.score = null
+                property.sumScore = 0
+                property.reviewCount = 0
                 return property.save()
             }),
         )
@@ -293,23 +324,15 @@ const seedBooking = async () => {
     }
     const properties = await Property.find()
     for (let property of properties) {
-        if (!property.accommodationGroups) {
-            continue
-        }
-        for (let accomGroup of property.accommodationGroups) {
-            for (let accom of accomGroup.accommodations) {
-                const currentBookingDates = generateCurrentBookingDates(
-                    getRandomNumber(0, 3),
-                    users,
-                )
-                for (let cbd of currentBookingDates) {
-                    const booking = await bookingService.createBooking({
-                        ...cbd,
-                        property: property._id,
-                        accomGroupId: accomGroup._id,
-                    })
-                    await bookingService.approveBookingToAccom(booking, accom._id)
-                }
+        for (let accom of property.accommodations) {
+            const currentBookingDates = genCBDates(genRandNum(0, 3))
+            for (let cbd of currentBookingDates) {
+                await bookingService.createBooking({
+                    ...cbd,
+                    property: property._id,
+                    guest: pickRandElementFromArr(users),
+                    accomId: accom._id,
+                })
             }
         }
     }
@@ -326,16 +349,11 @@ const seedReviews = async () => {
     }
 
     for (let property of properties) {
-        const reviews = generateReviews(getRandomNumber(0, 4), users, property._id)
+        const reviews = genReviews(genRandNum(0, 20), users, property._id)
         if (reviews.length === 0) {
             continue
         }
-        const averageScore =
-            reviews.reduce((sum, review) => sum + review.score, 0) / reviews.length
-        property.score = averageScore
-        property.reviewCount = reviews.length
-        await Review.insertMany(reviews)
-        await property.save()
+        await Promise.all(reviews.map((review) => reviewService.createReview(review)))
     }
 }
 

@@ -4,6 +4,47 @@ const { Review, PropertyScoreChange } = require("../models")
 const { pickFields } = require("../utils")
 
 /**
+ * Find one review, return null if not found
+ * @param {reviewFilter} filter
+ * @returns {Promise<review | null>}
+ */
+const findOneReview = async (filter) => {
+    return Review.findOne(filter)
+}
+
+/**
+ * Find review by id, return null if not found
+ * @param {string} reviewId
+ * @returns {Promise<review | null>}
+ */
+const findReviewById = async (reviewId) => {
+    return findOneReview({ _id: reviewId })
+}
+
+/**
+ * Get one review, throw error if not found
+ * @param {reviewFilter} filter
+ * @returns {Promise<review>}
+ */
+const getOneReview = async (filter) => {
+    const review = await findOneReview(filter)
+    if (!review) {
+        throw createError.NotFound("Review not found")
+    }
+    return review
+}
+
+/**
+ * Get review by id, throw error if not found
+ * @param {string} reviewId
+ * @returns {Promise<review>}
+ */
+const getReviewById = async (reviewId) => {
+    const review = await getOneReview({ _id: reviewId })
+    return review
+}
+
+/**
  * Paginate review
  * @param {reviewFilter} filter
  * @param {queryOptions} queryOptions
@@ -11,19 +52,6 @@ const { pickFields } = require("../utils")
  */
 const paginateReviews = async (filter, queryOptions) => {
     return await Review.paginate(filter, queryOptions)
-}
-
-/**
- * Get review by id
- * @param {string} reviewId
- * @returns {Promise<review>}
- */
-const getReviewById = async (reviewId) => {
-    const review = await Review.findById(reviewId)
-    if (!review) {
-        throw createError.NotFound("Review not found")
-    }
-    return review
 }
 
 /**
@@ -76,12 +104,21 @@ const updateReview = async (review, updateBody) => {
     return review
 }
 
-module.exports = { paginateReviews, getReviewById, createReview, updateReview }
+module.exports = {
+    findOneReview,
+    findReviewById,
+    getOneReview,
+    getReviewById,
+    paginateReviews,
+    createReview,
+    updateReview,
+}
 
 /**
  * @typedef {InstanceType<Review>} review
  *
  * @typedef {Object} reviewFilter
+ * @property {string} _id
  * @property {string} reviewer
  * @property {string} body
  * @property {number} score
