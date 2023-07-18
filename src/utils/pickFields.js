@@ -7,7 +7,7 @@ const pickFields = (obj, ...fields) => {
     const pickedObj = {}
     if (obj) {
         for (let field of fields) {
-            if (obj[field]) {
+            if (obj[field] !== undefined) {
                 pickedObj[field] = obj[field]
             }
         }
