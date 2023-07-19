@@ -39,7 +39,6 @@ const requireToBePropertyOwner = ({ allowAdmin } = {}) => {
         if (!req._property.owner.equals(req.user._id)) {
             throw createError.Forbidden("Forbidden")
         }
-        req._property.caller.isOwner = true
         return next()
     }
 }

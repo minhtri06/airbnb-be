@@ -39,6 +39,15 @@ const getProperty = async (req, res) => {
     if (bookIn && bookOut) {
         service.setAvailabilityFields(req._property, bookIn, bookOut)
     }
+
+    // If authenticated => check property saving
+    if (req.user) {
+        req._property.isSaved = await userService.isPropertySaved(
+            req.user._id,
+            req._property._id,
+        )
+    }
+
     return res.json({ property: req._property.toJSON({ virtuals: true }) })
 }
 

@@ -25,6 +25,7 @@ router
 
 router.get(
     "/page-name::pageName",
+    auth({ required: false }),
     validate(validation.getPropertyByPageName),
     getPropertyByPageName,
     controller.getProperty,

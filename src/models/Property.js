@@ -60,7 +60,7 @@ propertySchema.plugin(toJSON)
 propertySchema.plugin(paginate)
 
 propertySchema.virtual("isAvailable")
-propertySchema.virtual("caller.isOwner")
+propertySchema.virtual("isSaved")
 
 const Property = mongoose.model("Property", propertySchema)
 
