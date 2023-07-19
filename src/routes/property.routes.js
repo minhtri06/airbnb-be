@@ -16,7 +16,11 @@ const { propertyController: controller } = require("../controllers")
 
 router
     .route("/")
-    .get(validate(validation.searchProperties), controller.searchProperties)
+    .get(
+        auth({ required: false }),
+        validate(validation.searchProperties),
+        controller.searchProperties,
+    )
     .post(auth(), validate(validation.createProperty), controller.createProperty)
 
 router.get(

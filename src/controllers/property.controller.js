@@ -1,7 +1,12 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
-const { propertyService: service, bookingService, reviewService } = require("../services")
+const {
+    propertyService: service,
+    bookingService,
+    reviewService,
+    userService,
+} = require("../services")
 
 /** @type {controller} */
 const createProperty = async (req, res) => {
@@ -13,6 +18,18 @@ const createProperty = async (req, res) => {
 /** @type {controller} */
 const searchProperties = async (req, res) => {
     const properties = await service.searchProperties(req.query)
+
+    // If user is authenticated => check save properties
+    if (req.user) {
+        const saveChecks = await userService.checkSaveProperties(
+            req.user._id,
+            properties.map((p) => p._id),
+        )
+        for (let i = 0; i < saveChecks.length; i++) {
+            properties[i].isSaved = saveChecks[i]
+        }
+    }
+
     return res.json({ properties })
 }
 

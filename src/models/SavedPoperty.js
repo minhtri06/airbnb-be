@@ -3,8 +3,6 @@ const mongoose = require("mongoose")
 const { Schema } = mongoose
 
 const savedPropertySchema = new Schema({
-    _id: false,
-
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 
     property: { type: Schema.Types.ObjectId, ref: "Property", required: true },

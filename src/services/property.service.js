@@ -173,7 +173,7 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
  *   page,
  *   limit,
  * }} param0
- * @returns {Promise<property>}
+ * @returns {Promise<property[]>}
  */
 const searchProperties = async ({
     districtId,

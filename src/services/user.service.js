@@ -215,8 +215,48 @@ const saveProperty = async (userId, propertyId) => {
     return savedProperty.save()
 }
 
+/**
+ * Un-save a property
+ * @param {string} userId
+ * @param {string} propertyId
+ * @returns {Promise<>}
+ */
 const unSaveProperty = async (userId, propertyId) => {
     return SavedProperty.deleteMany({ user: userId, property: propertyId })
+}
+
+/**
+ * Check if a property is saved or not
+ * @param {string} userId
+ * @param {string} propertyId
+ * @returns {Promise<boolean>}
+ */
+const isPropertySaved = async (userId, propertyId) => {
+    const savedProperty = await SavedProperty.findOne({
+        user: userId,
+        property: propertyId,
+    })
+    return savedProperty !== null
+}
+
+/**
+ * Check properties is saved or not.
+ * Return an array specify each property is saved or not
+ * @param {string} userId
+ * @param {string[]} propertyIds
+ * @returns {Promise<boolean[]>}
+ */
+const checkSaveProperties = async (userId, propertyIds) => {
+    const savedProperties = await SavedProperty.find({
+        user: userId,
+        property: { $in: propertyIds },
+    })
+
+    const savedPropertyIds = savedProperties.map((sp) => sp.property)
+
+    return propertyIds.map((propertyId) => {
+        return savedPropertyIds.some((savedId) => savedId.equals(propertyId))
+    })
 }
 
 module.exports = {
@@ -231,6 +271,8 @@ module.exports = {
     replaceUserAvatar,
     saveProperty,
     unSaveProperty,
+    isPropertySaved,
+    checkSaveProperties,
 }
 
 /**
