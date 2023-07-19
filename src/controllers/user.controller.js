@@ -6,6 +6,7 @@ const { userService: service } = require("../services")
 /** @type {controller} */
 const getUserById = async (req, res) => {
     const user = await service.getUserById(req.params.userId)
+    user.email = undefined
     return res.json({ user })
 }
 

@@ -1,4 +1,5 @@
 const createError = require("http-errors")
+const { StatusCodes } = require("http-status-codes")
 
 const { userService, bookingService, propertyService } = require("../services")
 const { pickFields } = require("../utils")
@@ -50,12 +51,25 @@ const getMyBookings = async (req, res) => {
     return res.json({ bookings })
 }
 
+/** @type {controller} */
+const saveProperty = async (req, res) => {
+    await userService.saveProperty(req.user._id, req.body.propertyId)
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+/** @type {controller} */
+const unSaveProperty = async (req, res) => {
+    await userService.unSaveProperty(req.user._id, req.params.propertyId)
+}
+
 module.exports = {
     getMyProfile,
     updateMyProfile,
     replaceMyAvatar,
     getMyProperties,
     getMyBookings,
+    saveProperty,
+    unSaveProperty,
 }
 
 /**

@@ -1,7 +1,7 @@
 const createError = require("http-errors")
 const bcrypt = require("bcryptjs")
 
-const { User } = require("../models")
+const { User, SavedProperty } = require("../models")
 const envConfig = require("../configs/envConfig")
 const {
     authTypes: { LOCAL, GOOGLE },
@@ -134,6 +134,15 @@ const createUser = async (body) => {
 }
 
 /**
+ * Remove user cache
+ * @param {string} userId
+ */
+const deleteUserCache = async (userId) => {
+    const redisService = require("./redis.service")
+    await redisService.removeUser(userId)
+}
+
+/**
  * Update a user
  * @param {user} user
  * @param {{
@@ -167,9 +176,7 @@ const updateUser = async (user, updateBody) => {
 
     await user.save()
 
-    // Remove cache
-    const redisService = require("./redis.service")
-    await redisService.removeUser(user._id)
+    await deleteUserCache(user._id)
 
     return user
 }
@@ -192,11 +199,24 @@ const replaceUserAvatar = async (user, file) => {
         await deleteStaticFile(oldAvatar)
     }
 
-    // Remove cache
-    const redisService = require("./redis.service")
-    await redisService.removeUser(user._id)
+    await deleteUserCache(user._id)
 
     return user.avatar
+}
+
+/**
+ * Save a property
+ * @param {string} userId
+ * @param {string} propertyId
+ * @returns {Promise<savedProperty>}
+ */
+const saveProperty = async (userId, propertyId) => {
+    const savedProperty = new SavedProperty({ user: userId, property: propertyId })
+    return savedProperty.save()
+}
+
+const unSaveProperty = async (userId, propertyId) => {
+    return SavedProperty.deleteMany({ user: userId, property: propertyId })
 }
 
 module.exports = {
@@ -209,10 +229,13 @@ module.exports = {
     createUser,
     updateUser,
     replaceUserAvatar,
+    saveProperty,
+    unSaveProperty,
 }
 
 /**
  * @typedef {InstanceType<User>} user
+ * @typedef {InstanceType<SavedProperty>} savedProperty
  *
  * @typedef {Object} userFilter
  * @property {String} _id

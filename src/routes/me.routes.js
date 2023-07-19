@@ -22,6 +22,17 @@ router.get(
     controller.getMyProperties,
 )
 
+router.post(
+    "/saved-properties",
+    validate(validation.saveProperty),
+    controller.saveProperty,
+)
+router.delete(
+    "/saved-properties/:propertyId",
+    validate(validation.unSaveProperty),
+    controller.unSaveProperty,
+)
+
 router.get("/bookings", validate(validation.getMyBookings), controller.getMyBookings)
 
 module.exports = router
