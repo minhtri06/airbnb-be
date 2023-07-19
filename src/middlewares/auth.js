@@ -10,7 +10,7 @@ const createError = require("http-errors")
 const verifyCallBack = (allowedRoles, required, req, next) => async (err, user, info) => {
     try {
         if (!required) {
-            req.user = undefined
+            req.user = user
             return next()
         }
 
