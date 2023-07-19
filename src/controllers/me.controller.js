@@ -60,6 +60,7 @@ const saveProperty = async (req, res) => {
 /** @type {controller} */
 const unSaveProperty = async (req, res) => {
     await userService.unSaveProperty(req.user._id, req.params.propertyId)
+    return res.status(StatusCodes.NO_CONTENT).send()
 }
 
 module.exports = {
