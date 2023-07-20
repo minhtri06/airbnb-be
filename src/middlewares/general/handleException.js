@@ -4,9 +4,9 @@ const {
     StatusCodes: { BAD_REQUEST, INTERNAL_SERVER_ERROR },
 } = require("http-status-codes")
 
-const { PRODUCTION } = require("../constants").nodeEnv
-const envConfig = require("../configs/envConfig")
-const { deleteFile } = require("../utils").file
+const { PRODUCTION } = require("../../constants").nodeEnv
+const envConfig = require("../../configs/envConfig")
+const { deleteFile } = require("../../utils").file
 
 /** @type {import('express').ErrorRequestHandler} */
 const handleException = async (err, req, res, next) => {

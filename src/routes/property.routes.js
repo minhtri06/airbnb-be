@@ -1,9 +1,11 @@
 const router = require("express").Router()
 
 const {
-    validate,
-    auth,
-    upload: { uploadImage },
+    generalMiddlewares: {
+        validate,
+        auth,
+        upload: { uploadImage },
+    },
     propertyMiddleware: {
         getPropertyById,
         getPropertyByPageName,

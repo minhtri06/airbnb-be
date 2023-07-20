@@ -2,7 +2,9 @@ const router = require("express").Router()
 
 const { authController: controller } = require("../controllers")
 const { authValidation: validation } = require("../validation")
-const { validate } = require("../middlewares")
+const {
+    generalMiddlewares: { validate },
+} = require("../middlewares")
 
 router.post("/register", validate(validation.registerUser), controller.registerUser)
 router.post("/login", validate(validation.localLogin), controller.localLogin)

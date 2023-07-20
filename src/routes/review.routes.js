@@ -1,8 +1,7 @@
 const router = require("express").Router()
 
 const {
-    auth,
-    validate,
+    generalMiddlewares: { auth, validate },
     reviewMiddleware: { getReviewById, requireToBeReviewer },
 } = require("../middlewares")
 const { reviewController: controller } = require("../controllers")

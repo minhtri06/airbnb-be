@@ -1,8 +1,7 @@
 const router = require("express").Router()
 
 const {
-    validate,
-    auth,
+    generalMiddlewares: { validate, auth },
     bookingMiddleware: {
         getBookingById,
         requireToBeGuestOrPropertyOwner,
