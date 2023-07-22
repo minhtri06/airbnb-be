@@ -1,6 +1,8 @@
 module.exports = {
     booking: require("./booking"),
+    conversation: require("./conversation"),
     district: require("./district"),
+    message: require("./message"),
     objectId: require("./objectId"),
     property: require("./property"),
     province: require("./province"),

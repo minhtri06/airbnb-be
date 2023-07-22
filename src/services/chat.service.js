@@ -4,12 +4,56 @@ const { Conversation, Message } = require("../models")
 const { pickFields } = require("../utils")
 
 /**
- * Find many conversations
+ * Find one conversation, return null if not found
+ * @param {conversationFilter} filter
+ * @return {Promise<conversation | null>}
+ */
+const findOneConversation = async (filter) => {
+    return Conversation.findOne(filter)
+}
+
+/**
+ * Find conversation by id, return null if not found
+ * @param {id} conversationId
+ * @returns {Promise<conversation | null>}
+ */
+const findConversationById = async (conversationId) => {
+    return findOneConversation({ _id: conversationId })
+}
+
+/**
+ * Get one conversation, throw error if not found
  * @param {conversationFilter} filter
  * @returns {Promise<conversation>}
  */
-const findConversations = async (filter) => {
-    return Conversation.find(filter)
+const getOneConversation = async (filter) => {
+    const conversation = await findOneConversation(filter)
+    if (!conversation) {
+        throw createError.NotFound("Conversation not found")
+    }
+    return conversation
+}
+
+/**
+ * Get conversation by id, throw error if not found
+ * @param {id} conversationId
+ * @returns {Promise<conversation>}
+ */
+const getConversationById = async (conversationId) => {
+    return getOneConversation({ _id: conversationId })
+}
+
+/**
+ * Find many conversations
+ * @param {conversationFilter} filter
+ * @returns {Promise<conversation[]>}
+ */
+const findConversations = async (filter, { populate }) => {
+    const query = Conversation.find(filter)
+    if (populate) {
+        query.populate(populate)
+    }
+    return query.exec()
 }
 
 /**
@@ -47,6 +91,10 @@ const createMessage = async (body) => {
 }
 
 module.exports = {
+    findOneConversation,
+    findConversationById,
+    getOneConversation,
+    getConversationById,
     findConversations,
     createConversation,
     paginateMessages,
@@ -60,12 +108,14 @@ module.exports = {
  * @typedef {import('mongoose').Types.ObjectId | string} id
  *
  * @typedef {Object} conversationFilter
+ * @property {id} _id
  * @property {string[]} users
  * @property {Object} latestMessage
  * @property {string} latestMessage.body
  * @property {id} latestMessage.sender
  *
  * @typedef {Object} messageFilter
+ * @property {id} _id
  * @property {id} sender
  * @property {string} body
  * @property {id} conversation

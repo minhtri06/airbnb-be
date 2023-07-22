@@ -23,6 +23,8 @@ router.get(
     validate(validation.getMyProperties),
     controller.getMyProperties,
 )
+router.get("/bookings", validate(validation.getMyBookings), controller.getMyBookings)
+router.get("/conversations", controller.getMyConversations)
 
 router.post(
     "/saved-properties",
@@ -34,7 +36,5 @@ router.delete(
     validate(validation.unSaveProperty),
     controller.unSaveProperty,
 )
-
-router.get("/bookings", validate(validation.getMyBookings), controller.getMyBookings)
 
 module.exports = router

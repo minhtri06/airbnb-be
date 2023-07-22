@@ -8,7 +8,7 @@ const conversationSchema = new Schema({
     users: {
         type: [{ type: Schema.Types.ObjectId, ref: "User" }],
         validate: function (users) {
-            if (users.length) {
+            if (users.length === 0) {
                 throw new Error("users cannot empty")
             }
         },
@@ -16,14 +16,9 @@ const conversationSchema = new Schema({
     },
 
     latestMessage: {
-        body: { type: String, required: true, immutable: true },
+        body: { type: String },
 
-        sender: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-            required: true,
-            immutable: true,
-        },
+        sender: { type: Schema.Types.ObjectId, ref: "User" },
     },
 })
 

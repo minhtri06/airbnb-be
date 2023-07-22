@@ -14,9 +14,7 @@ const initSocket = (server) => {
 
     io.use(authHandler)
 
-    io.of("/chat").on("connection", (socket) => {
-        chatHandler(io, socket)
-    })
+    io.of("/chat").on("connection", chatHandler(io))
 }
 
 module.exports = initSocket

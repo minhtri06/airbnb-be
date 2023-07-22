@@ -1,7 +1,12 @@
 const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
-const { userService, bookingService, propertyService } = require("../services")
+const {
+    userService,
+    bookingService,
+    propertyService,
+    chatService,
+} = require("../services")
 const { pickFields } = require("../utils")
 
 /** @type {controller} */
@@ -52,6 +57,15 @@ const getMyBookings = async (req, res) => {
 }
 
 /** @type {controller} */
+const getMyConversations = async (req, res) => {
+    const myConversations = await chatService.findConversations(
+        { users: req.user._id },
+        { populate: [{ path: "users", select: "name avatar" }] },
+    )
+    return res.json({ myConversations })
+}
+
+/** @type {controller} */
 const saveProperty = async (req, res) => {
     await userService.saveProperty(req.user._id, req.body.propertyId)
     return res.status(StatusCodes.NO_CONTENT).send()
@@ -69,6 +83,7 @@ module.exports = {
     replaceMyAvatar,
     getMyProperties,
     getMyBookings,
+    getMyConversations,
     saveProperty,
     unSaveProperty,
 }

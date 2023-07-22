@@ -1,11 +1,16 @@
-const { redisService } = require("../services")
+const { redisService, chatService } = require("../services")
 
 /**
- *
+ * Handle chat socket
  * @param {import('socket.io').Server} io
- * @param {import('socket.io').Socket & { user }} socket
+ * @returns {function(socket)}
  */
-const chatHandler = (io, socket) => {
+const chatHandler = (io) => async (socket) => {
+    const conversations = await chatService.findConversations({ users: socket.user._id })
+    for (let convo of conversations) {
+        socket.join(convo._id)
+    }
+
     socket.on("make-conversation", async ({ conversationId, withUserId }) => {
         const withSocketId = await redisService.findUserSocketId(withUserId)
         if (!withSocketId) {
@@ -35,3 +40,8 @@ const chatHandler = (io, socket) => {
 }
 
 module.exports = chatHandler
+
+/**
+ * @typedef {InstanceType<import('../models/User')>} user
+ * @typedef {import('socket.io').Socket & { user: user }} socket
+ */
