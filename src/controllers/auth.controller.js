@@ -32,6 +32,12 @@ const localLogin = async (req, res) => {
 }
 
 /** @type {controller} */
+const googleLogin = async (req, res) => {
+    const authTokens = await tokenService.createAuthTokens(req.user._id)
+    return res.json({ user: req.user, authTokens })
+}
+
+/** @type {controller} */
 const logout = async (req, res) => {
     await service.logout(req.body.refreshToken)
 
@@ -77,6 +83,7 @@ const resetPassword = async (req, res) => {
 module.exports = {
     registerUser,
     localLogin,
+    googleLogin,
     logout,
     refreshToken,
     verifyEmail,

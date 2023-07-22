@@ -1,9 +1,17 @@
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt")
+const GooglePlusTokenStrategy = require("passport-google-plus-token")
 const createError = require("http-errors")
 
-const { SECRET } = require("./envConfig").jwt
-const { ACCESS } = require("../constants").tokenTypes
-const { redisService } = require("../services")
+const {
+    jwt: { SECRET },
+    googleAuth: { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET },
+} = require("./envConfig")
+const { NORMAL_USER } = require("./roles")
+const {
+    tokenTypes: { ACCESS },
+    authTypes: { GOOGLE },
+} = require("../constants")
+const { redisService, userService } = require("../services")
 
 const jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken("Authorization")
 
@@ -28,4 +36,29 @@ const jwtStrategy = new JwtStrategy(
     },
 )
 
-module.exports = { jwtStrategy }
+const googleStrategy = new GooglePlusTokenStrategy(
+    {
+        clientID: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
+        passReqToCallback: true,
+    },
+    async (req, accessToken, refreshToken, profile, next) => {
+        try {
+            let user = await userService.findOneUser({ email: profile.emails[0].value })
+            if (!user) {
+                const body = {
+                    name: profile.displayName,
+                    email: profile.emails[0].value,
+                    authType: GOOGLE,
+                    role: NORMAL_USER,
+                }
+                user = await userService.createUser(body)
+            }
+            return next(null, user)
+        } catch (error) {
+            return next(error, false)
+        }
+    },
+)
+
+module.exports = { jwtStrategy, googleStrategy }

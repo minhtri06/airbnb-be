@@ -1,7 +1,7 @@
 const createError = require("http-errors")
 const { ValidationError } = require("mongoose").Error
 const {
-    StatusCodes: { BAD_REQUEST, INTERNAL_SERVER_ERROR },
+    StatusCodes: { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED },
 } = require("http-status-codes")
 
 const { PRODUCTION } = require("../../constants").nodeEnv
@@ -36,6 +36,11 @@ const handleException = async (err, req, res, next) => {
             .map((key) => `${key} with value '${keyValue[key]}' already exists`)
             .join(", ")
         return res.status(BAD_REQUEST).json({ message })
+    }
+
+    // Google authentication fail
+    if (err.oauthError === 401) {
+        return res.status(UNAUTHORIZED).json({ message: "Unauthorized" })
     }
 
     if (envConfig.NODE_ENV !== PRODUCTION) {

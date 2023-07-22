@@ -7,7 +7,7 @@ const logger = require("morgan")
 const passport = require("passport")
 
 const envConfig = require("./configs/envConfig")
-const { jwtStrategy } = require("./configs/authStrategies")
+const { jwtStrategy, googleStrategy } = require("./configs/authStrategies")
 const { STATIC_DIRNAME } = require("./constants")
 const {
     generalMiddlewares: { handleException, handleNotFound },
@@ -38,6 +38,7 @@ app.use(
 
 app.use(passport.initialize())
 passport.use("jwt", jwtStrategy)
+passport.use(googleStrategy)
 
 app.use("/api/v1", router)
 app.get("/", (req, res) => res.send("oke"))
