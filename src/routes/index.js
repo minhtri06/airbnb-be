@@ -8,5 +8,8 @@ router.use("/properties", require("./property.routes"))
 router.use("/reviews", require("./review.routes"))
 router.use("/users", require("./user.routes"))
 router.use("/chats", require("./chat.routes"))
+router.get("/", (req, res) => {
+    return res.send("Hello World")
+})
 
 module.exports = router
