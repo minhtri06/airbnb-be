@@ -53,13 +53,44 @@ const findOrCacheFindUserById = async (userId) => {
     return user
 }
 
+/**
+ * Find user socket of a user by user id, return null if not found
+ * @param {id} userId
+ * @returns {Promise<string>}
+ */
+const findUserSocketId = async (userId) => {
+    return redisClient.get(`user-socket:${userId}`)
+}
+
+/**
+ * Cache user socket
+ * @param {id} userId
+ * @param {string} socketId
+ */
+const cacheUserSocketId = async (userId, socketId) => {
+    await redisClient.set(`user-socket:${userId}`, socketId)
+}
+
+/**
+ * Delete user socket
+ * @param {id} userId
+ */
+const deleteUserSocketId = async (userId) => {
+    await redisClient.del(`user-socket:${userId}`)
+}
+
 module.exports = {
     findUserById,
     cacheUser,
     removeUser,
     findOrCacheFindUserById,
+    findUserSocketId,
+    cacheUserSocketId,
+    deleteUserSocketId,
 }
 
 /**
  * @typedef {InstanceType<User>} user
+ *
+ * @typedef {import('mongoose').Types.ObjectId | string} id
  */

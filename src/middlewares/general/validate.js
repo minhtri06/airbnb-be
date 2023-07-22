@@ -1,6 +1,7 @@
 const createError = require("http-errors")
 const Joi = require("joi")
-const { BODY, QUERY, PARAMS } = require("../constants").request
+
+const { BODY, QUERY, PARAMS } = require("../../constants").request
 
 const emptyObj = Joi.object({})
 

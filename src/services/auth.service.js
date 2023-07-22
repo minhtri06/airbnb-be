@@ -53,43 +53,43 @@ const refreshAuthTokens = async (aToken, rToken) => {
     // Remove Bearer
     aToken = aToken.slice(7)
 
-    const aTokenInfo = tokenService.getTokenInfo(aToken)
-    const rTokenInfo = tokenService.getTokenInfo(rToken)
+    const accessPayload = tokenService.getPayload(aToken)
+    const refreshPayload = tokenService.getPayload(rToken)
 
     if (
-        !aTokenInfo ||
-        !rTokenInfo ||
-        aTokenInfo.type !== ACCESS ||
-        rTokenInfo.type !== REFRESH ||
-        rTokenInfo.sub !== aTokenInfo.sub
+        !accessPayload ||
+        !refreshPayload ||
+        accessPayload.type !== ACCESS ||
+        refreshPayload.type !== REFRESH ||
+        refreshPayload.sub !== accessPayload.sub
     ) {
         throw createError.BadRequest("Invalid token")
     }
 
-    if (!aTokenInfo.isExpired) {
+    if (!accessPayload.isExpired) {
         throw createError.BadRequest("Access token has not expired yet")
     }
-    if (rTokenInfo.isExpired) {
+    if (refreshPayload.isExpired) {
         throw createError.BadRequest("Refresh token has expired")
     }
 
-    const rTokenInst = await tokenService.getOneToken({ body: rToken, type: REFRESH })
+    const rTokenDoc = await tokenService.getOneToken({ body: rToken, type: REFRESH })
 
-    if (rTokenInst.isBlacklisted) {
+    if (rTokenDoc.isBlacklisted) {
         throw createError.Unauthorized("Unauthorized")
     }
 
-    const userId = rTokenInfo.sub
-    if (rTokenInst.isUsed || rTokenInst.isRevoked) {
+    const userId = refreshPayload.sub
+    if (rTokenDoc.isUsed || rTokenDoc.isRevoked) {
         // Blacklist this token and all usable refresh tokens of that user
-        rTokenInst.isBlacklisted = true
-        await rTokenInst.save()
+        rTokenDoc.isBlacklisted = true
+        await rTokenDoc.save()
         await tokenService.blackListAUser(userId)
         throw createError.Unauthorized("Unauthorized")
     }
 
-    rTokenInst.isUsed = true
-    await rTokenInst.save()
+    rTokenDoc.isUsed = true
+    await rTokenDoc.save()
     return tokenService.createAuthTokens(userId)
 }
 

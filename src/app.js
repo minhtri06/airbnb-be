@@ -9,9 +9,12 @@ const passport = require("passport")
 const envConfig = require("./configs/envConfig")
 const { jwtStrategy } = require("./configs/authStrategies")
 const { STATIC_DIRNAME } = require("./constants")
-const { handleException, handleNotFound } = require("./middlewares")
+const {
+    generalMiddlewares: { handleException, handleNotFound },
+} = require("./middlewares")
 const router = require("./routes")
 const { connectMongoDb, redisClient } = require("./db")
+const initSocket = require("./socket")
 
 const app = express()
 
@@ -48,12 +51,16 @@ const start = async () => {
     try {
         await connectMongoDb()
         console.log("Connect MongoDb successfully")
+
         await redisClient.connect()
         console.log("Connect Redis successfully")
-        app.listen(
+
+        const server = app.listen(
             envConfig.PORT,
             console.log("🧙‍ Server is running on port " + envConfig.PORT),
         )
+
+        initSocket(server)
     } catch (error) {
         console.log(error)
     }

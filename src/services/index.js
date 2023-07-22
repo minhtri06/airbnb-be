@@ -1,6 +1,7 @@
 module.exports = {
     authService: require("./auth.service"),
     bookingService: require("./booking.service"),
+    chatService: require("./chat.service"),
     divisionService: require("./division.service"),
     emailService: require("./email.service"),
     propertyService: require("./property.service"),

@@ -1,5 +1,5 @@
 {
-  "name": "booking-app",
+  "name": "airbnb-app",
   "version": "1.0.0",
   "description": "",
   "main": "./src/app.js",
@@ -33,6 +33,7 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "redis": "^4.6.7",
+    "socket.io": "^4.7.1",
     "uuid": "^9.0.0",
     "validator": "^13.9.0"
   },

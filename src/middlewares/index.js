@@ -6,7 +6,7 @@ module.exports = {
         auth: require("./general/auth"),
         handleException: require("./general/handleException"),
         handleNotFound: require("./general/handleNotFound"),
-        upload: require("./upload"),
-        validate: require("./validate"),
+        upload: require("./general/upload"),
+        validate: require("./general/validate"),
     },
 }

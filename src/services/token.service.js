@@ -130,33 +130,33 @@ const createAuthTokens = async (userId) => {
 }
 
 /**
- * Get token info
+ * Get token payload
  * @param {string} token
- * @returns {{sub, iat, exp, type, isExpired}}
+ * @returns {{ sub, iat, exp, type, isExpired }}
  */
-const getTokenInfo = (token) => {
-    const info = jwt.decode(token, SECRET)
-    if (info) {
-        info.isExpired = info.exp < moment().unix()
+const getPayload = (token) => {
+    const payload = jwt.decode(token, SECRET)
+    if (payload) {
+        payload.isExpired = payload.exp < moment().unix()
     }
-    return info
+    return payload
 }
 
 /**
- * Verify a token and return token's info
+ * Verify a token and return token's payload
  * @param {string} token
  * @param {string} type
  * @returns {{ sub, iat, exp, type, isExpired }}
  */
 const verifyToken = (token, type) => {
-    const info = getTokenInfo(token)
-    if (!info || info.type !== type) {
+    const payload = getPayload(token)
+    if (!payload || payload.type !== type) {
         throw createError.BadRequest(`Invalid ${type} token`)
     }
-    if (info.isExpired) {
+    if (payload.isExpired) {
         throw createError.BadRequest(`${type} token has expired`)
     }
-    return info
+    return payload
 }
 
 /**
@@ -187,7 +187,7 @@ module.exports = {
     createResetPasswordToken,
     createVerifyEmailToken,
     createAuthTokens,
-    getTokenInfo,
+    getPayload,
     verifyToken,
     blackListAUser,
     deleteManyTokens,
