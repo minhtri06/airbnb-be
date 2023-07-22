@@ -13,8 +13,6 @@ const {
     generalMiddlewares: { handleException, handleNotFound },
 } = require("./middlewares")
 const router = require("./routes")
-const { connectMongoDb, redisClient } = require("./db")
-const initSocket = require("./socket")
 
 const app = express()
 
@@ -48,23 +46,4 @@ app.use(express.static(STATIC_DIRNAME))
 app.use(handleNotFound)
 app.use(handleException)
 
-const start = async () => {
-    try {
-        await connectMongoDb()
-        console.log("Connect MongoDb successfully")
-
-        await redisClient.connect()
-        console.log("Connect Redis successfully")
-
-        const server = app.listen(
-            envConfig.PORT,
-            console.log("🧙‍ Server is running on port " + envConfig.PORT),
-        )
-
-        initSocket(server)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-start()
+module.exports = app
