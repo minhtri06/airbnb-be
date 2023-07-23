@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/app.js",
-  "engines": {
-    "node": "18.x"
-  },
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./src/server.js",
     "seed": "node ./src/utils/seed.js"
   },
   "keywords": [

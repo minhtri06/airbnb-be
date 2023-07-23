@@ -1,7 +1,7 @@
-const app = require("./src/app")
-const { connectMongoDb, redisClient } = require("./src/db")
-const initSocket = require("./src/socket")
-const envConfig = require("./src/configs/envConfig")
+const app = require("./app")
+const { connectMongoDb, redisClient } = require("./db")
+const initSocket = require("./socket")
+const envConfig = require("./configs/envConfig")
 
 const start = async () => {
     try {
