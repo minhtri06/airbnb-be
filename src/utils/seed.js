@@ -380,12 +380,13 @@ const truncateData = async () => {
 
 // Run seed
 connectMongoDb().then(async () => {
+    console.log("🍂 Seed start")
     await truncateData()
     await seedDivisions()
     await seedUsers()
     await seedProperty()
     await seedBooking()
     await seedReviews()
-    console.log("Done")
+    console.log("🍂 Seed done")
     await mongoose.connection.close()
 })

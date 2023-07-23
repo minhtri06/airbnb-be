@@ -11,9 +11,9 @@
     "seed": "node ./src/utils/seed.js"
   },
   "keywords": [
-    "booking.com",
-    "booking-app",
-    "booking-clone"
+    "airbnb.com",
+    "airbnb-app",
+    "airbnb-clone"
   ],
   "author": "Minh Tri",
   "license": "ISC",
