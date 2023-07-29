@@ -23,7 +23,9 @@ const handleException = async (err, req, res, next) => {
 
     // Response to the client
     if (err instanceof createError.HttpError) {
-        return res.status(err.statusCode).json({ message: err.message })
+        return res
+            .status(err.statusCode)
+            .json({ type: err.headers?.type, message: err.message })
     }
 
     if (err instanceof ValidationError) {

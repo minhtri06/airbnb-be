@@ -7,7 +7,7 @@ const logger = require("morgan")
 const passport = require("passport")
 
 const envConfig = require("./configs/envConfig")
-const { jwtStrategy, googleStrategy } = require("./configs/authStrategies")
+const { jwtStrategy } = require("./configs/authStrategies")
 const { STATIC_DIRNAME } = require("./constants")
 const {
     generalMiddlewares: { handleException, handleNotFound },
@@ -18,30 +18,20 @@ const app = express()
 
 app.use(helmet())
 
-app.use(
-    cors({
-        origin: envConfig.CLIENT_URL,
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    }),
-)
+app.use(cors())
 
 app.use(logger("dev"))
 
 app.use(express.json())
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-)
+app.use(express.urlencoded({ extended: true }))
+
+app.use(express.static(STATIC_DIRNAME))
 
 app.use(passport.initialize())
 passport.use("jwt", jwtStrategy)
-passport.use(googleStrategy)
 
-app.use("/api/v1", router)
-app.get("/", (req, res) => res.send("oke"))
-
-app.use(express.static(STATIC_DIRNAME))
+app.use(envConfig.API_PREFIX, router)
+app.get("/", (req, res) => res.sendFile(STATIC_DIRNAME + "/views/home.html"))
 
 app.use(handleNotFound)
 app.use(handleException)

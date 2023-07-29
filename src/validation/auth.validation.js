@@ -22,6 +22,12 @@ module.exports = {
         }),
     },
 
+    googleLogin: {
+        [QUERY]: Joi.object({
+            code: Joi.string().required(),
+        }),
+    },
+
     logout: {
         [BODY]: Joi.object({
             refreshToken: Joi.string().required(),

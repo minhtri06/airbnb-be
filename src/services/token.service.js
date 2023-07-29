@@ -130,33 +130,24 @@ const createAuthTokens = async (userId) => {
 }
 
 /**
- * Get token payload
- * @param {string} token
- * @returns {{ sub, iat, exp, type, isExpired }}
- */
-const getPayload = (token) => {
-    const payload = jwt.decode(token, SECRET)
-    if (payload) {
-        payload.isExpired = payload.exp < moment().unix()
-    }
-    return payload
-}
-
-/**
  * Verify a token and return token's payload
  * @param {string} token
  * @param {string} type
- * @returns {{ sub, iat, exp, type, isExpired }}
+ * @returns {{ sub, iat, exp, type }}
  */
-const verifyToken = (token, type) => {
-    const payload = getPayload(token)
-    if (!payload || payload.type !== type) {
-        throw createError.BadRequest(`Invalid ${type} token`)
+const verifyToken = (token, type, options = {}) => {
+    try {
+        const payload = jwt.verify(token, SECRET, options)
+        if (payload.type !== type) {
+            throw createError.Unauthorized(`Invalid ${type} token`)
+        }
+        return payload
+    } catch (error) {
+        if (error instanceof jwt.JsonWebTokenError) {
+            throw createError.Unauthorized(error.message)
+        }
+        throw error
     }
-    if (payload.isExpired) {
-        throw createError.BadRequest(`${type} token has expired`)
-    }
-    return payload
 }
 
 /**
@@ -187,7 +178,6 @@ module.exports = {
     createResetPasswordToken,
     createVerifyEmailToken,
     createAuthTokens,
-    getPayload,
     verifyToken,
     blackListAUser,
     deleteManyTokens,

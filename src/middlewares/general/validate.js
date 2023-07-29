@@ -9,10 +9,10 @@ const validate = (schema) => async (req, res, next) => {
     for (let prop of [BODY, QUERY, PARAMS]) {
         const validator = schema[prop] || emptyObj
         const { value, error } = validator.validate(req[prop], {
-            errors: { wrap: { label: "'" } },
+            errors: { wrap: { label: "" } },
         })
         if (error) {
-            next(new createError.BadRequest(`Request error (${prop}): ${error.message}`))
+            next(new createError.BadRequest(error.message))
         } else {
             req[prop] = value
         }

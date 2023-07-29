@@ -1,5 +1,7 @@
 const createError = require("http-errors")
 const bcrypt = require("bcryptjs")
+const qs = require("qs")
+const axios = require("axios")
 
 const { User, SavedProperty } = require("../models")
 const envConfig = require("../configs/envConfig")
@@ -109,6 +111,7 @@ const createUser = async (body) => {
         "authType",
         "password",
         "role",
+        "avatar",
         "phoneNumber",
         "dateOfBirth",
         "gender",

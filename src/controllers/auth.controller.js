@@ -15,12 +15,10 @@ const {
 const registerUser = async (req, res) => {
     const user = await userService.createUser(req.body)
 
-    const verifyEmailToken = await tokenService.createVerifyEmailToken(user._id)
-    await emailService.sendVerificationEmail(user.email, verifyEmailToken)
+    const verifyEmailTokenDoc = await tokenService.createVerifyEmailToken(user._id)
+    await emailService.sendVerificationEmail(user.email, verifyEmailTokenDoc.body)
 
-    return res
-        .status(StatusCodes.CREATED)
-        .json({ message: "Verify your email to finish sign up", user })
+    return res.status(StatusCodes.CREATED).send()
 }
 
 /** @type {controller} */
@@ -33,8 +31,9 @@ const localLogin = async (req, res) => {
 
 /** @type {controller} */
 const googleLogin = async (req, res) => {
-    const authTokens = await tokenService.createAuthTokens(req.user._id)
-    return res.json({ user: req.user, authTokens })
+    const { code } = req.query
+    const { user, authTokens } = await service.googleLogin(code)
+    return res.json({ user, authTokens })
 }
 
 /** @type {controller} */

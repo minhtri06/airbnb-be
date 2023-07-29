@@ -8,5 +8,9 @@ router.use("/properties", require("./property.routes"))
 router.use("/reviews", require("./review.routes"))
 router.use("/users", require("./user.routes"))
 router.use("/chats", require("./chat.routes"))
+router.get("/test", (req, res) => {
+    console.log("yolo")
+    return res.status(204).send()
+})
 
 module.exports = router

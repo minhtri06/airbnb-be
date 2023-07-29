@@ -17,13 +17,7 @@ const authHandler = async (socket, next) => {
 
     token = token.split(" ")[1]
 
-    const payload = tokenService.getPayload(token)
-    if (!payload || payload.type !== ACCESS) {
-        return next(new Error("Invalid token"))
-    }
-    if (payload.isExpired) {
-        return next(new Error("Token expired"))
-    }
+    const payload = tokenService.verifyToken(token, ACCESS)
 
     const user = await redisService.findOrCacheFindUserById(payload.sub)
     if (!user) {

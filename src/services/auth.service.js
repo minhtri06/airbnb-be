@@ -1,5 +1,14 @@
 const createError = require("http-errors")
+const {
+    StatusCodes: { BAD_REQUEST, FORBIDDEN, UNAUTHORIZED },
+} = require("http-status-codes")
+const qs = require("qs")
+const axios = require("axios")
+const jwt = require("jsonwebtoken")
+const moment = require("moment")
 
+const envConfig = require("../configs/envConfig")
+const { NORMAL_USER } = require("../configs/roles")
 const {
     tokenTypes: { ACCESS, REFRESH, RESET_PASSWORD, VERIFY_EMAIL },
     authTypes: { LOCAL, GOOGLE },
@@ -14,22 +23,83 @@ const tokenService = require("./token.service")
  * @returns {Promise<{ user, token }>}
  */
 const localLogin = async (email, password) => {
-    const user = await userService.getOneUser({ email })
+    const user = await userService.findOneUser({ email })
 
-    if (user.authType !== LOCAL) {
-        throw createError.BadRequest("Your authentication is not local authentication")
+    if (!user) {
+        throw createError(UNAUTHORIZED, "We cannot find user with your given email", {
+            headers: { type: "incorrect-email" },
+        })
     }
 
-    if (!user.isEmailVerified) {
-        throw createError.Forbidden("User email has not verified")
+    if (user.authType !== LOCAL) {
+        throw createError(BAD_REQUEST, "Your authentication is invalid", {
+            headers: { type: "wrong-auth-type" },
+        })
     }
 
     if (!(await user.isPasswordMatch(password))) {
-        throw createError.BadRequest("Wrong password")
+        throw createError(UNAUTHORIZED, "Password did not match", {
+            headers: { type: "incorrect-password" },
+        })
+    }
+
+    if (!user.isEmailVerified) {
+        throw createError(FORBIDDEN, "User email has not verified", {
+            headers: { type: "email-un-verify" },
+        })
     }
 
     const authTokens = await tokenService.createAuthTokens(user._id)
 
+    return { user, authTokens }
+}
+
+/**
+ * Get google oauth tokens
+ * @param {string} code
+ * @returns {Promise<{id_token: string}>}
+ */
+const getGoogleOauthTokens = async (code) => {
+    const url = "https://oauth2.googleapis.com/token"
+    const values = {
+        code,
+        client_id: envConfig.googleAuth.CLIENT_ID,
+        client_secret: envConfig.googleAuth.CLIENT_SECRET,
+        redirect_uri: envConfig.googleAuth.REDIRECT_URI,
+        grant_type: "authorization_code",
+    }
+    const res = await axios.default.post(url + "?" + qs.stringify(values), {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    })
+    return res.data
+}
+
+/**
+ * Google by google oauth2
+ * @param {string} code
+ * @returns {Promise<{user: user, authTokens: {}}>}
+ */
+const googleLogin = async (code) => {
+    const tokens = await getGoogleOauthTokens(code)
+    const userProfile = jwt.decode(tokens.id_token)
+    console.log(userProfile)
+    if (!userProfile.email_verified) {
+        throw createError.Unauthorized("Your email is not verified")
+    }
+    let user = await userService.findOneUser({ email: userProfile.email })
+    if (!user) {
+        const body = {
+            name: userProfile.name,
+            email: userProfile.email,
+            avatar: userProfile.picture,
+            authType: GOOGLE,
+            role: NORMAL_USER,
+        }
+        user = await userService.createUser(body)
+    }
+    const authTokens = await tokenService.createAuthTokens(user._id)
     return { user, authTokens }
 }
 
@@ -53,24 +123,25 @@ const refreshAuthTokens = async (aToken, rToken) => {
     // Remove Bearer
     aToken = aToken.slice(7)
 
-    const accessPayload = tokenService.getPayload(aToken)
-    const refreshPayload = tokenService.getPayload(rToken)
+    const accessPayload = tokenService.verifyToken(aToken, ACCESS, {
+        ignoreExpiration: true,
+    })
+    const refreshPayload = tokenService.verifyToken(rToken, REFRESH, {
+        ignoreExpiration: true,
+    })
 
-    if (
-        !accessPayload ||
-        !refreshPayload ||
-        accessPayload.type !== ACCESS ||
-        refreshPayload.type !== REFRESH ||
-        refreshPayload.sub !== accessPayload.sub
-    ) {
-        throw createError.BadRequest("Invalid token")
+    const now = moment().unix()
+    console.log(accessPayload.exp)
+    console.log(now)
+    if (accessPayload.exp > now) {
+        throw createError.BadRequest("Access token has not expired")
     }
-
-    if (!accessPayload.isExpired) {
-        throw createError.BadRequest("Access token has not expired yet")
-    }
-    if (refreshPayload.isExpired) {
+    if (refreshPayload.exp < now) {
         throw createError.BadRequest("Refresh token has expired")
+    }
+
+    if (refreshPayload.sub !== accessPayload.sub) {
+        throw createError.Unauthorized("Invalid token")
     }
 
     const rTokenDoc = await tokenService.getOneToken({ body: rToken, type: REFRESH })
@@ -136,6 +207,7 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
 
 module.exports = {
     localLogin,
+    googleLogin,
     logout,
     refreshAuthTokens,
     verifyEmail,
@@ -143,7 +215,7 @@ module.exports = {
 }
 
 /**
- * @typedef {import('../models/User')} user
+ * @typedef {InstanceType<import('../models/User')>} user
  *
- * @typedef {import('../models/Token')} token
+ * @typedef {InstanceType<import('../models/Token')>} token
  */
