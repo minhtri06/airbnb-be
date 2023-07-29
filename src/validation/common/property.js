@@ -10,6 +10,7 @@ module.exports = {
     isClosed: Joi.boolean(),
     owner: objectId,
     pageName: Joi.string(),
+    categoryCodes: Joi.array().min(1).items(Joi.string()),
     description: Joi.string(),
     facilityCodes: Joi.array().items(Joi.string()),
     reviewCount: Joi.number().min(0),

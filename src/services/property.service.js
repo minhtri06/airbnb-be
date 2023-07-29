@@ -58,6 +58,7 @@ const createProperty = async (body) => {
         "isClosed",
         "owner",
         "pageName",
+        "categoryCodes",
         "description",
         "facilityCodes",
         "address",
@@ -81,6 +82,7 @@ const updateProperty = async (property, updateBody) => {
         "title",
         "isClosed",
         "pageName",
+        "categoryCodes",
         "description",
         "facilityCodes",
     )
@@ -168,6 +170,7 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
  * @param {{
  *   districtId,
  *   provinceId,
+ *   categoryCode,
  *   bookIn,
  *   bookOut,
  *   page,
@@ -178,6 +181,7 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
 const searchProperties = async ({
     districtId,
     provinceId,
+    categoryCode,
     bookIn,
     bookOut,
     page,
@@ -193,6 +197,9 @@ const searchProperties = async ({
     }
     if (provinceId) {
         query.where({ "address.province": provinceId })
+    }
+    if (categoryCode) {
+        query.where({ categoryCodes: categoryCode })
     }
 
     let properties
@@ -431,6 +438,7 @@ module.exports = {
  * @property {boolean} isClosed
  * @property {string} owner
  * @property {string} pageName
+ * @property {string[] | string} categoryCodes
  * @property {number} score
  * @property {number} sumScore
  * @property {string} description

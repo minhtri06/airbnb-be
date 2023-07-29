@@ -50,6 +50,7 @@ module.exports = {
         [QUERY]: Joi.object({
             districtId: objectId,
             provinceId: objectId,
+            categoryCode: Joi.string(),
             bookIn: Joi.date().iso().greater(Date.now()),
             bookOut: Joi.date().iso().greater(Date.now()),
             page: query.page,

@@ -67,7 +67,71 @@ const genReviews = (numOfReviews, users, propertyId) => {
     return reviews
 }
 
-// Seeders
+const propertyCategoryCodes = [
+    "iconic-cities",
+    "countryside",
+    "omg",
+    "rooms",
+    "beach",
+    "amazing-views",
+    "mansions",
+    "amazing-pools",
+    "tiny-homes",
+    "riads",
+    "beachfront",
+    "casas-particulares",
+    "towers",
+    "treehouses",
+    "lakefront",
+    "domes",
+    "cabins",
+    "earth-homes",
+    "national-parks",
+    "design",
+    "tropical",
+    "camping",
+    "farms",
+    "creative-spaces",
+    "top-of-the-world",
+    "trending",
+    "luxe",
+    "lake",
+    "shepherd's-huts",
+    "new",
+    "castles",
+    "skiing",
+    "chef's-kitchens",
+    "islands",
+    "surfing",
+    "play",
+    "arctic",
+    "boats",
+    "vineyards",
+    "bed-breakfasts",
+    "campers",
+    "a-frames",
+    "caves",
+    "golfing",
+    "historical-homes",
+    "hanoks",
+    "cycladic-homes",
+    "ryokans",
+    "windmills",
+    "houseboats",
+    "minsus",
+    "desert",
+    "barns",
+    "yurts",
+    "off-the-grid",
+    "adapted",
+    "ski-in/out",
+    "containers",
+    "grand-pianos",
+    "dammusi",
+    "trulli",
+]
+
+//-Seeders
 const seedDivisions = async () => {
     for (let province of provinces) {
         const provinceDoc = await Province.create({
@@ -315,6 +379,11 @@ const seedProperty = async () => {
                     accommodation.maximumOfGuests = genRandNum(1, 4)
                     return accommodation
                 })
+                propertyData.categoryCodes = [
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                ]
                 const property = new Property(propertyData)
                 property.score = null
                 property.sumScore = 0

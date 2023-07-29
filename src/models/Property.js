@@ -15,6 +15,16 @@ const propertySchema = new Schema(
 
         pageName: { type: String, unique: true, lowercase: true, required: true },
 
+        categoryCodes: {
+            type: [String],
+            required: true,
+            validate: function (categoryCodes) {
+                if (categoryCodes.length === 0) {
+                    throw new Error("Property must have at least one category codes")
+                }
+            },
+        },
+
         score: { type: Number, min: 0, max: 10 },
 
         sumScore: { type: Number, min: 0, default: 0, required: true },

@@ -176,10 +176,10 @@ const updateUser = async (user, updateBody) => {
     }
 
     Object.assign(user, updateBody)
-
-    await user.save()
-
-    await deleteUserCache(user._id)
+    if (user.isModified()) {
+        await user.save()
+        await deleteUserCache(user._id)
+    }
 
     return user
 }

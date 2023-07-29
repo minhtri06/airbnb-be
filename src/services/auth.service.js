@@ -13,6 +13,7 @@ const {
     tokenTypes: { ACCESS, REFRESH, RESET_PASSWORD, VERIFY_EMAIL },
     authTypes: { LOCAL, GOOGLE },
 } = require("../constants")
+const { User } = require("../models")
 const userService = require("./user.service")
 const tokenService = require("./token.service")
 
@@ -83,21 +84,24 @@ const getGoogleOauthTokens = async (code) => {
  */
 const googleLogin = async (code) => {
     const tokens = await getGoogleOauthTokens(code)
+
     const userProfile = jwt.decode(tokens.id_token)
-    console.log(userProfile)
     if (!userProfile.email_verified) {
         throw createError.Unauthorized("Your email is not verified")
     }
+
+    const body = {
+        name: userProfile.name,
+        email: userProfile.email,
+        avatar: userProfile.picture,
+        authType: GOOGLE,
+        role: NORMAL_USER,
+    }
     let user = await userService.findOneUser({ email: userProfile.email })
     if (!user) {
-        const body = {
-            name: userProfile.name,
-            email: userProfile.email,
-            avatar: userProfile.picture,
-            authType: GOOGLE,
-            role: NORMAL_USER,
-        }
         user = await userService.createUser(body)
+    } else {
+        await userService.updateUser(user, body)
     }
     const authTokens = await tokenService.createAuthTokens(user._id)
     return { user, authTokens }
@@ -131,8 +135,6 @@ const refreshAuthTokens = async (aToken, rToken) => {
     })
 
     const now = moment().unix()
-    console.log(accessPayload.exp)
-    console.log(now)
     if (accessPayload.exp > now) {
         throw createError.BadRequest("Access token has not expired")
     }
