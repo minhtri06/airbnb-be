@@ -3,7 +3,7 @@ const envConfig = require("../../configs/envConfig")
 const paginate = (schema) => {
     schema.statics.paginate = async function (
         filter,
-        { sortBy, page, limit, select, populate, lean } = {},
+        { sortBy, page, limit, select, populate, lean, checkPaginate } = {},
     ) {
         const query = this.find(filter)
 
@@ -28,7 +28,15 @@ const paginate = (schema) => {
 
         query.skip(skip).limit(limit)
 
-        return query
+        if (checkPaginate) {
+            const [data, totalRecords] = await Promise.all([
+                query.exec(),
+                this.countDocuments(filter).exec(),
+            ])
+            return { data, totalRecords, totalPage: Math.ceil(totalRecords / limit) }
+        }
+        const data = await query.exec()
+        return { data }
     }
 }
 

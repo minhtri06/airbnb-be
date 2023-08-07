@@ -1,4 +1,3 @@
-const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
 const {
@@ -35,7 +34,7 @@ const searchProperties = async (req, res) => {
 
 /** @type {controller} */
 const getProperty = async (req, res) => {
-    const { bookIn, bookOut } = req.query
+    const { bookIn, bookOut, includeReviews } = req.query
     if (bookIn && bookOut) {
         service.setAvailabilityFields(req._property, bookIn, bookOut)
     }
@@ -48,7 +47,30 @@ const getProperty = async (req, res) => {
         )
     }
 
-    return res.json({ property: req._property.toJSON({ virtuals: true }) })
+    await req._property.populate([{ path: "owner", select: "name avatar" }])
+
+    const response = { property: req._property.toJSON({ virtuals: true }) }
+
+    if (includeReviews) {
+        const reviewResults = await reviewService.paginateReviews(
+            { property: req._property._id },
+            {
+                populate: [{ path: "reviewer", select: "name avatar" }],
+                checkPaginate: true,
+            },
+        )
+        response.reviews = reviewResults
+    }
+
+    return res.json(response)
+}
+
+/** @type {controller} */
+const checkPageNameExists = async (req, res) => {
+    console.log(req.body)
+    const { pageName } = req.body
+    const property = await service.findOneProperty({ pageName })
+    return res.json({ doesExist: property !== null })
 }
 
 /** @type {controller} */
@@ -101,15 +123,6 @@ const getAccommodationBookings = async (req, res) => {
 }
 
 /** @type {controller} */
-const getPropertyReviews = async (req, res) => {
-    const reviews = await reviewService.paginateReviews(
-        { property: req._property._id },
-        req.query,
-    )
-    return res.json({ reviews })
-}
-
-/** @type {controller} */
 const updateAccommodation = async (req, res) => {
     await service.updateAccommodation(req._property, req._accom, req.body)
     return res.json({ message: "Update successfully" })
@@ -119,6 +132,7 @@ module.exports = {
     createProperty,
     searchProperties,
     getProperty,
+    checkPageNameExists,
     addAccommodation,
     replaceThumbnail,
     addImages,
@@ -126,7 +140,6 @@ module.exports = {
     deleteAccommodation,
     updateProperty,
     getAccommodationBookings,
-    getPropertyReviews,
     updateAccommodation,
 }
 
@@ -141,7 +154,7 @@ module.exports = {
  * @property {number} maximumOfGuests
  * @property { 'specific-room' | 'entire-house' } type
  * @property {Object} bed
- * @property {[]} rooms
+ * @property {number} numberOfRooms
  * @property {[]} currentBookingDates
  *
  * @typedef {{

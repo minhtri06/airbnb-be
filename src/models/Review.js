@@ -38,7 +38,6 @@ const reviewSchema = new Schema(
     { timestamps: true, optimisticConcurrency: true },
 )
 
-reviewSchema.plugin(toJSON)
 reviewSchema.plugin(paginate)
 
 const Review = mongoose.model("Review", reviewSchema)

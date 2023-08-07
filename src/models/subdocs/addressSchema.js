@@ -13,6 +13,8 @@ const addressSchema = new Schema({
     districtName: { type: String },
     province: { type: Schema.Types.ObjectId, ref: "Province", required: true },
     provinceName: { type: String },
+    latitude: { type: Number },
+    longitude: { type: Number },
 })
 
 addressSchema.pre("save", async function (next) {

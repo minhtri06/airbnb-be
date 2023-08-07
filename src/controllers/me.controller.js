@@ -32,16 +32,16 @@ const replaceMyAvatar = async (req, res) => {
 /** @type {controller} */
 const getMyProperties = async (req, res) => {
     const filter = pickFields(req.query, "isClosed")
-    const queryOptions = pickFields(req.query, "limit", "page")
+    const queryOptions = pickFields(req.query, "limit", "page", "checkPaginate")
 
-    const properties = await propertyService.paginateProperties(
+    const results = await propertyService.paginateProperties(
         { owner: req.user._id, ...filter },
         {
             select: "-images -description -facilityCodes -owner -accommodationGroups",
             ...queryOptions,
         },
     )
-    return res.json({ properties })
+    return res.json({ ...results })
 }
 
 /** @type {controller} */
@@ -49,11 +49,11 @@ const getMyBookings = async (req, res) => {
     req.query.populate = [
         { path: "property", select: "thumbnail title pageName address score" },
     ]
-    const bookings = await bookingService.paginateBookings(
+    const results = await bookingService.paginateBookings(
         { guest: req.user._id },
         req.query,
     )
-    return res.json({ bookings })
+    return res.json({ ...results })
 }
 
 /** @type {controller} */

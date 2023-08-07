@@ -15,4 +15,5 @@ module.exports = {
         }),
     page: Joi.number().integer().min(1).max(50),
     limit: Joi.number().integer().min(0).max(100),
+    checkPaginate: Joi.boolean(),
 }

@@ -11,7 +11,6 @@ const { deleteFile } = require("../../utils").file
 /** @type {import('express').ErrorRequestHandler} */
 const handleException = async (err, req, res, next) => {
     // Delete uploading files
-
     if (req.file) {
         deleteFile(req.file.path)
     }

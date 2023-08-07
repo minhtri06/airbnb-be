@@ -14,6 +14,10 @@ const districtSchema = new Schema(
         provinceCode: { type: Number, required: true, index: true },
 
         province: { type: Schema.Types.ObjectId, ref: "Province", required: true },
+
+        latitude: { type: Number, required: true },
+
+        longitude: { type: Number, required: true },
     },
 
     { timestamps: true, optimisticConcurrency: true },

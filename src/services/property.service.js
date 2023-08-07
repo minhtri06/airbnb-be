@@ -187,7 +187,10 @@ const searchProperties = async ({
     page,
     limit,
 }) => {
-    const query = Property.where({ isClosed: false })
+    const query = Property.where({
+        isClosed: false,
+        accommodations: { $exists: true, $ne: [] },
+    })
         .lean()
         .select("-images -description -facilityCodes")
         .sort("-score")
@@ -322,7 +325,7 @@ const addAccommodation = async (property, newAccom) => {
         "maximumOfGuests",
         "type",
         "bed",
-        "rooms",
+        "numberOfRooms",
     )
 
     property.accommodations.push(newAccom)
@@ -369,7 +372,7 @@ const updateAccommodation = (property, accom, updateBody) => {
         "pricePerNight",
         "maximumOfGuests",
         "bed",
-        "rooms",
+        "numberOfRooms",
     )
     Object.assign(accom, updateBody)
     return property.save()
@@ -429,7 +432,7 @@ module.exports = {
  * @property {number} maximumOfGuests
  * @property { 'specific-room' | 'entire-house' } type
  * @property {Object} bed
- * @property {[]} rooms
+ * @property {number} numberOfRooms
  * @property {[]} currentBookingDates
  *
  * @typedef {Object} propertyFilter

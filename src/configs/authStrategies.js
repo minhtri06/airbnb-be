@@ -3,12 +3,9 @@ const createError = require("http-errors")
 
 const {
     jwt: { SECRET },
-    googleAuth: { CLIENT_ID, CLIENT_SECRET },
 } = require("./envConfig")
-const { NORMAL_USER } = require("./roles")
 const {
     tokenTypes: { ACCESS },
-    authTypes: { GOOGLE },
 } = require("../constants")
 const { redisService, userService } = require("../services")
 

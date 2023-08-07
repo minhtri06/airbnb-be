@@ -21,4 +21,14 @@ module.exports = {
             score: review.score,
         }),
     },
+
+    getReviews: {
+        [QUERY]: Joi.object({
+            propertyId: objectId.required(),
+            limit: query.limit,
+            page: query.page,
+            sortBy: query.sortBy("createdAt", "score").default("-createdAt"),
+            checkPaginate: query.checkPaginate,
+        }),
+    },
 }

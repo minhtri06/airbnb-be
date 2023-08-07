@@ -33,6 +33,12 @@ router.get(
     controller.getProperty,
 )
 
+router.post(
+    "/check-page-name-exits",
+    validate(validation.checkPageNameExists),
+    controller.checkPageNameExists,
+)
+
 router.param("propertyId", getPropertyById)
 router.param("accomId", getAccommodationById)
 
@@ -73,12 +79,6 @@ router
         validate(validation.deleteImages),
         controller.deleteImages,
     )
-
-router.get(
-    "/:propertyId/reviews",
-    validate(validation.getPropertyReviews),
-    controller.getPropertyReviews,
-)
 
 router
     .route("/:propertyId/accommodations")

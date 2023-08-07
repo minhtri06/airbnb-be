@@ -12,13 +12,11 @@ const makeConversation = async (req, res) => {
 
 /** @type {controller} */
 const getConversationMessages = async (req, res) => {
-    const messages = await chatService.paginateMessages(
-        {
-            conversation: req.params.conversationId,
-        },
+    const results = await chatService.paginateMessages(
+        { conversation: req.params.conversationId },
         req.query,
     )
-    return res.json({ messages })
+    return res.json({ ...results })
 }
 
 /** @type {controller} */

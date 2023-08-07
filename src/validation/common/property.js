@@ -18,6 +18,8 @@ module.exports = {
         address: Joi.string(),
         district: objectId,
         province: objectId,
+        latitude: Joi.number(),
+        longitude: Joi.number(),
     },
     accommodations: {
         title: Joi.string(),
@@ -30,14 +32,7 @@ module.exports = {
             single: Joi.number().integer().min(0),
             sofaBed: Joi.number().integer().min(0),
         },
-        rooms: {
-            bed: {
-                double: Joi.number().integer().min(0),
-                queen: Joi.number().integer().min(0),
-                single: Joi.number().integer().min(0),
-                sofaBed: Joi.number().integer().min(0),
-            },
-        },
+        numberOfRooms: Joi.number().integer().min(1),
         currentBookingDates: {
             bookIn: Joi.date().iso(),
             bookOut: Joi.date().iso(),

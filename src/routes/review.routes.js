@@ -9,7 +9,11 @@ const { reviewValidation: validation } = require("../validation")
 
 router.param("reviewId", getReviewById)
 
-router.route("/").post(auth(), validate(validation.addReview), controller.addReview)
+router
+    .route("/")
+    .get(validate(validation.getReviews), controller.getReviews)
+    .post(auth(), validate(validation.addReview), controller.addReview)
+
 router
     .route("/:reviewId")
     .patch(

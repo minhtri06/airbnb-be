@@ -8,7 +8,7 @@ const {
 const { property, district, province, booking, objectId, query } = require("./common")
 
 const { accommodations, address } = property
-const { bed, rooms } = accommodations
+const { bed } = accommodations
 
 module.exports = {
     createProperty: {
@@ -18,10 +18,13 @@ module.exports = {
             pageName: property.pageName.required(),
             description: property.description.required(),
             facilityCodes: property.facilityCodes.required(),
+            categoryCodes: property.categoryCodes.required(),
             address: Joi.object({
                 address: address.address.required(),
                 district: address.district.required(),
                 province: address.province.required(),
+                latitude: address.latitude.required(),
+                longitude: address.longitude.required(),
             }).required(),
             accommodations: Joi.array().items({
                 title: accommodations.title.required(),
@@ -34,14 +37,7 @@ module.exports = {
                     single: bed.single.required(),
                     sofaBed: bed.sofaBed.required(),
                 }),
-                rooms: Joi.array().items({
-                    bed: Joi.object({
-                        double: bed.double.required(),
-                        queen: bed.queen.required(),
-                        single: bed.single.required(),
-                        sofaBed: bed.sofaBed.required(),
-                    }),
-                }),
+                numberOfRooms: accommodations.numberOfRooms,
             }),
         }),
     },
@@ -65,6 +61,7 @@ module.exports = {
         [QUERY]: Joi.object({
             bookIn: Joi.date().iso().greater(Date.now()),
             bookOut: Joi.date().iso().greater(Date.now()),
+            includeReviews: Joi.boolean(),
         }),
     },
 
@@ -75,6 +72,13 @@ module.exports = {
         [QUERY]: Joi.object({
             bookIn: Joi.date().iso().greater(Date.now()),
             bookOut: Joi.date().iso().greater(Date.now()),
+            includeReviews: Joi.boolean(),
+        }),
+    },
+
+    checkPageNameExists: {
+        [BODY]: Joi.object({
+            pageName: property.pageName.required(),
         }),
     },
 
@@ -106,14 +110,7 @@ module.exports = {
                 single: bed.single.required(),
                 sofaBed: bed.sofaBed.required(),
             }),
-            rooms: Joi.array().items({
-                bed: Joi.object({
-                    double: bed.double.required(),
-                    queen: bed.queen.required(),
-                    single: bed.single.required(),
-                    sofaBed: bed.sofaBed.required(),
-                }),
-            }),
+            numberOfRooms: accommodations.numberOfRooms,
         }),
     },
 
@@ -157,14 +154,7 @@ module.exports = {
                 single: bed.single.required(),
                 sofaBed: bed.sofaBed.required(),
             }),
-            rooms: Joi.array().items({
-                bed: Joi.object({
-                    double: bed.double.required(),
-                    queen: bed.queen.required(),
-                    single: bed.single.required(),
-                    sofaBed: bed.sofaBed.required(),
-                }),
-            }),
+            numberOfRooms: accommodations.numberOfRooms,
         }),
     },
 

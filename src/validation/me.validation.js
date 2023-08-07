@@ -18,6 +18,7 @@ module.exports = {
             limit: query.limit,
             page: query.page,
             isClosed: property.isClosed.default(false),
+            checkPaginate: query.checkPaginate,
         }),
     },
 
@@ -39,6 +40,7 @@ module.exports = {
             page: query.page,
             // Default order is from the newest booking to the oldest booking
             sortBy: query.sortBy("bookIn").default("-bookIn"),
+            checkPaginate: query.checkPaginate,
         }),
     },
 }

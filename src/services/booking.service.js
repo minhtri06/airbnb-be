@@ -220,6 +220,7 @@ module.exports = {
  * @property {string} select
  * @property {string} populate
  * @property {boolean} lean
+ * @property {boolean} checkPaginate
  *
  * @typedef {Object} accommodation
  * @property {string} _id

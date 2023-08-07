@@ -21,18 +21,12 @@ const accommodationSchema = new Schema({
     },
 
     // For specific-room type
-    bed: {
-        type: bedSchema,
-        required: function () {
-            return this.get("type") === SPECIFIC_ROOM
-        },
-    },
+    bed: { type: bedSchema, required: true },
 
-    // For entire-house type
-    rooms: {
-        type: [{ bed: { type: bedSchema } }],
+    numberOfRooms: {
+        type: Number,
         required: function () {
-            return this.get("type") === ENTIRE_HOUSE
+            return this.type === ENTIRE_HOUSE
         },
     },
 
@@ -47,17 +41,6 @@ const accommodationSchema = new Schema({
         default: [],
         required: true,
     },
-})
-
-accommodationSchema.pre("validate", function (next) {
-    const accom = this
-    if (accom.type === SPECIFIC_ROOM) {
-        accom.rooms = undefined
-    }
-    if (accom.type === ENTIRE_HOUSE) {
-        accom.bed = undefined
-    }
-    return next()
 })
 
 accommodationSchema.virtual("isAvailable")

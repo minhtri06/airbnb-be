@@ -52,7 +52,7 @@ const propertySchema = new Schema(
 
         images: [String],
 
-        accommodations: { type: [accommodationSchema] },
+        accommodations: { type: [accommodationSchema], default: [], required: true },
     },
 
     {
@@ -71,6 +71,18 @@ propertySchema.plugin(paginate)
 
 propertySchema.virtual("isAvailable")
 propertySchema.virtual("isSaved")
+
+propertySchema.pre("validate", function (next) {
+    const property = this
+    if (
+        !property.address ||
+        isNaN(property.address.latitude) ||
+        isNaN(property.address.longitude)
+    ) {
+        throw new Error("Longitude, latitude is required")
+    }
+    next()
+})
 
 const Property = mongoose.model("Property", propertySchema)
 

@@ -15,7 +15,24 @@ const editReview = async (req, res) => {
     return res.json({ review: req._review })
 }
 
-module.exports = { addReview, editReview }
+/** @type {controller} */
+const getReviews = async (req, res) => {
+    const { propertyId, limit, page, sortBy, checkPaginate } = req.query
+    const results = await service.paginateReviews(
+        { property: propertyId },
+        {
+            limit,
+            page,
+            sortBy,
+            checkPaginate,
+            populate: [{ path: "reviewer", select: "name avatar" }],
+        },
+    )
+
+    return res.json({ ...results })
+}
+
+module.exports = { addReview, editReview, getReviews }
 
 /**
  * @typedef {InstanceType<import("../models/Property")>} property

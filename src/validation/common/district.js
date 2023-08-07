@@ -8,4 +8,6 @@ module.exports = {
     code: Joi.number().integer(),
     provinceCode: province.code,
     province: objectId,
+    latitude: Joi.number(),
+    longitude: Joi.number(),
 }

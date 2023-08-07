@@ -1,5 +1,6 @@
 const moment = require("moment")
 const mongoose = require("mongoose")
+const envConfig = require("../configs/envConfig")
 
 const {
     District,
@@ -43,9 +44,9 @@ const genArr = (len, elementGenerator) => {
 
 const genReviews = (numOfReviews, users, propertyId) => {
     const reviewSamples = [
-        "Khá tốt cho gia đình",
+        "We had a wonderful stay. The room and the property were well taken care of and communication was easy. Da met us at check in and everything went really smoothly. We would definitely stay again next time were in the area. We really enjoyed the area and found lots of good places to relax and eat near the room.",
         "Good",
-        "Kì nghỉ tuyệt vời",
+        "This is a great place in an amazing suburb full of craft markets, cafes, restaurants. It’s lovely to wander around. The place is very well equipped, with a nice pool and helpfully washing machine and Ada was very helpful. Would highly recommend a stay, it’s a lovely area so a little noisy at night is my only comment (but worth it for the rest!)",
         "Tôi khá thích lò sưởi ở đây",
         "Nhân viên không thân thiện lắm",
         "Thoải mái cho một chuyến công tác",
@@ -54,6 +55,27 @@ const genReviews = (numOfReviews, users, propertyId) => {
         " wonderful. Beautiful house",
         "Far from the center and the road is a bit difficult",
         "Stable and good for the price spent with all amenities",
+        "great stay.. highly recommend!",
+        "We really enjoyed our stay at Jitrada's place. It's a very cosy house at a peaceful and quiet place.\nJitrada answered very fast and helped us with all our questions. She is really a very lovely host.",
+        "All was great, very authentic house. Highly recommended!",
+        "Very nice, quite and clean place. Enjoyable and easy to find, Taxi can go directly in front of the house. Jitrada is a responsible and friendly host, she is always ready to help, and good at commutation. Highly recommended place.",
+        "I’ve stayed at 100s of Airbnbs and Nathan was one the most welcoming hosts. Incredible home and highly recommended. \nThe Airbnb is a ~10 minute walk to the beach and I would suggest using a motorcycle or scooter rental if you’re comfortable riding. Although be warned that the traffic, anywhere in Vietnam, is not for the faint of heart.\nAnyways, thanks for the stay!! We would love to visit again some day",
+        "Clean and spacious place. Had a comfortable stay and Nathan was really friendly! Highly recommend :)",
+        "Super friendly & helpful host. Nathan’s place is clean and look the same as advertised. Asked Nathan for food recommendations and he responded promptly with a few local restaurants within the neighbourhood. Looking forward to my next visit to Da Nang!! Thanks Nathan 🤎 sending you love from Malaysia",
+        "친절하고 빠르게 안내해주시고 숙소가 넓어서 좋았습니다! 또 놀러올게요",
+        "위치도 좋고 무엇보다 호스트와의 연락이 빠르게 이루어져서 너무 좋았습니다.ᐟ",
+        "Ok",
+        "Yolo",
+        "Bright, comfortable house, in a great area. Responsive owner, transferred the check-in, to an earlier time;)",
+        "Very clean and comfortable place, very accommodating host",
+        "place is in abit of a forested area so there are many insects bring some form of repellent along",
+        "We had a great time at sams place. Would recommend to anyone who was some peace and quiet",
+        "great place to visit, staff is very friendly and support. thank you for good exp :)",
+        "Great place if travel in group, especially families with young explorers. Room is as good as pictures nice cozy bunk beds.",
+        "I spent 2 nights here with wonderful feeling. In Dalat city, we rarely find a place like this with full facilities, close to the nature but not too far from the city, only 10 min driving and easy to explore the short track to Da Phu hill as well.",
+        "Amazing host, very kind and welcoming. staff was extremely kind and everything was very clean.\nThe view is stunning couldnt recommend more.",
+        "I had an absolutely fantastic experience during my stay at this Airbnb! It was a dream come true to be surrounded by nature and have the opportunity to live amidst its beauty, all while enjoying a clean and comfortable room with access to clean water. This place truly had everything I needed and more.\nThe highlight of my stay was undoubtedly the exhilarating ATV ride. Exploring the picturesque mountains and trails on the ATV was an adventure like no other. The thrill and excitement of riding through the stunning landscape were unforgettable. I must commend the host, Sam, and his staff for their excellent guidance and support throughout the ATV experience. They made sure I had a safe and enjoyable time.\nAlthough I didn't have the chance to try the dirt biking or enjoy a campfire, I could see that these options were available.\nThis is the perfect destination for an extraordinary getaway that will leave you with incredible memories",
+        "The place is clean and nice, peaceful place to stay and cheap price for the room if you go from 3-4 people. But I had a bit problem with located the villa from map direction. The staffs and Sam are quite friendly and delicate.\nI highly recommend for someone who wants a peaceful place to stay away from your hustle life.",
     ]
     const reviews = []
     for (let i = 0; i < numOfReviews; i++) {
@@ -131,7 +153,7 @@ const propertyCategoryCodes = [
     "trulli",
 ]
 
-//-Seeders
+// Seeders
 const seedDivisions = async () => {
     for (let province of provinces) {
         const provinceDoc = await Province.create({
@@ -147,6 +169,8 @@ const seedDivisions = async () => {
                     code: district.code,
                     provinceCode: district.province_code,
                     province: provinceDoc._id,
+                    latitude: district.latitude,
+                    longitude: district.longitude,
                 }
             }),
         )
@@ -189,7 +213,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/2.jpg",
+            avatar: envConfig.SERVER_URL + "/img/2.jpg",
             isEmailVerified: true,
         },
         {
@@ -199,7 +223,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: "/static/img/3.jpg",
+            avatar: envConfig.SERVER_URL + "/img/3.jpg",
             isEmailVerified: true,
         },
         {
@@ -209,7 +233,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/4.jpg",
+            avatar: envConfig.SERVER_URL + "/img/4.jpg",
             isEmailVerified: true,
         },
         {
@@ -219,7 +243,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/5.jpg",
+            avatar: envConfig.SERVER_URL + "/img/5.jpg",
             isEmailVerified: true,
         },
         {
@@ -229,7 +253,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/1.jpg",
+            avatar: envConfig.SERVER_URL + "/img/1.jpg",
             isEmailVerified: true,
         },
         {
@@ -239,7 +263,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: "/static/img/6.jpg",
+            avatar: envConfig.SERVER_URL + "/img/6.jpg",
             isEmailVerified: true,
         },
         {
@@ -249,7 +273,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: "/static/img/7.jpg",
+            avatar: envConfig.SERVER_URL + "/img/7.jpg",
             isEmailVerified: true,
         },
         {
@@ -259,7 +283,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/8.jpg",
+            avatar: envConfig.SERVER_URL + "/img/8.jpg",
             isEmailVerified: true,
         },
         {
@@ -269,7 +293,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/9.jpg",
+            avatar: envConfig.SERVER_URL + "/img/9.jpg",
             isEmailVerified: true,
         },
         {
@@ -279,7 +303,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/static/img/10.jpg",
+            avatar: envConfig.SERVER_URL + "/img/10.png",
             isEmailVerified: true,
         },
     ]
@@ -361,15 +385,14 @@ const seedProperty = async () => {
             propertiesData.map((propertyData) => {
                 propertyData.owner = pickRandElementFromArr(users)._id
                 propertyData.address = l.address
-                propertyData.accommodations = genArr(genRandNum(0, 3), () => {
+                propertyData.address.longitude = propertyData.longitude
+                propertyData.address.latitude = propertyData.latitude
+                propertyData.accommodations = genArr(genRandNum(1, 3), () => {
                     const accommodation = {}
                     const type = pickRandElementFromArr(Object.keys(accomTypesAndTitles))
-                    if (type === "specific-room") {
-                        accommodation.bed = pickRandElementFromArr(bedSamples)
-                    } else {
-                        accommodation.rooms = genArr(genRandNum(1, 4), () => ({
-                            bed: pickRandElementFromArr(bedSamples),
-                        }))
+                    accommodation.bed = pickRandElementFromArr(bedSamples)
+                    if (type === "entire-house") {
+                        accommodation.numberOfRooms = genRandNum(1, 4)
                     }
                     accommodation.type = type
                     accommodation.title = pickRandElementFromArr(
@@ -380,6 +403,27 @@ const seedProperty = async () => {
                     return accommodation
                 })
                 propertyData.categoryCodes = [
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
+                    pickRandElementFromArr(propertyCategoryCodes),
                     pickRandElementFromArr(propertyCategoryCodes),
                     pickRandElementFromArr(propertyCategoryCodes),
                     pickRandElementFromArr(propertyCategoryCodes),
@@ -426,7 +470,7 @@ const seedReviews = async () => {
     }
 
     for (let property of properties) {
-        const reviews = genReviews(genRandNum(0, 20), users, property._id)
+        const reviews = genReviews(genRandNum(3, 30), users, property._id)
         if (reviews.length === 0) {
             continue
         }
