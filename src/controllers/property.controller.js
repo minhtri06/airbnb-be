@@ -16,20 +16,20 @@ const createProperty = async (req, res) => {
 
 /** @type {controller} */
 const searchProperties = async (req, res) => {
-    const properties = await service.searchProperties(req.query)
+    const results = await service.searchProperties(req.query)
 
     // If user is authenticated => check save properties
     if (req.user) {
         const saveChecks = await userService.checkSaveProperties(
             req.user._id,
-            properties.map((p) => p._id),
+            results.data.map((p) => p._id),
         )
         for (let i = 0; i < saveChecks.length; i++) {
-            properties[i].isSaved = saveChecks[i]
+            results.data[i].isSaved = saveChecks[i]
         }
     }
 
-    return res.json({ properties })
+    return res.json({ ...results })
 }
 
 /** @type {controller} */

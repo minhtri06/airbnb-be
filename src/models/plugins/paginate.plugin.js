@@ -33,7 +33,11 @@ const paginate = (schema) => {
                 query.exec(),
                 this.countDocuments(filter).exec(),
             ])
-            return { data, totalRecords, totalPage: Math.ceil(totalRecords / limit) }
+            return {
+                totalRecords,
+                totalPage: Math.ceil(totalRecords / limit),
+                data,
+            }
         }
         const data = await query.exec()
         return { data }

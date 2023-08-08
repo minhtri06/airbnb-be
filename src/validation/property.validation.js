@@ -51,6 +51,7 @@ module.exports = {
             bookOut: Joi.date().iso().greater(Date.now()),
             page: query.page,
             limit: query.limit,
+            checkPaginate: query.checkPaginate,
         }),
     },
 

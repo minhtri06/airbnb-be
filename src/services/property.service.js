@@ -3,9 +3,6 @@ const createError = require("http-errors")
 const { Property } = require("../models")
 const envConfig = require("../configs/envConfig")
 const {
-    accommodationTypes: { ENTIRE_HOUSE, SPECIFIC_ROOM },
-} = require("../constants")
-const {
     pickFields,
     file: { deleteStaticFile, deleteManyStaticFiles },
 } = require("../utils")
@@ -176,7 +173,7 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
  *   page,
  *   limit,
  * }} param0
- * @returns {Promise<property[]>}
+ * @returns {Promise<{data: property[], totalRecords?: number, totalPage: number}>}
  */
 const searchProperties = async ({
     districtId,
@@ -186,62 +183,76 @@ const searchProperties = async ({
     bookOut,
     page,
     limit,
+    checkPaginate,
 }) => {
-    const query = Property.where({
-        isClosed: false,
-        accommodations: { $exists: true, $ne: [] },
-    })
-        .lean()
-        .select("-images -description -facilityCodes")
-        .sort("-score")
+    const filter = { isClosed: false }
+    if (districtId) filter["address.district"] = districtId
+    if (provinceId) filter["address.province"] = provinceId
+    if (categoryCode) filter.categoryCodes = categoryCode
+    const select = "-images -description -facilityCodes"
+    const sort = "-score"
 
-    if (districtId) {
-        query.where({ "address.district": districtId })
-    }
-    if (provinceId) {
-        query.where({ "address.province": provinceId })
-    }
-    if (categoryCode) {
-        query.where({ categoryCodes: categoryCode })
-    }
+    if (!bookIn || !bookOut)
+        return await paginateProperties(filter, {
+            select,
+            sortBy: sort,
+            checkPaginate,
+            lean: true,
+            page,
+            limit,
+        })
 
-    let properties
+    const query = Property.find(filter).lean().select(select).sort(sort)
+
     limit = limit || envConfig.DEFAULT_PAGE_LIMIT
     page = page || 1
     let skip = (page - 1) * limit
 
-    if (bookIn && bookOut) {
-        // Find available properties
-        const cursor = query.cursor()
-        properties = []
-        for (
-            let property = await cursor.next();
-            property !== null;
-            property = await cursor.next()
-        ) {
-            if (skip !== 0) {
-                if (isPropertyAvailable(property, bookIn, bookOut)) {
-                    skip--
-                }
-                continue
-            }
-            if (limit !== 0) {
-                setAvailabilityFields(property, bookIn, bookOut)
-                if (property.isAvailable) {
-                    limit--
-                    properties.push(property)
-                }
-            }
-            if (limit === 0 && skip === 0) {
-                break
-            }
+    // Find available properties
+    const cursor = query.cursor()
+    let _skip = skip
+    let _limit = limit
+    let properties = []
+    // Skip properties
+    for (
+        let property = await cursor.next();
+        property !== null && _skip !== 0;
+        property = await cursor.next()
+    )
+        if (isPropertyAvailable(property, bookIn, bookOut)) _skip--
+
+    // Get properties with limit
+    for (
+        let property = await cursor.next();
+        property !== null && _limit !== 0;
+        property = await cursor.next()
+    ) {
+        setAvailabilityFields(property, bookIn, bookOut)
+        if (property.isAvailable) {
+            _limit--
+            properties.push(property)
         }
-    } else {
-        query.skip(skip).limit(limit)
-        properties = await query.exec()
     }
 
-    return properties
+    if (!checkPaginate) return { data: properties }
+
+    // Check paginate
+    let remainCount = 0
+    for (
+        let property = await cursor.next();
+        property !== null;
+        property = await cursor.next()
+    ) {
+        if (isPropertyAvailable(property, bookIn, bookOut)) {
+            remainCount++
+        }
+    }
+    const totalRecords = skip + limit + remainCount
+    return {
+        totalRecords,
+        totalPage: Math.ceil(totalRecords / limit),
+        data: properties,
+    }
 }
 
 /**
@@ -459,4 +470,5 @@ module.exports = {
  * @property {string} select
  * @property {string} populate
  * @property {boolean} lean
+ * @property {boolean} checkPaginate
  */
