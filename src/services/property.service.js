@@ -173,7 +173,7 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
  *   page,
  *   limit,
  * }} param0
- * @returns {Promise<{data: property[], totalRecords?: number, totalPage: number}>}
+ * @returns {Promise<{data: property[], totalRecords?: number, totalPage?: number}>}
  */
 const searchProperties = async ({
     districtId,
@@ -202,56 +202,39 @@ const searchProperties = async ({
             limit,
         })
 
-    const query = Property.find(filter).lean().select(select).sort(sort)
-
     limit = limit || envConfig.DEFAULT_PAGE_LIMIT
     page = page || 1
     let skip = (page - 1) * limit
 
-    // Find available properties
-    const cursor = query.cursor()
-    let _skip = skip
-    let _limit = limit
-    let properties = []
-    // Skip properties
-    for (
-        let property = await cursor.next();
-        property !== null && _skip !== 0;
-        property = await cursor.next()
-    )
-        if (isPropertyAvailable(property, bookIn, bookOut)) _skip--
+    const properties = await Property.find(filter).lean().select(select).sort(sort)
 
-    // Get properties with limit
-    for (
-        let property = await cursor.next();
-        property !== null && _limit !== 0;
-        property = await cursor.next()
-    ) {
-        setAvailabilityFields(property, bookIn, bookOut)
-        if (property.isAvailable) {
-            _limit--
-            properties.push(property)
+    const selectedProperties = []
+    let skipCount = 0
+    let selectedCount = 0
+    let i = 0
+    for (; i < properties.length && skipCount < skip; i++) {
+        if (isPropertyAvailable(properties[i])) skipCount++
+    }
+    for (; i < properties.length && selectedCount < limit; i++) {
+        setAvailabilityFields(properties[i])
+        if (properties[i].isAvailable) {
+            selectedProperties.push(properties[i])
+            selectedCount++
         }
     }
 
-    if (!checkPaginate) return { data: properties }
+    if (!checkPaginate) return { data: selectedProperties }
 
-    // Check paginate
     let remainCount = 0
-    for (
-        let property = await cursor.next();
-        property !== null;
-        property = await cursor.next()
-    ) {
-        if (isPropertyAvailable(property, bookIn, bookOut)) {
-            remainCount++
-        }
+    for (; i < properties.length; i++) {
+        if (isPropertyAvailable(properties[i])) remainCount++
     }
-    const totalRecords = skip + limit + remainCount
+    const totalRecords = remainCount + skipCount + selectedCount
+    console.log(totalRecords)
     return {
+        data: selectedProperties,
         totalRecords,
         totalPage: Math.ceil(totalRecords / limit),
-        data: properties,
     }
 }
 
