@@ -24,7 +24,7 @@ router.get(
     controller.getMyProperties,
 )
 router.get("/bookings", validate(validation.getMyBookings), controller.getMyBookings)
-router.get("/conversations", controller.getMyConversations)
+router.get("/conversations", controller.getConversations)
 
 router.post(
     "/saved-properties",

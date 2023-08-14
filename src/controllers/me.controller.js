@@ -57,12 +57,19 @@ const getMyBookings = async (req, res) => {
 }
 
 /** @type {controller} */
-const getMyConversations = async (req, res) => {
-    const myConversations = await chatService.findConversations(
+const getConversations = async (req, res) => {
+    const conversations = await chatService.findManyConversations(
         { users: req.user._id },
-        { populate: [{ path: "users", select: "name avatar" }] },
+        { sort: "-updatedAt" },
     )
-    return res.json({ myConversations })
+    for (let c of conversations) {
+        c.withUser = c.users.find((u) => !u.equals(req.user._id))
+    }
+    await chatService.populateConversations(conversations, {
+        path: "withUser",
+        select: "_id name avatar",
+    })
+    return res.json({ conversations })
 }
 
 /** @type {controller} */
@@ -83,7 +90,7 @@ module.exports = {
     replaceMyAvatar,
     getMyProperties,
     getMyBookings,
-    getMyConversations,
+    getConversations,
     saveProperty,
     unSaveProperty,
 }

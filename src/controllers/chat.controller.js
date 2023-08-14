@@ -2,32 +2,36 @@ const createError = require("http-errors")
 const { StatusCodes } = require("http-status-codes")
 
 const { chatService } = require("../services")
+const { pickFields } = require("../utils")
 
 /** @type {controller} */
-const makeConversation = async (req, res) => {
-    const users = [req.body.withUser, req.user._id]
-    await chatService.createConversation({ users })
+const addMessage = async (req, res) => {
+    await chatService.addMessage({
+        fromUserId: req.user._id,
+        toUserId: req.body.toUserId,
+        body: req.body.body,
+    })
     return res.status(StatusCodes.CREATED).send()
 }
 
 /** @type {controller} */
-const getConversationMessages = async (req, res) => {
-    const results = await chatService.paginateMessages(
-        { conversation: req.params.conversationId },
-        req.query,
+const getMessages = async (req, res) => {
+    const { withUserId } = req.query
+    if (req.user._id.equals(withUserId)) {
+        throw createError.BadRequest("You don't have chat message with yourself")
+    }
+    const messages = await chatService.findManyMessages(
+        { users: { $all: [req.user._id, withUserId] } },
+        { sort: "-createdAt", lean: true },
     )
-    return res.json({ ...results })
+    for (let m of messages) {
+        m.userIds = m.users
+        m.users = undefined
+    }
+    return res.json({ messages })
 }
 
-/** @type {controller} */
-const postMessage = async (req, res) => {
-    req.body.sender = req.user._id
-    req.body.conversation = req._conversation._id
-    await chatService.createMessage(req.body)
-    return res.status(StatusCodes.CREATED).send()
-}
-
-module.exports = { makeConversation, getConversationMessages, postMessage }
+module.exports = { addMessage, getMessages }
 
 /**
  * @typedef {InstanceType<import("../models/User")>} user

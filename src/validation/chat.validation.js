@@ -4,28 +4,16 @@ const { conversation, message, objectId, query } = require("./common")
 const { BODY, QUERY, PARAMS, FILE } = require("../constants").request
 
 module.exports = {
-    makeConversation: {
+    addMessage: {
         [BODY]: Joi.object({
-            withUser: objectId.required(),
-        }),
-    },
-
-    getConversationMessages: {
-        [PARAMS]: Joi.object({
-            conversationId: objectId.required(),
-        }),
-        [QUERY]: Joi.object({
-            limit: query.limit,
-            page: query.page,
-        }),
-    },
-
-    postMessage: {
-        [PARAMS]: Joi.object({
-            conversationId: objectId.required(),
-        }),
-        [BODY]: Joi.object({
+            toUserId: objectId.required(),
             body: message.body.required(),
+        }),
+    },
+
+    getMessages: {
+        [QUERY]: Joi.object({
+            withUserId: objectId.required(),
         }),
     },
 }

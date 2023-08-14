@@ -2,6 +2,6 @@ const { createClient } = require("redis")
 
 const envConfig = require("../configs/envConfig")
 
-const redisClient = createClient({ url: envConfig.redis.URL })
+const redisClient = createClient()
 
 module.exports = redisClient

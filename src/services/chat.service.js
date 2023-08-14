@@ -48,29 +48,41 @@ const getConversationById = async (conversationId) => {
  * @param {conversationFilter} filter
  * @returns {Promise<conversation[]>}
  */
-const findConversations = async (filter, { populate }) => {
+const findManyConversations = async (filter, { populate, sort } = {}) => {
     const query = Conversation.find(filter)
-    if (populate) {
-        query.populate(populate)
+    if (populate) query.populate(populate)
+    if (sort) query.sort(sort)
+    return query
+}
+
+const populateConversations = async (conversations, options) => {
+    return Conversation.populate(conversations, options)
+}
+
+const upsertConversation = async ({ fromUserId, toUserId, body }) => {
+    const users = [fromUserId, toUserId]
+    let convo = await Conversation.findOneAndUpdate(
+        { users: { $all: users } },
+        { latestMessage: { body, sender: fromUserId } },
+        { new: true },
+    )
+    if (!convo) {
+        convo = new Conversation({ users, latestMessage: { body, sender: fromUserId } })
+        await convo.save()
     }
-    return query.exec()
+    return convo
+}
+
+const addMessage = async ({ fromUserId, toUserId, body }) => {
+    if (fromUserId.toString() === toUserId.toString()) {
+        throw createError.BadRequest("You cannot send message to yourself")
+    }
+    const msg = new Message({ users: [fromUserId, toUserId], body })
+    return Promise.all([msg.save(), upsertConversation({ fromUserId, toUserId, body })])
 }
 
 /**
- * Create new conversation
- * @param {{ users }} body
- * @returns {Promise<conversation>}
- */
-const createConversation = async (body) => {
-    body = pickFields(body, "users")
-
-    const conversation = new Conversation(body)
-
-    return conversation.save()
-}
-
-/**
- *
+ * Paginate messages
  * @param {messageFilter} filter
  * @param {*} queryOptions
  * @returns
@@ -80,14 +92,16 @@ const paginateMessages = async (filter, queryOptions = { limit: 20 }) => {
 }
 
 /**
- * Create new Message
- * @param {{ sender, body, conversation }} body
- * @returns {Promise<message>}
+ * Find many messages
+ * @param {messageFilter} filter
+ * @param {{ sort: string }} param1
+ * @returns
  */
-const createMessage = async (body) => {
-    body = pickFields(body, "sender", "body", "conversation")
-    const msg = new Message(body)
-    return msg.save()
+const findManyMessages = async (filter, { sort, lean } = {}) => {
+    const query = Message.find(filter)
+    if (sort) query.sort(sort)
+    if (lean) query.lean()
+    return query
 }
 
 module.exports = {
@@ -95,10 +109,11 @@ module.exports = {
     findConversationById,
     getOneConversation,
     getConversationById,
-    findConversations,
-    createConversation,
+    findManyConversations,
+    populateConversations,
+    addMessage,
     paginateMessages,
-    createMessage,
+    findManyMessages,
 }
 
 /**

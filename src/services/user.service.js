@@ -64,6 +64,19 @@ const getUserById = async (userId) => {
 }
 
 /**
+ * Find many users
+ * @param {userFilter} filter
+ * @returns {Promise<user[]>}
+ */
+const findManyUsers = async (filter, { select } = {}) => {
+    const query = User.find(filter)
+    if (select) {
+        query.select(select)
+    }
+    return query
+}
+
+/**
  * Check if email is taken
  * @param {string} email
  * @param {string} excludedUserId - If given, specify a user to be excluded
@@ -267,6 +280,7 @@ module.exports = {
     findUserById,
     getOneUser,
     getUserById,
+    findManyUsers,
     isEmailTaken,
     paginateUsers,
     createUser,

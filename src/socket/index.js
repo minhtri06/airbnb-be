@@ -12,9 +12,9 @@ const initSocket = (server) => {
         },
     })
 
-    io.use(authHandler)
-
-    io.of("/chat").on("connection", chatHandler(io))
+    const chatIo = io.of("/chat")
+    chatIo.use(authHandler)
+    chatIo.on("connection", chatHandler(chatIo))
 }
 
 module.exports = initSocket

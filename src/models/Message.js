@@ -4,25 +4,28 @@ const { toJSON, paginate } = require("./plugins")
 
 const { Schema } = mongoose
 
-const messageSchema = new Schema({
-    sender: { type: Schema.Types.ObjectId, ref: "User", required: true, immutable: true },
+const messageSchema = new Schema(
+    {
+        users: {
+            type: [{ type: Schema.Types.ObjectId, ref: "User" }],
+            immutable: true,
+            validate() {
+                if (this.users.length !== 2) throw new Error("Invalid users in Message")
+            },
+        },
 
-    body: { type: String, required: true },
-
-    conversation: {
-        type: Schema.Types.ObjectId,
-        ref: "Conversation",
-        required: true,
-        immutable: true,
+        body: { type: String, required: true },
     },
 
-    isUnSend: { type: Boolean, default: false, required: true },
-})
+    {
+        timestamps: true,
+    },
+)
 
 messageSchema.plugin(toJSON)
 messageSchema.plugin(paginate)
 
-messageSchema.index({ conversation: 1 })
+messageSchema.index({ users: 1 })
 
 const Message = mongoose.model("Message", messageSchema)
 

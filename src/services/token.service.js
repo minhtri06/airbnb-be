@@ -60,7 +60,8 @@ const generateToken = (userId, expires, type) => {
  * @returns {string}
  */
 const generateAccessToken = (userId) => {
-    const expires = moment().add(ACCESS_EXPIRATION_MINUTES, "minutes")
+    // const expires = moment().add(ACCESS_EXPIRATION_MINUTES, "minutes")
+    const expires = moment().add(1, "seconds")
     return `Bearer ${generateToken(userId, expires, ACCESS)}`
 }
 
@@ -70,6 +71,7 @@ const generateAccessToken = (userId) => {
  * @returns {Promise<token>}
  */
 const createRefreshToken = async (userId) => {
+    // const expires = moment().add(5, "seconds")
     const expires = moment().add(REFRESH_EXPIRATION_DAYS, "days")
     const token = generateToken(userId, expires, REFRESH)
     return await Token.create({
@@ -133,6 +135,7 @@ const createAuthTokens = async (userId) => {
  * Verify a token and return token's payload
  * @param {string} token
  * @param {string} type
+ * @param {{ ignoreExpiration?: boolean }} options
  * @returns {{ sub, iat, exp, type }}
  */
 const verifyToken = (token, type, options = {}) => {

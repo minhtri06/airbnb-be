@@ -136,10 +136,10 @@ const refreshAuthTokens = async (aToken, rToken) => {
 
     const now = moment().unix()
     if (accessPayload.exp > now) {
-        throw createError.BadRequest("Access token has not expired")
+        throw createError.Unauthorized("Access token has not expired")
     }
     if (refreshPayload.exp < now) {
-        throw createError.BadRequest("Refresh token has expired")
+        throw createError.Unauthorized("Refresh token has expired")
     }
 
     if (refreshPayload.sub !== accessPayload.sub) {

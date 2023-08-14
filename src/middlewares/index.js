@@ -1,6 +1,5 @@
 module.exports = {
     bookingMiddleware: require("./booking.middleware"),
-    chatMiddleware: require("./chat.middleware"),
     propertyMiddleware: require("./property.middleware"),
     reviewMiddleware: require("./review.middleware"),
     generalMiddlewares: {

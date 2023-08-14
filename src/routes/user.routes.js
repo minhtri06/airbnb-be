@@ -15,6 +15,6 @@ router
         controller.createUser,
     )
 
-router.get("/:userId", auth(), validate(validation.getUserById), controller.getUserById)
+router.get("/:userId", validate(validation.getUserById), controller.getUserById)
 
 module.exports = router

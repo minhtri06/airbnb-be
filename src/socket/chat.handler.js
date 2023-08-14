@@ -6,36 +6,20 @@ const { redisService, chatService } = require("../services")
  * @returns {function(socket)}
  */
 const chatHandler = (io) => async (socket) => {
-    const conversations = await chatService.findConversations({ users: socket.user._id })
-    for (let convo of conversations) {
-        socket.join(convo._id)
-    }
-
-    socket.on("make-conversation", async ({ conversationId, withUserId }) => {
-        const withSocketId = await redisService.findUserSocketId(withUserId)
-        if (!withSocketId) {
-            return
-        }
-
-        const withSocket = io.sockets.sockets.get(withSocketId)
-        if (!withSocket) {
-            return
-        }
-
-        withSocket.join(conversationId)
-        socket.join(conversationId)
+    socket.on("clg-user", () => {
+        console.log(socket.user)
     })
-
-    socket.on("send-message", async ({ conversationId, body }) => {
-        io.to(conversationId).emit("receive-message", {
-            sender: socket.user._id,
-            conversationId,
+    socket.on("ping", () => console.log("yolo"))
+    socket.on("send-message", async ({ receiverId, body }) => {
+        const receiveSocketId = await redisService.findUserSocketId(receiverId)
+        io.to(receiveSocketId).emit("receive-message", {
+            senderId: socket.user._id,
             body,
         })
     })
 
     socket.on("disconnect", async () => {
-        await redisService.deleteUserSocketId(socket.user._id)
+        // await redisService.deleteUserSocketId(socket.user._id)
     })
 }
 
