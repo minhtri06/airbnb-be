@@ -19,6 +19,7 @@ const updatePropertyScore = async () => {
         let newScore = null
         if (newReviewCount !== 0) {
             newScore = newSumScore / newReviewCount
+            newScore = Math.round(newScore * 10) / 10
         }
         property.score
         await Property.updateOne(
