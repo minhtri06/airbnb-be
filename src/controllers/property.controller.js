@@ -116,9 +116,11 @@ const updateProperty = async (req, res) => {
 
 /** @type {controller} */
 const getAccommodationBookings = async (req, res) => {
-    const bookings = await bookingService.findBookingsInMonth(req.query.month, {
-        accomId: req._accom._id,
-    })
+    const bookings = await bookingService.findBookingsInMonth(
+        req.query.month,
+        { accomId: req._accom._id },
+        { populate: [{ path: "guest", select: "_id name avatar" }] },
+    )
     return res.json({ bookings })
 }
 

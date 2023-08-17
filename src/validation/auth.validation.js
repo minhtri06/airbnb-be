@@ -61,4 +61,11 @@ module.exports = {
             newPassword: user.password.required(),
         }),
     },
+
+    changePassword: {
+        [BODY]: Joi.object({
+            oldPassword: user.password.required(),
+            newPassword: user.password.required(),
+        }),
+    },
 }

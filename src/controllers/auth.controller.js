@@ -72,10 +72,19 @@ const forgotPassword = async (req, res) => {
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
-/** @type {controller} */
+/**
+ * Reset forgotten password
+ * @type {controller} */
 const resetPassword = async (req, res) => {
     await service.resetPassword(req.query.token, req.body.newPassword)
 
+    return res.status(StatusCodes.NO_CONTENT).send()
+}
+
+/** @type {controller} */
+const changePassword = async (req, res) => {
+    const { oldPassword, newPassword } = req.body
+    await service.changePassword(req.user, oldPassword, newPassword)
     return res.status(StatusCodes.NO_CONTENT).send()
 }
 
@@ -88,6 +97,7 @@ module.exports = {
     verifyEmail,
     forgotPassword,
     resetPassword,
+    changePassword,
 }
 
 /**

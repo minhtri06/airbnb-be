@@ -7,6 +7,7 @@ const { userService: service } = require("../services")
 const getUserById = async (req, res) => {
     const user = await service.getUserById(req.params.userId)
     user.email = undefined
+    user.authType = undefined
     return res.json({ user })
 }
 

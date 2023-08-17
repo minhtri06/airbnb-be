@@ -6,9 +6,9 @@ module.exports = {
     updateMyProfile: {
         [BODY]: Joi.object({
             name: user.name,
-            phoneNumber: user.phoneNumber,
-            dateOfBirth: user.dateOfBirth,
-            gender: user.gender,
+            phoneNumber: user.phoneNumber.allow(null),
+            dateOfBirth: user.dateOfBirth.allow(null),
+            gender: user.gender.allow(null),
             address: user.address,
         }),
     },

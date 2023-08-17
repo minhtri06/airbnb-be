@@ -1,3 +1,5 @@
+require("./schedule.service")
+
 module.exports = {
     authService: require("./auth.service"),
     bookingService: require("./booking.service"),

@@ -207,6 +207,23 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
     ])
 }
 
+/**
+ * Change a password
+ * @param {user} user
+ * @param {string} oldPassword
+ * @param {string} newPassword
+ */
+const changePassword = async (user, oldPassword, newPassword) => {
+    if (user.authType === GOOGLE) {
+        throw createError.BadRequest("Your account cannot change password")
+    }
+
+    if (!(await user.isPasswordMatch(oldPassword))) {
+        throw createError.BadRequest("Old password is wrong")
+    }
+    await userService.updateUser(user, { password: newPassword })
+}
+
 module.exports = {
     localLogin,
     googleLogin,
@@ -214,6 +231,7 @@ module.exports = {
     refreshAuthTokens,
     verifyEmail,
     resetPassword,
+    changePassword,
 }
 
 /**

@@ -60,8 +60,8 @@ const generateToken = (userId, expires, type) => {
  * @returns {string}
  */
 const generateAccessToken = (userId) => {
-    // const expires = moment().add(ACCESS_EXPIRATION_MINUTES, "minutes")
-    const expires = moment().add(1, "seconds")
+    const expires = moment().add(ACCESS_EXPIRATION_MINUTES, "minutes")
+    // const expires = moment().add(1, "seconds")
     return `Bearer ${generateToken(userId, expires, ACCESS)}`
 }
 

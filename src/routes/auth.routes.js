@@ -4,7 +4,7 @@ const passport = require("passport")
 const { authController: controller } = require("../controllers")
 const { authValidation: validation } = require("../validation")
 const {
-    generalMiddlewares: { validate },
+    generalMiddlewares: { validate, auth },
 } = require("../middlewares")
 
 router.post("/register", validate(validation.registerUser), controller.registerUser)
@@ -22,6 +22,12 @@ router.post(
     "/reset-password",
     validate(validation.resetPassword),
     controller.resetPassword,
+)
+router.post(
+    "/change-password",
+    auth(),
+    validate(validation.changePassword),
+    controller.changePassword,
 )
 
 module.exports = router

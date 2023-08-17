@@ -93,6 +93,7 @@ module.exports = {
             pageName: property.pageName,
             description: property.description,
             facilityCodes: property.facilityCodes,
+            categoryCodes: property.categoryCodes,
         }),
     },
 
@@ -169,6 +170,21 @@ module.exports = {
     getAccommodationBookings: {
         [PARAMS]: Joi.object({
             propertyId: objectId.required(),
+            accomId: objectId.required(),
+        }),
+        [QUERY]: Joi.object({
+            // Default is this month
+            month: Joi.number()
+                .integer()
+                .min(1)
+                .max(12)
+                .default(moment().month() + 1),
+        }),
+    },
+
+    getAccommodationBookingsWithPageName: {
+        [PARAMS]: Joi.object({
+            pageName: property.pageName.required(),
             accomId: objectId.required(),
         }),
         [QUERY]: Joi.object({

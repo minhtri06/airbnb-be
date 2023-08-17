@@ -244,7 +244,7 @@ const searchProperties = async ({
  * @param {Object} thumbnailFile
  */
 const replaceThumbnail = async (property, thumbnailFile) => {
-    const oldThumbnail = property.thumbnail.split(envConfig.SERVER_URL)[1]
+    const oldThumbnail = property.thumbnail?.split(envConfig.SERVER_URL)[1]
     property.thumbnail = `${envConfig.SERVER_URL}/img/${thumbnailFile.filename}`
 
     await property.save()

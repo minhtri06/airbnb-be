@@ -35,7 +35,6 @@ const userSchema = new Schema(
             type: String,
             enum: Object.values(authTypes), // local or google validation
             default: authTypes.LOCAL,
-            private: true,
             required: true,
         },
 
