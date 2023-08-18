@@ -52,3 +52,8 @@ const removeOutdatedCurrentBookingDates = async () => {
     )
 }
 schedule.scheduleJob("00 00 00 * * *", removeOutdatedCurrentBookingDates)
+
+module.exports = {
+    updatePropertyScore,
+    removeOutdatedCurrentBookingDates,
+}

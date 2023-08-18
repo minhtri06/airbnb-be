@@ -1,5 +1,3 @@
-require("./schedule.service")
-
 module.exports = {
     authService: require("./auth.service"),
     bookingService: require("./booking.service"),
@@ -9,6 +7,7 @@ module.exports = {
     propertyService: require("./property.service"),
     redisService: require("./redis.service"),
     reviewService: require("./review.service"),
+    scheduleService: require("./schedule.service"),
     tokenService: require("./token.service"),
     userService: require("./user.service"),
 }

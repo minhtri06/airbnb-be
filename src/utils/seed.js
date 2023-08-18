@@ -12,7 +12,12 @@ const {
     Token,
     PropertyScoreChange,
 } = require("../models")
-const { bookingService, userService, reviewService } = require("../services")
+const {
+    bookingService,
+    userService,
+    reviewService,
+    scheduleService,
+} = require("../services")
 const { connectMongoDb } = require("../db")
 
 const provinces = require("../../crawl-data/divisions/provinces.json")
@@ -420,13 +425,6 @@ const seedProperty = async () => {
                     pickRandElementFromArr(propertyCategoryCodes),
                     pickRandElementFromArr(propertyCategoryCodes),
                     pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
-                    pickRandElementFromArr(propertyCategoryCodes),
                 ]
                 const property = new Property(propertyData)
                 property.score = null
@@ -500,6 +498,8 @@ connectMongoDb().then(async () => {
     await seedProperty()
     await seedBooking()
     await seedReviews()
+    await scheduleService.removeOutdatedCurrentBookingDates()
+    await scheduleService.updatePropertyScore()
     console.log("🍂 Seed done")
     await mongoose.connection.close()
 })

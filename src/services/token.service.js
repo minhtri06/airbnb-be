@@ -61,7 +61,6 @@ const generateToken = (userId, expires, type) => {
  */
 const generateAccessToken = (userId) => {
     const expires = moment().add(ACCESS_EXPIRATION_MINUTES, "minutes")
-    // const expires = moment().add(1, "seconds")
     return `Bearer ${generateToken(userId, expires, ACCESS)}`
 }
 
@@ -71,7 +70,6 @@ const generateAccessToken = (userId) => {
  * @returns {Promise<token>}
  */
 const createRefreshToken = async (userId) => {
-    // const expires = moment().add(5, "seconds")
     const expires = moment().add(REFRESH_EXPIRATION_DAYS, "days")
     const token = generateToken(userId, expires, REFRESH)
     return await Token.create({
