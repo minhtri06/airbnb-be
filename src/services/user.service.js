@@ -165,6 +165,7 @@ const deleteUserCache = async (userId) => {
  *   dateOfBirth,
  *   gender,
  *   address,
+ *    avatar,
  * }} updateBody
  * @returns {Promise<user>}
  */
@@ -178,7 +179,11 @@ const updateUser = async (user, updateBody) => {
         "dateOfBirth",
         "gender",
         "address",
+        "avatar",
     )
+    if (user.authType === LOCAL) {
+        delete updateBody.avatar
+    }
 
     if (updateBody.password) {
         updateBody.password = await hashPassword(updateBody.password)

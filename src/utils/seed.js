@@ -218,7 +218,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/2.jpg",
+            avatar: "/img/2.jpg",
             isEmailVerified: true,
         },
         {
@@ -228,7 +228,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: envConfig.SERVER_URL + "/img/3.jpg",
+            avatar: "/img/3.jpg",
             isEmailVerified: true,
         },
         {
@@ -238,7 +238,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/4.jpg",
+            avatar: "/img/4.jpg",
             isEmailVerified: true,
         },
         {
@@ -248,7 +248,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/5.jpg",
+            avatar: "/img/5.jpg",
             isEmailVerified: true,
         },
         {
@@ -258,7 +258,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/1.jpg",
+            avatar: "/img/1.jpg",
             isEmailVerified: true,
         },
         {
@@ -268,7 +268,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: envConfig.SERVER_URL + "/img/6.png",
+            avatar: "/img/6.png",
             isEmailVerified: true,
         },
         {
@@ -278,7 +278,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: envConfig.SERVER_URL + "/img/7.jpg",
+            avatar: "/img/7.jpg",
             isEmailVerified: true,
         },
         {
@@ -288,7 +288,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/8.png",
+            avatar: "/img/8.png",
             isEmailVerified: true,
         },
         {
@@ -298,7 +298,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/9.png",
+            avatar: "/img/9.png",
             isEmailVerified: true,
         },
         {
@@ -308,7 +308,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/10.png",
+            avatar: "/img/10.png",
             isEmailVerified: true,
         },
     ]
