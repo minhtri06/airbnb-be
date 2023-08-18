@@ -268,7 +268,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: envConfig.SERVER_URL + "/img/6.jpg",
+            avatar: envConfig.SERVER_URL + "/img/6.png",
             isEmailVerified: true,
         },
         {
@@ -288,7 +288,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/8.jpg",
+            avatar: envConfig.SERVER_URL + "/img/8.png",
             isEmailVerified: true,
         },
         {
@@ -298,7 +298,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: envConfig.SERVER_URL + "/img/9.jpg",
+            avatar: envConfig.SERVER_URL + "/img/9.png",
             isEmailVerified: true,
         },
         {
