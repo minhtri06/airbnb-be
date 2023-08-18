@@ -3,21 +3,19 @@ const { ValidationError } = require("mongoose").Error
 const {
     StatusCodes: { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED },
 } = require("http-status-codes")
+const cloudinary = require("cloudinary").v2
 
 const { PRODUCTION } = require("../../constants").nodeEnv
 const envConfig = require("../../configs/envConfig")
-const { deleteFile } = require("../../utils").file
 
 /** @type {import('express').ErrorRequestHandler} */
 const handleException = async (err, req, res, next) => {
     // Delete uploading files
     if (req.file) {
-        deleteFile(req.file.path)
+        cloudinary.uploader.destroy(req.file.filename)
     }
     if (req.files && req.files instanceof Array) {
-        for (let file of req.files) {
-            deleteFile(file.path)
-        }
+        cloudinary.api.delete_resources(req.files.map((file) => file.filename))
     }
 
     // Response to the client

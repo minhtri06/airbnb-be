@@ -82,14 +82,16 @@ const addAccommodation = async (req, res) => {
 
 /** @type {controller} */
 const replaceThumbnail = async (req, res) => {
-    const thumbnail = await service.replaceThumbnail(req._property, req.file)
-    return res.json({ thumbnail })
+    await service.replaceThumbnail(req._property, req.file)
+    return res.json({ thumbnail: req.file.path })
 }
 
 /** @type {controller} */
 const addImages = async (req, res) => {
-    const newImages = await service.addImages(req._property, req.files)
-    return res.status(StatusCodes.CREATED).json({ newImages })
+    await service.addImages(req._property, req.files)
+    return res
+        .status(StatusCodes.CREATED)
+        .json({ newImages: req.files.map((file) => file.path) })
 }
 
 /** @type {controller} */

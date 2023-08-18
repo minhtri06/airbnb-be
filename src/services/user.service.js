@@ -1,17 +1,13 @@
 const createError = require("http-errors")
 const bcrypt = require("bcryptjs")
-const qs = require("qs")
-const axios = require("axios")
+const cloudinary = require("cloudinary").v2
 
 const { User, SavedProperty } = require("../models")
 const envConfig = require("../configs/envConfig")
 const {
     authTypes: { LOCAL, GOOGLE },
 } = require("../constants")
-const {
-    pickFields,
-    file: { deleteStaticFile },
-} = require("../utils")
+const { pickFields } = require("../utils")
 
 /**
  * Hash password
@@ -203,21 +199,16 @@ const updateUser = async (user, updateBody) => {
  * @param {{}} file
  */
 const replaceUserAvatar = async (user, file) => {
-    let oldAvatar
-    if (user.avatar) {
-        oldAvatar = user.avatar.split(envConfig.SERVER_URL)[1]
-    }
+    let oldAvatar = user.avatar
 
-    user.avatar = `${envConfig.SERVER_URL}/img/${file.filename}`
+    user.avatar = file.filename
     await user.save()
 
     if (oldAvatar) {
-        await deleteStaticFile(oldAvatar)
+        await cloudinary.uploader.destroy(oldAvatar)
     }
 
     await deleteUserCache(user._id)
-
-    return user.avatar
 }
 
 /**

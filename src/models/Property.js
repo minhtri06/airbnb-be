@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const cloudinary = require("cloudinary").v2
 
 const { addressSchema, accommodationSchema } = require("./subdocs")
 const { toJSON, paginate } = require("./plugins")
@@ -59,6 +60,12 @@ const propertySchema = new Schema(
         toJSON: {
             transform: function (doc, ret) {
                 delete ret.caller
+                if (ret.images) {
+                    ret.images = ret.images.map((img) => cloudinary.url(img))
+                }
+                if (ret.thumbnail) {
+                    ret.thumbnail = cloudinary.url(ret.thumbnail)
+                }
             },
         },
         timestamps: true,

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const validator = require("validator")
 const bcrypt = require("bcryptjs")
+const cloudinary = require("cloudinary").v2
 
 const { authTypes, genders } = require("../constants")
 const { NORMAL_USER, ADMIN } = require("../configs/roles")
@@ -87,7 +88,17 @@ const userSchema = new Schema(
             default: undefined,
         },
     },
-    { timestamps: true, optimisticConcurrency: true },
+    {
+        timestamps: true,
+        optimisticConcurrency: true,
+        toJSON: {
+            transform: function (doc, ret) {
+                if (ret.avatar) {
+                    ret.avatar = cloudinary.url(ret.avatar)
+                }
+            },
+        },
+    },
 )
 
 userSchema.plugin(toJSON)

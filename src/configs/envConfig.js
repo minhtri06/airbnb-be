@@ -34,6 +34,10 @@ const envSchema = Joi.object({
     REDIS_URL: Joi.string().required(),
     REDIS_DEFAULT_EXPIRATION: Joi.number().integer().required(),
 
+    CLOUDINARY_NAME: Joi.string().required(),
+    CLOUDINARY_API_KEY: Joi.string().required(),
+    CLOUDINARY_API_SECRET: Joi.string().required(),
+
     JWT_SECRET: Joi.string().required(),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().integer().min(1).required(),
     JWT_REFRESH_EXPIRATION_DAYS: Joi.number().integer().min(1).required(),
@@ -73,6 +77,12 @@ const envConfig = {
     redis: {
         URL: envVars.REDIS_URL,
         DEFAULT_EXPIRATION: envVars.REDIS_DEFAULT_EXPIRATION,
+    },
+
+    cloudinary: {
+        NAME: envVars.CLOUDINARY_NAME,
+        API_KEY: envVars.CLOUDINARY_API_KEY,
+        API_SECRET: envVars.CLOUDINARY_API_SECRET,
     },
 
     jwt: {

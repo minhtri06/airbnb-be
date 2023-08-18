@@ -25,8 +25,8 @@ const replaceMyAvatar = async (req, res) => {
     if (!req.file) {
         throw createError.BadRequest("avatar is required")
     }
-    const avatar = await userService.replaceUserAvatar(req.user, req.file)
-    return res.json({ avatar })
+    await userService.replaceUserAvatar(req.user, req.file)
+    return res.json({ avatar: req.file.path })
 }
 
 /** @type {controller} */

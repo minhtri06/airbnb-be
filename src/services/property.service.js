@@ -1,11 +1,9 @@
 const createError = require("http-errors")
+const cloudinary = require("cloudinary").v2
 
 const { Property } = require("../models")
 const envConfig = require("../configs/envConfig")
-const {
-    pickFields,
-    file: { deleteStaticFile, deleteManyStaticFiles },
-} = require("../utils")
+const { pickFields } = require("../utils")
 
 /**
  * Find one property, return null if not found
@@ -244,18 +242,16 @@ const searchProperties = async ({
  * @param {Object} thumbnailFile
  */
 const replaceThumbnail = async (property, thumbnailFile) => {
-    const oldThumbnail = property.thumbnail?.split(envConfig.SERVER_URL)[1]
-    property.thumbnail = `${envConfig.SERVER_URL}/img/${thumbnailFile.filename}`
+    const oldThumbnail = property.thumbnail
+    property.thumbnail = thumbnailFile.filename
 
     await property.save()
 
     // Delete old file after saving because saving may fail.
     // If we delete first, we may lose the old file
     if (oldThumbnail) {
-        deleteStaticFile(oldThumbnail)
+        await cloudinary.uploader.destroy(oldThumbnail)
     }
-
-    return property.thumbnail
 }
 
 /**
@@ -264,17 +260,14 @@ const replaceThumbnail = async (property, thumbnailFile) => {
  * @param {[]} imageFiles
  */
 const addImages = async (property, imageFiles) => {
+    console.log(imageFiles)
     if (!imageFiles) {
         throw createError.BadRequest("Images are required")
     }
 
-    const newImages = imageFiles.map(
-        (file) => `${envConfig.SERVER_URL}/img/${file.filename}`,
-    )
+    const newImages = imageFiles.map((file) => file.filename)
     property.images.push(...newImages)
     await property.save()
-
-    return newImages
 }
 
 /**
@@ -290,15 +283,13 @@ const deleteImages = async (property, deletedIndexes) => {
     const deletedImgs = []
     property.images = property.images.filter((image, index) => {
         if (deletedIndexes.includes(index)) {
-            deletedImgs.push(image.split(envConfig.SERVER_URL)[1])
+            deletedImgs.push(image)
             return false
         }
         return true
     })
     await property.save()
-    await deleteManyStaticFiles(deletedImgs)
-
-    return property.images
+    await cloudinary.api.delete_resources(deletedImgs)
 }
 
 /**
