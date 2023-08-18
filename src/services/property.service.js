@@ -89,7 +89,7 @@ const updateProperty = async (property, updateBody) => {
  * Paginate properties
  * @param {propertyFilter} filter
  * @param {queryOptions} queryOptions
- * @returns {Promise<property[]>}
+ * @returns {Promise<{data: property[], totalPage?: number, totalRecords?: number}>}
  */
 const paginateProperties = async (filter, queryOptions) => {
     return Property.paginate(filter, queryOptions)
@@ -161,6 +161,19 @@ const setAvailabilityFields = (property, bookIn, bookOut) => {
 }
 
 /**
+ * Convert property's thumbnail and images to actual url
+ * @param {property} property
+ */
+const setPropertyImageUrl = (property) => {
+    if (property.thumbnail) {
+        property.thumbnail = cloudinary.url(property.thumbnail)
+    }
+    if (property.images) {
+        property.images = property.images.map((img) => cloudinary.url(img))
+    }
+}
+
+/**
  * Search properties
  * @param {{
  *   districtId,
@@ -190,8 +203,8 @@ const searchProperties = async ({
     const select = "-images -description -facilityCodes"
     const sort = "-score"
 
-    if (!bookIn || !bookOut)
-        return await paginateProperties(filter, {
+    if (!bookIn || !bookOut) {
+        const result = await paginateProperties(filter, {
             select,
             sortBy: sort,
             checkPaginate,
@@ -199,6 +212,11 @@ const searchProperties = async ({
             page,
             limit,
         })
+        for (let property of result.data) {
+            setPropertyImageUrl(property)
+        }
+        return result
+    }
 
     limit = limit || envConfig.DEFAULT_PAGE_LIMIT
     page = page || 1
@@ -216,6 +234,7 @@ const searchProperties = async ({
     for (; i < properties.length && selectedCount < limit; i++) {
         setAvailabilityFields(properties[i])
         if (properties[i].isAvailable) {
+            setPropertyImageUrl(properties[i])
             selectedProperties.push(properties[i])
             selectedCount++
         }
