@@ -26,8 +26,6 @@ const envSchema = Joi.object({
             return value
         }),
 
-    API_PREFIX: Joi.string().required(),
-
     DEFAULT_PAGE_LIMIT: Joi.number().integer().required(),
 
     MONGODB_URL: Joi.string().required(),
@@ -64,8 +62,6 @@ const envConfig = {
 
     SERVER_URL: envVars.SERVER_URL,
     CLIENT_URL: envVars.CLIENT_URL,
-
-    API_PREFIX: envVars.API_PREFIX,
 
     DEFAULT_PAGE_LIMIT: envVars.DEFAULT_PAGE_LIMIT,
 

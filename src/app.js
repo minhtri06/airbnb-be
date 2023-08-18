@@ -30,7 +30,7 @@ app.use(express.static(STATIC_DIRNAME))
 app.use(passport.initialize())
 passport.use("jwt", jwtStrategy)
 
-app.use(envConfig.API_PREFIX, router)
+app.use("/api/v1", router)
 app.get("/", (req, res) => res.sendFile(STATIC_DIRNAME + "/views/home.html"))
 
 app.use(handleNotFound)
