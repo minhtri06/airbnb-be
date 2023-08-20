@@ -188,27 +188,30 @@ const seedUsers = async () => {
             name: "Minh Tri",
             email: "pmtri.admin@email.com",
             password: "pmtri123",
-            role: "admin",
+            role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
+            avatar: "airbnb/1",
             isEmailVerified: true,
         },
         {
             name: "Ngo Toai",
             email: "ngotoai.admin@email.com",
             password: "ngotoai123",
-            role: "admin",
+            role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
+            avatar: "airbnb/2",
             isEmailVerified: true,
         },
         {
             name: "Tuan Rose",
             email: "tuanrose.admin@email.com",
             password: "tuanrose123",
-            role: "admin",
+            role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
+            avatar: "airbnb/3",
             isEmailVerified: true,
         },
         {
@@ -218,7 +221,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/2.jpg",
+            avatar: "airbnb/4",
             isEmailVerified: true,
         },
         {
@@ -228,7 +231,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: "/img/3.jpg",
+            avatar: "airbnb/5",
             isEmailVerified: true,
         },
         {
@@ -238,7 +241,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/4.jpg",
+            avatar: "airbnb/6",
             isEmailVerified: true,
         },
         {
@@ -248,7 +251,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/5.jpg",
+            avatar: "airbnb/7",
             isEmailVerified: true,
         },
         {
@@ -258,7 +261,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/1.jpg",
+            avatar: "airbnb/8",
             isEmailVerified: true,
         },
         {
@@ -268,7 +271,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: "/img/6.png",
+            avatar: "airbnb/9",
             isEmailVerified: true,
         },
         {
@@ -278,7 +281,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "female",
-            avatar: "/img/7.jpg",
+            avatar: "airbnb/10",
             isEmailVerified: true,
         },
         {
@@ -288,7 +291,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/8.png",
+            avatar: "airbnb/11",
             isEmailVerified: true,
         },
         {
@@ -298,7 +301,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/9.png",
+            avatar: "airbnb/12",
             isEmailVerified: true,
         },
         {
@@ -308,7 +311,7 @@ const seedUsers = async () => {
             role: "normal-user",
             dateOfBirth: "2001/01/06",
             gender: "Male",
-            avatar: "/img/10.png",
+            avatar: "airbnb/13",
             isEmailVerified: true,
         },
     ]
