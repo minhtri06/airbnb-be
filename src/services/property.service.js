@@ -247,7 +247,6 @@ const searchProperties = async ({
         if (isPropertyAvailable(properties[i])) remainCount++
     }
     const totalRecords = remainCount + skipCount + selectedCount
-    console.log(totalRecords)
     return {
         data: selectedProperties,
         totalRecords,
@@ -279,7 +278,6 @@ const replaceThumbnail = async (property, thumbnailFile) => {
  * @param {[]} imageFiles
  */
 const addImages = async (property, imageFiles) => {
-    console.log(imageFiles)
     if (!imageFiles) {
         throw createError.BadRequest("Images are required")
     }

@@ -67,7 +67,6 @@ const getProperty = async (req, res) => {
 
 /** @type {controller} */
 const checkPageNameExists = async (req, res) => {
-    console.log(req.body)
     const { pageName } = req.body
     const property = await service.findOneProperty({ pageName })
     return res.json({ doesExist: property !== null })
