@@ -1,38 +1,34 @@
-# booking-app
+# Airbnb Clone BE
 
-## Prerequisite
+## About this project
 
-- Node.js
-- Redis
-- MongoDB
+This is the backend for an Airbnb clone application. It implements the basic feature of airbnb.com.
 
-## Installation
+Link [deploy](https://minhtri06-airbnb.vercel.app/)
 
-#### 1. Clone project (BE)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/24479002-a0d0018d-0ca4-4676-ba1f-b972bb391043?action=collection%2Ffork&collection-url=entityId%3D24479002-a0d0018d-0ca4-4676-ba1f-b972bb391043%26entityType%3Dcollection%26workspaceId%3D0b819cc4-d8fd-4e66-87e0-42eb692c58f2#?env%5BNew%20Environment%5D=W10=)
 
-```gitbash
-git clone https://github.com/minhtri06/booking-app.git
-cd booking-app
-```
+## Features
 
-#### 2. Install packages
+-   Sign up, verify email
+-   Login with email/password, google login
+-   Check auth with jwt token, refresh token, blacklist suspicious tokens
+-   Update profile
+-   Reset password
+-   Post a property
+-   Book property
+-   Update property
+-   Manage property's booking
+-   Search properties by location and booking date
+-   Check property availability
+-   Save/un-save property
+-   Review a property
+-   Message with host
+-   Schedule jobs
 
-```gitbash
-npm install
-```
+## Technologies
 
-#### 3. Create file .env based on .env.example
-
-Input port, database connection
-
-#### 4. Generate data
-
-```gitbash
-npm run seed
-```
-
-#### 5. Start server
-
-```gitbash
-npm start
-```
+-   ExpressJs
+-   Mongodb, Redis (cache)
+-   Cloudinary
+-   Socket.io
