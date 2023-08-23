@@ -2,7 +2,7 @@
 
 ## About this project
 
-This is the backend of my Airbnb clone application. Which implements the basic feature of airbnb.com such as search/reserve property, post a property, find property in map, message host, etc.
+This is the backend of my Airbnb clone application. Which implements the basic feature of airbnb.com.
 
 [FE repository](https://github.com/minhtri06/airbnb-fe)
 
