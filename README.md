@@ -2,9 +2,11 @@
 
 ## About this project
 
-This is the backend for an Airbnb clone application. It implements the basic feature of airbnb.com.
+This is the backend for an Airbnb clone application. It implements the basic feature of airbnb.com such as search/reserve property, post propery message host, find property in map, etc.
 
-Link [deploy](https://minhtri06-airbnb.vercel.app/)
+You can check the live website in [here](https://minhtri06-airbnb.vercel.app/)
+
+Or test api with postman:
 
 [![Test in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/24479002-a0d0018d-0ca4-4676-ba1f-b972bb391043?action=collection%2Ffork&collection-url=entityId%3D24479002-a0d0018d-0ca4-4676-ba1f-b972bb391043%26entityType%3Dcollection%26workspaceId%3D0b819cc4-d8fd-4e66-87e0-42eb692c58f2#?env%5BNew%20Environment%5D=W10=)
 
