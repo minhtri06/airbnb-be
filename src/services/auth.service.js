@@ -21,7 +21,7 @@ const tokenService = require("./token.service")
  * Local login
  * @param {string} email
  * @param {string} password
- * @returns {Promise<{ user, token }>}
+ * @returns {Promise<{ user, authTokens }>}
  */
 const localLogin = async (email, password) => {
     const user = await userService.findOneUser({ email })
@@ -70,9 +70,7 @@ const getGoogleOauthTokens = async (code) => {
         grant_type: "authorization_code",
     }
     const res = await axios.default.post(url + "?" + qs.stringify(values), {
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
     return res.data
 }

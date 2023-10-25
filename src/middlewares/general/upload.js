@@ -31,16 +31,6 @@ const imageStorage = new CloudinaryStorage({
     params: { folder: "airbnb" },
 })
 
-// const imageStorage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, process.cwd() + "/src/static/img")
-//     },
-//     filename: function (req, file, cb) {
-//         const uniqueSuffix = uuidV4()
-//         cb(null, file.fieldname + "-" + uniqueSuffix + "." + file.extension)
-//     },
-// })
-
 const uploadSingleImage = (fieldName, { required } = { required: true }) => {
     return [
         util.promisify(

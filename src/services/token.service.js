@@ -122,7 +122,7 @@ const createVerifyEmailToken = async (userId) => {
  */
 const createAuthTokens = async (userId) => {
     const accessToken = generateAccessToken(userId)
-    const refreshToken = await createRefreshToken(userId, accessToken)
+    const refreshToken = await createRefreshToken(userId)
     return {
         accessToken,
         refreshToken: refreshToken.body,
