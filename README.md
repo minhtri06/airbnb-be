@@ -8,7 +8,7 @@ This is the backend of my Airbnb clone application. Which implements the main fe
 
 ## Documentation
 
-You can access the api documentation in [here](https://documenter.getpostman.com/view/24479002/2s93m34Psu)
+You can check the api documentation [here](https://documenter.getpostman.com/view/24479002/2s93m34Psu)
 
 Or fork the postman collection with:
 
